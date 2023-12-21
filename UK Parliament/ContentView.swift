@@ -10,7 +10,12 @@ struct ContentView: View {
 
             Text("MPs")
                 .tabItem {
-                    Label("MPs", systemImage: "person.3.fill")
+                    Label("MPs and Lords", systemImage: "person.3.fill")
+                }
+
+            ConstituenciesView()
+                .tabItem {
+                    Label("Constituencies", systemImage: "map.fill")
                 }
         }
     }

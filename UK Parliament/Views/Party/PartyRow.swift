@@ -8,28 +8,36 @@ struct PartyRow: View {
 
     var body: some View {
         HStack(alignment: .center) {
-            VStack(alignment: .leading) {
-                Text(party.name)
+            ZStack {
+                Circle()
+                    .strokeBorder(Color(hexString: party.backgroundColour ?? "ffffff"), lineWidth: 4)
+                    .frame(width: 75, height: 75)
+                Text(party.abbreviation?.uppercased() ?? "")
+                    .font(.caption)
                     .bold()
-                Text("\(partyResult.total) MPs")
             }
 
             Spacer()
 
-            Text((party.abbreviation ?? " ").uppercased())
-                .bold()
-                .foregroundStyle(Color(UIColor(hexString: party.foregroundColour ?? "000000")))
-                .padding(5)
-                .background {
-                    Color(UIColor(hexString: party.backgroundColour ?? "ffffff"))
-                        .mask {
-                            RoundedRectangle(cornerRadius: 8)
-                        }
+            VStack(alignment: .trailing) {
+                Text(party.name)
+                    .bold()
+                HStack {
+                    Text(String(partyResult.total))
+                        .bold()
+                    Text(partyResult.total == 1 ? "MP" : "MPs")
                 }
+            }
         }
     }
 }
 
+
+extension Color {
+    init(hexString: String) {
+        self.init(UIColor(hexString: hexString))
+    }
+}
 
 extension UIColor {
     convenience init(hexString: String) {

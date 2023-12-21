@@ -29,16 +29,17 @@ class StateOfThePartiesModel: Codable {
     var items: [PartyValueModel]
 }
 
+
 class HouseModel {
-    public static func getCommonsState(_ completion: @escaping (StateOfThePartiesModel?) -> Void) {
+    public func getCommonsState(_ completion: @escaping (StateOfThePartiesModel?) -> Void) {
         getHouseState(house: .commons, completion)
     }
 
-    public static func getLordsState(_ completion: @escaping (StateOfThePartiesModel?) -> Void) {
+    public func getLordsState(_ completion: @escaping (StateOfThePartiesModel?) -> Void) {
         getHouseState(house: .lords, completion)
     }
 
-    public static func getHouseState(house: House, _ completion: @escaping (StateOfThePartiesModel?) -> Void) {
+    public func getHouseState(house: House, _ completion: @escaping (StateOfThePartiesModel?) -> Void) {
         let today = Date.now
         let formatter3 = DateFormatter()
         formatter3.dateFormat = "yyyy-MM-dd"

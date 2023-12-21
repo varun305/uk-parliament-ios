@@ -16,6 +16,11 @@
 		EE86A4742B345131007BEA83 /* PartyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE86A4732B345131007BEA83 /* PartyModel.swift */; };
 		EE86A4762B3452F4007BEA83 /* PartiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE86A4752B3452F4007BEA83 /* PartiesViewModel.swift */; };
 		EE86A4782B34564C007BEA83 /* PartyRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE86A4772B34564C007BEA83 /* PartyRow.swift */; };
+		EE97BF8E2B34BF5E00FA950C /* ConstituencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BF8D2B34BF5E00FA950C /* ConstituencyModel.swift */; };
+		EE97BF902B34C30800FA950C /* ConstituenciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BF8F2B34C30800FA950C /* ConstituenciesView.swift */; };
+		EE97BF922B34C32A00FA950C /* ConstituenciesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BF912B34C32A00FA950C /* ConstituenciesViewModel.swift */; };
+		EE97BF942B34C60300FA950C /* MemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BF932B34C60300FA950C /* MemberModel.swift */; };
+		EE97BF962B34C6DD00FA950C /* ConstituencyRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BF952B34C6DD00FA950C /* ConstituencyRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +34,11 @@
 		EE86A4732B345131007BEA83 /* PartyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyModel.swift; sourceTree = "<group>"; };
 		EE86A4752B3452F4007BEA83 /* PartiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartiesViewModel.swift; sourceTree = "<group>"; };
 		EE86A4772B34564C007BEA83 /* PartyRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyRow.swift; sourceTree = "<group>"; };
+		EE97BF8D2B34BF5E00FA950C /* ConstituencyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstituencyModel.swift; sourceTree = "<group>"; };
+		EE97BF8F2B34C30800FA950C /* ConstituenciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstituenciesView.swift; sourceTree = "<group>"; };
+		EE97BF912B34C32A00FA950C /* ConstituenciesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstituenciesViewModel.swift; sourceTree = "<group>"; };
+		EE97BF932B34C60300FA950C /* MemberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberModel.swift; sourceTree = "<group>"; };
+		EE97BF952B34C6DD00FA950C /* ConstituencyRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstituencyRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,9 +92,8 @@
 		EE86A46C2B344C14007BEA83 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EE86A46F2B344D4C007BEA83 /* PartiesView.swift */,
-				EE86A4752B3452F4007BEA83 /* PartiesViewModel.swift */,
-				EE86A4772B34564C007BEA83 /* PartyRow.swift */,
+				EE97BF8C2B34A5A000FA950C /* Constituency */,
+				EE97BF882B34A4ED00FA950C /* Party */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -94,8 +103,30 @@
 			children = (
 				EE86A4712B34506F007BEA83 /* HouseModel.swift */,
 				EE86A4732B345131007BEA83 /* PartyModel.swift */,
+				EE97BF8D2B34BF5E00FA950C /* ConstituencyModel.swift */,
+				EE97BF932B34C60300FA950C /* MemberModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		EE97BF882B34A4ED00FA950C /* Party */ = {
+			isa = PBXGroup;
+			children = (
+				EE86A46F2B344D4C007BEA83 /* PartiesView.swift */,
+				EE86A4752B3452F4007BEA83 /* PartiesViewModel.swift */,
+				EE86A4772B34564C007BEA83 /* PartyRow.swift */,
+			);
+			path = Party;
+			sourceTree = "<group>";
+		};
+		EE97BF8C2B34A5A000FA950C /* Constituency */ = {
+			isa = PBXGroup;
+			children = (
+				EE97BF8F2B34C30800FA950C /* ConstituenciesView.swift */,
+				EE97BF912B34C32A00FA950C /* ConstituenciesViewModel.swift */,
+				EE97BF952B34C6DD00FA950C /* ConstituencyRow.swift */,
+			);
+			path = Constituency;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -114,6 +145,8 @@
 			dependencies = (
 			);
 			name = "UK Parliament";
+			packageProductDependencies = (
+			);
 			productName = "UK Parliament";
 			productReference = EE86A45B2B344BA6007BEA83 /* UK Parliament.app */;
 			productType = "com.apple.product-type.application";
@@ -142,6 +175,8 @@
 				Base,
 			);
 			mainGroup = EE86A4522B344BA6007BEA83;
+			packageReferences = (
+			);
 			productRefGroup = EE86A45C2B344BA6007BEA83 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -168,13 +203,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE97BF922B34C32A00FA950C /* ConstituenciesViewModel.swift in Sources */,
+				EE97BF942B34C60300FA950C /* MemberModel.swift in Sources */,
 				EE86A4702B344D4C007BEA83 /* PartiesView.swift in Sources */,
 				EE86A4612B344BA6007BEA83 /* ContentView.swift in Sources */,
 				EE86A4722B34506F007BEA83 /* HouseModel.swift in Sources */,
+				EE97BF8E2B34BF5E00FA950C /* ConstituencyModel.swift in Sources */,
 				EE86A4742B345131007BEA83 /* PartyModel.swift in Sources */,
 				EE86A4782B34564C007BEA83 /* PartyRow.swift in Sources */,
+				EE97BF962B34C6DD00FA950C /* ConstituencyRow.swift in Sources */,
 				EE86A45F2B344BA6007BEA83 /* UK_ParliamentApp.swift in Sources */,
 				EE86A4762B3452F4007BEA83 /* PartiesViewModel.swift in Sources */,
+				EE97BF902B34C30800FA950C /* ConstituenciesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
