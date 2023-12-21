@@ -11,6 +11,11 @@
 		EE86A4612B344BA6007BEA83 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE86A4602B344BA6007BEA83 /* ContentView.swift */; };
 		EE86A4632B344BA7007BEA83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE86A4622B344BA7007BEA83 /* Assets.xcassets */; };
 		EE86A4662B344BA7007BEA83 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE86A4652B344BA7007BEA83 /* Preview Assets.xcassets */; };
+		EE86A4702B344D4C007BEA83 /* PartiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE86A46F2B344D4C007BEA83 /* PartiesView.swift */; };
+		EE86A4722B34506F007BEA83 /* HouseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE86A4712B34506F007BEA83 /* HouseModel.swift */; };
+		EE86A4742B345131007BEA83 /* PartyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE86A4732B345131007BEA83 /* PartyModel.swift */; };
+		EE86A4762B3452F4007BEA83 /* PartiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE86A4752B3452F4007BEA83 /* PartiesViewModel.swift */; };
+		EE86A4782B34564C007BEA83 /* PartyRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE86A4772B34564C007BEA83 /* PartyRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +24,11 @@
 		EE86A4602B344BA6007BEA83 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EE86A4622B344BA7007BEA83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EE86A4652B344BA7007BEA83 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EE86A46F2B344D4C007BEA83 /* PartiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartiesView.swift; sourceTree = "<group>"; };
+		EE86A4712B34506F007BEA83 /* HouseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseModel.swift; sourceTree = "<group>"; };
+		EE86A4732B345131007BEA83 /* PartyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyModel.swift; sourceTree = "<group>"; };
+		EE86A4752B3452F4007BEA83 /* PartiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartiesViewModel.swift; sourceTree = "<group>"; };
+		EE86A4772B34564C007BEA83 /* PartyRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +61,8 @@
 		EE86A45D2B344BA6007BEA83 /* UK Parliament */ = {
 			isa = PBXGroup;
 			children = (
+				EE86A46D2B344C1A007BEA83 /* Models */,
+				EE86A46C2B344C14007BEA83 /* Views */,
 				EE86A45E2B344BA6007BEA83 /* UK_ParliamentApp.swift */,
 				EE86A4602B344BA6007BEA83 /* ContentView.swift */,
 				EE86A4622B344BA7007BEA83 /* Assets.xcassets */,
@@ -65,6 +77,25 @@
 				EE86A4652B344BA7007BEA83 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		EE86A46C2B344C14007BEA83 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EE86A46F2B344D4C007BEA83 /* PartiesView.swift */,
+				EE86A4752B3452F4007BEA83 /* PartiesViewModel.swift */,
+				EE86A4772B34564C007BEA83 /* PartyRow.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EE86A46D2B344C1A007BEA83 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EE86A4712B34506F007BEA83 /* HouseModel.swift */,
+				EE86A4732B345131007BEA83 /* PartyModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +168,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE86A4702B344D4C007BEA83 /* PartiesView.swift in Sources */,
 				EE86A4612B344BA6007BEA83 /* ContentView.swift in Sources */,
+				EE86A4722B34506F007BEA83 /* HouseModel.swift in Sources */,
+				EE86A4742B345131007BEA83 /* PartyModel.swift in Sources */,
+				EE86A4782B34564C007BEA83 /* PartyRow.swift in Sources */,
 				EE86A45F2B344BA6007BEA83 /* UK_ParliamentApp.swift in Sources */,
+				EE86A4762B3452F4007BEA83 /* PartiesViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

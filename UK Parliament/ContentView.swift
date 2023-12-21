@@ -1,24 +1,17 @@
-//
-//  ContentView.swift
-//  UK Parliament
-//
-//  Created by Varun Santhosh on 21/12/2023.
-//
-
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
-}
+        TabView {
+            PartiesView()
+                .tabItem {
+                    Label("Parties", systemImage: "house")
+                }
 
-#Preview {
-    ContentView()
+            Text("MPs")
+                .tabItem {
+                    Label("MPs", systemImage: "person.3.fill")
+                }
+        }
+    }
 }
