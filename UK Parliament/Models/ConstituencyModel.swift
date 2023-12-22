@@ -46,17 +46,20 @@ class ConstituencyModel: ObservableObject {
     public static var shared = ConstituencyModel()
     private init() {}
 
-    public func nextData(_ completion: @escaping (ConstituenciesModel?) -> Void) {
-        if skip >= totalResults {
+    public func nextData(skip: Int? = nil, _ completion: @escaping (ConstituenciesModel?) -> Void) {
+        let _skip = skip ?? self.skip
+        if _skip >= totalResults {
             return
         }
 
-        let searchParams = SearchParams(skip: skip, take: take)
-        if cache[searchParams] != nil {
+        let searchParams = SearchParams(skip: _skip, take: take)
+        guard cache[searchParams] == nil else {
             completion(cache[searchParams])
+            return
         }
 
-        let url = URL(string: "https://members-api.parliament.uk/api/Location/Constituency/Search?skip=\(skip)&take=\(take)")!
+        let url = URL(string: "https://members-api.parliament.uk/api/Location/Constituency/Search?skip=\(_skip)&take=\(take)")!
+        print("FETCHING skip=\(_skip) take=\(take)")
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard error == nil else {
                 completion(nil)

@@ -2,21 +2,28 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        TabView {
-            PartiesView()
-                .tabItem {
+        NavigationStack {
+            List {
+                NavigationLink {
+                    PartiesView()
+                } label: {
                     Label("Parties", systemImage: "house")
                 }
 
-            Text("MPs")
-                .tabItem {
+                NavigationLink {
+                    Text("MPs")
+                } label: {
                     Label("MPs and Lords", systemImage: "person.3.fill")
                 }
 
-            ConstituenciesView()
-                .tabItem {
+                NavigationLink {
+                    ConstituenciesView()
+                } label: {
                     Label("Constituencies", systemImage: "map.fill")
                 }
+            }
+            .navigationTitle("Home")
+            
         }
     }
 }

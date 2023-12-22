@@ -8,14 +8,7 @@ struct PartyRow: View {
 
     var body: some View {
         HStack(alignment: .center) {
-            ZStack {
-                Circle()
-                    .strokeBorder(Color(hexString: party.backgroundColour ?? "ffffff"), lineWidth: 4)
-                    .frame(width: 75, height: 75)
-                Text(party.abbreviation?.uppercased() ?? "")
-                    .font(.caption)
-                    .bold()
-            }
+            PartyCircleView(party: party)
 
             Spacer()
 

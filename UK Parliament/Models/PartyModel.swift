@@ -1,7 +1,15 @@
 import Foundation
 
 
-class PartyModel: Codable {
+class PartyModel: Codable, Identifiable, Hashable {
+    static func == (lhs: PartyModel, rhs: PartyModel) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+
     var id: Int
     var name: String
     var abbreviation: String?

@@ -31,6 +31,11 @@ class StateOfThePartiesModel: Codable {
 
 
 class HouseModel {
+    public static var shared = HouseModel()
+    private init() {}
+
+    private var cache: [House: StateOfThePartiesModel] = [:]
+
     public func getCommonsState(_ completion: @escaping (StateOfThePartiesModel?) -> Void) {
         getHouseState(house: .commons, completion)
     }
@@ -45,8 +50,12 @@ class HouseModel {
         formatter3.dateFormat = "yyyy-MM-dd"
         let dateString = formatter3.string(from: today)
 
-        let url = URL(string: "https://members-api.parliament.uk/api/Parties/StateOfTheParties/\(house.rawValue)/\(dateString)")!
+        guard self.cache[house] == nil else {
+            completion(self.cache[house])
+            return
+        }
 
+        let url = URL(string: "https://members-api.parliament.uk/api/Parties/StateOfTheParties/\(house.rawValue)/\(dateString)")!
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard error == nil else {
                 completion(nil)
@@ -56,6 +65,7 @@ class HouseModel {
             if let data = data {
                 do {
                     let result = try JSONDecoder().decode(StateOfThePartiesModel.self, from: data)
+                    self.cache[house] = result
                     completion(result)
                 } catch let error {
                     print(error)

@@ -5,14 +5,19 @@ import SwiftUI
 extension ConstituenciesView {
     @MainActor class ConstituenciesViewModel: ObservableObject {
         @Published var consituencies: [Constituency] = []
+        @Published var result: ConstituenciesModel? = nil
+
+        var numResults: Int {
+            result?.totalResults ?? 0
+        }
 
         func nextData() {
-            ConstituencyModel.shared.nextData { result in
-                if let consituencies = result?.items.map { $0.value } {
+            ConstituencyModel.shared.nextData(skip: consituencies.count) { result in
+                if let result = result {
+                    let consituencies = result.items.map { $0.value }
                     Task { @MainActor in
-                        withAnimation {
-                            self.consituencies.append(contentsOf: consituencies)
-                        }
+                        self.result = result
+                        self.consituencies += consituencies
                     }
                 } else {
                     // error

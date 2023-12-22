@@ -21,6 +21,7 @@
 		EE97BF922B34C32A00FA950C /* ConstituenciesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BF912B34C32A00FA950C /* ConstituenciesViewModel.swift */; };
 		EE97BF942B34C60300FA950C /* MemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BF932B34C60300FA950C /* MemberModel.swift */; };
 		EE97BF962B34C6DD00FA950C /* ConstituencyRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BF952B34C6DD00FA950C /* ConstituencyRow.swift */; };
+		EE97BF9C2B3571C800FA950C /* PartyCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BF9B2B3571C800FA950C /* PartyCircleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		EE97BF912B34C32A00FA950C /* ConstituenciesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstituenciesViewModel.swift; sourceTree = "<group>"; };
 		EE97BF932B34C60300FA950C /* MemberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberModel.swift; sourceTree = "<group>"; };
 		EE97BF952B34C6DD00FA950C /* ConstituencyRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstituencyRow.swift; sourceTree = "<group>"; };
+		EE97BF9B2B3571C800FA950C /* PartyCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyCircleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 		EE86A46C2B344C14007BEA83 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EE97BF9A2B35717A00FA950C /* Components */,
 				EE97BF8C2B34A5A000FA950C /* Constituency */,
 				EE97BF882B34A4ED00FA950C /* Party */,
 			);
@@ -127,6 +130,14 @@
 				EE97BF952B34C6DD00FA950C /* ConstituencyRow.swift */,
 			);
 			path = Constituency;
+			sourceTree = "<group>";
+		};
+		EE97BF9A2B35717A00FA950C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				EE97BF9B2B3571C800FA950C /* PartyCircleView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,6 +222,7 @@
 				EE97BF8E2B34BF5E00FA950C /* ConstituencyModel.swift in Sources */,
 				EE86A4742B345131007BEA83 /* PartyModel.swift in Sources */,
 				EE86A4782B34564C007BEA83 /* PartyRow.swift in Sources */,
+				EE97BF9C2B3571C800FA950C /* PartyCircleView.swift in Sources */,
 				EE97BF962B34C6DD00FA950C /* ConstituencyRow.swift in Sources */,
 				EE86A45F2B344BA6007BEA83 /* UK_ParliamentApp.swift in Sources */,
 				EE86A4762B3452F4007BEA83 /* PartiesViewModel.swift in Sources */,

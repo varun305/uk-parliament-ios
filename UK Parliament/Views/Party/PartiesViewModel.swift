@@ -21,8 +21,7 @@ extension PartiesView {
                 loading = true
             }
 
-            let model = HouseModel()
-            model.getHouseState(house: house) { state in
+            HouseModel.shared.getHouseState(house: house) { state in
                 Task { @MainActor in
                     self.state = state
                     withAnimation {
