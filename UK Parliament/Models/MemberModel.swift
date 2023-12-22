@@ -1,6 +1,13 @@
 import Foundation
 
 
+class MembdershipModel: Codable {
+    var membershipFrom: String
+    var membershipFromId: Int
+    var house: Int
+    var membershipStartDate: String
+}
+
 class Member: Codable, Identifiable {
     var id: Int
     var nameListAs: String
@@ -8,7 +15,9 @@ class Member: Codable, Identifiable {
     var nameFullTitle: String
     var nameAddressAs: String?
     var latestParty: PartyModel
+    var latestHouseMembership: MembdershipModel
     var gender: String
+    var thumbnailUrl: String
 }
 
 class MemberValueModel: Codable, Identifiable {
@@ -53,7 +62,7 @@ class MemberModel {
         }
 
         let url = URL(string: "https://members-api.parliament.uk/api/Members/Search?House=\(house.rawValue)&IsEligible=true&skip=\(_skip)&take=\(take)")!
-        print("FETCHING skip=\(_skip) take=\(take)")
+        print("FETCHING skip=\(_skip) take=\(take) house=\(house.rawValue)")
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard error == nil else {
                 completion(nil)

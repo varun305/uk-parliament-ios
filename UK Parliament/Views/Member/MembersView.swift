@@ -9,7 +9,7 @@ struct MembersView: View {
             LazyVStack(alignment: .leading) {
                 Divider()
                 ForEach(viewModel.members) { member in
-                    Text(member.nameDisplayAs)
+                    MemberRow(member: member)
                         .padding(.horizontal)
                     Divider()
                 }
