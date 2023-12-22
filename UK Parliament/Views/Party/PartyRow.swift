@@ -9,6 +9,7 @@ struct PartyRow: View {
     var body: some View {
         HStack(alignment: .center) {
             PartyCircleView(party: party)
+                .frame(width: 60, height: 60)
 
             Spacer()
 

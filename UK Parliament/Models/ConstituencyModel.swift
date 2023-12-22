@@ -51,7 +51,6 @@ class ConstituencyModel: FetchModel {
         }
 
         let url = search == "" ? constructConstituenciesUrl(skip: _skip) : constructSearchConstituenciesUrl(search: search, skip: _skip)
-        print("URL \(url)")
         skip.forEach { key, _ in
             if key != search {
                 skip[key] = 0

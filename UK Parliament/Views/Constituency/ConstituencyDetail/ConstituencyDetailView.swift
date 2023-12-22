@@ -38,21 +38,25 @@ struct ConstituencyDetailView: View {
     @ViewBuilder
     var resultsView: some View {
         ForEach(viewModel.electionResults) { result in
-            HStack {
-                Text(convertDate(from: result.electionDate))
-                    .lineLimit(1)
-                    .font(.callout)
+            NavigationLink {
+                ConstituencyElectionDetailView(consituency: constituency, electionResult: result)
+            } label: {
+                HStack {
+                    Text(convertDate(from: result.electionDate))
+                        .lineLimit(1)
+                        .font(.callout)
 
-                Spacer()
+                    Spacer()
 
-                Text(result.result.uppercased())
-                    .bold()
-                    .foregroundStyle(Color(hexString: result.winningParty.foregroundColour ?? "000000"))
-                    .padding(4)
-                    .background {
-                        RoundedRectangle(cornerRadius: 5)
-                            .foregroundStyle(Color(hexString: result.winningParty.backgroundColour ?? "ffffff"))
-                    }
+                    Text(result.result.uppercased())
+                        .bold()
+                        .foregroundStyle(Color(hexString: result.winningParty.foregroundColour ?? "000000"))
+                        .padding(4)
+                        .background {
+                            RoundedRectangle(cornerRadius: 5)
+                                .foregroundStyle(Color(hexString: result.winningParty.backgroundColour ?? "ffffff"))
+                        }
+                }
             }
         }
     }
