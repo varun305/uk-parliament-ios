@@ -8,12 +8,16 @@ struct ConstituencyRow: View {
 
     var body: some View {
         HStack(alignment: .center) {
-            PartyCircleView(party: party)
+            MemberPictureView(member: consituency.member)
+                .frame(width: 60, height: 60)
 
             VStack(alignment: .leading) {
                 Text(consituency.name)
                     .bold()
                 Text(consituency.member.nameDisplayAs)
+                    .font(.footnote)
+                Text(party.name)
+                    .font(.caption)
             }
         }
     }

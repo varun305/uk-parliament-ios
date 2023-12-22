@@ -34,7 +34,7 @@ class MembersModel: Codable {
 
 
 class MemberModel: FetchModel {
-    private var skip = 0
+    private var skip: [String?: Int] = [nil: 0]
     private var take = 20
     private var totalResults: Int = .max
 
@@ -43,19 +43,29 @@ class MemberModel: FetchModel {
         super.init()
     }
 
-    public func nextData(house: House, skip: Int? = nil, _ completion: @escaping (MembersModel?) -> Void) {
-        let _skip = skip ?? self.skip
+    public func nextData(house: House, search: String? = nil, reset: Bool = false, _ completion: @escaping (MembersModel?) -> Void) {
+        if reset {
+            skip[search] = 0
+        }
+
+        let _skip = skip[search, default: 0]
         if _skip >= totalResults {
             return
         }
 
-        let url = constructMembersUrl(house: house, skip: _skip)
+        let url = search == nil ? constructMembersUrl(house: house, skip: _skip) : constructSearchMembersUrl(search: search!, house: house, skip: _skip)
+        skip.forEach { key, _ in
+            if key != search {
+                skip[key] = 0
+            }
+        }
+
         FetchModel.base.fetchData(from: url) { data in
             if let data = data {
                 do {
                     let result = try JSONDecoder().decode(MembersModel.self, from: data)
                     self.totalResults = result.totalResults
-                    self.skip += self.take
+                    self.skip[search] = self.skip[search, default: 0] + self.take
                     completion(result)
                 } catch let error {
                     print(error)
@@ -69,5 +79,9 @@ class MemberModel: FetchModel {
 
     private func constructMembersUrl(house: House, skip: Int) -> String {
         "https://members-api.parliament.uk/api/Members/Search?House=\(house.rawValue)&IsEligible=true&skip=\(skip)&take=\(take)"
+    }
+
+    private func constructSearchMembersUrl(search: String, house: House, skip: Int) -> String {
+        "https://members-api.parliament.uk/api/Members/Search?Name=\(search)&House=\(house.rawValue)&IsEligible=true&skip=\(skip)&take=\(take)"
     }
 }

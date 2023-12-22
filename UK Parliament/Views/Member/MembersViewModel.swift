@@ -6,29 +6,37 @@ class MembersViewModel: ObservableObject {
     @Published var members: [Member] = []
     @Published var result: MembersModel? = nil
     @Published var house: House = .commons {
-        willSet {
-            members = []
-        }
         didSet {
-            nextData()
+            nextData(reset: true)
         }
     }
+    @Published var search = ""
 
     var numResults: Int {
         result?.totalResults ?? 0
     }
 
-    func nextData() {
-        MemberModel.shared.nextData(house: house, skip: members.count) { result in
-            if let result = result {
-                let members = result.items.map { $0.value }
-                Task { @MainActor in
-                    self.result = result
-                    self.members += members
+    private func handleData(result: MembersModel?, reset: Bool = false) {
+        if let result = result {
+            let members = result.items.map { $0.value }
+            Task { @MainActor in
+                self.result = result
+                withAnimation {
+                    if reset {
+                        self.members = members
+                    } else {
+                        self.members += members
+                    }
                 }
-            } else {
-                // error
             }
+        } else {
+            // error
+        }
+    }
+
+    func nextData(reset: Bool = false) {
+        MemberModel.shared.nextData(house: house, search: search == "" ? nil : search, reset: reset) { result in
+            self.handleData(result: result, reset: reset)
         }
     }
 }

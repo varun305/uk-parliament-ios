@@ -44,17 +44,13 @@ class ConstituencyModel: FetchModel {
         if reset {
             skip[search] = 0
         }
-        print(skip)
 
-        print(search)
         let _skip = skip[search, default: 0]
-        print(_skip)
         if _skip >= totalResults {
             return
         }
 
         let url = search == nil ? constructConstituenciesUrl(skip: _skip) : constructSearchConstituenciesUrl(search: search!, skip: _skip)
-        print(url)
         skip.forEach { key, _ in
             if key != search {
                 skip[key] = 0

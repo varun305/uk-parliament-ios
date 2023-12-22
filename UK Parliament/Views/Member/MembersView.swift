@@ -6,15 +6,33 @@ struct MembersView: View {
 
     var body: some View {
         ScrollView {
+            Text("\(viewModel.numResults) results" + (viewModel.search != "" ? " for '\(viewModel.search)'" : ""))
+                .font(.caption)
+                .padding(.horizontal)
             LazyVStack(alignment: .leading) {
                 Divider()
                 ForEach(viewModel.members) { member in
-                    MemberRow(member: member)
-                        .padding(.horizontal)
+                    NavigationLink {
+                        MemberDetailView(member: member)
+                    } label: {
+                        MemberRow(member: member)
+                            .padding(.horizontal)
+                    }
+                    .foregroundStyle(.primary)
                     Divider()
                 }
             }
             .scrollTargetLayout()
+        }
+        .searchable(text: $viewModel.search)
+        .onSubmit(of: .search) {
+            viewModel.nextData(reset: true)
+        }
+        .onChange(of: viewModel.search) { _, new in
+            if new.isEmpty {
+                viewModel.search = ""
+                viewModel.nextData(reset: true)
+            }
         }
         .navigationTitle(viewModel.house == .commons ? "MPs" : "Lords")
         .navigationBarTitleDisplayMode(.inline)
@@ -27,14 +45,14 @@ struct MembersView: View {
             }
         }
         .scrollPosition(id: $scrollItem, anchor: .bottom)
-        .onChange(of: scrollItem) { old, new in
+        .onChange(of: scrollItem) { _, new in
             if new == viewModel.members.last?.id {
                 viewModel.nextData()
             }
         }
         .onAppear {
             if viewModel.members.isEmpty {
-                viewModel.nextData()
+                viewModel.nextData(reset: true)
             }
         }
     }

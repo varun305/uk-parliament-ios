@@ -31,7 +31,7 @@ extension ConstituenciesView {
         }
 
         func nextData(reset: Bool = false) {
-            ConstituencyModel.shared.nextData(search: search, reset: reset) { result in
+            ConstituencyModel.shared.nextData(search: search == "" ? nil : search, reset: reset) { result in
                 self.handleData(result: result, reset: reset)
             }
         }

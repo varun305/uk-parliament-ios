@@ -4,7 +4,6 @@ import SwiftUI
 struct ConstituenciesView: View {
     @StateObject var viewModel = ConstituenciesViewModel()
     @State var scrollItem: Constituency.ID?
-    @Environment(\.isSearching) var isSearching
 
     var body: some View {
         ScrollView {
@@ -39,13 +38,15 @@ struct ConstituenciesView: View {
         .navigationTitle("Constituencies")
         .navigationBarTitleDisplayMode(.inline)
         .scrollPosition(id: $scrollItem, anchor: .bottom)
-        .onChange(of: scrollItem) { old, new in
+        .onChange(of: scrollItem) { _, new in
             if new == viewModel.consituencies.last?.id {
                 viewModel.nextData()
             }
         }
         .onAppear {
-            viewModel.nextData(reset: true)
+            if viewModel.consituencies.isEmpty {
+                viewModel.nextData(reset: true)
+            }
         }
     }
 }
