@@ -5,8 +5,6 @@ struct ConstituenciesView: View {
     @StateObject var viewModel = ConstituenciesViewModel()
     @State var scrollItem: Constituency.ID?
 
-    @State var showFilterView = false
-
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading) {

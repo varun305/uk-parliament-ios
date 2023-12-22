@@ -11,7 +11,7 @@ struct ContentView: View {
                 }
 
                 NavigationLink {
-                    Text("MPs")
+                    MembersView()
                 } label: {
                     Label("MPs and Lords", systemImage: "person.3.fill")
                 }

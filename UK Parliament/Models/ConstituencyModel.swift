@@ -11,7 +11,7 @@ class Constituency: Codable, Identifiable {
     var startDate: String
     var endDate: String?
     var currentRepresentation: CurrentRepresentationModel
-    var member: MemberModel {
+    var member: Member {
         currentRepresentation.member.value
     }
 }
