@@ -30,11 +30,11 @@ class StateOfThePartiesModel: Codable {
 }
 
 
-class HouseModel {
+class HouseModel: FetchModel {
     public static var shared = HouseModel()
-    private init() {}
-
-    private var cache: [House: StateOfThePartiesModel] = [:]
+    override private init() {
+        super.init()
+    }
 
     public func getCommonsState(_ completion: @escaping (StateOfThePartiesModel?) -> Void) {
         getHouseState(house: .commons, completion)
@@ -45,27 +45,11 @@ class HouseModel {
     }
 
     public func getHouseState(house: House, _ completion: @escaping (StateOfThePartiesModel?) -> Void) {
-        let today = Date.now
-        let formatter3 = DateFormatter()
-        formatter3.dateFormat = "yyyy-MM-dd"
-        let dateString = formatter3.string(from: today)
-
-        guard self.cache[house] == nil else {
-            completion(self.cache[house])
-            return
-        }
-
-        let url = URL(string: "https://members-api.parliament.uk/api/Parties/StateOfTheParties/\(house.rawValue)/\(dateString)")!
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard error == nil else {
-                completion(nil)
-                return
-            }
-
+        let url = constructStateUrl(house: house)
+        FetchModel.base.fetchData(from: url) { data in
             if let data = data {
                 do {
                     let result = try JSONDecoder().decode(StateOfThePartiesModel.self, from: data)
-                    self.cache[house] = result
                     completion(result)
                 } catch let error {
                     print(error)
@@ -74,7 +58,16 @@ class HouseModel {
             } else {
                 completion(nil)
             }
-        }.resume()
+        }
+    }
+
+    private func constructStateUrl(house: House) -> String {
+        let today = Date.now
+        let formatter3 = DateFormatter()
+        formatter3.dateFormat = "yyyy-MM-dd"
+        let dateString = formatter3.string(from: today)
+
+        return "https://members-api.parliament.uk/api/Parties/StateOfTheParties/\(house.rawValue)/\(dateString)"
     }
 }
 

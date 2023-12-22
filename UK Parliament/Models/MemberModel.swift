@@ -33,21 +33,15 @@ class MembersModel: Codable {
 }
 
 
-fileprivate struct SearchParams: Hashable {
-    var skip: Int
-    var take: Int
-    var house: House
-}
-
-class MemberModel {
+class MemberModel: FetchModel {
     private var skip = 0
     private var take = 20
     private var totalResults: Int = .max
 
-    private var cache: [SearchParams: MembersModel] = [:]
-
     public static var shared = MemberModel()
-    private init() {}
+    override private init() {
+        super.init()
+    }
 
     public func nextData(house: House, skip: Int? = nil, _ completion: @escaping (MembersModel?) -> Void) {
         let _skip = skip ?? self.skip
@@ -55,26 +49,13 @@ class MemberModel {
             return
         }
 
-        let searchParams = SearchParams(skip: _skip, take: take, house: house)
-        guard cache[searchParams] == nil else {
-            completion(cache[searchParams])
-            return
-        }
-
-        let url = URL(string: "https://members-api.parliament.uk/api/Members/Search?House=\(house.rawValue)&IsEligible=true&skip=\(_skip)&take=\(take)")!
-        print("FETCHING skip=\(_skip) take=\(take) house=\(house.rawValue)")
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard error == nil else {
-                completion(nil)
-                return
-            }
-
+        let url = constructMembersUrl(house: house, skip: _skip)
+        FetchModel.base.fetchData(from: url) { data in
             if let data = data {
                 do {
                     let result = try JSONDecoder().decode(MembersModel.self, from: data)
                     self.totalResults = result.totalResults
                     self.skip += self.take
-                    self.cache[searchParams] = result
                     completion(result)
                 } catch let error {
                     print(error)
@@ -83,6 +64,10 @@ class MemberModel {
             } else {
                 completion(nil)
             }
-        }.resume()
+        }
+    }
+
+    private func constructMembersUrl(house: House, skip: Int) -> String {
+        "https://members-api.parliament.uk/api/Members/Search?House=\(house.rawValue)&IsEligible=true&skip=\(skip)&take=\(take)"
     }
 }

@@ -4,26 +4,35 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List {
-                NavigationLink {
-                    PartiesView()
-                } label: {
-                    Label("Parties", systemImage: "house")
+                Section("Members") {
+                    NavigationLink {
+                        PartiesView()
+                    } label: {
+                        Label("Parties", systemImage: "house")
+                    }
+
+                    NavigationLink {
+                        MembersView()
+                    } label: {
+                        Label("MPs and Lords", systemImage: "person.3.fill")
+                    }
+
+                    NavigationLink {
+                        ConstituenciesView()
+                    } label: {
+                        Label("Constituencies", systemImage: "map.fill")
+                    }
                 }
 
-                NavigationLink {
-                    MembersView()
-                } label: {
-                    Label("MPs and Lords", systemImage: "person.3.fill")
-                }
-
-                NavigationLink {
-                    ConstituenciesView()
-                } label: {
-                    Label("Constituencies", systemImage: "map.fill")
+                Section {
+                    NavigationLink {
+                        Text("Settings")
+                    } label: {
+                        Label("Settings", systemImage: "gear")
+                    }
                 }
             }
             .navigationTitle("Home")
-            
         }
     }
 }

@@ -30,21 +30,15 @@ class ConstituenciesModel: Codable {
 }
 
 
-fileprivate struct SearchParams: Hashable {
-    var skip: Int
-    var take: Int
-}
-
-
-class ConstituencyModel: ObservableObject {
+class ConstituencyModel: FetchModel {
     private var skip = 0
     private var take = 20
     private var totalResults: Int = .max
 
-    private var cache: [SearchParams: ConstituenciesModel] = [:]
-
     public static var shared = ConstituencyModel()
-    private init() {}
+    override private init() {
+        super.init()
+    }
 
     public func nextData(skip: Int? = nil, _ completion: @escaping (ConstituenciesModel?) -> Void) {
         let _skip = skip ?? self.skip
@@ -52,26 +46,13 @@ class ConstituencyModel: ObservableObject {
             return
         }
 
-        let searchParams = SearchParams(skip: _skip, take: take)
-        guard cache[searchParams] == nil else {
-            completion(cache[searchParams])
-            return
-        }
-
-        let url = URL(string: "https://members-api.parliament.uk/api/Location/Constituency/Search?skip=\(_skip)&take=\(take)")!
-        print("FETCHING skip=\(_skip) take=\(take)")
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard error == nil else {
-                completion(nil)
-                return
-            }
-
+        let url = constructConstituenciesUrl(skip: _skip)
+        FetchModel.base.fetchData(from: url) { data in
             if let data = data {
                 do {
                     let result = try JSONDecoder().decode(ConstituenciesModel.self, from: data)
                     self.totalResults = result.totalResults
                     self.skip += self.take
-                    self.cache[searchParams] = result
                     completion(result)
                 } catch let error {
                     print(error)
@@ -80,6 +61,10 @@ class ConstituencyModel: ObservableObject {
             } else {
                 completion(nil)
             }
-        }.resume()
+        }
+    }
+
+    private func constructConstituenciesUrl(skip: Int) -> String {
+        "https://members-api.parliament.uk/api/Location/Constituency/Search?skip=\(skip)&take=\(take)"
     }
 }
