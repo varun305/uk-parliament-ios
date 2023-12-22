@@ -49,7 +49,7 @@ class MemberModel: FetchModel {
         }
 
         let _skip = skip[search, default: 0]
-        if _skip >= totalResults {
+        if _skip > totalResults {
             return
         }
 

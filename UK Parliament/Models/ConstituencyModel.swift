@@ -40,17 +40,18 @@ class ConstituencyModel: FetchModel {
         super.init()
     }
 
-    public func nextData(search: String? = nil, reset: Bool = false, _ completion: @escaping (ConstituenciesModel?) -> Void) {
+    public func nextData(search: String = "", reset: Bool = false, _ completion: @escaping (ConstituenciesModel?) -> Void) {
         if reset {
             skip[search] = 0
         }
 
         let _skip = skip[search, default: 0]
-        if _skip >= totalResults {
+        if _skip > totalResults {
             return
         }
 
-        let url = search == nil ? constructConstituenciesUrl(skip: _skip) : constructSearchConstituenciesUrl(search: search!, skip: _skip)
+        let url = search == "" ? constructConstituenciesUrl(skip: _skip) : constructSearchConstituenciesUrl(search: search, skip: _skip)
+        print("URL \(url)")
         skip.forEach { key, _ in
             if key != search {
                 skip[key] = 0

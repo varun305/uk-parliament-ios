@@ -6,10 +6,10 @@ struct MembersView: View {
 
     var body: some View {
         ScrollView {
-            Text("\(viewModel.numResults) results" + (viewModel.search != "" ? " for '\(viewModel.search)'" : ""))
-                .font(.caption)
-                .padding(.horizontal)
             LazyVStack(alignment: .leading) {
+                Text("\(viewModel.numResults) results" + (viewModel.search != "" ? " for '\(viewModel.search)'" : ""))
+                    .font(.caption)
+                    .padding(.horizontal)
                 Divider()
                 ForEach(viewModel.members) { member in
                     NavigationLink {
