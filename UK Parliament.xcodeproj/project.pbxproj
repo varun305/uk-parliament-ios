@@ -11,6 +11,7 @@
 		EE50F9BB2B358FA200163E52 /* MembersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE50F9BA2B358FA200163E52 /* MembersViewModel.swift */; };
 		EE50F9BD2B3592D200163E52 /* MemberRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE50F9BC2B3592D200163E52 /* MemberRow.swift */; };
 		EE50F9BF2B35A09E00163E52 /* FetchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE50F9BE2B35A09E00163E52 /* FetchModel.swift */; };
+		EE50F9C22B35A59700163E52 /* ConstituencyDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE50F9C12B35A59700163E52 /* ConstituencyDetailView.swift */; };
 		EE86A45F2B344BA6007BEA83 /* UK_ParliamentApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE86A45E2B344BA6007BEA83 /* UK_ParliamentApp.swift */; };
 		EE86A4612B344BA6007BEA83 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE86A4602B344BA6007BEA83 /* ContentView.swift */; };
 		EE86A4632B344BA7007BEA83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE86A4622B344BA7007BEA83 /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 		EE50F9BA2B358FA200163E52 /* MembersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersViewModel.swift; sourceTree = "<group>"; };
 		EE50F9BC2B3592D200163E52 /* MemberRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRow.swift; sourceTree = "<group>"; };
 		EE50F9BE2B35A09E00163E52 /* FetchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchModel.swift; sourceTree = "<group>"; };
+		EE50F9C12B35A59700163E52 /* ConstituencyDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstituencyDetailView.swift; sourceTree = "<group>"; };
 		EE86A45B2B344BA6007BEA83 /* UK Parliament.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UK Parliament.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE86A45E2B344BA6007BEA83 /* UK_ParliamentApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UK_ParliamentApp.swift; sourceTree = "<group>"; };
 		EE86A4602B344BA6007BEA83 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -72,6 +74,14 @@
 			path = Member;
 			sourceTree = "<group>";
 		};
+		EE50F9C02B35A57D00163E52 /* ConstituencyDetail */ = {
+			isa = PBXGroup;
+			children = (
+				EE50F9C12B35A59700163E52 /* ConstituencyDetailView.swift */,
+			);
+			path = ConstituencyDetail;
+			sourceTree = "<group>";
+		};
 		EE86A4522B344BA6007BEA83 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +101,7 @@
 		EE86A45D2B344BA6007BEA83 /* UK Parliament */ = {
 			isa = PBXGroup;
 			children = (
+				EE97BF9A2B35717A00FA950C /* Components */,
 				EE86A46D2B344C1A007BEA83 /* Models */,
 				EE86A46C2B344C14007BEA83 /* Views */,
 				EE86A45E2B344BA6007BEA83 /* UK_ParliamentApp.swift */,
@@ -113,7 +124,6 @@
 			isa = PBXGroup;
 			children = (
 				EE50F9B72B358F7E00163E52 /* Member */,
-				EE97BF9A2B35717A00FA950C /* Components */,
 				EE97BF8C2B34A5A000FA950C /* Constituency */,
 				EE97BF882B34A4ED00FA950C /* Party */,
 			);
@@ -145,6 +155,7 @@
 		EE97BF8C2B34A5A000FA950C /* Constituency */ = {
 			isa = PBXGroup;
 			children = (
+				EE50F9C02B35A57D00163E52 /* ConstituencyDetail */,
 				EE97BF8F2B34C30800FA950C /* ConstituenciesView.swift */,
 				EE97BF912B34C32A00FA950C /* ConstituenciesViewModel.swift */,
 				EE97BF952B34C6DD00FA950C /* ConstituencyRow.swift */,
@@ -245,6 +256,7 @@
 				EE86A4742B345131007BEA83 /* PartyModel.swift in Sources */,
 				EE86A4782B34564C007BEA83 /* PartyRow.swift in Sources */,
 				EE97BF9C2B3571C800FA950C /* PartyCircleView.swift in Sources */,
+				EE50F9C22B35A59700163E52 /* ConstituencyDetailView.swift in Sources */,
 				EE50F9BD2B3592D200163E52 /* MemberRow.swift in Sources */,
 				EE97BF962B34C6DD00FA950C /* ConstituencyRow.swift in Sources */,
 				EE50F9B92B358F8B00163E52 /* MembersView.swift in Sources */,

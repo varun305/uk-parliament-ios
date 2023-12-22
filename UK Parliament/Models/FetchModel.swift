@@ -14,6 +14,7 @@ class FetchModel {
         }
 
         URLSession.shared.dataTask(with: URL(string: url)!) { data, response, error in
+            print("FETCHING \(url)")
             self.cache[url] = data
             completion(data)
         }.resume()

@@ -4,21 +4,37 @@ import SwiftUI
 struct ConstituenciesView: View {
     @StateObject var viewModel = ConstituenciesViewModel()
     @State var scrollItem: Constituency.ID?
+    @Environment(\.isSearching) var isSearching
 
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading) {
-                Text("\(viewModel.numResults) results")
+                Text("\(viewModel.numResults) results" + (viewModel.search != "" ? " for '\(viewModel.search)'" : ""))
                     .font(.caption)
                     .padding(.horizontal)
                 Divider()
                 ForEach(viewModel.consituencies) { constituency in
-                    ConstituencyRow(consituency: constituency)
-                        .padding(.horizontal)
+                    NavigationLink {
+                        ConstituencyDetailView(constituency: constituency)
+                    } label: {
+                        ConstituencyRow(consituency: constituency)
+                            .padding(.horizontal)
+                    }
+                    .foregroundStyle(.primary)
                     Divider()
                 }
             }
             .scrollTargetLayout()
+        }
+        .searchable(text: $viewModel.search, prompt: "Search for constituencies")
+        .onSubmit(of: .search) {
+            viewModel.nextData(reset: true)
+        }
+        .onChange(of: viewModel.search) { _, new in
+            if new.isEmpty {
+                viewModel.search = ""
+                viewModel.nextData(reset: true)
+            }
         }
         .navigationTitle("Constituencies")
         .navigationBarTitleDisplayMode(.inline)
@@ -29,9 +45,7 @@ struct ConstituenciesView: View {
             }
         }
         .onAppear {
-            if viewModel.consituencies.isEmpty {
-                viewModel.nextData()
-            }
+            viewModel.nextData(reset: true)
         }
     }
 }
