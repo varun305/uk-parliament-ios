@@ -28,6 +28,12 @@ struct MemberDetailView: View {
                     membershipTile
                 }
             }
+
+            Section {
+                NavigationLink("Registered interests") {
+                    RegisteredInterestsVIew(member: member)
+                }
+            }
         }
         .navigationTitle(member.nameDisplayAs)
         .navigationBarTitleDisplayMode(.inline)
