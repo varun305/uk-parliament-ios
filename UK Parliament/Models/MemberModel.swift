@@ -59,6 +59,7 @@ class MemberModel: FetchModel {
                     let result = try JSONDecoder().decode(MemberSynopsisModel.self, from: data)
                     completion(result)
                 } catch let error {
+                    print(error)
                     completion(nil)
                 }
             } else {

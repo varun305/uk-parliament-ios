@@ -31,7 +31,7 @@ struct MemberDetailView: View {
 
             Section {
                 NavigationLink("Registered interests") {
-                    RegisteredInterestsVIew(member: member)
+                    RegisteredInterestsView(member: member)
                 }
             }
         }
