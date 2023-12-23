@@ -6,7 +6,7 @@ struct RegisteredInterestsView: View {
 
     var body: some View {
         List {
-            ForEach(viewModel.registeredInterests) { registeredInterest in
+            ForEach(viewModel.registeredInterests.sorted { $0.sortOrder < $1.sortOrder }) { registeredInterest in
                 Section(registeredInterest.name) {
                     ForEach(registeredInterest.interests) { interest in
                         InterestRow(interest: interest)

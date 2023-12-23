@@ -16,7 +16,7 @@ struct MembersView: View {
                 Divider()
                 ForEach(viewModel.members) { member in
                     NavigationLink {
-                        MemberDetailView(member: member)
+                        MemberDetailView(memberId: member.id)
                     } label: {
                         MemberRow(member: member)
                             .padding(.horizontal)

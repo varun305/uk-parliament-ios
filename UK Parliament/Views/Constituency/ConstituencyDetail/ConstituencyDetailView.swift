@@ -2,34 +2,42 @@ import SwiftUI
 
 struct ConstituencyDetailView: View {
     @StateObject var viewModel = ConstituencyDetailViewModel()
-    var constituency: Constituency
+    var constituencyId: Int
     var memberLink: Bool = true
 
     var body: some View {
-        List {
-            Section("Current MP") {
-                if memberLink {
-                    membershipLink
-                } else {
-                    membershipTile
-                }
-            }
+        Group {
+            if let constituency = viewModel.constituency {
+                List {
+                    Section("Current MP") {
+                        if memberLink {
+                            membershipLink
+                        } else {
+                            membershipTile
+                        }
+                    }
 
-            Section("Past election results") {
-                resultsView
+                    Section("Past election results") {
+                        resultsView
+                    }
+                }
+                .navigationTitle(constituency.name)
+                .navigationBarTitleDisplayMode(.inline)
+            } else {
+                ProgressView()
             }
         }
-        .navigationTitle(constituency.name)
         .onAppear {
-            viewModel.fetchData(for: constituency)
+            viewModel.fetchConstituency(for: constituencyId)
+            viewModel.fetchData(for: constituencyId)
         }
     }
 
     @ViewBuilder
     var membershipLink: some View {
-        if let member = constituency.member {
+        if let constituency = viewModel.constituency, let member = constituency.member {
             NavigationLink {
-                MemberDetailView(member: member, constituencyLink: false)
+                MemberDetailView(memberId: member.id, constituencyLink: false)
             } label: {
                 membershipTile
             }
@@ -40,7 +48,7 @@ struct ConstituencyDetailView: View {
 
     @ViewBuilder
     var membershipTile: some View {
-        if let member = constituency.member {
+        if let constituency = viewModel.constituency, let member = constituency.member {
             HStack {
                 Text(member.nameDisplayAs)
                     .bold()
@@ -58,7 +66,7 @@ struct ConstituencyDetailView: View {
     var resultsView: some View {
         ForEach(viewModel.electionResults) { result in
             NavigationLink {
-                ConstituencyElectionDetailView(consituency: constituency, electionResult: result)
+                ConstituencyElectionDetailView(constituencyId: constituencyId, electionResult: result)
             } label: {
                 HStack {
                     Text(convertDate(from: result.electionDate))

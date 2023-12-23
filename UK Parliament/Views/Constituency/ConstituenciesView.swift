@@ -14,7 +14,7 @@ struct ConstituenciesView: View {
                 Divider()
                 ForEach(viewModel.consituencies) { constituency in
                     NavigationLink {
-                        ConstituencyDetailView(constituency: constituency)
+                        ConstituencyDetailView(constituencyId: constituency.id)
                     } label: {
                         ConstituencyRow(consituency: constituency)
                             .padding(.horizontal)

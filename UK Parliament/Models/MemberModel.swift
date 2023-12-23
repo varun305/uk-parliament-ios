@@ -51,6 +51,27 @@ class MemberModel: FetchModel {
         super.init()
     }
 
+    public func fetchMember(for id: Int, _ completion: @escaping (MemberValueModel?) -> Void) {
+        let url = constructMemberUrl(for: id)
+        FetchModel.base.fetchData(from: url) { data in
+            if let data = data {
+                do {
+                    let result = try JSONDecoder().decode(MemberValueModel.self, from: data)
+                    completion(result)
+                } catch let error {
+                    print(error)
+                    completion(nil)
+                }
+            } else {
+                completion(nil)
+            }
+        }
+    }
+
+    private func constructMemberUrl(for id: Int) -> String {
+        "https://members-api.parliament.uk/api/Members/\(id)"
+    }
+
     public func fetchMemberSynopsis(for id: Int, _ completion: @escaping (MemberSynopsisModel?) -> Void) {
         let url = constructMemberSynopsisUrl(for: id)
         FetchModel.base.fetchData(from: url) { data in

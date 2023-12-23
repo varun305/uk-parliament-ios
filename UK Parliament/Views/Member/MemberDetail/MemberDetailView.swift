@@ -2,52 +2,58 @@ import SwiftUI
 
 struct MemberDetailView: View {
     @StateObject var viewModel = MemberDetailViewModel()
-    var member: Member
+    var memberId: Int
     var constituencyLink: Bool = true
 
     var body: some View {
-        List {
-            VStack(alignment: .center) {
-                HStack {
-                    Spacer()
-                    MemberPictureView(member: member)
-                        .frame(width: 180, height: 180)
-                    Spacer()
-                }
-                Text(member.nameFullTitle)
-                    .bold()
-                Text(viewModel.synopsis)
-                    .font(.caption)
-            }
-            .listRowBackground(Color.clear)
+        Group {
+            if let member = viewModel.member {
+                List {
+                    VStack(alignment: .center) {
+                        HStack {
+                            Spacer()
+                            MemberPictureView(member: member)
+                                .frame(width: 180, height: 180)
+                            Spacer()
+                        }
+                        Text(member.nameFullTitle)
+                            .bold()
+                        Text(viewModel.synopsis)
+                            .font(.caption)
+                    }
+                    .listRowBackground(Color.clear)
 
-            Section("Constituency") {
-                if constituencyLink {
-                    membershipLink
-                } else {
-                    membershipTile
-                }
-            }
+                    Section("Constituency") {
+                        if constituencyLink {
+                            membershipLink
+                        } else {
+                            membershipTile
+                        }
+                    }
 
-            Section {
-                NavigationLink("Registered interests") {
-                    RegisteredInterestsView(member: member)
+                    Section {
+                        NavigationLink("Registered interests") {
+                            RegisteredInterestsView(member: member)
+                        }
+                    }
                 }
+                .navigationTitle(member.nameDisplayAs)
+                .navigationBarTitleDisplayMode(.inline)
+            } else {
+                ProgressView()
             }
         }
-        .navigationTitle(member.nameDisplayAs)
-        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            viewModel.fetchMemberConstituency(for: member.id)
-            viewModel.fetchMemberSynopsis(for: member.id)
+            viewModel.fetchMember(for: memberId)
+            viewModel.fetchMemberSynopsis(for: memberId)
         }
     }
 
     @ViewBuilder
     var membershipLink: some View {
-        if member.isCommonsMember, let constituency = viewModel.constituency {
+        if let member = viewModel.member, member.isCommonsMember, let constituency = viewModel.constituency {
             NavigationLink {
-                ConstituencyDetailView(constituency: constituency, memberLink: false)
+                ConstituencyDetailView(constituencyId: constituency.id, memberLink: false)
             } label: {
                 membershipTile
             }
@@ -58,6 +64,11 @@ struct MemberDetailView: View {
 
     @ViewBuilder
     var membershipTile: some View {
-        Text(member.latestHouseMembership.membershipFrom)
+        if let member = viewModel.member {
+            Text(member.latestHouseMembership.membershipFrom)
+        } else {
+            Text("No member found")
+                .italic()
+        }
     }
 }
