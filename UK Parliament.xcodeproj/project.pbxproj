@@ -22,6 +22,7 @@
 		EE86A4762B3452F4007BEA83 /* PartiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE86A4752B3452F4007BEA83 /* PartiesViewModel.swift */; };
 		EE86A4782B34564C007BEA83 /* PartyRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE86A4772B34564C007BEA83 /* PartyRow.swift */; };
 		EE8F2CBD2B36341300D771F2 /* ConstituencyElectionDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8F2CBC2B36341300D771F2 /* ConstituencyElectionDetailViewModel.swift */; };
+		EE8F2CBF2B36C53700D771F2 /* MemberDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8F2CBE2B36C53700D771F2 /* MemberDetailViewModel.swift */; };
 		EE97BF8E2B34BF5E00FA950C /* ConstituencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BF8D2B34BF5E00FA950C /* ConstituencyModel.swift */; };
 		EE97BF902B34C30800FA950C /* ConstituenciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BF8F2B34C30800FA950C /* ConstituenciesView.swift */; };
 		EE97BF922B34C32A00FA950C /* ConstituenciesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BF912B34C32A00FA950C /* ConstituenciesViewModel.swift */; };
@@ -52,6 +53,7 @@
 		EE86A4752B3452F4007BEA83 /* PartiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartiesViewModel.swift; sourceTree = "<group>"; };
 		EE86A4772B34564C007BEA83 /* PartyRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyRow.swift; sourceTree = "<group>"; };
 		EE8F2CBC2B36341300D771F2 /* ConstituencyElectionDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstituencyElectionDetailViewModel.swift; sourceTree = "<group>"; };
+		EE8F2CBE2B36C53700D771F2 /* MemberDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailViewModel.swift; sourceTree = "<group>"; };
 		EE97BF8D2B34BF5E00FA950C /* ConstituencyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstituencyModel.swift; sourceTree = "<group>"; };
 		EE97BF8F2B34C30800FA950C /* ConstituenciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstituenciesView.swift; sourceTree = "<group>"; };
 		EE97BF912B34C32A00FA950C /* ConstituenciesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstituenciesViewModel.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				EEFC7C9A2B36132200183203 /* MemberDetailView.swift */,
+				EE8F2CBE2B36C53700D771F2 /* MemberDetailViewModel.swift */,
 			);
 			path = MemberDetail;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				EE86A4762B3452F4007BEA83 /* PartiesViewModel.swift in Sources */,
 				EEFC7C9D2B36140400183203 /* ElectionResultModel.swift in Sources */,
 				EE97BF902B34C30800FA950C /* ConstituenciesView.swift in Sources */,
+				EE8F2CBF2B36C53700D771F2 /* MemberDetailViewModel.swift in Sources */,
 				EE8F2CBD2B36341300D771F2 /* ConstituencyElectionDetailViewModel.swift in Sources */,
 				EEFC7C9F2B3615AD00183203 /* ConstituencyDetailViewModel.swift in Sources */,
 			);

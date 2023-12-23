@@ -18,6 +18,10 @@ class Member: Codable, Identifiable {
     var latestHouseMembership: MembdershipModel
     var gender: String
     var thumbnailUrl: String
+
+    var isCommonsMember: Bool {
+        latestHouseMembership.house == 1
+    }
 }
 
 class MemberValueModel: Codable, Identifiable {
@@ -32,6 +36,10 @@ class MembersModel: Codable {
     var totalResults: Int
 }
 
+class MemberSynopsisModel: Codable {
+    var value: String
+}
+
 
 class MemberModel: FetchModel {
     private var skip: [String?: Int] = [nil: 0]
@@ -41,6 +49,26 @@ class MemberModel: FetchModel {
     public static var shared = MemberModel()
     override private init() {
         super.init()
+    }
+
+    public func fetchMemberSynopsis(for id: Int, _ completion: @escaping (MemberSynopsisModel?) -> Void) {
+        let url = constructMemberSynopsisUrl(for: id)
+        FetchModel.base.fetchData(from: url) { data in
+            if let data = data {
+                do {
+                    let result = try JSONDecoder().decode(MemberSynopsisModel.self, from: data)
+                    completion(result)
+                } catch let error {
+                    completion(nil)
+                }
+            } else {
+                completion(nil)
+            }
+        }
+    }
+
+    private func constructMemberSynopsisUrl(for id: Int) -> String {
+        "https://members-api.parliament.uk/api/Members/\(id)/Synopsis"
     }
 
     public func nextData(house: House, search: String? = nil, reset: Bool = false, _ completion: @escaping (MembersModel?) -> Void) {

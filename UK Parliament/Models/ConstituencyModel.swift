@@ -40,6 +40,27 @@ class ConstituencyModel: FetchModel {
         super.init()
     }
 
+    public func getConstituency(for id: Int, _ completion: @escaping (ConstituencyValueModel?) -> Void) {
+        let url = getConstituencyUrl(for: id)
+        FetchModel.base.fetchData(from: url) { data in
+            if let data = data {
+                do {
+                    let result = try JSONDecoder().decode(ConstituencyValueModel.self, from: data)
+                    completion(result)
+                } catch let error {
+                    print(error)
+                    completion(nil)
+                }
+            } else {
+                completion(nil)
+            }
+        }
+    }
+
+    private func getConstituencyUrl(for id: Int) -> String {
+        "https://members-api.parliament.uk/api/Location/Constituency/\(id)"
+    }
+
     public func nextData(search: String = "", reset: Bool = false, _ completion: @escaping (ConstituenciesModel?) -> Void) {
         if reset {
             skip[search] = 0

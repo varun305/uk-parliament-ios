@@ -19,6 +19,8 @@ struct ConstituencyRow: View {
                 Text(party.name)
                     .font(.caption)
             }
+
+            Spacer()
         }
     }
 }

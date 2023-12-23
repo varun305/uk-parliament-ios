@@ -16,6 +16,8 @@ struct MemberRow: View {
                 Text(member.latestHouseMembership.membershipFrom)
                     .font(.caption)
             }
+
+            Spacer()
         }
     }
 }

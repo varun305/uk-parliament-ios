@@ -1,13 +1,18 @@
 import SwiftUI
 
 struct ConstituencyDetailView: View {
-    var constituency: Constituency
     @StateObject var viewModel = ConstituencyDetailViewModel()
+    var constituency: Constituency
+    var memberLink: Bool = true
 
     var body: some View {
         List {
             Section("Current MP") {
-                memberTile
+                if memberLink {
+                    membershipLink
+                } else {
+                    membershipTile
+                }
             }
 
             Section("Past election results") {
@@ -21,17 +26,22 @@ struct ConstituencyDetailView: View {
     }
 
     @ViewBuilder
-    var memberTile: some View {
+    var membershipLink: some View {
         NavigationLink {
-            MemberDetailView(member: constituency.member)
+            MemberDetailView(member: constituency.member, constituencyLink: false)
         } label: {
-            HStack {
-                Text(constituency.member.nameDisplayAs)
-                    .bold()
-                Spacer()
-                MemberPictureView(member: constituency.member)
-                    .frame(width: 30, height: 30)
-            }
+            membershipTile
+        }
+    }
+
+    @ViewBuilder
+    var membershipTile: some View {
+        HStack {
+            Text(constituency.member.nameDisplayAs)
+                .bold()
+            Spacer()
+            MemberPictureView(member: constituency.member)
+                .frame(width: 30, height: 30)
         }
     }
 

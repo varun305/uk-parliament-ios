@@ -3,11 +3,14 @@ import SwiftUI
 struct MembersView: View {
     @StateObject var viewModel = MembersViewModel()
     @State var scrollItem: Member.ID?
+    private var resultsText: String {
+        "\(viewModel.numResults) results" + (viewModel.search != "" ? " for '\(viewModel.search)'" : "")
+    }
 
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading) {
-                Text("\(viewModel.numResults) results" + (viewModel.search != "" ? " for '\(viewModel.search)'" : ""))
+                Text(resultsText)
                     .font(.caption)
                     .padding(.horizontal)
                 Divider()
