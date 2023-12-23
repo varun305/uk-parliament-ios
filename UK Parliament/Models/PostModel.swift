@@ -17,7 +17,7 @@ class Department: Codable, Identifiable {
     var id: Int
     var name: String
     var url: String?
-    var imageUrl: String
+    var imageUrl: String?
 }
 
 class Post: Codable, Identifiable {

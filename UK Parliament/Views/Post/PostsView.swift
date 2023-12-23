@@ -41,7 +41,7 @@ struct PostsView: View {
                 }
             }
         }
-        .navigationTitle("Government and opposition posts")
+        .navigationTitle(side == .government ? "Government posts" : "Opposition posts")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             viewModel.getPosts(side: .government)
