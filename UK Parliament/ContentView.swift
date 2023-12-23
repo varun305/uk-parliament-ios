@@ -12,6 +12,12 @@ struct ContentView: View {
                     }
 
                     NavigationLink {
+                        PostsView()
+                    } label: {
+                        Label("Posts", systemImage: "building.columns.fill")
+                    }
+
+                    NavigationLink {
                         MembersView()
                     } label: {
                         Label("MPs and Lords", systemImage: "person.3.fill")

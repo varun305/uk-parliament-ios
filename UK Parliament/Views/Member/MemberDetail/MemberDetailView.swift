@@ -5,6 +5,10 @@ struct MemberDetailView: View {
     var memberId: Int
     var constituencyLink: Bool = true
 
+    private var positionTypeString: String {
+        viewModel.member?.latestHouseMembership.house == 2 ? "Peerage type" : "Constituency"
+    }
+
     var body: some View {
         Group {
             if let member = viewModel.member {
@@ -21,9 +25,10 @@ struct MemberDetailView: View {
                         Text(viewModel.synopsis)
                             .font(.caption)
                     }
+                    .multilineTextAlignment(.center)
                     .listRowBackground(Color.clear)
 
-                    Section("Constituency") {
+                    Section(positionTypeString) {
                         if constituencyLink {
                             membershipLink
                         } else {
