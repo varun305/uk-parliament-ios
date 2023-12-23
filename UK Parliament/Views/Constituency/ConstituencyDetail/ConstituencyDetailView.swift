@@ -27,21 +27,30 @@ struct ConstituencyDetailView: View {
 
     @ViewBuilder
     var membershipLink: some View {
-        NavigationLink {
-            MemberDetailView(member: constituency.member, constituencyLink: false)
-        } label: {
+        if let member = constituency.member {
+            NavigationLink {
+                MemberDetailView(member: member, constituencyLink: false)
+            } label: {
+                membershipTile
+            }
+        } else {
             membershipTile
         }
     }
 
     @ViewBuilder
     var membershipTile: some View {
-        HStack {
-            Text(constituency.member.nameDisplayAs)
-                .bold()
-            Spacer()
-            MemberPictureView(member: constituency.member)
-                .frame(width: 30, height: 30)
+        if let member = constituency.member {
+            HStack {
+                Text(member.nameDisplayAs)
+                    .bold()
+                Spacer()
+                MemberPictureView(member: member)
+                    .frame(width: 30, height: 30)
+            }
+        } else {
+            Text("No member found")
+                .italic()
         }
     }
 

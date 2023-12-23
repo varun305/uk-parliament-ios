@@ -49,10 +49,10 @@ struct MemberDetailView: View {
             NavigationLink {
                 ConstituencyDetailView(constituency: constituency, memberLink: false)
             } label: {
-                Text(member.latestHouseMembership.membershipFrom)
+                membershipTile
             }
         } else {
-            Text(member.latestHouseMembership.membershipFrom)
+            membershipTile
         }
     }
 

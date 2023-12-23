@@ -2,22 +2,28 @@ import SwiftUI
 
 struct ConstituencyRow: View {
     var consituency: Constituency
-    var party: PartyModel {
-        consituency.member.latestParty
+    var party: PartyModel? {
+        consituency.member?.latestParty
     }
 
     var body: some View {
         HStack(alignment: .center) {
-            MemberPictureView(member: consituency.member)
-                .frame(width: 60, height: 60)
+            if let member = consituency.member {
+                MemberPictureView(member: member)
+                    .frame(width: 60, height: 60)
+            }
 
             VStack(alignment: .leading) {
                 Text(consituency.name)
                     .bold()
-                Text(consituency.member.nameDisplayAs)
-                    .font(.footnote)
-                Text(party.name)
-                    .font(.caption)
+                if let member = consituency.member {
+                    Text(member.nameDisplayAs)
+                        .font(.footnote)
+                }
+                if let party = party {
+                    Text(party.name)
+                        .font(.caption)
+                }
             }
 
             Spacer()
