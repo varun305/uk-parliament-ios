@@ -5,16 +5,22 @@ struct RegisteredInterestsView: View {
     var member: Member
 
     var body: some View {
-        List {
-            ForEach(viewModel.registeredInterests.sorted { $0.sortOrder < $1.sortOrder }) { registeredInterest in
-                Section(registeredInterest.name) {
-                    ForEach(registeredInterest.interests) { interest in
-                        InterestRow(interest: interest)
+        Group {
+            if !viewModel.registeredInterests.isEmpty {
+                List {
+                    ForEach(viewModel.registeredInterests.sorted { $0.sortOrder < $1.sortOrder }) { registeredInterest in
+                        Section(registeredInterest.name) {
+                            ForEach(registeredInterest.interests) { interest in
+                                InterestRow(interest: interest)
+                            }
+                        }
                     }
                 }
+            } else {
+                Text("No registered interests")
             }
         }
-        .navigationTitle("Registered Interests: \(member.nameDisplayAs)")
+        .navigationTitle("Registered Interests, \(member.nameDisplayAs)")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             viewModel.fetchData(for: member.id)
