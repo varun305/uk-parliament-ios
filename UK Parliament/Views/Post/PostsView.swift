@@ -30,14 +30,6 @@ struct PostsView: View {
                         }
                         .font(.footnote)
                     }
-                    DisclosureGroup {
-                        ForEach(post.governmentDepartments) { department in
-                            Text(department.name)
-                        }
-                    } label: {
-                        Text("Departments")
-                    }
-                    .font(.footnote)
                 }
             }
         }
@@ -49,7 +41,7 @@ struct PostsView: View {
         }
     }
 
-    private func convertDate(from date: String) -> String{
+    private func convertDate(from date: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         let dateFormatter2 = DateFormatter()

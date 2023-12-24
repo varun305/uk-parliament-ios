@@ -9,14 +9,31 @@ struct PartiesView: View {
                 ProgressView()
             } else {
                 ScrollView {
-                    LazyVStack {
-                        Divider()
+                    LazyVStack(alignment: .leading) {
                         ForEach(viewModel.parties) { party in
-                            PartyRow(partyResult: party)
-                                .padding(.horizontal)
-                            Divider()
+                            Text("\(party.party.name) (\(party.total) members)")
+                                .font(.footnote)
+                                .bold()
+                            LazyVGrid(columns: [GridItem(.adaptive(minimum: 10))], spacing: 5) {
+                                ForEach(0..<party.total, id: \.self) { _ in
+                                    if let color = party.party.backgroundColour, color != "ffffff" {
+                                        Color(hexString: party.party.backgroundColour ?? "ffffff")
+                                            .mask {
+                                                RoundedRectangle(cornerRadius: 2)
+                                            }
+                                            .opacity(0.6)
+                                    } else {
+                                        RoundedRectangle(cornerRadius: 2)
+                                            .stroke(.black, lineWidth: 1)
+                                            .foregroundStyle(.white)
+                                    }
+                                }
+                            }
+                            .padding(.bottom)
                         }
                     }
+                    .padding(.top)
+                    .padding(.horizontal)
                 }
             }
         }
