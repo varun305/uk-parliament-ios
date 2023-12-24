@@ -39,18 +39,8 @@ class PostModel {
 
     public func getPosts(side: Side, _ completion: @escaping ([PostResultModel]?) -> Void) {
         let url = side == .government ? constructGovernmentPostsUrl() : constructOppositionPostsUrl()
-        FetchModel.base.fetchData(from: url) { data in
-            if let data = data {
-                do {
-                    let result = try JSONDecoder().decode([PostResultModel].self, from: data)
-                    completion(result)
-                } catch let error {
-                    print(error)
-                    completion(nil)
-                }
-            } else {
-                completion(nil)
-            }
+        FetchModel.base.fetchData([PostResultModel].self, from: url) { result in
+            completion(result)
         }
     }
 

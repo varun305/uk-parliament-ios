@@ -30,30 +30,18 @@ class ConstituenciesModel: Codable {
 }
 
 
-class ConstituencyModel: FetchModel {
+class ConstituencyModel {
     private var skip: [String?: Int] = [nil: 0]
     private let take = 20
     private var totalResults: Int = .max
 
     public static var shared = ConstituencyModel()
-    override private init() {
-        super.init()
-    }
+    private init() {}
 
     public func getConstituency(for id: Int, _ completion: @escaping (ConstituencyValueModel?) -> Void) {
         let url = getConstituencyUrl(for: id)
-        FetchModel.base.fetchData(from: url) { data in
-            if let data = data {
-                do {
-                    let result = try JSONDecoder().decode(ConstituencyValueModel.self, from: data)
-                    completion(result)
-                } catch let error {
-                    print(error)
-                    completion(nil)
-                }
-            } else {
-                completion(nil)
-            }
+        FetchModel.base.fetchData(ConstituencyValueModel.self, from: url) { result in
+            completion(result)
         }
     }
 
@@ -78,20 +66,8 @@ class ConstituencyModel: FetchModel {
             }
         }
         
-        FetchModel.base.fetchData(from: url) { data in
-            if let data = data {
-                do {
-                    let result = try JSONDecoder().decode(ConstituenciesModel.self, from: data)
-                    self.totalResults = result.totalResults
-                    self.skip[search] = self.skip[search, default: 0] + self.take
-                    completion(result)
-                } catch let error {
-                    print(error)
-                    completion(nil)
-                }
-            } else {
-                completion(nil)
-            }
+        FetchModel.base.fetchData(ConstituenciesModel.self, from: url) { result in
+            completion(result)
         }
     }
 

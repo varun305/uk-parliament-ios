@@ -40,43 +40,21 @@ class ConstituencyElectionResultResultModel: Codable {
 }
 
 
-class ElectionResultModel: FetchModel {
+class ElectionResultModel {
     public static var shared = ElectionResultModel()
-    override private init() {
-        super.init()
-    }
+    private init() {}
 
     public func getResults(for constituency: Int, _ completion: @escaping (ElectionResultResultModel?) -> Void) {
         let url = constructElectionResultUrl(for: constituency)
-        FetchModel.base.fetchData(from: url) { data in
-            if let data = data {
-                do {
-                    let result = try JSONDecoder().decode(ElectionResultResultModel.self, from: data)
-                    completion(result)
-                } catch let error {
-                    print(error)
-                    completion(nil)
-                }
-            } else {
-                completion(nil)
-            }
+        FetchModel.base.fetchData(ElectionResultResultModel.self, from: url) { result in
+            completion(result)
         }
     }
 
     public func getElectionResult(in constituency: Int, at election: Int, _ completion: @escaping (ConstituencyElectionResultResultModel?) -> Void) {
         let url = constructConstituencyElectionResultUrl(in: constituency, at: election)
-        FetchModel.base.fetchData(from: url) { data in
-            if let data = data {
-                do {
-                    let result = try JSONDecoder().decode(ConstituencyElectionResultResultModel.self, from: data)
-                    completion(result)
-                } catch let error {
-                    print(error)
-                    completion(nil)
-                }
-            } else {
-                completion(nil)
-            }
+        FetchModel.base.fetchData(ConstituencyElectionResultResultModel.self, from: url) { result in
+            completion(result)
         }
     }
 

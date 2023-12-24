@@ -22,26 +22,14 @@ class RegisteredInterestValueModel: Codable {
 }
 
 
-class RegisteredInterestModel: FetchModel {
+class RegisteredInterestModel {
     public static var shared = RegisteredInterestModel()
-    override private init() {
-        super.init()
-    }
+    private init() {}
 
     public func getRegisteredInterests(for id: Int, _ completion: @escaping (RegisteredInterestValueModel?) -> Void) {
         let url = getRegisteredInterestsUrl(for: id)
-        FetchModel.base.fetchData(from: url) { data in
-            if let data = data {
-                do {
-                    let result = try JSONDecoder().decode(RegisteredInterestValueModel.self, from: data)
-                    completion(result)
-                } catch let error {
-                    print(error)
-                    completion(nil)
-                }
-            } else {
-                completion(nil)
-            }
+        FetchModel.base.fetchData(RegisteredInterestValueModel.self, from: url) { result in
+            completion(result)
         }
     }
 

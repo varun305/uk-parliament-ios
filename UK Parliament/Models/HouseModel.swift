@@ -30,11 +30,9 @@ class StateOfThePartiesModel: Codable {
 }
 
 
-class HouseModel: FetchModel {
+class HouseModel {
     public static var shared = HouseModel()
-    override private init() {
-        super.init()
-    }
+    private init() { }
 
     public func getCommonsState(_ completion: @escaping (StateOfThePartiesModel?) -> Void) {
         getHouseState(house: .commons, completion)
@@ -46,18 +44,8 @@ class HouseModel: FetchModel {
 
     public func getHouseState(house: House, _ completion: @escaping (StateOfThePartiesModel?) -> Void) {
         let url = constructStateUrl(house: house)
-        FetchModel.base.fetchData(from: url) { data in
-            if let data = data {
-                do {
-                    let result = try JSONDecoder().decode(StateOfThePartiesModel.self, from: data)
-                    completion(result)
-                } catch let error {
-                    print(error)
-                    completion(nil)
-                }
-            } else {
-                completion(nil)
-            }
+        FetchModel.base.fetchData(StateOfThePartiesModel.self, from: url) { result in
+            completion(result)
         }
     }
 

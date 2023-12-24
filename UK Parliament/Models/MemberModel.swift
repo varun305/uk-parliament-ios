@@ -41,30 +41,18 @@ class MemberSynopsisModel: Codable {
 }
 
 
-class MemberModel: FetchModel {
+class MemberModel {
     private var skip: [String?: Int] = [nil: 0]
     private var take = 20
     private var totalResults: Int = .max
 
     public static var shared = MemberModel()
-    override private init() {
-        super.init()
-    }
+    private init() {}
 
     public func fetchMember(for id: Int, _ completion: @escaping (MemberValueModel?) -> Void) {
         let url = constructMemberUrl(for: id)
-        FetchModel.base.fetchData(from: url) { data in
-            if let data = data {
-                do {
-                    let result = try JSONDecoder().decode(MemberValueModel.self, from: data)
-                    completion(result)
-                } catch let error {
-                    print(error)
-                    completion(nil)
-                }
-            } else {
-                completion(nil)
-            }
+        FetchModel.base.fetchData(MemberValueModel.self, from: url) { result in
+            completion(result)
         }
     }
 
@@ -74,18 +62,8 @@ class MemberModel: FetchModel {
 
     public func fetchMemberSynopsis(for id: Int, _ completion: @escaping (MemberSynopsisModel?) -> Void) {
         let url = constructMemberSynopsisUrl(for: id)
-        FetchModel.base.fetchData(from: url) { data in
-            if let data = data {
-                do {
-                    let result = try JSONDecoder().decode(MemberSynopsisModel.self, from: data)
-                    completion(result)
-                } catch let error {
-                    print(error)
-                    completion(nil)
-                }
-            } else {
-                completion(nil)
-            }
+        FetchModel.base.fetchData(MemberSynopsisModel.self, from: url) { result in
+            completion(result)
         }
     }
 
@@ -110,20 +88,8 @@ class MemberModel: FetchModel {
             }
         }
 
-        FetchModel.base.fetchData(from: url) { data in
-            if let data = data {
-                do {
-                    let result = try JSONDecoder().decode(MembersModel.self, from: data)
-                    self.totalResults = result.totalResults
-                    self.skip[search] = self.skip[search, default: 0] + self.take
-                    completion(result)
-                } catch let error {
-                    print(error)
-                    completion(nil)
-                }
-            } else {
-                completion(nil)
-            }
+        FetchModel.base.fetchData(MembersModel.self, from: url) { result in
+            completion(result)
         }
     }
 
