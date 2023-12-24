@@ -20,6 +20,7 @@ struct RegisteredInterestsView: View {
                 ProgressView()
             } else {
                 Text("No data")
+                    .foregroundStyle(.secondary)
                     .font(.footnote)
                     .italic()
             }

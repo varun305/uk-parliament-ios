@@ -4,7 +4,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List {
-                Section("Members") {
+                Section {
                     NavigationLink {
                         PartiesView()
                     } label: {

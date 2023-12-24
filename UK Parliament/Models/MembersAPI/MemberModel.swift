@@ -115,16 +115,11 @@ class MemberModel {
         }
 
         let url = search == nil ? constructMembersUrl(house: house, skip: _skip) : constructSearchMembersUrl(search: search!, house: house, skip: _skip)
-        skip.forEach { key, _ in
-            if key != search {
-                skip[key] = 0
-            }
-        }
 
         FetchModel.base.fetchData(MembersModel.self, from: url) { result in
             if let result = result {
                 self.totalResults = result.totalResults
-                self.skip[search] = self.skip[search, default: 0] + self.take
+                self.skip = [search: self.skip[search, default: 0] + self.take]
                 completion(result)
             } else {
                 completion(nil)
