@@ -53,6 +53,10 @@
 		EEEC3B1E2B38ADC500A8626D /* BillStagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B1D2B38ADC500A8626D /* BillStagesView.swift */; };
 		EEEC3B202B38AE7300A8626D /* BillStageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B1F2B38AE7300A8626D /* BillStageRow.swift */; };
 		EEEC3B222B38AED000A8626D /* BillStagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B212B38AED000A8626D /* BillStagesViewModel.swift */; };
+		EEEC3B252B38BA7900A8626D /* BillPublicationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B242B38BA7900A8626D /* BillPublicationsView.swift */; };
+		EEEC3B272B38BAF500A8626D /* BillPublicationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B262B38BAF500A8626D /* BillPublicationsViewModel.swift */; };
+		EEEC3B292B38BCD200A8626D /* BillPublicationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B282B38BCD200A8626D /* BillPublicationRow.swift */; };
+		EEEC3B2C2B38C06100A8626D /* BillPublicationLinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B2B2B38C06100A8626D /* BillPublicationLinksView.swift */; };
 		EEFC7C992B35B4E000183203 /* MemberPictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFC7C982B35B4E000183203 /* MemberPictureView.swift */; };
 		EEFC7C9B2B36132200183203 /* MemberDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFC7C9A2B36132200183203 /* MemberDetailView.swift */; };
 		EEFC7C9D2B36140400183203 /* ElectionResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFC7C9C2B36140400183203 /* ElectionResultModel.swift */; };
@@ -109,6 +113,10 @@
 		EEEC3B1D2B38ADC500A8626D /* BillStagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillStagesView.swift; sourceTree = "<group>"; };
 		EEEC3B1F2B38AE7300A8626D /* BillStageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillStageRow.swift; sourceTree = "<group>"; };
 		EEEC3B212B38AED000A8626D /* BillStagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillStagesViewModel.swift; sourceTree = "<group>"; };
+		EEEC3B242B38BA7900A8626D /* BillPublicationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillPublicationsView.swift; sourceTree = "<group>"; };
+		EEEC3B262B38BAF500A8626D /* BillPublicationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillPublicationsViewModel.swift; sourceTree = "<group>"; };
+		EEEC3B282B38BCD200A8626D /* BillPublicationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillPublicationRow.swift; sourceTree = "<group>"; };
+		EEEC3B2B2B38C06100A8626D /* BillPublicationLinksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillPublicationLinksView.swift; sourceTree = "<group>"; };
 		EEFC7C982B35B4E000183203 /* MemberPictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberPictureView.swift; sourceTree = "<group>"; };
 		EEFC7C9A2B36132200183203 /* MemberDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailView.swift; sourceTree = "<group>"; };
 		EEFC7C9C2B36140400183203 /* ElectionResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElectionResultModel.swift; sourceTree = "<group>"; };
@@ -307,7 +315,8 @@
 		EEEC3B0E2B3896E300A8626D /* BillDetail */ = {
 			isa = PBXGroup;
 			children = (
-				EEEC3B1C2B38ADB900A8626D /* BillStages */,
+				EEEC3B232B38BA6700A8626D /* BillPublication */,
+				EEEC3B1C2B38ADB900A8626D /* BillStage */,
 				EEEC3B0F2B3896EF00A8626D /* BillDetailView.swift */,
 				EEEC3B112B38971600A8626D /* BillDetailViewModel.swift */,
 				EEEC3B132B3899EC00A8626D /* SponsorRow.swift */,
@@ -324,14 +333,33 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		EEEC3B1C2B38ADB900A8626D /* BillStages */ = {
+		EEEC3B1C2B38ADB900A8626D /* BillStage */ = {
 			isa = PBXGroup;
 			children = (
 				EEEC3B1D2B38ADC500A8626D /* BillStagesView.swift */,
 				EEEC3B1F2B38AE7300A8626D /* BillStageRow.swift */,
 				EEEC3B212B38AED000A8626D /* BillStagesViewModel.swift */,
 			);
-			path = BillStages;
+			path = BillStage;
+			sourceTree = "<group>";
+		};
+		EEEC3B232B38BA6700A8626D /* BillPublication */ = {
+			isa = PBXGroup;
+			children = (
+				EEEC3B2A2B38C05300A8626D /* BillPublicationLink */,
+				EEEC3B242B38BA7900A8626D /* BillPublicationsView.swift */,
+				EEEC3B262B38BAF500A8626D /* BillPublicationsViewModel.swift */,
+				EEEC3B282B38BCD200A8626D /* BillPublicationRow.swift */,
+			);
+			path = BillPublication;
+			sourceTree = "<group>";
+		};
+		EEEC3B2A2B38C05300A8626D /* BillPublicationLink */ = {
+			isa = PBXGroup;
+			children = (
+				EEEC3B2B2B38C06100A8626D /* BillPublicationLinksView.swift */,
+			);
+			path = BillPublicationLink;
 			sourceTree = "<group>";
 		};
 		EEFC7CA02B36230700183203 /* MemberDetail */ = {
@@ -440,17 +468,20 @@
 				EE86A4702B344D4C007BEA83 /* PartiesView.swift in Sources */,
 				EE86A4612B344BA6007BEA83 /* ContentView.swift in Sources */,
 				EE86A4722B34506F007BEA83 /* HouseModel.swift in Sources */,
+				EEEC3B292B38BCD200A8626D /* BillPublicationRow.swift in Sources */,
 				EEEC3B202B38AE7300A8626D /* BillStageRow.swift in Sources */,
 				EE97BF8E2B34BF5E00FA950C /* ConstituencyModel.swift in Sources */,
 				EEEC3B1B2B38A51D00A8626D /* StringExtensions.swift in Sources */,
 				EE50F9BF2B35A09E00163E52 /* FetchModel.swift in Sources */,
 				EE86A4742B345131007BEA83 /* PartyModel.swift in Sources */,
+				EEEC3B2C2B38C06100A8626D /* BillPublicationLinksView.swift in Sources */,
 				EE86A4782B34564C007BEA83 /* PartyRow.swift in Sources */,
 				EE97BF9C2B3571C800FA950C /* PartyCircleView.swift in Sources */,
 				EE8F2CC92B36DA5600D771F2 /* RegisteredInterestsViewModel.swift in Sources */,
 				EEFC7C9B2B36132200183203 /* MemberDetailView.swift in Sources */,
 				EEEC3B222B38AED000A8626D /* BillStagesViewModel.swift in Sources */,
 				EEFC7C992B35B4E000183203 /* MemberPictureView.swift in Sources */,
+				EEEC3B272B38BAF500A8626D /* BillPublicationsViewModel.swift in Sources */,
 				EE8F2CC42B36D74F00D771F2 /* RegisteredInterestsView.swift in Sources */,
 				EEEC3B0D2B388FE100A8626D /* LordsBadge.swift in Sources */,
 				EE0186252B38255D004F7F77 /* MemberContactView.swift in Sources */,
@@ -460,6 +491,7 @@
 				EEEC3B0B2B388F4800A8626D /* CommonsBadge.swift in Sources */,
 				EE97BF962B34C6DD00FA950C /* ConstituencyRow.swift in Sources */,
 				EEEC3B052B388B1900A8626D /* BillsView.swift in Sources */,
+				EEEC3B252B38BA7900A8626D /* BillPublicationsView.swift in Sources */,
 				EE01861E2B375B0C004F7F77 /* PostsView.swift in Sources */,
 				EE50F9B92B358F8B00163E52 /* MembersView.swift in Sources */,
 				EE86A45F2B344BA6007BEA83 /* UK_ParliamentApp.swift in Sources */,

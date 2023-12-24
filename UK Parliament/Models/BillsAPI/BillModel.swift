@@ -76,6 +76,33 @@ class BillItemModel: Codable {
     var totalResults: Int
 }
 
+class BillPublicationType: Codable, Identifiable {
+    var id: Int
+    var name: String
+    var description: String
+}
+
+class BillPublicationLink: Codable, Identifiable {
+    var id: Int
+    var title: String
+    var url: String
+    var contentType: String
+}
+
+class BillPublication: Codable, Identifiable {
+    var house: String
+    var id: Int
+    var title: String
+    var publicationType: BillPublicationType
+    var displayDate: String
+    var links: [BillPublicationLink]
+}
+
+class BillPublicationResultModel: Codable {
+    var billId: Int
+    var publications: [BillPublication]
+}
+
 
 class BillModel {
     private var stagesSkip = 0
@@ -87,6 +114,17 @@ class BillModel {
 
     public static var shared = BillModel()
     private init() {}
+
+    public func fetchBillPublications(for id: Int, _ completion: @escaping (BillPublicationResultModel?) -> Void) {
+        let url = constructBillPublicationsUrl(for: id)
+        FetchModel.base.fetchData(BillPublicationResultModel.self, from: url) { result in
+            completion(result)
+        }
+    }
+
+    private func constructBillPublicationsUrl(for id: Int) -> String {
+        "https://bills-api.parliament.uk/api/v1/Bills/\(id)/Publications"
+    }
 
     public func fetchBillStages(for id: Int, reset: Bool = false, _ completion: @escaping (StageResultModel?) -> Void) {
         if reset {

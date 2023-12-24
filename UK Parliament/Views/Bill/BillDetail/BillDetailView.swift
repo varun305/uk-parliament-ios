@@ -11,7 +11,6 @@ struct BillDetailView: View {
                     VStack(alignment: .center) {
                         if let longTitle = bill.longTitle {
                             Text(longTitle)
-                                .padding(.top, 3)
                         }
                     }
                     .multilineTextAlignment(.center)
@@ -42,6 +41,12 @@ struct BillDetailView: View {
                                 .foregroundStyle(.secondary)
                                 .italic()
                                 .font(.footnote)
+                        }
+                    }
+
+                    Section {
+                        NavigationLink("Publications") {
+                            BillPublicationsView(bill: bill)
                         }
                     }
                 }

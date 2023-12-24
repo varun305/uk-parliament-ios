@@ -13,7 +13,7 @@ struct MemberContactView: View {
                             Text(contact.line1)
                                 .bold()
                         } else {
-                            Text("[\(contact.line1)](\(contact.line1))")
+                            Link(contact.line1, destination: URL(string: contact.line1)!)
                         }
                         if let line2 = contact.line2 {
                             Text(line2)
@@ -25,7 +25,7 @@ struct MemberContactView: View {
                             Text(phone)
                         }
                         if let email = contact.email {
-                            Text("[\(email)](\(email))")
+                            Link(email, destination: URL(string: "mailto:" + email)!)
                         }
                     }
                     .font(.footnote)
