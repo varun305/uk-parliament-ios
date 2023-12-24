@@ -11,17 +11,9 @@ struct ConstituencyElectionDetailView: View {
                 List {
                     Section("\(result.constituencyName), \(convertDate(from: result.electionDate))") {
                         HStack {
-                            Text(result.result.uppercased())
-                                .bold()
-                                .foregroundStyle(Color(hexString: result.winningParty.foregroundColour ?? "000000"))
-                                .padding(4)
-                                .background {
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .foregroundStyle(Color(hexString: result.winningParty.backgroundColour ?? "ffffff"))
-                                }
+                            PartyTaggedText(text: result.result.uppercased(), party: result.winningParty)
 
                             Spacer()
-
                             Text(convertDate(from: result.electionDate))
                                 .bold()
                         }
@@ -40,7 +32,7 @@ struct ConstituencyElectionDetailView: View {
                     }
 
                     Section("Candidates") {
-                        ForEach(result.candidates.sorted { $0.rankOrder < $1.rankOrder }, id: \.name) { candidate in
+                        ForEach(result.candidates.sorted { $0.votes > $1.votes }, id: \.name) { candidate in
                             HStack {
                                 Text((candidate.party.abbreviation ?? candidate.party.name).uppercased())
                                     .bold()

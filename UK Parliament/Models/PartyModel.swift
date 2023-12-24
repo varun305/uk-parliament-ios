@@ -24,4 +24,8 @@ class PartyModel: Codable, Identifiable, Hashable {
     var bgColor: Color {
         Color(hexString: backgroundColour ?? "ffffff")
     }
+
+    var fgColor: Color {
+        Color(hexString: foregroundColour ?? "000000")
+    }
 }

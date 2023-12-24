@@ -6,9 +6,9 @@ class CandidateResultModel: Codable {
     var name: String
     var party: PartyModel
     var resultChange: String?
-    var rankOrder: Int
+    var rankOrder: Int?
     var votes: Int
-    var voteShare: Double
+    var voteShare: Double?
 }
 
 class ElectionResult: Codable, Identifiable {
@@ -17,7 +17,7 @@ class ElectionResult: Codable, Identifiable {
     var electorate: Int
     var turnout: Int
     var majority: Int
-    var winningParty: PartyModel
+    var winningParty: PartyModel?
     var electionTitle: String
     var electionDate: String
     var electionId: Int

@@ -121,14 +121,7 @@ struct ConstituencyDetailView: View {
 
                     Spacer()
 
-                    Text(result.result.uppercased())
-                        .bold()
-                        .foregroundStyle(Color(hexString: result.winningParty.foregroundColour ?? "000000"))
-                        .padding(4)
-                        .background {
-                            RoundedRectangle(cornerRadius: 5)
-                                .foregroundStyle(Color(hexString: result.winningParty.backgroundColour ?? "ffffff"))
-                        }
+                    PartyTaggedText(text: result.result.uppercased(), party: result.winningParty)
                 }
             }
         }
