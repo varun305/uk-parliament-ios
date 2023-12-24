@@ -41,7 +41,7 @@ class BillOrganisation: Codable {
 
 class Sponsor: Codable {
     var member: BillMember
-    var organisation: BillOrganisation
+    var organisation: BillOrganisation?
     var sortOrder: Int
 }
 
@@ -59,6 +59,7 @@ class Bill: Codable, Identifiable {
     var includedSessionIds: [Int]
     var isAct: Bool
     var currentStage: Stage
+    var sponsors: [Sponsor]?
 
     var id: Int {
         billId
@@ -78,6 +79,17 @@ class BillModel {
 
     public static var shared = BillModel()
     private init() {}
+
+    public func fetchBill(for id: Int, _ completion: @escaping (Bill?) -> Void) {
+        let url = constructBillUrl(for: id)
+        FetchModel.base.fetchData(Bill.self, from: url) { result in
+            completion(result)
+        }
+    }
+
+    private func constructBillUrl(for id: Int) -> String {
+        "https://bills-api.parliament.uk/api/v1/Bills/\(id)"
+    }
 
     public func nextData(search: String = "", reset: Bool = false, _ completion: @escaping (BillItemModel?) -> Void) {
         if reset {

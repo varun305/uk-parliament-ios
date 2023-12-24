@@ -9,7 +9,7 @@ struct LordsBadge: View {
             .padding(2)
             .background {
                 RoundedRectangle(cornerRadius: 5)
-                    .foregroundStyle(Color(hexString: "b50938"))
+                    .foregroundStyle(Color.lords)
             }
     }
 }

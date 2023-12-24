@@ -16,8 +16,13 @@ struct BillsView: View {
                     .padding(.horizontal)
                 Divider()
                 ForEach(viewModel.bills) { bill in
-                    BillRow(bill: bill)
-                        .padding(.horizontal)
+                    NavigationLink {
+                        BillDetailView(bill: bill)
+                    } label: {
+                        BillRow(bill: bill)
+                            .padding(.horizontal)
+                    }
+                    .foregroundStyle(.primary)
                     Divider()
                 }
             }

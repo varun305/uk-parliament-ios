@@ -20,22 +20,20 @@ struct BillRow: View {
                 }
             }
             HStack {
-                Text(convertDate(from: bill.lastUpdate))
+                Text(bill.lastUpdate.convertToDate())
                     .font(.footnote)
                 Spacer()
 
-                if bill.currentHouse == "Commons" {
-                    CommonsBadge()
-                } else {
-                    LordsBadge()
+                BillStageBadge(stage: bill.currentStage)
+                Group {
+                    if bill.originatingHouse == "Commons" {
+                        CommonsBadge()
+                    } else if bill.originatingHouse == "Lords" {
+                        LordsBadge()
+                    }
                 }
             }
         }
-    }
-
-    private func convertDate(from date: String) -> String{
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        return dateFormatter.date(from: date.components(separatedBy: ".").first ?? "")?.formatted(date: .abbreviated, time: .omitted) ?? ""
+        .multilineTextAlignment(.leading)
     }
 }
