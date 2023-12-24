@@ -34,18 +34,9 @@ struct BillDetailView: View {
                     }
 
                     Section("Current stage") {
-                        HStack {
-                            Text(bill.currentStage.description)
-                            Spacer()
-
-                            if bill.currentHouse == "Commons" {
-                                CommonsBadge()
-                            } else if bill.currentHouse == "Lords" {
-                                LordsBadge()
-                            }
-                        }
+                        BillStageRow(stage: bill.currentStage)
                         NavigationLink {
-                            Text("All stages")
+                            BillStagesView(bill: bill)
                         } label: {
                             Text("See all stages")
                                 .foregroundStyle(.secondary)

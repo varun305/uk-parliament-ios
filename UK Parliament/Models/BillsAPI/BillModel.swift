@@ -20,6 +20,11 @@ class Stage: Codable, Identifiable {
     var sortOrder: Int
 }
 
+class StageResultModel: Codable {
+    var items: [Stage]
+    var totalResults: Int
+}
+
 class BillMember: Codable, Identifiable {
     var memberId: Int
     var name: String
@@ -73,12 +78,40 @@ class BillItemModel: Codable {
 
 
 class BillModel {
+    private var stagesSkip = 0
+    private var stagesTotalResults: Int = .max
+
     private var skip: [String?: Int] = [nil: 0]
     private let take = 20
     private var totalResults: Int = .max
 
     public static var shared = BillModel()
     private init() {}
+
+    public func fetchBillStages(for id: Int, reset: Bool = false, _ completion: @escaping (StageResultModel?) -> Void) {
+        if reset {
+            stagesSkip = 0
+        }
+
+        if stagesSkip > stagesTotalResults {
+            return
+        }
+
+        let url = constructBillStagesUrl(for: id, skip: stagesSkip)
+        FetchModel.base.fetchData(StageResultModel.self, from: url) { result in
+            if let result = result {
+                self.stagesTotalResults = result.totalResults
+                self.stagesSkip += self.take
+                completion(result)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+
+    private func constructBillStagesUrl(for id: Int, skip: Int) -> String {
+        "https://bills-api.parliament.uk/api/v1/Bills/\(id)/Stages?Skip=\(skip)&Take=20"
+    }
 
     public func fetchBill(for id: Int, _ completion: @escaping (Bill?) -> Void) {
         let url = constructBillUrl(for: id)
