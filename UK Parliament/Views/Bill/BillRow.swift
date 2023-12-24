@@ -7,7 +7,6 @@ struct BillRow: View {
         VStack(alignment: .leading) {
             HStack {
                 Text(bill.shortTitle)
-                    .font(.caption)
                     .bold()
                 Spacer()
 
