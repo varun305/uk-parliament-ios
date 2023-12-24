@@ -28,7 +28,7 @@ struct SponsorRow: View {
                 Text(sponsor.member.name)
                     .bold()
                 if let organisation = sponsor.organisation {
-                    Text(organisation.name)
+                    Text("On behalf of \(organisation.name)")
                         .font(.footnote)
                 }
             }

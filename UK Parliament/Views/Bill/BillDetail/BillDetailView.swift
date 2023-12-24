@@ -11,6 +11,7 @@ struct BillDetailView: View {
                     VStack(alignment: .center) {
                         if let longTitle = bill.longTitle {
                             Text(longTitle)
+                                .font(.subheadline)
                         }
                     }
                     .multilineTextAlignment(.center)
