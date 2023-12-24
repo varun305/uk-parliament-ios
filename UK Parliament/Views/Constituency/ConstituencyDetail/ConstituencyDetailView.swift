@@ -1,4 +1,5 @@
 import SwiftUI
+import MapKit
 
 struct ConstituencyDetailView: View {
     @StateObject var viewModel = ConstituencyDetailViewModel()
@@ -17,6 +18,21 @@ struct ConstituencyDetailView: View {
                         }
                     }
 
+                    if let geometry = viewModel.geometry {
+                        Map {
+                            MapPolygon(coordinates: viewModel.coordinates)
+                                .stroke(constituency.member?.latestParty.bgColor ?? .white, lineWidth: 1)
+                                .foregroundStyle((constituency.member?.latestParty.bgColor ?? .white).opacity(0.3))
+                        }
+                        .disabled(true)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 200)
+                        .listRowBackground(Color.clear)
+                        .mask {
+                            RoundedRectangle(cornerRadius: 5)
+                        }
+                    }
+
                     Section("Past election results") {
                         resultsView
                     }
@@ -29,6 +45,7 @@ struct ConstituencyDetailView: View {
         }
         .onAppear {
             viewModel.fetchConstituency(for: constituencyId)
+            viewModel.fetchGeometry(for: constituencyId)
             viewModel.fetchData(for: constituencyId)
         }
     }

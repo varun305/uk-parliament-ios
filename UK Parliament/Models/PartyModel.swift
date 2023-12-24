@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 
 class PartyModel: Codable, Identifiable, Hashable {
@@ -19,4 +20,8 @@ class PartyModel: Codable, Identifiable, Hashable {
     var isLordsSpiritualParty: Bool?
     var governmentType: Int?
     var isIndependentParty: Bool?
+
+    var bgColor: Color {
+        Color(hexString: backgroundColour ?? "ffffff")
+    }
 }

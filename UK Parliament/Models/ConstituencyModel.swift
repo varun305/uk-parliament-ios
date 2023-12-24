@@ -29,6 +29,18 @@ class ConstituenciesModel: Codable {
     var totalResults: Int
 }
 
+class Geometry: Codable {
+    var type: String
+    var coordinates: [[[Double]]]
+
+    var flattenedCoordinates: [[Double]] {
+        coordinates.flatMap { $0 }
+    }
+}
+
+class ConstituencyGeometryValueModel: Codable {
+    var value: String
+}
 
 class ConstituencyModel {
     private var skip: [String?: Int] = [nil: 0]
@@ -38,14 +50,35 @@ class ConstituencyModel {
     public static var shared = ConstituencyModel()
     private init() {}
 
+    public func getConstituencyGeometry(for id: Int, _ completion: @escaping (Geometry?) -> Void) {
+        let url = constructConstituencyGeometryUrl(for: id)
+        FetchModel.base.fetchData(ConstituencyGeometryValueModel.self, from: url) { result in
+            if let result = result {
+                do {
+                    let geometry = try JSONDecoder().decode(Geometry.self, from: Data(result.value.utf8))
+                    completion(geometry)
+                } catch let error {
+                    print(error)
+                    completion(nil)
+                }
+            } else {
+                completion(nil)
+            }
+        }
+    }
+
+    private func constructConstituencyGeometryUrl(for id: Int) -> String {
+        "https://members-api.parliament.uk/api/Location/Constituency/\(id)/Geometry"
+    }
+
     public func getConstituency(for id: Int, _ completion: @escaping (ConstituencyValueModel?) -> Void) {
-        let url = getConstituencyUrl(for: id)
+        let url = constructConstituencyUrl(for: id)
         FetchModel.base.fetchData(ConstituencyValueModel.self, from: url) { result in
             completion(result)
         }
     }
 
-    private func getConstituencyUrl(for id: Int) -> String {
+    private func constructConstituencyUrl(for id: Int) -> String {
         "https://members-api.parliament.uk/api/Location/Constituency/\(id)"
     }
 
