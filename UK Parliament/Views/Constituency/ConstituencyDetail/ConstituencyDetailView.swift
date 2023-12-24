@@ -1,10 +1,22 @@
 import SwiftUI
 import MapKit
 
+
+private struct MapConfiguration: Identifiable {
+    var constituency: Constituency
+    var coordinates: [[[Double]]]
+    var party: PartyModel?
+
+    var id: Int {
+        constituency.id
+    }
+}
+
 struct ConstituencyDetailView: View {
     @StateObject var viewModel = ConstituencyDetailViewModel()
     var constituencyId: Int
     var memberLink: Bool = true
+    @State private var mapConfig: MapConfiguration? = nil
 
     var body: some View {
         Group {
@@ -15,23 +27,6 @@ struct ConstituencyDetailView: View {
                             membershipLink
                         } else {
                             membershipTile
-                        }
-                    }
-
-                    if viewModel.geometry != nil {
-                        Map {
-                            ForEach(0..<viewModel.coordinates.count, id: \.self) { i in
-                                MapPolygon(coordinates: viewModel.coordinates[i])
-                                    .stroke(constituency.member?.latestParty.bgColor ?? .white, lineWidth: 1)
-                                    .foregroundStyle((constituency.member?.latestParty.bgColor ?? .white).opacity(0.5))
-                            }
-                        }
-                        .disabled(true)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 200)
-                        .listRowBackground(Color.clear)
-                        .mask {
-                            RoundedRectangle(cornerRadius: 5)
                         }
                     }
 
@@ -49,6 +44,38 @@ struct ConstituencyDetailView: View {
             viewModel.fetchConstituency(for: constituencyId)
             viewModel.fetchGeometry(for: constituencyId)
             viewModel.fetchData(for: constituencyId)
+        }
+        .toolbar {
+            if let constituency = viewModel.constituency, let geometry = viewModel.geometry {
+                Button {
+                    mapConfig = MapConfiguration(constituency: constituency, coordinates: geometry.flattenedCoordinates, party: constituency.member?.latestParty)
+                } label: {
+                    Image(systemName: "map.fill")
+                }
+            }
+        }
+        .sheet(item: $mapConfig) { config in
+            NavigationStack {
+                Map {
+                    ForEach(0..<config.coordinates.count, id: \.self) { i in
+                        MapPolygon(coordinates: viewModel.coordinates[i])
+                            .stroke((config.party?.bgColor ?? .white), lineWidth: 1)
+                            .foregroundStyle((config.party?.bgColor ?? .white).opacity(0.5))
+                    }
+                }
+                .ignoresSafeArea(.all, edges: .bottom)
+                .navigationTitle(config.constituency.name)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button {
+                            mapConfig = nil
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                        }
+                    }
+                }
+            }
         }
     }
 

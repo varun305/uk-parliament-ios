@@ -16,8 +16,12 @@ struct RegisteredInterestsView: View {
                         }
                     }
                 }
+            } else if viewModel.loading {
+                ProgressView()
             } else {
-                Text("No registered interests")
+                Text("No data")
+                    .font(.footnote)
+                    .italic()
             }
         }
         .navigationTitle("Registered Interests, \(member.nameDisplayAs)")
