@@ -27,7 +27,7 @@ struct MembersView: View {
             }
             .scrollTargetLayout()
         }
-        .searchable(text: $viewModel.search)
+        .searchable(text: $viewModel.search, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search " + (viewModel.house == .commons ? "MPs" : "lords"))
         .onSubmit(of: .search) {
             viewModel.nextData(reset: true)
         }

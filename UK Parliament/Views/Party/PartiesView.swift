@@ -21,7 +21,6 @@ struct PartiesView: View {
                                             .mask {
                                                 RoundedRectangle(cornerRadius: 2)
                                             }
-                                            .opacity(0.6)
                                     } else {
                                         RoundedRectangle(cornerRadius: 2)
                                             .stroke(.black, lineWidth: 1)

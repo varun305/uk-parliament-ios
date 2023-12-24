@@ -25,7 +25,7 @@ struct ConstituenciesView: View {
             }
             .scrollTargetLayout()
         }
-        .searchable(text: $viewModel.search, prompt: "Search for constituencies")
+        .searchable(text: $viewModel.search, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for constituencies")
         .onSubmit(of: .search) {
             viewModel.nextData(reset: true)
         }
