@@ -18,11 +18,13 @@ struct ConstituencyDetailView: View {
                         }
                     }
 
-                    if let geometry = viewModel.geometry {
+                    if viewModel.geometry != nil {
                         Map {
-                            MapPolygon(coordinates: viewModel.coordinates)
-                                .stroke(constituency.member?.latestParty.bgColor ?? .white, lineWidth: 1)
-                                .foregroundStyle((constituency.member?.latestParty.bgColor ?? .white).opacity(0.3))
+                            ForEach(0..<viewModel.coordinates.count, id: \.self) { i in
+                                MapPolygon(coordinates: viewModel.coordinates[i])
+                                    .stroke(constituency.member?.latestParty.bgColor ?? .white, lineWidth: 1)
+                                    .foregroundStyle((constituency.member?.latestParty.bgColor ?? .white).opacity(0.5))
+                            }
                         }
                         .disabled(true)
                         .frame(maxWidth: .infinity)

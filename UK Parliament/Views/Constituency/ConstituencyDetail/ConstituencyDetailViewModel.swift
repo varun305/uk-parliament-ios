@@ -7,9 +7,11 @@ extension ConstituencyDetailView {
         @Published var constituency: Constituency? = nil
         @Published var electionResults: [ElectionResult] = []
         @Published var geometry: Geometry? = nil
-        var coordinates: [CLLocationCoordinate2D] {
+        var coordinates: [[CLLocationCoordinate2D]] {
             geometry?.flattenedCoordinates.map {
-                CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0])
+                $0.map {
+                    CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0])
+                }
             } ?? []
         }
 

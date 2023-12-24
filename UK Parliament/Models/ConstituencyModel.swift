@@ -29,11 +29,24 @@ class ConstituenciesModel: Codable {
     var totalResults: Int
 }
 
-class Geometry: Codable {
+protocol Geometry {
+    var flattenedCoordinates: [[[Double]]] { get }
+}
+
+class SingleGeometry: Codable, Geometry {
     var type: String
     var coordinates: [[[Double]]]
 
-    var flattenedCoordinates: [[Double]] {
+    var flattenedCoordinates: [[[Double]]] {
+        coordinates
+    }
+}
+
+class MultiGeometry: Codable, Geometry {
+    var type: String
+    var coordinates: [[[[Double]]]]
+
+    var flattenedCoordinates: [[[Double]]] {
         coordinates.flatMap { $0 }
     }
 }
@@ -55,11 +68,16 @@ class ConstituencyModel {
         FetchModel.base.fetchData(ConstituencyGeometryValueModel.self, from: url) { result in
             if let result = result {
                 do {
-                    let geometry = try JSONDecoder().decode(Geometry.self, from: Data(result.value.utf8))
+                    let geometry = try JSONDecoder().decode(SingleGeometry.self, from: Data(result.value.utf8))
                     completion(geometry)
-                } catch let error {
-                    print(error)
-                    completion(nil)
+                } catch {
+                    do {
+                        let multiGeometry = try JSONDecoder().decode(MultiGeometry.self, from: Data(result.value.utf8))
+                        completion(multiGeometry)
+                    } catch let error {
+                        print(error)
+                        completion(nil)
+                    }
                 }
             } else {
                 completion(nil)
@@ -98,7 +116,7 @@ class ConstituencyModel {
                 skip[key] = 0
             }
         }
-        
+
         FetchModel.base.fetchData(ConstituenciesModel.self, from: url) { result in
             if let result = result {
                 self.totalResults = result.totalResults

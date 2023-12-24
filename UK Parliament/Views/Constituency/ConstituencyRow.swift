@@ -15,6 +15,7 @@ struct ConstituencyRow: View {
 
             VStack(alignment: .leading) {
                 Text(consituency.name)
+                    .multilineTextAlignment(.leading)
                     .bold()
                 if let member = consituency.member {
                     Text(member.nameDisplayAs)
