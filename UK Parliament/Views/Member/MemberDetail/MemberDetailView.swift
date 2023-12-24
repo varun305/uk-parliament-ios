@@ -28,6 +28,15 @@ struct MemberDetailView: View {
                     .multilineTextAlignment(.center)
                     .listRowBackground(Color.clear)
 
+                    Section {
+                        HStack {
+                            Circle()
+                                .frame(width: 20, height: 20)
+                                .foregroundStyle(Color(hexString: member.latestParty.backgroundColour ?? "ffffff"))
+                            Text(member.latestParty.name)
+                        }
+                    }
+
                     Section(positionTypeString) {
                         if constituencyLink {
                             membershipLink
@@ -39,6 +48,9 @@ struct MemberDetailView: View {
                     Section {
                         NavigationLink("Registered interests") {
                             RegisteredInterestsView(member: member)
+                        }
+                        NavigationLink("Contact details") {
+                            MemberContactView(member: member)
                         }
                     }
                 }

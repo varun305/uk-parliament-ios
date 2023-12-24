@@ -40,6 +40,28 @@ class MemberSynopsisModel: Codable {
     var value: String
 }
 
+class MemberContact: Codable, Identifiable {
+    var type: String
+    var typeDescription: String?
+    var typeId: Int
+    var isPreferred: Bool
+    var isWebAddress: Bool
+    var notes: String?
+    var line1: String
+    var line2: String?
+    var postcode: String?
+    var phone: String?
+    var email: String?
+
+    var id: String {
+        line1 + type
+    }
+}
+
+class MemberContactValueModel: Codable {
+    var value: [MemberContact]
+}
+
 
 class MemberModel {
     private var skip: [String?: Int] = [nil: 0]
@@ -69,6 +91,17 @@ class MemberModel {
 
     private func constructMemberSynopsisUrl(for id: Int) -> String {
         "https://members-api.parliament.uk/api/Members/\(id)/Synopsis"
+    }
+
+    public func fetchMemberContacts(for id: Int, _ completion: @escaping (MemberContactValueModel?) -> Void) {
+        let url = constructMemberContactUrl(for: id)
+        FetchModel.base.fetchData(MemberContactValueModel.self, from: url) { result in
+            completion(result)
+        }
+    }
+
+    private func constructMemberContactUrl(for id: Int) -> String {
+        "https://members-api.parliament.uk/api/Members/\(id)/Contact"
     }
 
     public func nextData(house: House, search: String? = nil, reset: Bool = false, _ completion: @escaping (MembersModel?) -> Void) {
