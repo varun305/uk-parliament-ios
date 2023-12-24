@@ -100,7 +100,13 @@ class ConstituencyModel {
         }
         
         FetchModel.base.fetchData(ConstituenciesModel.self, from: url) { result in
-            completion(result)
+            if let result = result {
+                self.totalResults = result.totalResults
+                self.skip[search] = self.skip[search, default: 0] + self.take
+                completion(result)
+            } else {
+                completion(nil)
+            }
         }
     }
 
