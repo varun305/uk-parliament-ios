@@ -1,9 +1,8 @@
 import SwiftUI
 
-
-struct ConstituenciesView: View {
-    @StateObject var viewModel = ConstituenciesViewModel()
-    @State var scrollItem: Constituency.ID?
+struct BillsView: View {
+    @StateObject var viewModel = BillsViewModel()
+    @State var scrollItem: Bill.ID?
 
     var resultsText: String {
         "\(viewModel.numResults) results" + (viewModel.search != "" ? " for '\(viewModel.search)'" : "")
@@ -16,20 +15,15 @@ struct ConstituenciesView: View {
                     .font(.caption)
                     .padding(.horizontal)
                 Divider()
-                ForEach(viewModel.consituencies) { constituency in
-                    NavigationLink {
-                        ConstituencyDetailView(constituencyId: constituency.id)
-                    } label: {
-                        ConstituencyRow(consituency: constituency)
-                            .padding(.horizontal)
-                    }
-                    .foregroundStyle(.primary)
+                ForEach(viewModel.bills) { bill in
+                    BillRow(bill: bill)
+                        .padding(.horizontal)
                     Divider()
                 }
             }
             .scrollTargetLayout()
         }
-        .searchable(text: $viewModel.search, placement: .navigationBarDrawer(displayMode: .always), prompt: "Enter a name or postcode")
+        .searchable(text: $viewModel.search, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search bills")
         .onSubmit(of: .search) {
             viewModel.nextData(reset: true)
         }
@@ -39,16 +33,16 @@ struct ConstituenciesView: View {
                 viewModel.nextData(reset: true)
             }
         }
-        .navigationTitle("Constituencies")
+        .navigationTitle("Bills")
         .navigationBarTitleDisplayMode(.inline)
         .scrollPosition(id: $scrollItem, anchor: .bottom)
         .onChange(of: scrollItem) { _, new in
-            if new == viewModel.consituencies.last?.id {
+            if new == viewModel.bills.last?.id {
                 viewModel.nextData()
             }
         }
         .onAppear {
-            if viewModel.consituencies.isEmpty {
+            if viewModel.bills.isEmpty {
                 viewModel.nextData(reset: true)
             }
         }

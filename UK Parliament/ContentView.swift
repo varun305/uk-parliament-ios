@@ -28,6 +28,12 @@ struct ContentView: View {
                     } label: {
                         Label("Constituencies", systemImage: "map.fill")
                     }
+
+                    NavigationLink {
+                        BillsView()
+                    } label: {
+                        Label("Bills", systemImage: "square.on.square")
+                    }
                 }
 
                 Section {

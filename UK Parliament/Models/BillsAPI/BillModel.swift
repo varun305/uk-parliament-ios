@@ -11,12 +11,12 @@ class StageSitting: Codable, Identifiable {
 
 class Stage: Codable, Identifiable {
     var id: Int
-    var stateId: Int
+    var stageId: Int
     var sessionId: Int
     var description: String
     var abbreviation: String
     var house: String
-    var stateSittings: [StageSitting]
+    var stageSittings: [StageSitting]
     var sortOrder: Int
 }
 
@@ -89,7 +89,7 @@ class BillModel {
             return
         }
 
-        let url = constructBillsUrl(skip: _skip)
+        let url = search == "" ? constructBillsUrl(skip: _skip) : constructSearchBillsUrl(search: search, skip: _skip)
         FetchModel.base.fetchData(BillItemModel.self, from: url) { result in
             if let result = result {
                 self.totalResults = result.totalResults
@@ -103,5 +103,9 @@ class BillModel {
 
     private func constructBillsUrl(skip: Int) -> String {
         "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&Skip=\(skip)&Take=20"
+    }
+
+    private func constructSearchBillsUrl(search: String, skip: Int) -> String {
+        "https://bills-api.parliament.uk/api/v1/Bills?SearchTerm=\(search)&SortOrder=DateUpdatedDescending&Skip=\(skip)&Take=20"
     }
 }
