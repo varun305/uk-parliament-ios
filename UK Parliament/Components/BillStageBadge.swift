@@ -2,16 +2,41 @@ import SwiftUI
 
 struct BillStageBadge: View {
     var stage: Stage
+    private var color: Color {
+        switch stage.house {
+        case "Commons":
+            Color.commons
+        case "Lords":
+            Color.lords
+        default:
+            Color.accentColor
+        }
+    }
+    private var text: String {
+        switch stage.abbreviation {
+        case "1R":
+            "1"
+        case "2R":
+            "2"
+        case "3R":
+            "3"
+        case "CS":
+            "C"
+        case "RS":
+            "R"
+        case "RA":
+            "RA"
+        default:
+            ""
+        }
+    }
 
     var body: some View {
-        Text(stage.abbreviation)
-            .font(.footnote)
-            .bold()
-            .foregroundStyle(.white)
-            .padding(2)
-            .background {
-                RoundedRectangle(cornerRadius: 5)
-                    .foregroundStyle(stage.house == "Commons" ? Color.commons : stage.house == "Lords" ? Color.lords : .accentColor)
-            }
+        ZStack {
+            Circle()
+                .stroke(color, lineWidth: 3)
+            Text(text)
+                .font(.largeTitle)
+        }
     }
 }
