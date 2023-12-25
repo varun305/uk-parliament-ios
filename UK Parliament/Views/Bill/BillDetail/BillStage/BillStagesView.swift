@@ -9,6 +9,35 @@ struct BillStagesView: View {
     }
 
     var body: some View {
+        Group {
+            if viewModel.stages.count > 0 {
+                scrollView
+            } else if viewModel.loading {
+                ProgressView()
+            } else {
+                Text("No data")
+                    .foregroundStyle(.secondary)
+                    .font(.footnote)
+                    .italic()
+            }
+        }
+        .navigationTitle("Stages, \(bill.shortTitle)")
+        .navigationBarTitleDisplayMode(.inline)
+        .scrollPosition(id: $scrollItem, anchor: .bottom)
+        .onChange(of: scrollItem) { _, new in
+            if new == viewModel.stages.last?.id {
+                viewModel.nextData(for: bill.billId)
+            }
+        }
+        .onAppear {
+            if viewModel.stages.isEmpty {
+                viewModel.nextData(for: bill.billId, reset: true)
+            }
+        }
+    }
+
+    @ViewBuilder
+    var scrollView: some View {
         ScrollView {
             LazyVStack(alignment: .leading) {
                 Text(resultsText)
@@ -32,19 +61,6 @@ struct BillStagesView: View {
                 }
             }
             .scrollTargetLayout()
-        }
-        .navigationTitle("Stages, \(bill.shortTitle)")
-        .navigationBarTitleDisplayMode(.inline)
-        .scrollPosition(id: $scrollItem, anchor: .bottom)
-        .onChange(of: scrollItem) { _, new in
-            if new == viewModel.stages.last?.id {
-                viewModel.nextData(for: bill.billId)
-            }
-        }
-        .onAppear {
-            if viewModel.stages.isEmpty {
-                viewModel.nextData(for: bill.billId, reset: true)
-            }
         }
     }
 }
