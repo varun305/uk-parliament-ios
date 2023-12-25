@@ -37,6 +37,12 @@ struct MemberDetailView: View {
                         }
                     }
 
+                    Section {
+                        NavigationLink("Bills") {
+                            BillsView(member: member)
+                        }
+                    }
+
                     Section(positionTypeString) {
                         if constituencyLink {
                             membershipLink

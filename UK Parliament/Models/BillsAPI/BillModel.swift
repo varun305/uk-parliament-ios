@@ -182,7 +182,7 @@ class BillModel {
         "https://bills-api.parliament.uk/api/v1/Bills/\(id)"
     }
 
-    public func nextData(search: String = "", reset: Bool = false, _ completion: @escaping (BillItemModel?) -> Void) {
+    public func nextData(search: String = "", memberId: Int? = nil, reset: Bool = false, _ completion: @escaping (BillItemModel?) -> Void) {
         if reset {
             skip[search] = 0
         }
@@ -192,7 +192,17 @@ class BillModel {
             return
         }
 
-        let url = search == "" ? constructBillsUrl(skip: _skip) : constructSearchBillsUrl(search: search, skip: _skip)
+        let url: String
+        if search != "", let memberId = memberId {
+            url = constructSearchMemberBillsUrl(search: search, memberId: memberId, skip: _skip)
+        } else if search != "" {
+            url = constructSearchBillsUrl(search: search, skip: _skip)
+        } else if let memberId = memberId {
+            url = constructMemberBillsUrl(memberId: memberId, skip: _skip)
+        } else {
+            url = constructBillsUrl(skip: _skip)
+        }
+        
         FetchModel.base.fetchData(BillItemModel.self, from: url) { result in
             if let result = result {
                 self.totalResults = result.totalResults
@@ -210,5 +220,13 @@ class BillModel {
 
     private func constructSearchBillsUrl(search: String, skip: Int) -> String {
         "https://bills-api.parliament.uk/api/v1/Bills?SearchTerm=\(search)&SortOrder=DateUpdatedDescending&Skip=\(skip)&Take=20"
+    }
+
+    private func constructMemberBillsUrl(memberId: Int, skip: Int) -> String {
+        "https://bills-api.parliament.uk/api/v1/Bills?MemberId=\(memberId)&SortOrder=DateUpdatedDescending&Skip=\(skip)&Take=20"
+    }
+
+    private func constructSearchMemberBillsUrl(search: String, memberId: Int, skip: Int) -> String {
+        "https://bills-api.parliament.uk/api/v1/Bills?SearchTerm=\(search)&MemberId=\(memberId)&SortOrder=DateUpdatedDescending&Skip=\(skip)&Take=20"
     }
 }

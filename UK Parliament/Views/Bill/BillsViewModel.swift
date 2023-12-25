@@ -29,8 +29,8 @@ extension BillsView {
             }
         }
 
-        public func nextData(reset: Bool = false) {
-            BillModel.shared.nextData(search: search, reset: reset) { result in
+        public func nextData(memberId: Int? = nil, reset: Bool = false) {
+            BillModel.shared.nextData(search: search, memberId: memberId, reset: reset) { result in
                 self.handleData(result: result, reset: reset)
             }
         }

@@ -3,9 +3,18 @@ import SwiftUI
 struct BillsView: View {
     @StateObject var viewModel = BillsViewModel()
     @State var scrollItem: Bill.ID?
+    var member: Member?
 
     var resultsText: String {
         "\(viewModel.numResults) results" + (viewModel.search != "" ? " for '\(viewModel.search)'" : "")
+    }
+
+    var navTitle: String {
+        if let member = member {
+            "Bills, \(member.nameDisplayAs)"
+        } else {
+            "Bills"
+        }
     }
 
     var body: some View {
@@ -35,25 +44,25 @@ struct BillsView: View {
         }
         .searchable(text: $viewModel.search, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search bills")
         .onSubmit(of: .search) {
-            viewModel.nextData(reset: true)
+            viewModel.nextData(memberId: member?.id, reset: true)
         }
         .onChange(of: viewModel.search) { _, new in
             if new.isEmpty {
                 viewModel.search = ""
-                viewModel.nextData(reset: true)
+                viewModel.nextData(memberId: member?.id, reset: true)
             }
         }
-        .navigationTitle("Bills")
+        .navigationTitle(navTitle)
         .navigationBarTitleDisplayMode(.inline)
         .scrollPosition(id: $scrollItem, anchor: .bottom)
         .onChange(of: scrollItem) { _, new in
             if new == viewModel.bills.last?.id {
-                viewModel.nextData()
+                viewModel.nextData(memberId: member?.id)
             }
         }
         .onAppear {
             if viewModel.bills.isEmpty {
-                viewModel.nextData(reset: true)
+                viewModel.nextData(memberId: member?.id, reset: true)
             }
         }
     }
