@@ -18,9 +18,14 @@ struct MembersView: View {
                     NavigationLink {
                         MemberDetailView(memberId: member.id)
                     } label: {
-                        MemberRow(member: member)
-                            .padding(.horizontal)
+                        HStack {
+                            MemberRow(member: member)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundStyle(.secondary)
+                        }
                     }
+                    .padding(.horizontal)
                     .foregroundStyle(.primary)
                     Divider()
                 }

@@ -8,10 +8,12 @@ struct BillDetailView: View {
         Group {
             if let bill = viewModel.bill {
                 List {
-                    VStack(alignment: .center) {
+                    HStack(alignment: .center) {
                         if let longTitle = bill.longTitle {
+                            Spacer()
                             Text(longTitle)
                                 .font(.subheadline)
+                            Spacer()
                         }
                     }
                     .multilineTextAlignment(.center)

@@ -21,6 +21,7 @@ struct BillRow: View {
                             .italic()
                     }
                 }
+                Spacer()
                 HStack {
                     Text(bill.lastUpdate.convertToDate())
                     Spacer()

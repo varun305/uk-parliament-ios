@@ -19,9 +19,14 @@ struct BillsView: View {
                     NavigationLink {
                         BillDetailView(bill: bill)
                     } label: {
-                        BillRow(bill: bill)
-                            .padding(.horizontal)
+                        HStack {
+                            BillRow(bill: bill)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundStyle(.secondary)
+                        }
                     }
+                    .padding(.horizontal)
                     .foregroundStyle(.primary)
                     Divider()
                 }

@@ -42,7 +42,7 @@ struct BillPublicationsView: View {
         .navigationTitle(navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            viewModel.fetchPublications(for: bill.billId)
+            viewModel.fetchPublications(for: bill.billId, stageId: stage?.id)
         }
     }
 }

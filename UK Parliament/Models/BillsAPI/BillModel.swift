@@ -79,7 +79,7 @@ class BillItemModel: Codable {
 class BillPublicationType: Codable, Identifiable {
     var id: Int
     var name: String
-    var description: String
+    var description: String?
 }
 
 class BillPublicationLink: Codable, Identifiable {
@@ -90,7 +90,7 @@ class BillPublicationLink: Codable, Identifiable {
 }
 
 class BillPublication: Codable, Identifiable {
-    var house: String
+    var house: String?
     var id: Int
     var title: String
     var publicationType: BillPublicationType
@@ -101,6 +101,17 @@ class BillPublication: Codable, Identifiable {
 class BillPublicationResultModel: Codable {
     var billId: Int
     var publications: [BillPublication]
+}
+
+class BillStageSitting: Codable {
+    var sittingId: Int
+    var publications: [BillPublication]
+}
+
+class BillStagePublicationResultModel: Codable {
+    var billStageId: Int
+    var publications: [BillPublication]
+    var sittings: [BillStageSitting]
 }
 
 
@@ -124,6 +135,17 @@ class BillModel {
 
     private func constructBillPublicationsUrl(for id: Int) -> String {
         "https://bills-api.parliament.uk/api/v1/Bills/\(id)/Publications"
+    }
+
+    public func fetchBillStagePublications(for id: Int, stageId: Int, _ completion: @escaping (BillStagePublicationResultModel?) -> Void) {
+        let url = constructBillStagePublicationsUrl(for: id, stageId: stageId)
+        FetchModel.base.fetchData(BillStagePublicationResultModel.self, from: url) { result in
+            completion(result)
+        }
+    }
+
+    private func constructBillStagePublicationsUrl(for id: Int, stageId: Int) -> String {
+        "https://bills-api.parliament.uk/api/v1/Bills/\(id)/Stages/\(stageId)/Publications"
     }
 
     public func fetchBillStages(for id: Int, reset: Bool = false, _ completion: @escaping (StageResultModel?) -> Void) {

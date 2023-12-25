@@ -16,8 +16,18 @@ struct BillStagesView: View {
                     .padding(.horizontal)
                 Divider()
                 ForEach(viewModel.stages) { stage in
-                    BillStageRow(stage: stage)
-                        .padding(.horizontal)
+                    NavigationLink {
+                        BillPublicationsView(bill: bill, stage: stage)
+                    } label: {
+                        HStack {
+                            BillStageRow(stage: stage)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    .foregroundStyle(.primary)
+                    .padding(.horizontal)
                     Divider()
                 }
             }
@@ -38,3 +48,4 @@ struct BillStagesView: View {
         }
     }
 }
+
