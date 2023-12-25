@@ -5,32 +5,16 @@ struct ContextAwareNavigationLink<Label>: View where Label: View {
 
     private var value: NavigationItem
     private var label: () -> Label
-    private var addChevron: Bool
 
-    init(value: NavigationItem, addChevron: Bool = false, @ViewBuilder label: @escaping () -> Label) {
+    init(value: NavigationItem, @ViewBuilder label: @escaping () -> Label) {
         self.value = value
         self.label = label
-        self.addChevron = addChevron
     }
 
     var body: some View {
         if canLink() {
             NavigationLink(value: value) {
-                labelView
-            }
-        } else {
-            label()
-        }
-    }
-
-    @ViewBuilder
-    var labelView: some View {
-        if addChevron {
-            HStack {
                 label()
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .foregroundStyle(.secondary)
             }
         } else {
             label()
