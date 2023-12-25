@@ -13,8 +13,8 @@ private struct MapConfiguration: Identifiable {
 
 struct ConstituencyDetailView: View {
     @StateObject var viewModel = ConstituencyDetailViewModel()
-    var constituencyId: Int
-    var memberLink: Bool = true
+    var constituency: Constituency
+
     @State private var mapConfig: MapConfiguration?
 
     var body: some View {
@@ -22,11 +22,7 @@ struct ConstituencyDetailView: View {
             if let constituency = viewModel.constituency {
                 List {
                     Section("Current MP") {
-                        if memberLink {
-                            membershipLink
-                        } else {
-                            membershipTile
-                        }
+                        membershipLink
                     }
 
                     Section("Past election results") {
@@ -40,9 +36,9 @@ struct ConstituencyDetailView: View {
             }
         }
         .onAppear {
-            viewModel.fetchConstituency(for: constituencyId)
-            viewModel.fetchGeometry(for: constituencyId)
-            viewModel.fetchData(for: constituencyId)
+            viewModel.fetchConstituency(for: constituency.id)
+            viewModel.fetchGeometry(for: constituency.id)
+            viewModel.fetchData(for: constituency.id)
         }
         .toolbar {
             if let constituency = viewModel.constituency, let geometry = viewModel.geometry {
@@ -81,9 +77,7 @@ struct ConstituencyDetailView: View {
     @ViewBuilder
     var membershipLink: some View {
         if let constituency = viewModel.constituency, let member = constituency.member {
-            NavigationLink {
-                MemberDetailView(memberId: member.id, constituencyLink: false)
-            } label: {
+            ContextAwareNavigationLink(value: .memberDetailView(memberId: member.id)) {
                 membershipTile
             }
         } else {
@@ -110,16 +104,12 @@ struct ConstituencyDetailView: View {
     @ViewBuilder
     var resultsView: some View {
         ForEach(viewModel.electionResults) { result in
-            NavigationLink {
-                ConstituencyElectionDetailView(constituencyId: constituencyId, electionResult: result)
-            } label: {
+            ContextAwareNavigationLink(value: .constituencyElectionDetailView(constituency: constituency, election: result)) {
                 HStack {
                     Text(convertDate(from: result.electionDate))
                         .lineLimit(1)
                         .font(.callout)
-
                     Spacer()
-
                     PartyTaggedText(text: result.result.uppercased(), party: result.winningParty)
                 }
             }

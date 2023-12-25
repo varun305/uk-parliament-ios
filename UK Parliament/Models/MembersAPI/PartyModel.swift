@@ -2,14 +2,6 @@ import Foundation
 import SwiftUI
 
 class PartyModel: Codable, Identifiable, Hashable {
-    static func == (lhs: PartyModel, rhs: PartyModel) -> Bool {
-        lhs.id == rhs.id
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-
     var id: Int
     var name: String
     var abbreviation: String?
@@ -26,5 +18,14 @@ class PartyModel: Codable, Identifiable, Hashable {
 
     var fgColor: Color {
         Color(hexString: foregroundColour ?? "000000")
+    }
+
+    static func == (lhs: PartyModel, rhs: PartyModel) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(name)
     }
 }

@@ -3,7 +3,6 @@ import SwiftUI
 struct MemberDetailView: View {
     @StateObject var viewModel = MemberDetailViewModel()
     var memberId: Int
-    var constituencyLink: Bool = true
 
     private var positionTypeString: String {
         viewModel.member?.latestHouseMembership.house == 2 ? "Peerage type" : "Constituency"
@@ -38,25 +37,21 @@ struct MemberDetailView: View {
                     }
 
                     Section {
-                        NavigationLink("Bills") {
-                            BillsView(member: member)
+                        ContextAwareNavigationLink(value: .billsView(member: member)) {
+                            Text("Bills")
                         }
                     }
 
                     Section(positionTypeString) {
-                        if constituencyLink {
-                            membershipLink
-                        } else {
-                            membershipTile
-                        }
+                        membershipLink
                     }
 
                     Section {
-                        NavigationLink("Registered interests") {
-                            RegisteredInterestsView(member: member)
+                        ContextAwareNavigationLink(value: .memberInterestsView(member: member)) {
+                            Text("Registered interests")
                         }
-                        NavigationLink("Contact details") {
-                            MemberContactView(member: member)
+                        ContextAwareNavigationLink(value: .memberContactView(member: member)) {
+                            Text("Contact details")
                         }
                     }
                 }
@@ -75,9 +70,7 @@ struct MemberDetailView: View {
     @ViewBuilder
     var membershipLink: some View {
         if let member = viewModel.member, member.isCommonsMember, let constituency = viewModel.constituency {
-            NavigationLink {
-                ConstituencyDetailView(constituencyId: constituency.id, memberLink: false)
-            } label: {
+            ContextAwareNavigationLink(value: .constituencyDetailView(constituency: constituency)) {
                 membershipTile
             }
         } else {

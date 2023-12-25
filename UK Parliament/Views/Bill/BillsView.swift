@@ -25,15 +25,8 @@ struct BillsView: View {
                     .padding(.horizontal)
                 Divider()
                 ForEach(viewModel.bills) { bill in
-                    NavigationLink {
-                        BillDetailView(bill: bill)
-                    } label: {
-                        HStack {
-                            BillRow(bill: bill)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundStyle(.secondary)
-                        }
+                    ContextAwareNavigationLink(value: .billDetailView(bill: bill), addChevron: true) {
+                        BillRow(bill: bill)
                     }
                     .padding(.horizontal)
                     .foregroundStyle(.primary)

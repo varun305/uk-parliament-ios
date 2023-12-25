@@ -16,11 +16,7 @@ struct BillPublicationsView: View {
                     Section("\(viewModel.publications.count) results") {
                         ForEach(viewModel.publications) { publication in
                             if publication.links.count > 0 {
-                                NavigationLink {
-                                    BillPublicationLinksView(links: publication.links)
-                                        .navigationTitle("Links, \(publication.title)")
-                                        .navigationBarTitleDisplayMode(.inline)
-                                } label: {
+                                ContextAwareNavigationLink(value: .billPublicationLinksView(links: publication.links)) {
                                     BillPublicationRow(publication: publication)
                                 }
                             } else {

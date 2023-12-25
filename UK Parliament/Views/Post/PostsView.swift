@@ -16,9 +16,7 @@ struct PostsView: View {
             ForEach(side == .government ? viewModel.governmentPosts : viewModel.oppositionPosts) { post in
                 Section(post.hansardName) {
                     ForEach(post.postHolders) { holder in
-                        NavigationLink {
-                            MemberDetailView(memberId: holder.member.id)
-                        } label: {
+                        ContextAwareNavigationLink(value: .memberDetailView(memberId: holder.member.id)) {
                             MemberRow(member: holder.member.value)
                         }
                         HStack {

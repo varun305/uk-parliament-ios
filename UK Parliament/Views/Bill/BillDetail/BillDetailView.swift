@@ -22,9 +22,7 @@ struct BillDetailView: View {
                     if let sponsors = bill.sponsors {
                         Section("Sponsors") {
                             ForEach(sponsors.sorted { $0.sortOrder < $1.sortOrder }, id: \.member.id) { sponsor in
-                                NavigationLink {
-                                    MemberDetailView(memberId: sponsor.member.memberId)
-                                } label: {
+                                ContextAwareNavigationLink(value: .memberDetailView(memberId: sponsor.member.memberId)) {
                                     SponsorRow(sponsor: sponsor)
                                 }
                             }
@@ -37,9 +35,7 @@ struct BillDetailView: View {
 
                     Section("Current stage") {
                         BillStageRow(stage: bill.currentStage)
-                        NavigationLink {
-                            BillStagesView(bill: bill)
-                        } label: {
+                        ContextAwareNavigationLink(value: .billStagesView(bill: bill)) {
                             Text("See all stages")
                                 .foregroundStyle(.secondary)
                                 .italic()
@@ -48,8 +44,8 @@ struct BillDetailView: View {
                     }
 
                     Section {
-                        NavigationLink("Publications") {
-                            BillPublicationsView(bill: bill)
+                        ContextAwareNavigationLink(value: .billPublicationsView(bill: bill, stage: nil)) {
+                            Text("All publications")
                         }
                     }
                 }

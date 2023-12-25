@@ -45,15 +45,8 @@ struct BillStagesView: View {
                     .padding(.horizontal)
                 Divider()
                 ForEach(viewModel.stages) { stage in
-                    NavigationLink {
-                        BillPublicationsView(bill: bill, stage: stage)
-                    } label: {
-                        HStack {
-                            BillStageRow(stage: stage)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundStyle(.secondary)
-                        }
+                    ContextAwareNavigationLink(value: .billPublicationsView(bill: bill, stage: stage), addChevron: true) {
+                        BillStageRow(stage: stage)
                     }
                     .foregroundStyle(.primary)
                     .padding(.horizontal)

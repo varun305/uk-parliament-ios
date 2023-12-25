@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ConstituencyElectionDetailView: View {
     @StateObject var viewModel = ConstituencyElectionDetailViewModel()
-    var constituencyId: Int
+    var constituency: Constituency
     var electionResult: ElectionResult
 
     var body: some View {
@@ -56,7 +56,7 @@ struct ConstituencyElectionDetailView: View {
         .navigationTitle("Election results")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            viewModel.fetchData(in: constituencyId, at: electionResult)
+            viewModel.fetchData(in: constituency.id, at: electionResult)
         }
     }
 

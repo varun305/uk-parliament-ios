@@ -4,7 +4,7 @@ class CurrentRepresentationModel: Codable {
     var member: MemberValueModel
 }
 
-class Constituency: Codable, Identifiable {
+class Constituency: Codable, Identifiable, Hashable {
     var id: Int
     var name: String
     var startDate: String
@@ -12,6 +12,15 @@ class Constituency: Codable, Identifiable {
     var currentRepresentation: CurrentRepresentationModel?
     var member: Member? {
         currentRepresentation?.member.value
+    }
+
+    static func == (lhs: Constituency, rhs: Constituency) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(name)
     }
 }
 

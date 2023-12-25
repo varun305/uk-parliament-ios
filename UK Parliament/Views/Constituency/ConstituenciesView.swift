@@ -16,15 +16,8 @@ struct ConstituenciesView: View {
                     .padding(.horizontal)
                 Divider()
                 ForEach(viewModel.consituencies) { constituency in
-                    NavigationLink {
-                        ConstituencyDetailView(constituencyId: constituency.id)
-                    } label: {
-                        HStack {
-                            ConstituencyRow(consituency: constituency)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundStyle(.secondary)
-                        }
+                    ContextAwareNavigationLink(value: .constituencyDetailView(constituency: constituency), addChevron: true) {
+                        ConstituencyRow(consituency: constituency)
                     }
                     .padding(.horizontal)
                     .foregroundStyle(.primary)

@@ -10,7 +10,7 @@ class CandidateResultModel: Codable {
     var voteShare: Double?
 }
 
-class ElectionResult: Codable, Identifiable {
+class ElectionResult: Codable, Identifiable, Hashable {
     var result: String
     var isNotional: Bool
     var electorate: Int
@@ -26,6 +26,15 @@ class ElectionResult: Codable, Identifiable {
 
     var id: Int {
         electionId
+    }
+
+    static func == (lhs: ElectionResult, rhs: ElectionResult) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(electionId)
+        hasher.combine(constituencyName)
     }
 }
 

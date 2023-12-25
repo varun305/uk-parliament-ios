@@ -15,15 +15,8 @@ struct MembersView: View {
                     .padding(.horizontal)
                 Divider()
                 ForEach(viewModel.members) { member in
-                    NavigationLink {
-                        MemberDetailView(memberId: member.id)
-                    } label: {
-                        HStack {
-                            MemberRow(member: member)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundStyle(.secondary)
-                        }
+                    ContextAwareNavigationLink(value: .memberDetailView(memberId: member.id), addChevron: true) {
+                        MemberRow(member: member)
                     }
                     .padding(.horizontal)
                     .foregroundStyle(.primary)

@@ -1,25 +1,48 @@
 import Foundation
 
-class MembdershipModel: Codable {
+class MembershipModel: Codable, Equatable, Hashable {
     var membershipFrom: String
     var membershipFromId: Int
     var house: Int
     var membershipStartDate: String
+
+    static func == (lhs: MembershipModel, rhs: MembershipModel) -> Bool {
+        lhs.membershipFrom == rhs.membershipFrom
+        && lhs.membershipFromId == rhs.membershipFromId
+        && lhs.house == rhs.house
+        && lhs.membershipStartDate == rhs.membershipStartDate
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(membershipFrom)
+        hasher.combine(membershipFromId)
+        hasher.combine(house)
+        hasher.combine(membershipStartDate)
+    }
 }
 
-class Member: Codable, Identifiable {
+class Member: Codable, Identifiable, Hashable {
     var id: Int
     var nameListAs: String
     var nameDisplayAs: String
     var nameFullTitle: String
     var nameAddressAs: String?
     var latestParty: PartyModel
-    var latestHouseMembership: MembdershipModel
+    var latestHouseMembership: MembershipModel
     var gender: String
     var thumbnailUrl: String
 
     var isCommonsMember: Bool {
         latestHouseMembership.house == 1
+    }
+
+    static func == (lhs: Member, rhs: Member) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(nameFullTitle)
     }
 }
 

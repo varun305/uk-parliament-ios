@@ -8,7 +8,7 @@ class StageSitting: Codable, Identifiable {
     var date: String
 }
 
-class Stage: Codable, Identifiable {
+class Stage: Codable, Identifiable, Hashable {
     var id: Int
     var stageId: Int
     var sessionId: Int
@@ -17,6 +17,16 @@ class Stage: Codable, Identifiable {
     var house: String
     var stageSittings: [StageSitting]
     var sortOrder: Int
+
+    static func == (lhs: Stage, rhs: Stage) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(stageId)
+        hasher.combine(sessionId)
+    }
 }
 
 class StageResultModel: Codable {
@@ -49,7 +59,7 @@ class Sponsor: Codable {
     var sortOrder: Int
 }
 
-class Bill: Codable, Identifiable {
+class Bill: Codable, Identifiable, Hashable {
     var billId: Int
     var shortTitle: String
     var longTitle: String?
@@ -68,6 +78,15 @@ class Bill: Codable, Identifiable {
     var id: Int {
         billId
     }
+
+    static func == (lhs: Bill, rhs: Bill) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(shortTitle)
+    }
 }
 
 class BillItemModel: Codable {
@@ -81,11 +100,20 @@ class BillPublicationType: Codable, Identifiable {
     var description: String?
 }
 
-class BillPublicationLink: Codable, Identifiable {
+class BillPublicationLink: Codable, Identifiable, Hashable {
     var id: Int
     var title: String
     var url: String
     var contentType: String
+
+    static func == (lhs: BillPublicationLink, rhs: BillPublicationLink) -> Bool {
+        lhs.id == rhs.id && lhs.url == rhs.url
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(url)
+    }
 }
 
 class BillPublication: Codable, Identifiable {
