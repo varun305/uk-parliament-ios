@@ -6,7 +6,7 @@ protocol Voter: Identifiable {
     var listAs: String { get }
     var party: String { get }
     var partyColour: String { get }
-    var partyAbbreviation: String { get }
+    var partyAbbreviation: String? { get }
     var memberFrom: String { get }
 }
 
@@ -16,7 +16,7 @@ class CommonsVoter: Voter, Codable {
     var listAs: String
     var party: String
     var partyColour: String
-    var partyAbbreviation: String
+    var partyAbbreviation: String?
     var memberFrom: String
 
     enum CodingKeys: String, CodingKey {
@@ -34,7 +34,7 @@ class CommonsVoter: Voter, Codable {
     }
 }
 
-class CommonsVote: Codable, Identifiable, Equatable {
+class CommonsVote: Codable, Identifiable, Equatable, Hashable {
     var divisionId: Int
     var date: String
     var publicationUpdated: String
@@ -72,6 +72,11 @@ class CommonsVote: Codable, Identifiable, Equatable {
     static func == (lhs: CommonsVote, rhs: CommonsVote) -> Bool {
         lhs.id == rhs.id
     }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(divisionId)
+        hasher.combine(title)
+    }
 }
 
 class VoteModel {
@@ -106,5 +111,16 @@ class VoteModel {
 
     private func constructSearchCommonsVoteUrl(search: String, skip: Int) -> String {
         "https://commonsvotes-api.parliament.uk/data/divisions.json/search?queryParameters.skip=\(skip)&queryParameters.take=\(take)&queryParameters.searchTerm=\(search)"
+    }
+
+    public func fetchCommonsVote(for id: Int, _ completion: @escaping (CommonsVote?) -> Void) {
+        let url = constructFetchCommonsVoteUrl(for: id)
+        FetchModel.base.fetchData(CommonsVote.self, from: url) { result in
+            completion(result)
+        }
+    }
+
+    private func constructFetchCommonsVoteUrl(for id: Int) -> String {
+        "https://commonsvotes-api.parliament.uk/data/division/\(id).json"
     }
 }

@@ -16,6 +16,7 @@ enum NavigationItem: Hashable, Codable {
     case billPublicationsView(bill: Bill, stage: Stage?)
     case billPublicationLinksView(links: [BillPublicationLink])
     case commonsVotesView
+    case commonsVoteDetailView(vote: CommonsVote)
 
     static func == (lhs: NavigationItem, rhs: NavigationItem) -> Bool {
         switch (lhs, rhs) {
@@ -44,6 +45,8 @@ enum NavigationItem: Hashable, Codable {
             return bill1 == bill2 && stage1 == stage2
         case let (.billPublicationLinksView(links1), .billPublicationLinksView(links2)):
             return links1 == links2
+        case let (.commonsVoteDetailView(vote1), .commonsVoteDetailView(vote2)):
+            return vote1 == vote2
         default:
             return false
         }
@@ -93,6 +96,9 @@ enum NavigationItem: Hashable, Codable {
                 hasher.combine(links)
             case .commonsVotesView:
                 hasher.combine(14)
+            case .commonsVoteDetailView(let vote):
+                hasher.combine(15)
+                hasher.combine(vote)
             }
         }
 }

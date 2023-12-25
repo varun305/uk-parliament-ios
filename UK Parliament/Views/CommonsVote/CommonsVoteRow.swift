@@ -6,7 +6,6 @@ struct CommonsVoteRow: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(vote.title)
-                .font(.subheadline)
                 .bold()
             HStack(alignment: .center) {
                 HStack {
@@ -21,6 +20,7 @@ struct CommonsVoteRow: View {
                         .foregroundStyle(.secondary)
                 }
             }
+            .padding(.vertical, 2)
             Text("Division \(vote.number) on \(vote.date.convertToDate())")
                 .font(.footnote)
                 .foregroundStyle(.secondary)

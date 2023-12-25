@@ -6,8 +6,10 @@ struct CommonsVotesView: View {
     var body: some View {
         List {
             ForEach(viewModel.votes) { vote in
-                CommonsVoteRow(vote: vote)
-                    .onAppear(perform: { onScrollEnd(vote: vote )})
+                ContextAwareNavigationLink(value: .commonsVoteDetailView(vote: vote)) {
+                    CommonsVoteRow(vote: vote)
+                        .onAppear(perform: { onScrollEnd(vote: vote )})
+                }
             }
         }
         .listStyle(.plain)

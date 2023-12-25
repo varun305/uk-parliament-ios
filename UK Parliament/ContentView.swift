@@ -62,6 +62,8 @@ struct ContentView: View {
                     BillPublicationLinksView(links: links)
                 case .commonsVotesView:
                     CommonsVotesView()
+                case .commonsVoteDetailView(let vote):
+                    CommonsVoteDetailView(vote: vote)
                 }
             }
         }
