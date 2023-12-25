@@ -2,29 +2,23 @@ import SwiftUI
 
 struct MembersView: View {
     @StateObject var viewModel = MembersViewModel()
-    @State var scrollItem: Member.ID?
     private var resultsText: String {
         "\(viewModel.numResults) results" + (viewModel.search != "" ? " for '\(viewModel.search)'" : "")
     }
 
     var body: some View {
-        ScrollView {
-            LazyVStack(alignment: .leading) {
-                Text(resultsText)
-                    .font(.caption)
-                    .padding(.horizontal)
-                Divider()
+        List {
+            Section(resultsText) {
                 ForEach(viewModel.members) { member in
-                    ContextAwareNavigationLink(value: .memberDetailView(memberId: member.id), addChevron: true) {
+                    ContextAwareNavigationLink(value: .memberDetailView(memberId: member.id)) {
                         MemberRow(member: member)
+                            .onAppear(perform: { onScrollEnd(member: member )})
                     }
-                    .padding(.horizontal)
-                    .foregroundStyle(.primary)
-                    Divider()
                 }
             }
-            .scrollTargetLayout()
         }
+        .listStyle(.plain)
+        .scrollTargetLayout()
         .searchable(text: $viewModel.search, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search " + (viewModel.house == .commons ? "MPs" : "lords"))
         .onSubmit(of: .search) {
             viewModel.nextData(reset: true)
@@ -45,16 +39,16 @@ struct MembersView: View {
                 }
             }
         }
-        .scrollPosition(id: $scrollItem, anchor: .bottom)
-        .onChange(of: scrollItem) { _, new in
-            if new == viewModel.members.last?.id {
-                viewModel.nextData()
-            }
-        }
         .onAppear {
             if viewModel.members.isEmpty {
                 viewModel.nextData(reset: true)
             }
+        }
+    }
+
+    private func onScrollEnd(member: Member) {
+        if member == viewModel.members.last {
+            viewModel.nextData()
         }
     }
 }

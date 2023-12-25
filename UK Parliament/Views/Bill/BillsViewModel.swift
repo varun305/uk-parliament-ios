@@ -3,6 +3,7 @@ import SwiftUI
 
 extension BillsView {
     @MainActor class BillsViewModel: ObservableObject {
+        @Published var loading = false
         @Published var result: BillItemModel?
         @Published var bills: [Bill] = []
         @Published var search = ""
@@ -23,6 +24,7 @@ extension BillsView {
                             self.bills += bills
                         }
                     }
+                    loading = false
                 }
             } else {
                 // error
@@ -30,6 +32,7 @@ extension BillsView {
         }
 
         public func nextData(memberId: Int? = nil, reset: Bool = false) {
+            loading = true
             BillModel.shared.nextData(search: search, memberId: memberId, reset: reset) { result in
                 self.handleData(result: result, reset: reset)
             }

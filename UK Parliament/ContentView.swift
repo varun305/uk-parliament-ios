@@ -6,26 +6,24 @@ struct ContentView: View {
     var body: some View {
         NavigationStack(path: $contextModel.navigationPath) {
             List {
-                Section {
-                    ContextAwareNavigationLink(value: NavigationItem.partiesView) {
-                        Label("Parties", systemImage: "house")
-                    }
+                ContextAwareNavigationLink(value: NavigationItem.billsView(member: nil)) {
+                    Label("Bills", systemImage: "square.on.square")
+                }
 
-                    ContextAwareNavigationLink(value: NavigationItem.postsView) {
-                        Label("Posts", systemImage: "building.columns.fill")
-                    }
+                ContextAwareNavigationLink(value: NavigationItem.membersView) {
+                    Label("MPs and Lords", systemImage: "person.3.fill")
+                }
 
-                    ContextAwareNavigationLink(value: NavigationItem.membersView) {
-                        Label("MPs and Lords", systemImage: "person.3.fill")
-                    }
+                ContextAwareNavigationLink(value: NavigationItem.constituenciesView) {
+                    Label("Constituencies", systemImage: "map.fill")
+                }
 
-                    ContextAwareNavigationLink(value: NavigationItem.constituenciesView) {
-                        Label("Constituencies", systemImage: "map.fill")
-                    }
+                ContextAwareNavigationLink(value: NavigationItem.postsView) {
+                    Label("Posts", systemImage: "building.columns.fill")
+                }
 
-                    ContextAwareNavigationLink(value: NavigationItem.billsView(member: nil)) {
-                        Label("Bills", systemImage: "square.on.square")
-                    }
+                ContextAwareNavigationLink(value: NavigationItem.partiesView) {
+                    Label("Parties", systemImage: "house")
                 }
             }
             .navigationTitle("Home")

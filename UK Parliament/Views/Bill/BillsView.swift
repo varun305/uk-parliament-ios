@@ -2,7 +2,6 @@ import SwiftUI
 
 struct BillsView: View {
     @StateObject var viewModel = BillsViewModel()
-    @State var scrollItem: Bill.ID?
     var member: Member?
 
     var resultsText: String {
@@ -18,22 +17,17 @@ struct BillsView: View {
     }
 
     var body: some View {
-        ScrollView {
-            LazyVStack(alignment: .leading) {
-                Text(resultsText)
-                    .font(.caption)
-                    .padding(.horizontal)
-                Divider()
-                ForEach(viewModel.bills) { bill in
-                    ContextAwareNavigationLink(value: .billDetailView(bill: bill), addChevron: true) {
-                        BillRow(bill: bill)
-                    }
-                    .padding(.horizontal)
-                    .foregroundStyle(.primary)
-                    Divider()
-                }
+        Group {
+            if viewModel.bills.count > 0 {
+                scrollView
+            } else if viewModel.loading {
+                ProgressView()
+            } else {
+                Text("No data")
+                    .foregroundStyle(.secondary)
+                    .font(.footnote)
+                    .italic()
             }
-            .scrollTargetLayout()
         }
         .searchable(text: $viewModel.search, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search bills")
         .onSubmit(of: .search) {
@@ -47,16 +41,31 @@ struct BillsView: View {
         }
         .navigationTitle(navTitle)
         .navigationBarTitleDisplayMode(.inline)
-        .scrollPosition(id: $scrollItem, anchor: .bottom)
-        .onChange(of: scrollItem) { _, new in
-            if new == viewModel.bills.last?.id {
-                viewModel.nextData(memberId: member?.id)
-            }
-        }
         .onAppear {
             if viewModel.bills.isEmpty {
                 viewModel.nextData(memberId: member?.id, reset: true)
             }
+        }
+    }
+
+    @ViewBuilder
+    var scrollView: some View {
+        List {
+            Section(resultsText) {
+                ForEach(viewModel.bills) { bill in
+                    ContextAwareNavigationLink(value: .billDetailView(bill: bill)) {
+                        BillRow(bill: bill)
+                            .onAppear(perform: { onScrollEnd(bill: bill) })
+                    }
+                }
+            }
+        }
+        .listStyle(.plain)
+    }
+
+    private func onScrollEnd(bill: Bill) {
+        if bill == viewModel.bills.last {
+            viewModel.nextData()
         }
     }
 }
