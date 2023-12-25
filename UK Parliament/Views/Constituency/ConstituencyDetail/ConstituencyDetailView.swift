@@ -106,7 +106,7 @@ struct ConstituencyDetailView: View {
         ForEach(viewModel.electionResults) { result in
             ContextAwareNavigationLink(value: .constituencyElectionDetailView(constituency: constituency, election: result)) {
                 HStack {
-                    Text(convertDate(from: result.electionDate))
+                    Text(result.electionDate.convertToDate())
                         .lineLimit(1)
                         .font(.callout)
                     Spacer()
@@ -114,11 +114,5 @@ struct ConstituencyDetailView: View {
                 }
             }
         }
-    }
-
-    private func convertDate(from date: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        return dateFormatter.date(from: date)?.formatted(date: .abbreviated, time: .omitted) ?? ""
     }
 }

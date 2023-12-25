@@ -43,35 +43,27 @@ struct RegisteredInterestsView: View {
                         HStack {
                             Text("Created")
                             Spacer()
-                            Text(convertDate(from: createdWhen))
+                            Text(createdWhen.convertToDate())
                         }
                     }
                     if let lastAmendedWhen = interest.lastAmendedWhen, lastAmendedWhen != "" {
                         HStack {
                             Text("Amended")
                             Spacer()
-                            Text(convertDate(from: lastAmendedWhen))
+                            Text(lastAmendedWhen.convertToDate())
                         }
                     }
                     if let deletedWhen = interest.deletedWhen, deletedWhen != "" {
                         HStack {
                             Text("Created")
                             Spacer()
-                            Text(convertDate(from: deletedWhen))
+                            Text(deletedWhen.convertToDate())
                         }
                     }
                 }
                 .italic()
             }
             .font(.footnote)
-        }
-
-        private func convertDate(from date: String) -> String {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-            let dateFormatter2 = DateFormatter()
-            dateFormatter2.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
-            return dateFormatter.date(from: date)?.formatted(date: .abbreviated, time: .omitted) ?? dateFormatter2.date(from: date)?.formatted(date: .abbreviated, time: .omitted) ?? ""
         }
     }
 }

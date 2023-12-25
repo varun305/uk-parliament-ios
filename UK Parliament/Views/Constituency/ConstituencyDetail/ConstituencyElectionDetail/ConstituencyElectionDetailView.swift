@@ -9,12 +9,12 @@ struct ConstituencyElectionDetailView: View {
         Group {
             if let result = viewModel.result {
                 List {
-                    Section("\(result.constituencyName), \(convertDate(from: result.electionDate))") {
+                    Section("\(result.constituencyName), \(result.electionDate.convertToDate())") {
                         HStack {
                             PartyTaggedText(text: result.result.uppercased(), party: result.winningParty)
 
                             Spacer()
-                            Text(convertDate(from: result.electionDate))
+                            Text(result.electionDate.convertToDate())
                                 .bold()
                         }
                         HStack {
@@ -58,11 +58,5 @@ struct ConstituencyElectionDetailView: View {
         .onAppear {
             viewModel.fetchData(in: constituency.id, at: electionResult)
         }
-    }
-
-    private func convertDate(from date: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        return dateFormatter.date(from: date)?.formatted(date: .abbreviated, time: .omitted) ?? ""
     }
 }

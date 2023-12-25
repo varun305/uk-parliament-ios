@@ -20,7 +20,7 @@ struct PostsView: View {
                             MemberRow(member: holder.member.value)
                         }
                         HStack {
-                            Text("from \(convertDate(from: holder.startDate))")
+                            Text("from \(holder.startDate.convertToDate())")
                             if holder.isPaid {
                                 Spacer()
                                 Text("Paid role")
@@ -37,14 +37,6 @@ struct PostsView: View {
             viewModel.getPosts(side: .government)
             viewModel.getPosts(side: .opposition)
         }
-    }
-
-    private func convertDate(from date: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        let dateFormatter2 = DateFormatter()
-        dateFormatter2.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
-        return dateFormatter.date(from: date)?.formatted(date: .abbreviated, time: .omitted) ?? dateFormatter2.date(from: date)?.formatted(date: .abbreviated, time: .omitted) ?? ""
     }
 }
 
