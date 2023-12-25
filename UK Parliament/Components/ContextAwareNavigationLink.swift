@@ -22,6 +22,14 @@ struct ContextAwareNavigationLink<Label>: View where Label: View {
     }
 
     private func canLink() -> Bool {
-        return !contextModel.navigationPath.contains(where: { $0 == value })
+        return !clipepdPath().contains(where: { $0 == value })
+    }
+
+    private func clipepdPath() -> [NavigationItem] {
+        if contextModel.navigationPath.count == 0 {
+            return []
+        } else {
+            return Array(contextModel.navigationPath[0..<contextModel.navigationPath.count - 1])
+        }
     }
 }
