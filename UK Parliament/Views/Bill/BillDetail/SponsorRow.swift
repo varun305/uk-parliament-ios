@@ -20,7 +20,7 @@ struct SponsorRow: View {
             }
             .overlay {
                 Circle()
-                    .stroke(Color(hexString: sponsor.member.partyColour), lineWidth: 3)
+                    .stroke(Color(hexString: sponsor.member.partyColour ?? "ffffff"), lineWidth: 3)
             }
             .frame(width: 60, height: 60)
 

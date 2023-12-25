@@ -15,7 +15,7 @@ struct BillStagesView: View {
                     .font(.caption)
                     .padding(.horizontal)
                 Divider()
-                ForEach(viewModel.stages.sorted { $0.sortOrder > $1.sortOrder }) { stage in
+                ForEach(viewModel.stages) { stage in
                     BillStageRow(stage: stage)
                         .padding(.horizontal)
                     Divider()

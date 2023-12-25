@@ -28,11 +28,11 @@ class StageResultModel: Codable {
 class BillMember: Codable, Identifiable {
     var memberId: Int
     var name: String
-    var party: String
-    var partyColour: String
+    var party: String?
+    var partyColour: String?
     var house: String
     var memberPhoto: String
-    var memberFrom: String
+    var memberFrom: String?
 
     var id: Int {
         memberId
