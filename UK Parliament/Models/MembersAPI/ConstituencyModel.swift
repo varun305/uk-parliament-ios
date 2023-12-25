@@ -119,7 +119,6 @@ class ConstituencyModel {
         }
 
         let url = search == "" ? constructConstituenciesUrl(skip: _skip) : constructSearchConstituenciesUrl(search: search, skip: _skip)
-
         FetchModel.base.fetchData(ConstituenciesModel.self, from: url) { result in
             if let result = result {
                 self.totalResults = result.totalResults

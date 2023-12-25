@@ -6,23 +6,26 @@ struct ContentView: View {
     var body: some View {
         NavigationStack(path: $contextModel.navigationPath) {
             List {
-                ContextAwareNavigationLink(value: NavigationItem.billsView(member: nil)) {
+                ContextAwareNavigationLink(value: .commonsVotesView) {
+                    Label("Commons votes", systemImage: "checkmark.square")
+                }
+                ContextAwareNavigationLink(value: .billsView(member: nil)) {
                     Label("Bills", systemImage: "square.on.square")
                 }
 
-                ContextAwareNavigationLink(value: NavigationItem.membersView) {
+                ContextAwareNavigationLink(value: .membersView) {
                     Label("MPs and Lords", systemImage: "person.3.fill")
                 }
 
-                ContextAwareNavigationLink(value: NavigationItem.constituenciesView) {
+                ContextAwareNavigationLink(value: .constituenciesView) {
                     Label("Constituencies", systemImage: "map.fill")
                 }
 
-                ContextAwareNavigationLink(value: NavigationItem.postsView) {
+                ContextAwareNavigationLink(value: .postsView) {
                     Label("Posts", systemImage: "building.columns.fill")
                 }
 
-                ContextAwareNavigationLink(value: NavigationItem.partiesView) {
+                ContextAwareNavigationLink(value: .partiesView) {
                     Label("Parties", systemImage: "house")
                 }
             }
@@ -57,6 +60,8 @@ struct ContentView: View {
                     BillPublicationsView(bill: bill, stage: stage)
                 case .billPublicationLinksView(let links):
                     BillPublicationLinksView(links: links)
+                case .commonsVotesView:
+                    CommonsVotesView()
                 }
             }
         }

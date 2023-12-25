@@ -10,6 +10,7 @@ struct BillRow: View {
             VStack(alignment: .leading) {
                 HStack {
                     Text(bill.shortTitle)
+                        .font(.subheadline)
                         .bold()
                     Spacer()
 
@@ -33,10 +34,11 @@ struct BillRow: View {
                         }
                     }
                     .italic()
-                    .foregroundStyle(.secondary)
                 }
+                .foregroundStyle(.secondary)
                 .font(.footnote)
             }
+            .padding(.top, 3)
             .multilineTextAlignment(.leading)
         }
     }
