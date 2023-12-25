@@ -12,7 +12,7 @@ struct ContextAwareNavigationLink<Label>: View where Label: View {
     }
 
     var body: some View {
-        if canLink() {
+        if forwardLink {
             NavigationLink(value: value) {
                 label()
             }
@@ -21,15 +21,15 @@ struct ContextAwareNavigationLink<Label>: View where Label: View {
         }
     }
 
-    private func canLink() -> Bool {
-        return !clipepdPath().contains(where: { $0 == value })
+    private var forwardLink: Bool {
+        !clipepdPath.contains(where: { $0 == value })
     }
 
-    private func clipepdPath() -> [NavigationItem] {
+    var clipepdPath: [NavigationItem] {
         if contextModel.navigationPath.count == 0 {
-            return []
+            []
         } else {
-            return Array(contextModel.navigationPath[0..<contextModel.navigationPath.count - 1])
+            Array(contextModel.navigationPath[0..<contextModel.navigationPath.count - 1])
         }
     }
 }
