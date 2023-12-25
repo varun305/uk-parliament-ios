@@ -1,6 +1,5 @@
 import Foundation
 
-
 class PostHolderMemberModel: Codable, Identifiable {
     var member: MemberValueModel
     var startDate: String

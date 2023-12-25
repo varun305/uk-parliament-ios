@@ -66,7 +66,7 @@ struct RegisteredInterestsView: View {
             .font(.footnote)
         }
 
-        private func convertDate(from date: String) -> String{
+        private func convertDate(from date: String) -> String {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
             let dateFormatter2 = DateFormatter()

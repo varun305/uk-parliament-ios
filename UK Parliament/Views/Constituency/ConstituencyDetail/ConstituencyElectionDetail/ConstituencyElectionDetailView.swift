@@ -60,7 +60,7 @@ struct ConstituencyElectionDetailView: View {
         }
     }
 
-    private func convertDate(from date: String) -> String{
+    private func convertDate(from date: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         return dateFormatter.date(from: date)?.formatted(date: .abbreviated, time: .omitted) ?? ""

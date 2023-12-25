@@ -1,6 +1,5 @@
 import Foundation
 
-
 extension RegisteredInterestsView {
     @MainActor class RegisteredInterestsViewModel: ObservableObject {
         @Published var loading = false

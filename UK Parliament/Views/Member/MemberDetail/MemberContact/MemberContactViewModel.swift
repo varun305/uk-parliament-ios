@@ -1,6 +1,5 @@
 import Foundation
 
-
 extension MemberContactView {
     @MainActor class MemberContactViewModel: ObservableObject {
         @Published var contacts: [MemberContact] = []

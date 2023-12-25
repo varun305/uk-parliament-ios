@@ -26,7 +26,6 @@ struct PartyRow: View {
     }
 }
 
-
 extension Color {
     init(hexString: String) {
         self.init(UIColor(hexString: hexString))

@@ -1,6 +1,5 @@
 import Foundation
 
-
 class CurrentRepresentationModel: Codable {
     var member: MemberValueModel
 }

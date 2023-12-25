@@ -1,10 +1,9 @@
 import Foundation
 import SwiftUI
 
-
 class MembersViewModel: ObservableObject {
     @Published var members: [Member] = []
-    @Published var result: MembersModel? = nil
+    @Published var result: MembersModel?
     @Published var house: House = .commons {
         didSet {
             nextData(reset: true)

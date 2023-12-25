@@ -1,6 +1,5 @@
 import Foundation
 
-
 class CandidateResultModel: Codable {
     var memberId: Int?
     var name: String
@@ -30,7 +29,6 @@ class ElectionResult: Codable, Identifiable {
     }
 }
 
-
 class ElectionResultResultModel: Codable {
     var value: [ElectionResult]
 }
@@ -38,7 +36,6 @@ class ElectionResultResultModel: Codable {
 class ConstituencyElectionResultResultModel: Codable {
     var value: ElectionResult
 }
-
 
 class ElectionResultModel {
     public static var shared = ElectionResultModel()

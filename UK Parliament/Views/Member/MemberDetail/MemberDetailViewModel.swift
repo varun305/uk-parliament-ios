@@ -1,16 +1,15 @@
 import Foundation
 
-
 extension MemberDetailView {
     @MainActor class MemberDetailViewModel: ObservableObject {
-        @Published var member: Member? = nil {
+        @Published var member: Member? {
             didSet {
                 if let member = member {
                     fetchMemberConstituency(for: member.latestHouseMembership.membershipFromId)
                 }
             }
         }
-        @Published var constituency: Constituency? = nil
+        @Published var constituency: Constituency?
         @Published var synopsis = ""
 
         public func fetchMember(for id: Int) {
@@ -35,7 +34,7 @@ extension MemberDetailView {
                     let string = result?.value ?? ""
                     do {
                         let regex = try NSRegularExpression(pattern: "(<[^>]*>)", options: .caseInsensitive)
-                        let range = NSMakeRange(0, string.count)
+                        let range = NSRange(location: 0, length: string.count)
                         let value = regex.stringByReplacingMatches(in: string, range: range, withTemplate: "")
                         self.synopsis = value
                     } catch {

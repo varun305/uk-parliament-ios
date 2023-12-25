@@ -1,6 +1,5 @@
 import Foundation
 
-
 class Interest: Codable, Identifiable {
     var id: Int
     var interest: String
@@ -20,7 +19,6 @@ class RegisteredInterest: Codable, Identifiable {
 class RegisteredInterestValueModel: Codable {
     var value: [RegisteredInterest]
 }
-
 
 class RegisteredInterestModel {
     public static var shared = RegisteredInterestModel()

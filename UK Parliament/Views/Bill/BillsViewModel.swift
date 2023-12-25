@@ -1,10 +1,9 @@
 import Foundation
 import SwiftUI
 
-
 extension BillsView {
     @MainActor class BillsViewModel: ObservableObject {
-        @Published var result: BillItemModel? = nil
+        @Published var result: BillItemModel?
         @Published var bills: [Bill] = []
         @Published var search = ""
 

@@ -1,12 +1,11 @@
 import Foundation
 import MapKit
 
-
 extension ConstituencyDetailView {
     @MainActor class ConstituencyDetailViewModel: ObservableObject {
-        @Published var constituency: Constituency? = nil
+        @Published var constituency: Constituency?
         @Published var electionResults: [ElectionResult] = []
-        @Published var geometry: Geometry? = nil
+        @Published var geometry: Geometry?
         var coordinates: [[CLLocationCoordinate2D]] {
             geometry?.flattenedCoordinates.map {
                 $0.map {

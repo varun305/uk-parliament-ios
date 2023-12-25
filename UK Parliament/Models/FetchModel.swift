@@ -1,6 +1,5 @@
 import Foundation
 
-
 class FetchModel {
     var cache: [String: Data] = [:]
 
@@ -13,7 +12,7 @@ class FetchModel {
             return
         }
 
-        URLSession.shared.dataTask(with: URL(string: url)!) { data, response, error in
+        URLSession.shared.dataTask(with: URL(string: url)!) { data, _, _ in
             print("FETCHING \(url)")
             self.cache[url] = data
             completion(self.resolveData(T.self, from: data))

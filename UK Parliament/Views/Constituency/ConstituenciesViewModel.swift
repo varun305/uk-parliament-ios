@@ -1,11 +1,10 @@
 import Foundation
 import SwiftUI
 
-
 extension ConstituenciesView {
     @MainActor class ConstituenciesViewModel: ObservableObject {
         @Published var consituencies: [Constituency] = []
-        @Published var result: ConstituenciesModel? = nil
+        @Published var result: ConstituenciesModel?
         @Published var search = ""
 
         var numResults: Int {

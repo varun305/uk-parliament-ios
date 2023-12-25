@@ -1,7 +1,6 @@
 import SwiftUI
 import MapKit
 
-
 private struct MapConfiguration: Identifiable {
     var constituency: Constituency
     var coordinates: [[[Double]]]
@@ -16,7 +15,7 @@ struct ConstituencyDetailView: View {
     @StateObject var viewModel = ConstituencyDetailViewModel()
     var constituencyId: Int
     var memberLink: Bool = true
-    @State private var mapConfig: MapConfiguration? = nil
+    @State private var mapConfig: MapConfiguration?
 
     var body: some View {
         Group {
@@ -127,7 +126,7 @@ struct ConstituencyDetailView: View {
         }
     }
 
-    private func convertDate(from date: String) -> String{
+    private func convertDate(from date: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         return dateFormatter.date(from: date)?.formatted(date: .abbreviated, time: .omitted) ?? ""

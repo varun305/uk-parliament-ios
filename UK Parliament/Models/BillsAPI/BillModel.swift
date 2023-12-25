@@ -1,6 +1,5 @@
 import Foundation
 
-
 class StageSitting: Codable, Identifiable {
     var id: Int
     var stageId: Int
@@ -113,7 +112,6 @@ class BillStagePublicationResultModel: Codable {
     var publications: [BillPublication]
     var sittings: [BillStageSitting]
 }
-
 
 class BillModel {
     private var stagesSkip = 0

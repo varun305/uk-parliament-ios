@@ -1,6 +1,5 @@
 import Foundation
 
-
 extension String {
     public func convertToDate() -> String {
         let dateFormatter = DateFormatter()

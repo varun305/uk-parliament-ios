@@ -15,7 +15,7 @@ struct BillStageRow: View {
                     } else if stage.stageSittings.count == 1 {
                         Text("Sitting on \(stage.stageSittings[0].date.convertToDate())")
                     } else {
-                        Text("Sittings from \(stage.stageSittings.sorted{ $0.date < $1.date }[0].date.convertToDate())")
+                        Text("Sittings from \(stage.stageSittings.sorted { $0.date < $1.date }[0].date.convertToDate())")
                     }
                 }
                 .font(.footnote)

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct BillPublicationLinksView: View {
     var links: [BillPublicationLink]
-    
+
     var body: some View {
         List {
             Section("\(links.count) results") {

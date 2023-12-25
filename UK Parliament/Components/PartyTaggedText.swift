@@ -2,7 +2,7 @@ import SwiftUI
 
 struct PartyTaggedText: View {
     var text: String
-    var party: PartyModel? = nil
+    var party: PartyModel?
 
     var body: some View {
         Text(text)

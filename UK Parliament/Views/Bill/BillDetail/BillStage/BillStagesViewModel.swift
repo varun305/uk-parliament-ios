@@ -1,10 +1,9 @@
 import Foundation
 import SwiftUI
 
-
 extension BillStagesView {
     @MainActor class BillStagesViewModel: ObservableObject {
-        @Published var result: StageResultModel? = nil
+        @Published var result: StageResultModel?
         @Published var stages: [Stage] = []
 
         var numResults: Int {

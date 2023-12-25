@@ -1,7 +1,6 @@
 import Foundation
 import SwiftUI
 
-
 class PartyModel: Codable, Identifiable, Hashable {
     static func == (lhs: PartyModel, rhs: PartyModel) -> Bool {
         lhs.id == rhs.id

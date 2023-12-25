@@ -1,14 +1,13 @@
 import SwiftUI
 
-
 struct ConstituenciesView: View {
     @StateObject var viewModel = ConstituenciesViewModel()
     @State var scrollItem: Constituency.ID?
-    
+
     var resultsText: String {
         "\(viewModel.numResults) results" + (viewModel.search != "" ? " for '\(viewModel.search)'" : "")
     }
-    
+
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading) {

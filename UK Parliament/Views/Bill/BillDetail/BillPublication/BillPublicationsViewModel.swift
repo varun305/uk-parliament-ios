@@ -1,7 +1,6 @@
 import Foundation
 import SwiftUI
 
-
 extension BillPublicationsView {
     @MainActor class BillPublicationsViewModel: ObservableObject {
         @Published var loading = false

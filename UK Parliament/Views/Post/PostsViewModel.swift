@@ -1,6 +1,5 @@
 import Foundation
 
-
 extension PostsView {
     @MainActor class PostsViewModel: ObservableObject {
         @Published var governmentPosts: [Post] = []

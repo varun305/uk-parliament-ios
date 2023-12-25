@@ -1,6 +1,5 @@
 import Foundation
 
-
 class PartyResultModel: Codable, Identifiable {
     var male: Int
     var female: Int
@@ -28,7 +27,6 @@ class PartyValueModel: Codable, Identifiable {
 class StateOfThePartiesModel: Codable {
     var items: [PartyValueModel]
 }
-
 
 class HouseModel {
     public static var shared = HouseModel()

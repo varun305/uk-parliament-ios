@@ -1,7 +1,6 @@
 import Foundation
 import SwiftUI
 
-
 extension PartiesView {
     @MainActor class PartiesViewModel: ObservableObject {
         @Published var state: StateOfThePartiesModel?

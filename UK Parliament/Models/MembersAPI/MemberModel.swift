@@ -1,6 +1,5 @@
 import Foundation
 
-
 class MembdershipModel: Codable {
     var membershipFrom: String
     var membershipFromId: Int
@@ -61,7 +60,6 @@ class MemberContact: Codable, Identifiable {
 class MemberContactValueModel: Codable {
     var value: [MemberContact]
 }
-
 
 class MemberModel {
     private var skip: [String?: Int] = [nil: 0]
