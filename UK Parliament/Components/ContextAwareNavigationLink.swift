@@ -25,7 +25,7 @@ struct ContextAwareNavigationLink<Label>: View where Label: View {
         !clipepdPath.contains(where: { $0 == value })
     }
 
-    var clipepdPath: [NavigationItem] {
+    private var clipepdPath: [NavigationItem] {
         if contextModel.navigationPath.count == 0 {
             []
         } else {

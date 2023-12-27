@@ -6,27 +6,35 @@ struct ContentView: View {
     var body: some View {
         NavigationStack(path: $contextModel.navigationPath) {
             List {
-                ContextAwareNavigationLink(value: .commonsVotesView) {
-                    Label("Commons votes", systemImage: "checkmark.square")
-                }
-                ContextAwareNavigationLink(value: .billsView(member: nil)) {
-                    Label("Bills", systemImage: "square.on.square")
+                Section {
+                    ContextAwareNavigationLink(value: .commonsVotesView) {
+                        Label("Commons votes", systemImage: "checkmark.square")
+                    }
+                    ContextAwareNavigationLink(value: .billsView(member: nil)) {
+                        Label("Bills", systemImage: "square.on.square")
+                    }
+
+                    ContextAwareNavigationLink(value: .membersView) {
+                        Label("MPs and Lords", systemImage: "person.3.fill")
+                    }
+
+                    ContextAwareNavigationLink(value: .constituenciesView) {
+                        Label("Constituencies", systemImage: "map.fill")
+                    }
+
+                    ContextAwareNavigationLink(value: .postsView) {
+                        Label("Posts", systemImage: "building.columns.fill")
+                    }
+
+                    ContextAwareNavigationLink(value: .partiesView) {
+                        Label("Parties", systemImage: "house")
+                    }
                 }
 
-                ContextAwareNavigationLink(value: .membersView) {
-                    Label("MPs and Lords", systemImage: "person.3.fill")
-                }
-
-                ContextAwareNavigationLink(value: .constituenciesView) {
-                    Label("Constituencies", systemImage: "map.fill")
-                }
-
-                ContextAwareNavigationLink(value: .postsView) {
-                    Label("Posts", systemImage: "building.columns.fill")
-                }
-
-                ContextAwareNavigationLink(value: .partiesView) {
-                    Label("Parties", systemImage: "house")
+                Section {
+                    NavigationLink("Acknowledgements") {
+                        AcknowledgementsView()
+                    }
                 }
             }
             .navigationTitle("Home")

@@ -1,6 +1,6 @@
 import Foundation
 
-protocol Voter: Identifiable {
+protocol Voter: Identifiable, Codable {
     var memberId: Int { get }
     var name: String { get }
     var listAs: String { get }
@@ -10,7 +10,7 @@ protocol Voter: Identifiable {
     var memberFrom: String { get }
 }
 
-class CommonsVoter: Voter, Codable {
+class CommonsVoter: Voter {
     var memberId: Int
     var name: String
     var listAs: String
@@ -34,7 +34,7 @@ class CommonsVoter: Voter, Codable {
     }
 }
 
-class CommonsVote: Codable, Identifiable, Equatable, Hashable {
+class CommonsVote: Codable, Identifiable, Hashable {
     var divisionId: Int
     var date: String
     var publicationUpdated: String
