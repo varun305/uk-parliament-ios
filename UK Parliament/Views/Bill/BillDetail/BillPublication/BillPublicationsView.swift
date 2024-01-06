@@ -15,8 +15,8 @@ struct BillPublicationsView: View {
                 List {
                     Section("\(viewModel.publications.count) results") {
                         ForEach(viewModel.publications) { publication in
-                            if publication.links.count > 0 {
-                                ContextAwareNavigationLink(value: .billPublicationLinksView(links: publication.links)) {
+                            if publication.links.count + publication.files.count > 0 {
+                                ContextAwareNavigationLink(value: .billPublicationLinksView(publication: publication)) {
                                     BillPublicationRow(publication: publication)
                                 }
                             } else {

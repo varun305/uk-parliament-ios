@@ -116,13 +116,39 @@ class BillPublicationLink: Codable, Identifiable, Hashable {
     }
 }
 
-class BillPublication: Codable, Identifiable {
+class BillPublicationFile: Codable, Identifiable, Hashable {
+    var id: Int
+    var filename: String
+    var contentType: String
+    var contentLength: Int
+
+    static func == (lhs: BillPublicationFile, rhs: BillPublicationFile) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(filename)
+    }
+}
+
+class BillPublication: Codable, Identifiable, Equatable, Hashable {
     var house: String?
     var id: Int
     var title: String
     var publicationType: BillPublicationType
     var displayDate: String
     var links: [BillPublicationLink]
+    var files: [BillPublicationFile]
+
+    static func == (lhs: BillPublication, rhs: BillPublication) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(title)
+    }
 }
 
 class BillPublicationResultModel: Codable {
@@ -208,6 +234,25 @@ class BillModel {
 
     private func constructBillUrl(for id: Int) -> String {
         "https://bills-api.parliament.uk/api/v1/Bills/\(id)"
+    }
+
+
+    public func fetchFile(publicationId: Int, fileId: Int, _ completion: @escaping (Data?) -> Void) {
+        guard let url = URL(string: constructFetchFileUrl(publicationId: publicationId, fileId: fileId)) else {
+            completion(nil)
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            completion(data)
+        }.resume()
+    }
+
+    private func constructFetchFileUrl(publicationId: Int, fileId: Int) -> String {
+        "https://bills-api.parliament.uk/api/v1/Publications/\(publicationId)/Documents/\(fileId)/Download"
     }
 
     public func nextData(search: String = "", memberId: Int? = nil, reset: Bool = false, _ completion: @escaping (BillItemModel?) -> Void) {
