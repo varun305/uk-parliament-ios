@@ -236,19 +236,11 @@ class BillModel {
         "https://bills-api.parliament.uk/api/v1/Bills/\(id)"
     }
 
-
     public func fetchFile(publicationId: Int, fileId: Int, _ completion: @escaping (Data?) -> Void) {
-        guard let url = URL(string: constructFetchFileUrl(publicationId: publicationId, fileId: fileId)) else {
-            completion(nil)
-            return
-        }
-
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        let url = constructFetchFileUrl(publicationId: publicationId, fileId: fileId)
+        FetchModel.base.fetchData(from: url) { data in
             completion(data)
-        }.resume()
+        }
     }
 
     private func constructFetchFileUrl(publicationId: Int, fileId: Int) -> String {

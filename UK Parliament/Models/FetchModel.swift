@@ -6,6 +6,19 @@ class FetchModel {
     public static var base = FetchModel()
     public init() {}
 
+    public func fetchData(from url: String, _ completion: @escaping (Data?) -> Void) {
+        guard cache[url] == nil else {
+            completion(cache[url])
+            return
+        }
+
+        URLSession.shared.dataTask(with: URL(string: url)!) { data, _, _ in
+            print("FETCHING \(url)")
+            self.cache[url] = data
+            completion(data)
+        }.resume()
+    }
+
     public func fetchData<T>(_ type: T.Type, from url: String, _ completion: @escaping (T?) -> Void) where T: Decodable {
         guard cache[url] == nil else {
             completion(resolveData(T.self, from: cache[url]))
