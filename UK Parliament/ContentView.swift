@@ -40,6 +40,8 @@ struct ContentView: View {
             .navigationTitle("Home")
             .navigationDestination(for: NavigationItem.self) { item in
                 switch item {
+                case ._404:
+                    Text("Oops! This page doesn't exist")
                 case .partiesView:
                     PartiesView()
                 case .membersView:
@@ -68,6 +70,8 @@ struct ContentView: View {
                     BillPublicationsView(bill: bill, stage: stage)
                 case .billPublicationLinksView(let publication):
                     BillPublicationLinksView(publication: publication)
+                case .billPublicationPDFView(let publication, let file):
+                    BillPublicationPDFView(publication: publication, file: file)
                 case .commonsVotesView:
                     CommonsVotesView()
                 case .commonsVoteDetailView(let vote):

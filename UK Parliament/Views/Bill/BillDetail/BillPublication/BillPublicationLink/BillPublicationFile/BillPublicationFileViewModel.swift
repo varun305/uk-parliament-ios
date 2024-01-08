@@ -1,13 +1,16 @@
 import Foundation
 
-extension BillPublicationFileView {
-    @MainActor class BillPublicationFileViewModel: ObservableObject {
-        @Published var pdfData: Data? = nil
+extension BillPublicationPDFView {
+    @MainActor class BillPublicationPDFViewModel: ObservableObject {
+        @Published var data: Data? = nil
+        @Published var loading: Bool = false
 
-        func getPDF(publicationId: Int, fileId: Int) {
+        func fetchData(publicationId: Int, fileId: Int) {
+            loading = true
             BillModel.shared.fetchFile(publicationId: publicationId, fileId: fileId) { data in
                 Task { @MainActor in
-                    self.pdfData = data
+                    self.data = data
+                    self.loading = false
                 }
             }
         }

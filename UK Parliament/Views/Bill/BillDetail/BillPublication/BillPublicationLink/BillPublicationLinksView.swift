@@ -29,21 +29,37 @@ struct BillPublicationLinksView: View {
             if files.count > 0 {
                 Section("Files") {
                     ForEach(files) { file in
-                        NavigationLink {
-                            BillPublicationFileView(publication: publication, file: file)
-                        } label: {
-                            VStack(alignment: .leading) {
-                                Text(file.filename)
-                                    .bold()
-                                Text(file.contentType)
-                                    .italic()
-                            }
-                            .font(.footnote)
+                        ContextAwareNavigationLink(value: getNavigationTypeForFile(file: file)) {
+                            FileTile(file: file)
                         }
                     }
                 }
             }
         }
         .listStyle(.plain)
+    }
+
+    private func getNavigationTypeForFile(file: BillPublicationFile) -> NavigationItem {
+        switch file.contentType {
+        case "application/pdf":
+            return .billPublicationPDFView(publication: publication, file: file)
+        case "text/html":
+            return ._404
+        default:
+            return ._404
+        }
+    }
+
+    private struct FileTile: View {
+        var file: BillPublicationFile
+        var body: some View {
+            VStack(alignment: .leading) {
+                Text(file.filename)
+                    .bold()
+                Text(file.contentType)
+                    .italic()
+            }
+            .font(.footnote)
+        }
     }
 }

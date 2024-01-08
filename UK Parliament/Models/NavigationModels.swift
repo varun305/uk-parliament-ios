@@ -1,6 +1,7 @@
 import Foundation
 
 enum NavigationItem: Hashable, Codable {
+    case _404
     case partiesView
     case membersView
     case memberDetailView(memberId: Int)
@@ -15,21 +16,23 @@ enum NavigationItem: Hashable, Codable {
     case billStagesView(bill: Bill)
     case billPublicationsView(bill: Bill, stage: Stage?)
     case billPublicationLinksView(publication: BillPublication)
+    case billPublicationPDFView(publication: BillPublication, file: BillPublicationFile)
     case commonsVotesView
     case commonsVoteDetailView(vote: CommonsVote)
 
     static func == (lhs: NavigationItem, rhs: NavigationItem) -> Bool {
         switch (lhs, rhs) {
-        case (.partiesView, .partiesView),
-             (.membersView, .membersView),
-             (.constituenciesView, .constituenciesView),
-             (.postsView, .postsView),
+        case (._404, ._404),
+            (.partiesView, .partiesView),
+            (.membersView, .membersView),
+            (.constituenciesView, .constituenciesView),
+            (.postsView, .postsView),
             (.commonsVotesView, .commonsVotesView):
             return true
         case let (.memberDetailView(member1), .memberDetailView(member2)):
             return member1 == member2
         case let (.memberContactView(member1), .memberContactView(member2)),
-             let (.memberInterestsView(member1), .memberInterestsView(member2)):
+            let (.memberInterestsView(member1), .memberInterestsView(member2)):
             return member1 == member2
         case let (.constituencyDetailView(constituency1), .constituencyDetailView(constituency2)):
             return constituency1 == constituency2
@@ -45,6 +48,8 @@ enum NavigationItem: Hashable, Codable {
             return bill1 == bill2 && stage1 == stage2
         case let (.billPublicationLinksView(publication1), .billPublicationLinksView(publication2)):
             return publication1 == publication2
+        case let (.billPublicationPDFView(publication1, file1), .billPublicationPDFView(publication2, file2)):
+            return publication1 == publication2 && file1 == file2
         case let (.commonsVoteDetailView(vote1), .commonsVoteDetailView(vote2)):
             return vote1 == vote2
         default:
@@ -53,53 +58,59 @@ enum NavigationItem: Hashable, Codable {
     }
 
     func hash(into hasher: inout Hasher) {
-            switch self {
-            case .partiesView:
-                hasher.combine(0)
-            case .membersView:
-                hasher.combine(1)
-            case .memberDetailView(let member):
-                hasher.combine(2)
-                hasher.combine(member) // Ensure Member is also Hashable
-            case .memberContactView(let member):
-                hasher.combine(3)
-                hasher.combine(member)
-            case .memberInterestsView(let member):
-                hasher.combine(4)
-                hasher.combine(member)
-            case .constituenciesView:
-                hasher.combine(5)
-            case .constituencyDetailView(let constituency):
-                hasher.combine(6)
-                hasher.combine(constituency)
-            case .constituencyElectionDetailView(let constituency, let election):
-                hasher.combine(7)
-                hasher.combine(constituency)
-                hasher.combine(election)
-            case .postsView:
-                hasher.combine(8)
-            case .billsView(let member):
-                hasher.combine(9)
-                hasher.combine(member)
-            case .billDetailView(let bill):
-                hasher.combine(10)
-                hasher.combine(bill)
-            case .billStagesView(let bill):
-                hasher.combine(11)
-                hasher.combine(bill)
-            case .billPublicationsView(let bill, let stage):
-                hasher.combine(12)
-                hasher.combine(bill)
-                hasher.combine(stage)
-            case .billPublicationLinksView(let publication):
-                hasher.combine(13)
-                hasher.combine(publication)
-            case .commonsVotesView:
-                hasher.combine(14)
-            case .commonsVoteDetailView(let vote):
-                hasher.combine(15)
-                hasher.combine(vote)
-            }
+        switch self {
+        case ._404:
+            hasher.combine(-1)
+        case .partiesView:
+            hasher.combine(0)
+        case .membersView:
+            hasher.combine(1)
+        case .memberDetailView(let member):
+            hasher.combine(2)
+            hasher.combine(member) // Ensure Member is also Hashable
+        case .memberContactView(let member):
+            hasher.combine(3)
+            hasher.combine(member)
+        case .memberInterestsView(let member):
+            hasher.combine(4)
+            hasher.combine(member)
+        case .constituenciesView:
+            hasher.combine(5)
+        case .constituencyDetailView(let constituency):
+            hasher.combine(6)
+            hasher.combine(constituency)
+        case .constituencyElectionDetailView(let constituency, let election):
+            hasher.combine(7)
+            hasher.combine(constituency)
+            hasher.combine(election)
+        case .postsView:
+            hasher.combine(8)
+        case .billsView(let member):
+            hasher.combine(9)
+            hasher.combine(member)
+        case .billDetailView(let bill):
+            hasher.combine(10)
+            hasher.combine(bill)
+        case .billStagesView(let bill):
+            hasher.combine(11)
+            hasher.combine(bill)
+        case .billPublicationsView(let bill, let stage):
+            hasher.combine(12)
+            hasher.combine(bill)
+            hasher.combine(stage)
+        case .billPublicationLinksView(let publication):
+            hasher.combine(13)
+            hasher.combine(publication)
+        case .billPublicationPDFView(let publication, let file):
+            hasher.combine(14)
+            hasher.combine(publication)
+            hasher.combine(file)
+        case .commonsVotesView:
+            hasher.combine(15)
+        case .commonsVoteDetailView(let vote):
+            hasher.combine(16)
+            hasher.combine(vote)
         }
+    }
 }
 
