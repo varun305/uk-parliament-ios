@@ -41,7 +41,7 @@
 		EE97BF962B34C6DD00FA950C /* ConstituencyRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BF952B34C6DD00FA950C /* ConstituencyRow.swift */; };
 		EE97BF9C2B3571C800FA950C /* PartyCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BF9B2B3571C800FA950C /* PartyCircleView.swift */; };
 		EEA1FEAC2B49BD34008935AE /* BillPublicationPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA1FEAB2B49BD34008935AE /* BillPublicationPDFView.swift */; };
-		EEA1FEAE2B49BD4F008935AE /* BillPublicationFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA1FEAD2B49BD4F008935AE /* BillPublicationFileViewModel.swift */; };
+		EEA1FEAE2B49BD4F008935AE /* BillPublicationPDFViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA1FEAD2B49BD4F008935AE /* BillPublicationPDFViewModel.swift */; };
 		EEEC3B022B38862400A8626D /* BillModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B012B38862400A8626D /* BillModel.swift */; };
 		EEEC3B052B388B1900A8626D /* BillsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B042B388B1900A8626D /* BillsView.swift */; };
 		EEEC3B072B388B2600A8626D /* BillsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B062B388B2600A8626D /* BillsViewModel.swift */; };
@@ -115,7 +115,7 @@
 		EE97BF952B34C6DD00FA950C /* ConstituencyRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstituencyRow.swift; sourceTree = "<group>"; };
 		EE97BF9B2B3571C800FA950C /* PartyCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyCircleView.swift; sourceTree = "<group>"; };
 		EEA1FEAB2B49BD34008935AE /* BillPublicationPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillPublicationPDFView.swift; sourceTree = "<group>"; };
-		EEA1FEAD2B49BD4F008935AE /* BillPublicationFileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillPublicationFileViewModel.swift; sourceTree = "<group>"; };
+		EEA1FEAD2B49BD4F008935AE /* BillPublicationPDFViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillPublicationPDFViewModel.swift; sourceTree = "<group>"; };
 		EEEC3B012B38862400A8626D /* BillModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillModel.swift; sourceTree = "<group>"; };
 		EEEC3B042B388B1900A8626D /* BillsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillsView.swift; sourceTree = "<group>"; };
 		EEEC3B062B388B2600A8626D /* BillsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillsViewModel.swift; sourceTree = "<group>"; };
@@ -317,7 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				EEA1FEAB2B49BD34008935AE /* BillPublicationPDFView.swift */,
-				EEA1FEAD2B49BD4F008935AE /* BillPublicationFileViewModel.swift */,
+				EEA1FEAD2B49BD4F008935AE /* BillPublicationPDFViewModel.swift */,
 			);
 			path = BillPublicationFile;
 			sourceTree = "<group>";
@@ -532,7 +532,7 @@
 			files = (
 				EEEC3B122B38971600A8626D /* BillDetailViewModel.swift in Sources */,
 				EE97BF922B34C32A00FA950C /* ConstituenciesViewModel.swift in Sources */,
-				EEA1FEAE2B49BD4F008935AE /* BillPublicationFileViewModel.swift in Sources */,
+				EEA1FEAE2B49BD4F008935AE /* BillPublicationPDFViewModel.swift in Sources */,
 				EE50F9BB2B358FA200163E52 /* MembersViewModel.swift in Sources */,
 				EEEC3B1E2B38ADC500A8626D /* BillStagesView.swift in Sources */,
 				EEEC3B022B38862400A8626D /* BillModel.swift in Sources */,
