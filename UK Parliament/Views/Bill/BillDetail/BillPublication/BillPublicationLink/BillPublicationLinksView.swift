@@ -53,13 +53,24 @@ struct BillPublicationLinksView: View {
     private struct FileTile: View {
         var file: BillPublicationFile
         var body: some View {
-            VStack(alignment: .leading) {
-                Text(file.filename)
-                    .bold()
-                Text(file.contentType)
-                    .italic()
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(file.filename)
+                        .bold()
+                    Text(file.contentType)
+                        .italic()
+                }
+                Spacer()
+                Text(fileSizeString(fromBytes: file.contentLength))
             }
             .font(.footnote)
+        }
+
+        private func fileSizeString(fromBytes bytes: Int) -> String {
+            let byteCountFormatter = ByteCountFormatter()
+            byteCountFormatter.allowedUnits = [.useKB, .useMB, .useGB]
+            byteCountFormatter.countStyle = .file
+            return byteCountFormatter.string(fromByteCount: Int64(bytes))
         }
     }
 }

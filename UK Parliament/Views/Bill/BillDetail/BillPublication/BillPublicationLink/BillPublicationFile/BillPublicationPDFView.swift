@@ -22,6 +22,14 @@ struct BillPublicationPDFView: View {
         .onAppear {
             viewModel.fetchData(publicationId: publication.id, fileId: file.id)
         }
+        .ifLet(viewModel.fileLocation) { view, url in
+            view
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        ShareLink(item: url)
+                    }
+                }
+        }
     }
 
     @ViewBuilder

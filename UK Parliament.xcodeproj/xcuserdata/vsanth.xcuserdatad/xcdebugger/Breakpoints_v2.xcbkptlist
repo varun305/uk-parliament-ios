@@ -14,8 +14,8 @@
             filePath = "UK Parliament/Views/Bill/BillDetail/BillPublication/BillPublicationLink/BillPublicationFile/BillPublicationFileViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "BillPublicationPDFView"
             landmarkType = "21">
          </BreakpointContent>
