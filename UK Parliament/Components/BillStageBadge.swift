@@ -35,8 +35,12 @@ struct BillStageBadge: View {
         ZStack {
             Circle()
                 .stroke(color, lineWidth: 3)
+            Circle()
+                .fill(color)
+                .padding(5)
             Text(text)
                 .font(.largeTitle)
+                .foregroundStyle(.white)
         }
     }
 }

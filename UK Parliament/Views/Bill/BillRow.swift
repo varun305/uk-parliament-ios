@@ -4,7 +4,7 @@ struct BillRow: View {
     var bill: Bill
 
     var body: some View {
-        HStack {
+        HStack(alignment: .center) {
             BillStageBadge(stage: bill.currentStage)
                 .frame(width: 60, height: 60)
             VStack(alignment: .leading) {
@@ -12,7 +12,6 @@ struct BillRow: View {
                     Text(bill.shortTitle)
                         .bold()
                     Spacer()
-
                     if bill.isDefeated {
                         Text("Defeated")
                             .foregroundStyle(.red)
@@ -21,7 +20,6 @@ struct BillRow: View {
                             .italic()
                     }
                 }
-                Spacer()
                 HStack {
                     Text(bill.lastUpdate.convertToDate())
                     Spacer()
@@ -37,7 +35,6 @@ struct BillRow: View {
                 .foregroundStyle(.secondary)
                 .font(.footnote)
             }
-            .padding(.top, 3)
             .multilineTextAlignment(.leading)
         }
     }
