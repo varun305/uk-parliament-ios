@@ -3,22 +3,19 @@ import PDFKit
 
 extension BillPublicationPDFView {
     @MainActor class BillPublicationPDFViewModel: ObservableObject {
-        @Published var data: Data? = nil {
-            didSet {
-                if let data = data {
-                    saveFile(data: data)
-                }
-            }
-        }
+        @Published var data: Data? = nil
         @Published var loading: Bool = false
         @Published var fileLocation: URL? = nil
+        @Published var downloading: Bool = false
 
         func fetchData(publicationId: Int, fileId: Int) {
-            loading = true
-            BillModel.shared.fetchFile(publicationId: publicationId, fileId: fileId) { data in
-                Task { @MainActor in
-                    self.data = data
-                    self.loading = false
+            Task {
+                self.loading = true
+                BillModel.shared.fetchFile(publicationId: publicationId, fileId: fileId) { data in
+                    Task { @MainActor in
+                        self.data = data
+                        self.loading = false
+                    }
                 }
             }
         }
@@ -36,7 +33,9 @@ extension BillPublicationPDFView {
 
                 }
 
-                fileLocation = file
+                Task { @MainActor in
+                    fileLocation = file
+                }
             }
         }
     }

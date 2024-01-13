@@ -72,6 +72,8 @@ struct ContentView: View {
                     BillPublicationLinksView(publication: publication)
                 case .billPublicationPDFView(let publication, let file):
                     BillPublicationPDFView(publication: publication, file: file)
+                case .billPublicationHTMLView(let publication, let file):
+                    BillPublicationHTMLView(publication: publication, file: file)
                 case .commonsVotesView:
                     CommonsVotesView()
                 case .commonsVoteDetailView(let vote):

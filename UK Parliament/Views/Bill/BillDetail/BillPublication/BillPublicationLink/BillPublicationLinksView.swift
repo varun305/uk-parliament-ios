@@ -44,7 +44,7 @@ struct BillPublicationLinksView: View {
         case "application/pdf":
             return .billPublicationPDFView(publication: publication, file: file)
         case "text/html":
-            return ._404
+            return .billPublicationHTMLView(publication: publication, file: file)
         default:
             return ._404
         }
