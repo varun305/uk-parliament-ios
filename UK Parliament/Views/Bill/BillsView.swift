@@ -65,7 +65,7 @@ struct BillsView: View {
 
     private func onScrollEnd(bill: Bill) {
         if bill == viewModel.bills.last {
-            viewModel.nextData()
+            viewModel.nextData(memberId: member?.id)
         }
     }
 }
