@@ -1,6 +1,7 @@
 import Foundation
 
-class CandidateResultModel: Codable {
+class CandidateResultModel: Codable, Hashable {
+
     var memberId: Int?
     var name: String
     var party: PartyModel
@@ -8,6 +9,15 @@ class CandidateResultModel: Codable {
     var rankOrder: Int?
     var votes: Int
     var voteShare: Double?
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(memberId)
+        hasher.combine(name)
+    }
+
+    static func == (lhs: CandidateResultModel, rhs: CandidateResultModel) -> Bool {
+        lhs.memberId == rhs.memberId && lhs.name == rhs.name
+    }
 }
 
 class ElectionResult: Codable, Identifiable, Hashable {

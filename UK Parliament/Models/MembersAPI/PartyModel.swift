@@ -13,11 +13,11 @@ class PartyModel: Codable, Identifiable, Hashable {
     var isIndependentParty: Bool?
 
     var bgColor: Color {
-        Color(hexString: backgroundColour ?? "ffffff")
+        Color(hexString: backgroundColour ?? "888888")
     }
 
     var fgColor: Color {
-        Color(hexString: foregroundColour ?? "000000")
+        Color(hexString: foregroundColour ?? "888888")
     }
 
     static func == (lhs: PartyModel, rhs: PartyModel) -> Bool {

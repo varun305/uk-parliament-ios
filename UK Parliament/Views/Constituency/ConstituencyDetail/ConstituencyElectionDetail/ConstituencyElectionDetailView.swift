@@ -1,4 +1,5 @@
 import SwiftUI
+import Charts
 
 struct ConstituencyElectionDetailView: View {
     @StateObject var viewModel = ConstituencyElectionDetailViewModel()
@@ -31,22 +32,16 @@ struct ConstituencyElectionDetailView: View {
                         }
                     }
 
-                    Section("Candidates") {
-                        ForEach(result.candidates.sorted { $0.votes > $1.votes }, id: \.name) { candidate in
-                            HStack {
-                                Text((candidate.party.abbreviation ?? candidate.party.name).uppercased())
-                                    .bold()
-                                    .foregroundStyle(Color(hexString: candidate.party.foregroundColour ?? "000000"))
-                                    .padding(4)
-                                    .background {
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .foregroundStyle(Color(hexString: candidate.party.backgroundColour ?? "ffffff"))
-                                    }
-                                Text(candidate.name)
-                                Spacer()
-                                Text(String(candidate.votes))
-                            }
-                        }
+                    Section("Vote share") {
+                        pieView
+                            .frame(height: 350)
+                            .padding(3)
+                    }
+
+                    Section("All votes") {
+                        barView
+                            .frame(height: 300 * CGFloat(result.candidates.count) / 6)
+                            .padding(3)
                     }
                 }
             } else {
@@ -57,6 +52,37 @@ struct ConstituencyElectionDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             viewModel.fetchData(in: constituency.id, at: electionResult)
+        }
+    }
+
+    @ViewBuilder
+    var pieView: some View {
+        if let result = viewModel.result {
+            Chart(result.candidates.sorted { $0.votes > $1.votes }, id: \.name) { candidate in
+                SectorMark(
+                    angle: .value("Votes", candidate.votes),
+                    innerRadius: .ratio(0.65)
+                )
+                .foregroundStyle(candidate.party.bgColor)
+            }
+            .chartLegend(.hidden)
+        }
+    }
+
+    @ViewBuilder
+    var barView: some View {
+        if let result = viewModel.result {
+            Chart(result.candidates.sorted { $0.votes > $1.votes }, id: \.name) { candidate in
+                BarMark(
+                    x: .value("Votes", candidate.votes),
+                    y: .value("Candidate", "\(candidate.name), \(candidate.party.abbreviation?.uppercased() ?? candidate.party.name)")
+                )
+                .annotation(position: .trailing) {
+                    Text(String(candidate.votes))
+                        .font(.caption)
+                }
+                .foregroundStyle(candidate.party.bgColor)
+            }
         }
     }
 }

@@ -257,8 +257,6 @@ class BillModel {
             return
         }
 
-        print(search, memberId)
-
         let url: String
         if search != "", let memberId = memberId {
             url = constructSearchMemberBillsUrl(search: search, memberId: memberId, skip: _skip)
