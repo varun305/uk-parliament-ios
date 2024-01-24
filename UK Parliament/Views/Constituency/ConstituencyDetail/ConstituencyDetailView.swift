@@ -63,10 +63,8 @@ struct ConstituencyDetailView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
-                        Button {
+                        Button("Close") {
                             mapConfig = nil
-                        } label: {
-                            Image(systemName: "xmark.circle.fill")
                         }
                     }
                 }
