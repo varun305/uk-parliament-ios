@@ -66,6 +66,18 @@ struct ConstituencyElectionDetailView: View {
                 .foregroundStyle(candidate.party.bgColor)
             }
             .chartLegend(.hidden)
+            .chartBackground { chartProxy in
+                GeometryReader { geometry in
+                    let frame = geometry[chartProxy.plotFrame!]
+                    VStack {
+                        Text(result.result.uppercased())
+                            .bold()
+                            .font(.title2)
+                        Text("Majority of \(result.majority)")
+                    }
+                    .position(x: frame.midX, y: frame.midY)
+                }
+            }
         }
     }
 
@@ -83,6 +95,7 @@ struct ConstituencyElectionDetailView: View {
                 }
                 .foregroundStyle(candidate.party.bgColor)
             }
+            .chartXAxis(.hidden)
         }
     }
 }
