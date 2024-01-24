@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var contextModel: ContextModel
+    @Environment(\.openURL) var openURL
 
     var body: some View {
         NavigationStack(path: $contextModel.navigationPath) {
@@ -32,6 +33,11 @@ struct ContentView: View {
                 }
 
                 Section {
+                    Button {
+                        openURL(URL(string: "https://www.parliament.uk/")!)
+                    } label: {
+                        Label("UK Parliament website", systemImage: "link.circle")
+                    }
                     NavigationLink("Acknowledgements") {
                         AcknowledgementsView()
                     }
