@@ -4,15 +4,13 @@ struct CommonsVotesView: View {
     @StateObject var viewModel = CommonsVotesViewModel()
 
     var body: some View {
-        List {
-            ForEach(viewModel.votes) { vote in
-                ContextAwareNavigationLink(value: .commonsVoteDetailView(vote: vote)) {
-                    CommonsVoteRow(vote: vote)
-                        .onAppear(perform: { onScrollEnd(vote: vote )})
-                }
+        Group {
+            if viewModel.loading {
+                ProgressView()
+            } else {
+                scrollView
             }
         }
-        .listStyle(.plain)
         .searchable(text: $viewModel.search, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for a commons vote")
         .onSubmit(of: .search) {
             viewModel.nextData(reset: true)
@@ -30,6 +28,17 @@ struct CommonsVotesView: View {
                 viewModel.nextData(reset: true)
             }
         }
+    }
+
+    @ViewBuilder
+    var scrollView: some View {
+        List(viewModel.votes) { vote in
+            ContextAwareNavigationLink(value: .commonsVoteDetailView(vote: vote)) {
+                CommonsVoteRow(vote: vote)
+                    .onAppear(perform: { onScrollEnd(vote: vote) })
+            }
+        }
+        .listStyle(.plain)
     }
 
     private func onScrollEnd(vote: CommonsVote) {

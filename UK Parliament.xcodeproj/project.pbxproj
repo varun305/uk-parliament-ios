@@ -13,6 +13,7 @@
 		EE0186252B38255D004F7F77 /* MemberContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0186242B38255D004F7F77 /* MemberContactView.swift */; };
 		EE0186272B38258B004F7F77 /* MemberContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0186262B38258B004F7F77 /* MemberContactViewModel.swift */; };
 		EE0186292B385A4E004F7F77 /* PartyTaggedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0186282B385A4E004F7F77 /* PartyTaggedText.swift */; };
+		EE020BC42B618A94004C893B /* SkeletonUI in Frameworks */ = {isa = PBXBuildFile; productRef = EE020BC32B618A94004C893B /* SkeletonUI */; };
 		EE29CCC42B6059E10027CBA4 /* ListExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE29CCC32B6059E10027CBA4 /* ListExtensions.swift */; };
 		EE2F06D02B3C50C600462D3C /* AcknowledgementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2F06CF2B3C50C600462D3C /* AcknowledgementsView.swift */; };
 		EE50F9B92B358F8B00163E52 /* MembersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE50F9B82B358F8B00163E52 /* MembersView.swift */; };
@@ -163,6 +164,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE020BC42B618A94004C893B /* SkeletonUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,6 +484,7 @@
 			);
 			name = "UK Parliament";
 			packageProductDependencies = (
+				EE020BC32B618A94004C893B /* SkeletonUI */,
 			);
 			productName = "UK Parliament";
 			productReference = EE86A45B2B344BA6007BEA83 /* UK Parliament.app */;
@@ -512,6 +515,7 @@
 			);
 			mainGroup = EE86A4522B344BA6007BEA83;
 			packageReferences = (
+				EE020BC22B618A94004C893B /* XCRemoteSwiftPackageReference "SkeletonUI" */,
 			);
 			productRefGroup = EE86A45C2B344BA6007BEA83 /* Products */;
 			projectDirPath = "";
@@ -822,6 +826,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EE020BC22B618A94004C893B /* XCRemoteSwiftPackageReference "SkeletonUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CSolanaM/SkeletonUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EE020BC32B618A94004C893B /* SkeletonUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EE020BC22B618A94004C893B /* XCRemoteSwiftPackageReference "SkeletonUI" */;
+			productName = SkeletonUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EE86A4532B344BA6007BEA83 /* Project object */;
 }
