@@ -1,11 +1,15 @@
 import Foundation
 
 class StageSitting: Codable, Identifiable {
-    var id: Int
-    var stageId: Int
-    var billStageId: Int
-    var billId: Int
-    var date: String
+    var id: Int?
+    var stageId: Int?
+    var billStageId: Int?
+    var billId: Int?
+    var date: String?
+
+    var formattedDate: String {
+        date?.convertToDate() ?? ""
+    }
 }
 
 class Stage: Codable, Identifiable, Hashable {
