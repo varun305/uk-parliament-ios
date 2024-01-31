@@ -103,7 +103,7 @@ struct ConstituencyDetailView: View {
 
     @ViewBuilder
     var resultsView: some View {
-        ForEach(viewModel.electionResults) { result in
+        ForEach(viewModel.electionResults.sorted { $0.electionDate ?? "" > $1.electionDate ?? "" }) { result in
             ContextAwareNavigationLink(value: .constituencyElectionDetailView(constituency: constituency, election: result)) {
                 HStack {
                     Text(result.formattedDate)
