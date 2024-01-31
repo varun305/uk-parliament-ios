@@ -7,7 +7,9 @@ extension MemberDetailView {
             didSet {
                 if let membershipFromId = member?.latestHouseMembership?.membershipFromId {
                     fetchMemberConstituency(for: membershipFromId)
-                    fetchMemberSynopsis(for: membershipFromId)
+                }
+                if let memberId = member?.id {
+                    fetchMemberSynopsis(for: memberId)
                 }
             }
         }
