@@ -32,35 +32,35 @@ class ConstituencyValueModel: Codable, Identifiable {
 }
 
 class ConstituenciesModel: Codable {
-    var items: [ConstituencyValueModel]
-    var links: [[String: String]]
-    var totalResults: Int
+    var items: [ConstituencyValueModel]?
+    var links: [[String: String]]?
+    var totalResults: Int?
 }
 
 protocol Geometry {
-    var flattenedCoordinates: [[[Double]]] { get }
+    var flattenedCoordinates: [[[Double]]]? { get }
 }
 
 class SingleGeometry: Codable, Geometry {
-    var type: String
-    var coordinates: [[[Double]]]
+    var type: String?
+    var coordinates: [[[Double]]]?
 
-    var flattenedCoordinates: [[[Double]]] {
+    var flattenedCoordinates: [[[Double]]]? {
         coordinates
     }
 }
 
 class MultiGeometry: Codable, Geometry {
-    var type: String
-    var coordinates: [[[[Double]]]]
+    var type: String?
+    var coordinates: [[[[Double]]]]?
 
-    var flattenedCoordinates: [[[Double]]] {
-        coordinates.flatMap { $0 }
+    var flattenedCoordinates: [[[Double]]]? {
+        (coordinates ?? []).flatMap { $0 }
     }
 }
 
 class ConstituencyGeometryValueModel: Codable {
-    var value: String
+    var value: String?
 }
 
 class ConstituencyModel {
@@ -76,11 +76,11 @@ class ConstituencyModel {
         FetchModel.base.fetchData(ConstituencyGeometryValueModel.self, from: url) { result in
             if let result = result {
                 do {
-                    let geometry = try JSONDecoder().decode(SingleGeometry.self, from: Data(result.value.utf8))
+                    let geometry = try JSONDecoder().decode(SingleGeometry.self, from: Data((result.value ?? "").utf8))
                     completion(geometry)
                 } catch {
                     do {
-                        let multiGeometry = try JSONDecoder().decode(MultiGeometry.self, from: Data(result.value.utf8))
+                        let multiGeometry = try JSONDecoder().decode(MultiGeometry.self, from: Data((result.value ?? "").utf8))
                         completion(multiGeometry)
                     } catch let error {
                         print(error)
@@ -121,7 +121,7 @@ class ConstituencyModel {
         let url = search == "" ? constructConstituenciesUrl(skip: _skip) : constructSearchConstituenciesUrl(search: search, skip: _skip)
         FetchModel.base.fetchData(ConstituenciesModel.self, from: url) { result in
             if let result = result {
-                self.totalResults = result.totalResults
+                self.totalResults = result.totalResults ?? 0
                 self.skip = [search: self.skip[search, default: 0] + self.take]
                 completion(result)
             } else {

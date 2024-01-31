@@ -45,7 +45,7 @@ struct ConstituencyDetailView: View {
         .toolbar {
             if let constituency = viewModel.constituency, let geometry = viewModel.geometry {
                 Button {
-                    mapConfig = MapConfiguration(constituency: constituency, coordinates: geometry.flattenedCoordinates, party: constituency.member?.latestParty)
+                    mapConfig = MapConfiguration(constituency: constituency, coordinates: geometry.flattenedCoordinates ?? [], party: constituency.member?.latestParty)
                 } label: {
                     Image(systemName: "map.fill")
                 }
