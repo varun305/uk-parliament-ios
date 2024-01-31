@@ -7,24 +7,18 @@ struct MembersView: View {
     }
 
     var body: some View {
-        List {
-            Section(resultsText) {
-                ForEach(viewModel.members) { member in
-                    Group {
-                        if let memberId = member.id {
-                            ContextAwareNavigationLink(value: .memberDetailView(memberId: memberId)) {
-                                MemberRow(member: member)
-                            }
-                        } else {
-                            MemberRow(member: member)
-                        }
-                    }
-                    .onAppear(perform: { onScrollEnd(member: member )})
-                }
+        Group {
+            if viewModel.members.count > 0 {
+                scrollView
+            } else if viewModel.loading {
+                loadingView
+            } else {
+                Text("No data")
+                    .foregroundStyle(.secondary)
+                    .font(.footnote)
+                    .italic()
             }
         }
-        .listStyle(.plain)
-        .scrollTargetLayout()
         .searchable(text: $viewModel.search, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search " + (viewModel.house == .commons ? "MPs" : "lords"))
         .onSubmit(of: .search) {
             viewModel.nextData(reset: true)
@@ -51,6 +45,41 @@ struct MembersView: View {
             }
         }
         .toolbarBackground(viewModel.house == .commons ? Color.commons.opacity(0.1) : Color.lords.opacity(0.1))
+    }
+
+    @ViewBuilder
+    var loadingView: some View {
+        List(0..<10) { _ in
+            NavigationLink {
+                Text("")
+            } label: {
+                MemberRowLoading()
+            }
+            .disabled(true)
+        }
+        .listStyle(.plain)
+        .environment(\.isScrollEnabled, false)
+    }
+
+    @ViewBuilder
+    var scrollView: some View {
+        List {
+            Section(resultsText) {
+                ForEach(viewModel.members) { member in
+                    Group {
+                        if let memberId = member.id {
+                            ContextAwareNavigationLink(value: .memberDetailView(memberId: memberId)) {
+                                MemberRow(member: member)
+                            }
+                        } else {
+                            MemberRow(member: member)
+                        }
+                    }
+                    .onAppear(perform: { onScrollEnd(member: member )})
+                }
+            }
+        }
+        .listStyle(.plain)
     }
 
     private func onScrollEnd(member: Member) {

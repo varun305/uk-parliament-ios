@@ -78,14 +78,14 @@ struct BillDetailView: View {
                         NavigationLink {
                             Text("")
                         } label: {
-                            BillStageRowLoading()
+                            MemberRowLoading()
                         }
                         .disabled(true)
 
                         NavigationLink {
                             Text("")
                         } label: {
-                            BillStageRowLoading()
+                            MemberRowLoading()
                         }
                         .disabled(true)
                     }

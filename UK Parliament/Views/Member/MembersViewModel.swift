@@ -10,6 +10,7 @@ class MembersViewModel: ObservableObject {
         }
     }
     @Published var search = ""
+    @Published var loading = false
 
     var numResults: Int {
         result?.totalResults ?? 0
@@ -26,6 +27,7 @@ class MembersViewModel: ObservableObject {
                     } else {
                         self.members += members
                     }
+                    self.loading = false
                 }
             }
         } else {
@@ -34,6 +36,7 @@ class MembersViewModel: ObservableObject {
     }
 
     func nextData(reset: Bool = false) {
+        loading = true
         MemberModel.shared.nextData(house: house, search: search == "" ? nil : search, reset: reset) { result in
             self.handleData(result: result, reset: reset)
         }
