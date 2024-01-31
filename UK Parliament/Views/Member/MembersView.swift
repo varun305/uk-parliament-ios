@@ -10,10 +10,16 @@ struct MembersView: View {
         List {
             Section(resultsText) {
                 ForEach(viewModel.members) { member in
-                    ContextAwareNavigationLink(value: .memberDetailView(memberId: member.id)) {
-                        MemberRow(member: member)
-                            .onAppear(perform: { onScrollEnd(member: member )})
+                    Group {
+                        if let memberId = member.id {
+                            ContextAwareNavigationLink(value: .memberDetailView(memberId: memberId)) {
+                                MemberRow(member: member)
+                            }
+                        } else {
+                            MemberRow(member: member)
+                        }
                     }
+                    .onAppear(perform: { onScrollEnd(member: member )})
                 }
             }
         }

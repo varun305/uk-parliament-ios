@@ -25,10 +25,12 @@ struct RegisteredInterestsView: View {
                     .italic()
             }
         }
-        .navigationTitle("Registered Interests, \(member.nameDisplayAs)")
+        .navigationTitle("Registered Interests, \(member.nameDisplayAs ?? "")")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            viewModel.fetchData(for: member.id)
+            if let memberId = member.id {
+                viewModel.fetchData(for: memberId)
+            }
         }
     }
 

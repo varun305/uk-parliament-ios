@@ -18,7 +18,7 @@ struct ConstituencyRow: View {
                     .multilineTextAlignment(.leading)
                     .bold()
                 if let member = consituency.member {
-                    Text(member.nameDisplayAs)
+                    Text(member.nameDisplayAs ?? "")
                         .font(.footnote)
                 }
                 if let name = party?.name {

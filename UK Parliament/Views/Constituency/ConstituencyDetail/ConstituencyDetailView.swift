@@ -76,8 +76,8 @@ struct ConstituencyDetailView: View {
 
     @ViewBuilder
     var membershipLink: some View {
-        if let constituency = viewModel.constituency, let member = constituency.member {
-            ContextAwareNavigationLink(value: .memberDetailView(memberId: member.id)) {
+        if let constituency = viewModel.constituency, let memberId = constituency.member?.id {
+            ContextAwareNavigationLink(value: .memberDetailView(memberId: memberId)) {
                 membershipTile
             }
         } else {
@@ -89,7 +89,7 @@ struct ConstituencyDetailView: View {
     var membershipTile: some View {
         if let constituency = viewModel.constituency, let member = constituency.member {
             HStack {
-                Text(member.nameDisplayAs)
+                Text(member.nameDisplayAs ?? "")
                     .bold()
                 Spacer()
                 MemberPictureView(member: member)

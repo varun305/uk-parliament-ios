@@ -5,7 +5,11 @@ struct MemberDetailView: View {
     var memberId: Int
 
     private var positionTypeString: String {
-        viewModel.member?.latestHouseMembership.house == 2 ? "Peerage type" : "Constituency"
+        if let house = viewModel.member?.latestHouseMembership?.house {
+            return house == 2 ? "Peerage type" : "Constituency"
+        } else {
+            return ""
+        }
     }
 
     var body: some View {
@@ -19,7 +23,7 @@ struct MemberDetailView: View {
                                 .frame(width: 180, height: 180)
                             Spacer()
                         }
-                        Text(member.nameFullTitle)
+                        Text(member.nameFullTitle ?? "")
                             .bold()
                         Text(viewModel.synopsis)
                             .font(.caption)
@@ -31,8 +35,8 @@ struct MemberDetailView: View {
                         HStack {
                             Circle()
                                 .frame(width: 20, height: 20)
-                                .foregroundStyle(Color(hexString: member.latestParty.backgroundColour ?? "ffffff"))
-                            Text(member.latestParty.name ?? "")
+                                .foregroundStyle(Color(hexString: member.latestParty?.backgroundColour ?? "ffffff"))
+                            Text(member.latestParty?.name ?? "")
                         }
                     }
 
@@ -55,7 +59,7 @@ struct MemberDetailView: View {
                         }
                     }
                 }
-                .navigationTitle(member.nameDisplayAs)
+                .navigationTitle(member.nameDisplayAs ?? "")
                 .navigationBarTitleDisplayMode(.inline)
             } else {
                 ProgressView()
@@ -81,7 +85,7 @@ struct MemberDetailView: View {
     @ViewBuilder
     var membershipTile: some View {
         if let member = viewModel.member {
-            Text(member.latestHouseMembership.membershipFrom)
+            Text(member.latestHouseMembership?.membershipFrom ?? "")
         } else {
             Text("No member found")
                 .italic()

@@ -5,7 +5,7 @@ struct MemberPictureView: View {
 
     var body: some View {
         AsyncImage(
-            url: URL(string: member.thumbnailUrl)!,
+            url: URL(string: member.thumbnailUrl ?? "")!,
             content: { image in
                 image
                     .resizable()
@@ -19,7 +19,7 @@ struct MemberPictureView: View {
         }
         .overlay {
             Circle()
-                .stroke(Color(hexString: member.latestParty.backgroundColour ?? "ffffff"), lineWidth: 3)
+                .stroke(Color(hexString: member.latestParty?.backgroundColour ?? "ffffff"), lineWidth: 3)
         }
     }
 }

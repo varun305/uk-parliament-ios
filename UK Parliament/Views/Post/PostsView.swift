@@ -16,8 +16,14 @@ struct PostsView: View {
             ForEach(side == .government ? viewModel.governmentPosts : viewModel.oppositionPosts) { post in
                 Section(post.hansardName) {
                     ForEach(post.postHolders) { holder in
-                        ContextAwareNavigationLink(value: .memberDetailView(memberId: holder.member.id)) {
-                            MemberRow(member: holder.member.value)
+                        if let memberId = holder.member.id, let member = holder.member.value {
+                            ContextAwareNavigationLink(value: .memberDetailView(memberId: memberId)) {
+                                MemberRow(member: member)
+                            }
+                        } else if let member = holder.member.value {
+                            MemberRow(member: member)
+                        } else {
+                            EmptyView()
                         }
                         HStack {
                             Text("from \(holder.startDate.convertToDate())")

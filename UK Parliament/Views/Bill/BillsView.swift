@@ -9,8 +9,8 @@ struct BillsView: View {
     }
 
     var navTitle: String {
-        if let member = member {
-            "Bills, \(member.nameDisplayAs)"
+        if let nameDisplayAs = member?.nameDisplayAs {
+            "Bills, \(nameDisplayAs)"
         } else {
             "Bills"
         }

@@ -17,7 +17,7 @@ class MembersViewModel: ObservableObject {
 
     private func handleData(result: MembersModel?, reset: Bool = false) {
         if let result = result {
-            let members = result.items.map { $0.value }
+            let members = result.items.compactMap { $0.value }
             Task { @MainActor in
                 self.result = result
                 withAnimation {

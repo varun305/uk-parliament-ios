@@ -9,11 +9,11 @@ struct MemberRow: View {
                 .frame(width: 60, height: 60)
 
             VStack(alignment: .leading) {
-                Text(member.nameDisplayAs)
+                Text(member.nameDisplayAs ?? "")
                     .bold()
-                Text(member.latestParty.name ?? "")
+                Text(member.latestParty?.name ?? "")
                     .font(.footnote)
-                Text(member.latestHouseMembership.membershipFrom)
+                Text(member.latestHouseMembership?.membershipFrom ?? "")
                     .font(.caption)
             }
 

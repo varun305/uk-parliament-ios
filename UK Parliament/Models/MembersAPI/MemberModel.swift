@@ -1,10 +1,10 @@
 import Foundation
 
 class MembershipModel: Codable, Equatable, Hashable {
-    var membershipFrom: String
-    var membershipFromId: Int
-    var house: Int
-    var membershipStartDate: String
+    var membershipFrom: String?
+    var membershipFromId: Int?
+    var house: Int?
+    var membershipStartDate: String?
 
     static func == (lhs: MembershipModel, rhs: MembershipModel) -> Bool {
         lhs.membershipFrom == rhs.membershipFrom
@@ -22,18 +22,18 @@ class MembershipModel: Codable, Equatable, Hashable {
 }
 
 class Member: Codable, Identifiable, Hashable {
-    var id: Int
-    var nameListAs: String
-    var nameDisplayAs: String
-    var nameFullTitle: String
+    var id: Int?
+    var nameListAs: String?
+    var nameDisplayAs: String?
+    var nameFullTitle: String?
     var nameAddressAs: String?
-    var latestParty: PartyModel
-    var latestHouseMembership: MembershipModel
-    var gender: String
-    var thumbnailUrl: String
+    var latestParty: PartyModel?
+    var latestHouseMembership: MembershipModel?
+    var gender: String?
+    var thumbnailUrl: String?
 
     var isCommonsMember: Bool {
-        latestHouseMembership.house == 1
+        latestHouseMembership?.house == 1
     }
 
     static func == (lhs: Member, rhs: Member) -> Bool {
@@ -47,9 +47,9 @@ class Member: Codable, Identifiable, Hashable {
 }
 
 class MemberValueModel: Codable, Identifiable {
-    var value: Member
-    var id: Int {
-        value.id
+    var value: Member?
+    var id: Int? {
+        value?.id
     }
 }
 

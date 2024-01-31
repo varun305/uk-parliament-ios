@@ -7,7 +7,7 @@ class PostHolderMemberModel: Codable, Identifiable {
     var layingMinisterName: String?
     var isPaid: Bool
 
-    var id: Int {
+    var id: Int? {
         member.id
     }
 }

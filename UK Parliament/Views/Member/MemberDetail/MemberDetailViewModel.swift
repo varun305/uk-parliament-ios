@@ -4,8 +4,8 @@ extension MemberDetailView {
     @MainActor class MemberDetailViewModel: ObservableObject {
         @Published var member: Member? {
             didSet {
-                if let member = member {
-                    fetchMemberConstituency(for: member.latestHouseMembership.membershipFromId)
+                if let membershipFromId = member?.latestHouseMembership?.membershipFromId {
+                    fetchMemberConstituency(for: membershipFromId)
                 }
             }
         }

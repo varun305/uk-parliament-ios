@@ -34,8 +34,10 @@ struct MemberContactView: View {
             }
         }
         .onAppear {
-            viewModel.fetchContacts(for: member.id)
+            if let memberId = member.id {
+                viewModel.fetchContacts(for: memberId)
+            }
         }
-        .navigationTitle("Contact details, \(member.nameDisplayAs)")
+        .navigationTitle("Contact details, \(member.nameDisplayAs ?? "")")
     }
 }
