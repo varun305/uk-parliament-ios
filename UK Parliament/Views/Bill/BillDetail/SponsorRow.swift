@@ -6,7 +6,7 @@ struct SponsorRow: View {
     var body: some View {
         HStack {
             AsyncImage(
-                url: URL(string: sponsor.member.memberPhoto)!,
+                url: URL(string: sponsor.member?.memberPhoto ?? "")!,
                 content: { image in
                     image
                         .resizable()
@@ -20,15 +20,15 @@ struct SponsorRow: View {
             }
             .overlay {
                 Circle()
-                    .stroke(Color(hexString: sponsor.member.partyColour ?? "ffffff"), lineWidth: 3)
+                    .stroke(Color(hexString: sponsor.member?.partyColour ?? "ffffff"), lineWidth: 3)
             }
             .frame(width: 60, height: 60)
 
             VStack(alignment: .leading) {
-                Text(sponsor.member.name ?? "")
+                Text(sponsor.member?.name ?? "")
                     .bold()
                 if let organisation = sponsor.organisation {
-                    Text("On behalf of \(organisation.name)")
+                    Text("On behalf of \(organisation.name ?? "")")
                         .font(.footnote)
                 }
             }

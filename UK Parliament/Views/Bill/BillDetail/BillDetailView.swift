@@ -21,8 +21,8 @@ struct BillDetailView: View {
 
                     if let sponsors = bill.sponsors {
                         Section("Sponsors") {
-                            ForEach(sponsors.sorted { $0.sortOrder < $1.sortOrder }, id: \.member.id) { sponsor in
-                                if let memberId = sponsor.member.memberId {
+                            ForEach(sponsors) { sponsor in
+                                if let memberId = sponsor.member?.memberId {
                                     ContextAwareNavigationLink(value: .memberDetailView(memberId: memberId)) {
                                         SponsorRow(sponsor: sponsor)
                                     }

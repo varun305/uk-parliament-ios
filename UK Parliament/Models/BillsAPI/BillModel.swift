@@ -53,14 +53,18 @@ class BillMember: Codable, Identifiable {
 }
 
 class BillOrganisation: Codable {
-    var name: String
-    var url: String
+    var name: String?
+    var url: String?
 }
 
-class Sponsor: Codable {
-    var member: BillMember
+class Sponsor: Codable, Identifiable {
+    var member: BillMember?
     var organisation: BillOrganisation?
-    var sortOrder: Int
+    var sortOrder: Int?
+
+    var id: Int? {
+        member?.memberId
+    }
 }
 
 class Bill: Codable, Identifiable, Hashable {
