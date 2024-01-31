@@ -24,24 +24,24 @@ struct CommonsVoteDetailView: View {
                         }
                     }
 
-                    if vote.ayes.count > 0 {
+                    if let ayes = vote.ayes, ayes.count > 0 {
                         Section("Ayes") {
-                            ForEach(vote.ayes) { aye in
+                            ForEach(ayes) { aye in
                                 VoterNavigationLink(voter: aye)
                             }
                         }
                     }
 
-                    if vote.noes.count > 0 {
+                    if let noes = vote.noes, noes.count > 0 {
                         Section("Noes") {
-                            ForEach(vote.noes) { no in
+                            ForEach(noes) { no in
                                 VoterNavigationLink(voter: no)
                             }
                         }
                     }
                 }
                 .listStyle(.plain)
-                .navigationTitle("Votes, \(vote.title)")
+                .ifLet(vote.title) { $0.navigationTitle("Votes, \($1)") }
             } else {
                 Text("No data")
                     .foregroundStyle(.secondary)
@@ -49,7 +49,9 @@ struct CommonsVoteDetailView: View {
             }
         }
         .onAppear {
-            viewModel.fetchData(for: vote.divisionId)
+            if let divisionId = vote.divisionId {
+                viewModel.fetchData(for: divisionId)
+            }
         }
     }
 

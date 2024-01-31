@@ -35,19 +35,19 @@ class CommonsVoter: Voter {
 }
 
 class CommonsVote: Codable, Identifiable, Hashable {
-    var divisionId: Int
-    var date: String
-    var publicationUpdated: String
-    var number: Int
-    var isDeferred: Bool
-    var title: String
-    var ayeCount: Int
-    var noCount: Int
+    var divisionId: Int?
+    var date: String?
+    var publicationUpdated: String?
+    var number: Int?
+    var isDeferred: Bool?
+    var title: String?
+    var ayeCount: Int?
+    var noCount: Int?
     var ayeTellers: [CommonsVoter]?
     var noTellers: [CommonsVoter]?
-    var ayes: [CommonsVoter]
-    var noes: [CommonsVoter]
-    var noVoteRecorded: [CommonsVoter]
+    var ayes: [CommonsVoter]?
+    var noes: [CommonsVoter]?
+    var noVoteRecorded: [CommonsVoter]?
 
     enum CodingKeys: String, CodingKey {
         case divisionId = "DivisionId"
@@ -65,7 +65,7 @@ class CommonsVote: Codable, Identifiable, Hashable {
         case noVoteRecorded = "NoVoteRecorded"
     }
 
-    var id: Int {
+    var id: Int? {
         divisionId
     }
 
