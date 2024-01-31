@@ -4,10 +4,10 @@ class CandidateResultModel: Codable, Hashable {
 
     var memberId: Int?
     var name: String
-    var party: PartyModel
+    var party: PartyModel?
     var resultChange: String?
     var rankOrder: Int?
-    var votes: Int
+    var votes: Int?
     var voteShare: Double?
 
     func hash(into hasher: inout Hasher) {
@@ -21,21 +21,25 @@ class CandidateResultModel: Codable, Hashable {
 }
 
 class ElectionResult: Codable, Identifiable, Hashable {
-    var result: String
-    var isNotional: Bool
-    var electorate: Int
-    var turnout: Int
-    var majority: Int
+    var result: String?
+    var isNotional: Bool?
+    var electorate: Int?
+    var turnout: Int?
+    var majority: Int?
     var winningParty: PartyModel?
-    var electionTitle: String
-    var electionDate: String
-    var electionId: Int
-    var isGeneralElection: Bool
-    var constituencyName: String
-    var candidates: [CandidateResultModel]
+    var electionTitle: String?
+    var electionDate: String?
+    var electionId: Int?
+    var isGeneralElection: Bool?
+    var constituencyName: String?
+    var candidates: [CandidateResultModel]?
 
-    var id: Int {
+    var id: Int? {
         electionId
+    }
+
+    var formattedDate: String {
+        electionDate?.convertToDate() ?? ""
     }
 
     static func == (lhs: ElectionResult, rhs: ElectionResult) -> Bool {
@@ -49,11 +53,11 @@ class ElectionResult: Codable, Identifiable, Hashable {
 }
 
 class ElectionResultResultModel: Codable {
-    var value: [ElectionResult]
+    var value: [ElectionResult]?
 }
 
 class ConstituencyElectionResultResultModel: Codable {
-    var value: ElectionResult
+    var value: ElectionResult?
 }
 
 class ElectionResultModel {

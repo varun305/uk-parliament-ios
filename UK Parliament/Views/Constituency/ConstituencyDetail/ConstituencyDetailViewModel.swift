@@ -36,7 +36,7 @@ extension ConstituencyDetailView {
             ElectionResultModel.shared.getResults(for: id) { result in
                 if let result = result {
                     Task { @MainActor in
-                        self.electionResults = result.value.sorted { $0.electionDate > $1.electionDate }
+                        self.electionResults = (result.value ?? []).sorted { $0.formattedDate > $1.formattedDate }
                     }
                 }
             }

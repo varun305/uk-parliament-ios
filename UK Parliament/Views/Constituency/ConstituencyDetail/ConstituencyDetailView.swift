@@ -106,11 +106,11 @@ struct ConstituencyDetailView: View {
         ForEach(viewModel.electionResults) { result in
             ContextAwareNavigationLink(value: .constituencyElectionDetailView(constituency: constituency, election: result)) {
                 HStack {
-                    Text(result.electionDate.convertToDate())
+                    Text(result.formattedDate)
                         .lineLimit(1)
                         .font(.callout)
                     Spacer()
-                    PartyTaggedText(text: result.result.uppercased(), party: result.winningParty)
+                    PartyTaggedText(text: result.result?.uppercased() ?? "", party: result.winningParty)
                 }
             }
         }

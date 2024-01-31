@@ -81,7 +81,7 @@ class MemberContact: Codable, Identifiable {
 }
 
 class MemberContactValueModel: Codable {
-    var value: [MemberContact]
+    var value: [MemberContact]?
 }
 
 class MemberModel {

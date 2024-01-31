@@ -5,10 +5,12 @@ extension ConstituencyElectionDetailView {
         @Published var result: ElectionResult?
 
         public func fetchData(in constituencyId: Int, at election: ElectionResult) {
-            ElectionResultModel.shared.getElectionResult(in: constituencyId, at: election.id) { result in
-                if let result = result {
-                    Task { @MainActor in
-                        self.result = result.value
+            if let electionId = election.id {
+                ElectionResultModel.shared.getElectionResult(in: constituencyId, at: electionId) { result in
+                    if let result = result {
+                        Task { @MainActor in
+                            self.result = result.value
+                        }
                     }
                 }
             }

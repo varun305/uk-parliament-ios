@@ -10,24 +10,24 @@ struct ConstituencyElectionDetailView: View {
         Group {
             if let result = viewModel.result {
                 List {
-                    Section("\(result.constituencyName), \(result.electionDate.convertToDate())") {
+                    Section("\(result.constituencyName ?? ""), \(result.formattedDate)") {
                         HStack {
-                            PartyTaggedText(text: result.result.uppercased(), party: result.winningParty)
+                            PartyTaggedText(text: result.result?.uppercased() ?? "", party: result.winningParty)
 
                             Spacer()
-                            Text(result.electionDate.convertToDate())
+                            Text(result.formattedDate)
                                 .bold()
                         }
                         HStack {
                             Text("Majority")
                             Spacer()
-                            Text(String(result.majority))
+                            Text(String(result.majority ?? 0))
                                 .bold()
                         }
                         HStack {
                             Text("Electorate")
                             Spacer()
-                            Text(String(result.electorate))
+                            Text(String(result.electorate ?? 0))
                                 .bold()
                         }
                     }
@@ -40,7 +40,7 @@ struct ConstituencyElectionDetailView: View {
 
                     Section("All votes") {
                         barView
-                            .frame(height: 300 * CGFloat(result.candidates.count) / 6)
+                            .frame(height: 300 * CGFloat((result.candidates ?? []).count) / 6)
                             .padding(3)
                     }
                 }
@@ -60,22 +60,22 @@ struct ConstituencyElectionDetailView: View {
     @ViewBuilder
     var pieView: some View {
         if let result = viewModel.result {
-            Chart(result.candidates.sorted { $0.votes > $1.votes }, id: \.name) { candidate in
+            Chart((result.candidates ?? []).sorted { $0.votes ?? 0 > $1.votes ?? 0 }, id: \.name) { candidate in
                 SectorMark(
-                    angle: .value("Votes", candidate.votes),
+                    angle: .value("Votes", candidate.votes ?? 0),
                     innerRadius: .ratio(0.65)
                 )
-                .foregroundStyle(candidate.party.bgColor)
+                .foregroundStyle(candidate.party?.bgColor ?? .white)
             }
             .chartLegend(.hidden)
             .chartBackground { chartProxy in
                 GeometryReader { geometry in
                     let frame = geometry[chartProxy.plotFrame!]
                     VStack {
-                        Text(result.result.uppercased())
+                        Text(result.result?.uppercased() ?? "")
                             .bold()
                             .font(.title2)
-                        Text("Majority of \(result.majority)")
+                        Text("Majority of \(result.majority ?? 0)")
                     }
                     .position(x: frame.midX, y: frame.midY)
                 }
@@ -86,16 +86,16 @@ struct ConstituencyElectionDetailView: View {
     @ViewBuilder
     var barView: some View {
         if let result = viewModel.result {
-            Chart(result.candidates.sorted { $0.votes > $1.votes }, id: \.name) { candidate in
+            Chart((result.candidates ?? []).sorted { $0.votes ?? 0 > $1.votes ?? 0 }, id: \.name) { candidate in
                 BarMark(
-                    x: .value("Votes", candidate.votes),
-                    y: .value("Candidate", "\(candidate.name), \(candidate.party.abbreviation?.uppercased() ?? candidate.party.name ?? "")")
+                    x: .value("Votes", candidate.votes ?? 0),
+                    y: .value("Candidate", "\(candidate.name), \(candidate.party?.abbreviation?.uppercased() ?? candidate.party?.name ?? "")")
                 )
                 .annotation(position: .trailing) {
-                    Text(String(candidate.votes))
+                    Text(String(candidate.votes ?? 0))
                         .font(.caption)
                 }
-                .foregroundStyle(candidate.party.bgColor)
+                .foregroundStyle(candidate.party?.bgColor ?? .black)
             }
             .chartXAxis(.hidden)
         }
