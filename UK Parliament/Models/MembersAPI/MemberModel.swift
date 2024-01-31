@@ -54,29 +54,29 @@ class MemberValueModel: Codable, Identifiable {
 }
 
 class MembersModel: Codable {
-    var items: [MemberValueModel]
-    var totalResults: Int
+    var items: [MemberValueModel]?
+    var totalResults: Int?
 }
 
 class MemberSynopsisModel: Codable {
-    var value: String
+    var value: String?
 }
 
 class MemberContact: Codable, Identifiable {
-    var type: String
+    var type: String?
     var typeDescription: String?
-    var typeId: Int
-    var isPreferred: Bool
-    var isWebAddress: Bool
+    var typeId: Int?
+    var isPreferred: Bool?
+    var isWebAddress: Bool?
     var notes: String?
-    var line1: String
+    var line1: String?
     var line2: String?
     var postcode: String?
     var phone: String?
     var email: String?
 
     var id: String {
-        line1 + type
+        (line1 ?? "") + (type ?? "")
     }
 }
 
@@ -139,7 +139,7 @@ class MemberModel {
 
         FetchModel.base.fetchData(MembersModel.self, from: url) { result in
             if let result = result {
-                self.totalResults = result.totalResults
+                self.totalResults = result.totalResults ?? 0
                 self.skip = [search: self.skip[search, default: 0] + self.take]
                 completion(result)
             } else {

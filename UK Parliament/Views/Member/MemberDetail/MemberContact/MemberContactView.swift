@@ -7,13 +7,15 @@ struct MemberContactView: View {
     var body: some View {
         List {
             ForEach(viewModel.contacts) { contact in
-                Section(contact.type) {
+                Section(contact.type ?? "") {
                     VStack(alignment: .leading) {
-                        if !contact.isWebAddress {
-                            Text(contact.line1)
-                                .bold()
-                        } else {
-                            Link(contact.line1, destination: URL(string: contact.line1)!)
+                        if let line1 = contact.line1 {
+                            if !(contact.isWebAddress ?? false) {
+                                Text(line1)
+                                    .bold()
+                            } else {
+                                Link(line1, destination: URL(string: line1)!)
+                            }
                         }
                         if let line2 = contact.line2 {
                             Text(line2)
