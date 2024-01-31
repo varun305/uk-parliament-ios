@@ -168,19 +168,19 @@ class BillPublication: Codable, Identifiable, Equatable, Hashable {
 }
 
 class BillPublicationResultModel: Codable {
-    var billId: Int
-    var publications: [BillPublication]
+    var billId: Int?
+    var publications: [BillPublication]?
 }
 
 class BillStageSitting: Codable {
-    var sittingId: Int
-    var publications: [BillPublication]
+    var sittingId: Int?
+    var publications: [BillPublication]?
 }
 
 class BillStagePublicationResultModel: Codable {
-    var billStageId: Int
-    var publications: [BillPublication]
-    var sittings: [BillStageSitting]
+    var billStageId: Int?
+    var publications: [BillPublication]?
+    var sittings: [BillStageSitting]?
 }
 
 class BillModel {

@@ -11,7 +11,7 @@ extension BillPublicationsView {
             if let stageId = stageId {
                 BillModel.shared.fetchBillStagePublications(for: id, stageId: stageId) { result in
                     Task { @MainActor in
-                        self.publications = result?.sittings.flatMap { $0.publications } ?? []
+                        self.publications = (result?.sittings ?? []).flatMap { $0.publications ?? [] }
                         self.loading = false
                     }
                 }
