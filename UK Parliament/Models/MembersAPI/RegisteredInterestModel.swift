@@ -1,8 +1,8 @@
 import Foundation
 
 class Interest: Codable, Identifiable {
-    var id: Int
-    var interest: String
+    var id: Int?
+    var interest: String?
     var createdWhen: String?
     var lastAmendedWhen: String?
     var deletedWhen: String?
@@ -10,14 +10,14 @@ class Interest: Codable, Identifiable {
 }
 
 class RegisteredInterest: Codable, Identifiable {
-    var id: Int
-    var name: String
-    var sortOrder: Int
-    var interests: [Interest]
+    var id: Int?
+    var name: String?
+    var sortOrder: Int?
+    var interests: [Interest]?
 }
 
 class RegisteredInterestValueModel: Codable {
-    var value: [RegisteredInterest]
+    var value: [RegisteredInterest]?
 }
 
 class RegisteredInterestModel {

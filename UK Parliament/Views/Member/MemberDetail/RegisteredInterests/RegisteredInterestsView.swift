@@ -8,9 +8,9 @@ struct RegisteredInterestsView: View {
         Group {
             if !viewModel.registeredInterests.isEmpty {
                 List {
-                    ForEach(viewModel.registeredInterests.sorted { $0.sortOrder < $1.sortOrder }) { registeredInterest in
-                        Section(registeredInterest.name) {
-                            ForEach(registeredInterest.interests) { interest in
+                    ForEach(viewModel.registeredInterests.sorted { $0.sortOrder ?? 0 < $1.sortOrder ?? 0 }) { registeredInterest in
+                        Section(registeredInterest.name ?? "") {
+                            ForEach(registeredInterest.interests ?? []) { interest in
                                 InterestRow(interest: interest)
                             }
                         }
@@ -39,7 +39,7 @@ struct RegisteredInterestsView: View {
 
         var body: some View {
             VStack(alignment: .leading) {
-                Text(interest.interest)
+                Text(interest.interest ?? "")
                 VStack {
                     if let createdWhen = interest.createdWhen, createdWhen != "" {
                         HStack {
