@@ -5,14 +5,16 @@ struct BillRow: View {
 
     var body: some View {
         HStack(alignment: .center) {
-            BillStageBadge(stage: bill.currentStage)
-                .frame(width: 60, height: 60)
+            if let currentStage = bill.currentStage {
+                BillStageBadge(stage: currentStage)
+                    .frame(width: 60, height: 60)
+            }
             VStack(alignment: .leading) {
                 HStack {
-                    Text(bill.shortTitle)
+                    Text(bill.shortTitle ?? "")
                         .bold()
                     Spacer()
-                    if bill.isDefeated {
+                    if bill.isDefeated ?? false {
                         Text("Defeated")
                             .foregroundStyle(.red)
                             .font(.footnote)
@@ -21,7 +23,7 @@ struct BillRow: View {
                     }
                 }
                 HStack {
-                    Text(bill.lastUpdate.convertToDate())
+                    Text(bill.formattedDate)
                     Spacer()
                     Group {
                         if bill.originatingHouse == "Commons" {

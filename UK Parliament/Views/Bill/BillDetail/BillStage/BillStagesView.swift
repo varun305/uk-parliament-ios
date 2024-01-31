@@ -20,11 +20,11 @@ struct BillStagesView: View {
                     .italic()
             }
         }
-        .navigationTitle("Stages, \(bill.shortTitle)")
+        .navigationTitle("Stages, \(bill.shortTitle ?? "")")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            if viewModel.stages.isEmpty {
-                viewModel.nextData(for: bill.billId, reset: true)
+            if let billId = bill.billId, viewModel.stages.isEmpty {
+                viewModel.nextData(for: billId, reset: true)
             }
         }
     }
@@ -45,8 +45,8 @@ struct BillStagesView: View {
     }
 
     private func onScrollEnd(stage: Stage) {
-        if stage == viewModel.stages.last {
-            viewModel.nextData(for: bill.billId)
+        if let billId = bill.billId, stage == viewModel.stages.last {
+            viewModel.nextData(for: billId)
         }
     }
 }

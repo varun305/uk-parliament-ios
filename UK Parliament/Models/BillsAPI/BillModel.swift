@@ -68,23 +68,27 @@ class Sponsor: Codable, Identifiable {
 }
 
 class Bill: Codable, Identifiable, Hashable {
-    var billId: Int
-    var shortTitle: String
+    var billId: Int?
+    var shortTitle: String?
     var longTitle: String?
-    var currentHouse: String
-    var originatingHouse: String
-    var lastUpdate: String
+    var currentHouse: String?
+    var originatingHouse: String?
+    var lastUpdate: String?
     var billWithdrawn: String?
-    var isDefeated: Bool
-    var billTypeId: Int
-    var introducedSessionId: Int
-    var includedSessionIds: [Int]
-    var isAct: Bool
-    var currentStage: Stage
+    var isDefeated: Bool?
+    var billTypeId: Int?
+    var introducedSessionId: Int?
+    var includedSessionIds: [Int]?
+    var isAct: Bool?
+    var currentStage: Stage?
     var sponsors: [Sponsor]?
 
-    var id: Int {
+    var id: Int? {
         billId
+    }
+
+    var formattedDate: String {
+        lastUpdate?.convertToDate() ?? ""
     }
 
     static func == (lhs: Bill, rhs: Bill) -> Bool {

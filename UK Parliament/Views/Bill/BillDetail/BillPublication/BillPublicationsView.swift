@@ -6,7 +6,7 @@ struct BillPublicationsView: View {
     var stage: Stage?
 
     private var navigationTitle: String {
-        "Publications, \(bill.shortTitle)"
+        "Publications, \(bill.shortTitle ?? "")"
     }
 
     var body: some View {
@@ -38,7 +38,9 @@ struct BillPublicationsView: View {
         .navigationTitle(navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            viewModel.fetchPublications(for: bill.billId, stageId: stage?.id)
+            if let billId = bill.billId {
+                viewModel.fetchPublications(for: billId, stageId: stage?.id)
+            }
         }
     }
 }

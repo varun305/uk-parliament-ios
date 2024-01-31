@@ -33,17 +33,21 @@ struct BillDetailView: View {
                         }
                     }
 
-                    Section("Last update") {
-                        Text(bill.lastUpdate.convertToDate())
+                    if let _ = bill.lastUpdate {
+                        Section("Last update") {
+                            Text(bill.formattedDate)
+                        }
                     }
 
-                    Section("Current stage") {
-                        BillStageRow(stage: bill.currentStage)
-                        ContextAwareNavigationLink(value: .billStagesView(bill: bill)) {
-                            Text("See all stages")
-                                .foregroundStyle(.secondary)
-                                .italic()
-                                .font(.footnote)
+                    if let currentStage = bill.currentStage {
+                        Section("Current stage") {
+                            BillStageRow(stage: currentStage)
+                            ContextAwareNavigationLink(value: .billStagesView(bill: bill)) {
+                                Text("See all stages")
+                                    .foregroundStyle(.secondary)
+                                    .italic()
+                                    .font(.footnote)
+                            }
                         }
                     }
 
@@ -62,10 +66,12 @@ struct BillDetailView: View {
                     .italic()
             }
         }
-        .navigationTitle(bill.shortTitle)
+        .navigationTitle(bill.shortTitle ?? "")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            viewModel.fetchData(for: bill.billId)
+            if let billId = bill.billId {
+                viewModel.fetchData(for: billId)
+            }
         }
     }
 }
