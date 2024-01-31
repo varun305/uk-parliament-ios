@@ -14,15 +14,15 @@ struct ConstituencyRow: View {
             }
 
             VStack(alignment: .leading) {
-                Text(consituency.name)
+                Text(consituency.name ?? "")
                     .multilineTextAlignment(.leading)
                     .bold()
                 if let member = consituency.member {
                     Text(member.nameDisplayAs)
                         .font(.footnote)
                 }
-                if let party = party {
-                    Text(party.name)
+                if let name = party?.name {
+                    Text(name)
                         .font(.caption)
                 }
             }

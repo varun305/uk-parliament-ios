@@ -32,7 +32,7 @@ struct MemberDetailView: View {
                             Circle()
                                 .frame(width: 20, height: 20)
                                 .foregroundStyle(Color(hexString: member.latestParty.backgroundColour ?? "ffffff"))
-                            Text(member.latestParty.name)
+                            Text(member.latestParty.name ?? "")
                         }
                     }
 

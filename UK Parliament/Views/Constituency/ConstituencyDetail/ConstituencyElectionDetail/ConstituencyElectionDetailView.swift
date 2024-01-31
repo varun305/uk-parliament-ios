@@ -51,7 +51,9 @@ struct ConstituencyElectionDetailView: View {
         .navigationTitle("Election results")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            viewModel.fetchData(in: constituency.id, at: electionResult)
+            if let constituencyId = constituency.id {
+                viewModel.fetchData(in: constituencyId, at: electionResult)
+            }
         }
     }
 
@@ -87,7 +89,7 @@ struct ConstituencyElectionDetailView: View {
             Chart(result.candidates.sorted { $0.votes > $1.votes }, id: \.name) { candidate in
                 BarMark(
                     x: .value("Votes", candidate.votes),
-                    y: .value("Candidate", "\(candidate.name), \(candidate.party.abbreviation?.uppercased() ?? candidate.party.name)")
+                    y: .value("Candidate", "\(candidate.name), \(candidate.party.abbreviation?.uppercased() ?? candidate.party.name ?? "")")
                 )
                 .annotation(position: .trailing) {
                     Text(String(candidate.votes))

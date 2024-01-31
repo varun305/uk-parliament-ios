@@ -11,7 +11,7 @@ struct MemberRow: View {
             VStack(alignment: .leading) {
                 Text(member.nameDisplayAs)
                     .bold()
-                Text(member.latestParty.name)
+                Text(member.latestParty.name ?? "")
                     .font(.footnote)
                 Text(member.latestHouseMembership.membershipFrom)
                     .font(.caption)

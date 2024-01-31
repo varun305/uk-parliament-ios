@@ -32,7 +32,7 @@ struct PartiesView: View {
             LazyVStack(alignment: .leading) {
                 ForEach(viewModel.parties) { party in
                     if let _party = party.party {
-                        Text("\(_party.name) (\(party.total ?? 0) members)")
+                        Text("\(_party.name ?? "") (\(party.total ?? 0) members)")
                             .font(.footnote)
                             .bold()
                         LazyVGrid(columns: [GridItem(.adaptive(minimum: 10))], spacing: 5) {

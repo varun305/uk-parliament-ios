@@ -13,7 +13,7 @@ extension ConstituenciesView {
 
         private func handleData(result: ConstituenciesModel?, reset: Bool = false) {
             if let result = result {
-                let consituencies = result.items.map { $0.value }
+                let consituencies = result.items.compactMap { $0.value }
                 Task { @MainActor in
                     self.result = result
                     withAnimation {

@@ -6,7 +6,7 @@ private struct MapConfiguration: Identifiable {
     var coordinates: [[[Double]]]
     var party: PartyModel?
 
-    var id: Int {
+    var id: Int? {
         constituency.id
     }
 }
@@ -29,16 +29,18 @@ struct ConstituencyDetailView: View {
                         resultsView
                     }
                 }
-                .navigationTitle(constituency.name)
+                .navigationTitle(constituency.name ?? "")
                 .navigationBarTitleDisplayMode(.inline)
             } else {
                 ProgressView()
             }
         }
         .onAppear {
-            viewModel.fetchConstituency(for: constituency.id)
-            viewModel.fetchGeometry(for: constituency.id)
-            viewModel.fetchData(for: constituency.id)
+            if let constituencyId = constituency.id {
+                viewModel.fetchConstituency(for: constituencyId)
+                viewModel.fetchGeometry(for: constituencyId)
+                viewModel.fetchData(for: constituencyId)
+            }
         }
         .toolbar {
             if let constituency = viewModel.constituency, let geometry = viewModel.geometry {
@@ -59,7 +61,7 @@ struct ConstituencyDetailView: View {
                     }
                 }
                 .ignoresSafeArea(.all, edges: .bottom)
-                .navigationTitle(config.constituency.name)
+                .navigationTitle(config.constituency.name ?? "")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {

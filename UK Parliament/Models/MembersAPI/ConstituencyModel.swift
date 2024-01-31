@@ -1,17 +1,17 @@
 import Foundation
 
 class CurrentRepresentationModel: Codable {
-    var member: MemberValueModel
+    var member: MemberValueModel?
 }
 
 class Constituency: Codable, Identifiable, Hashable {
-    var id: Int
-    var name: String
-    var startDate: String
+    var id: Int?
+    var name: String?
+    var startDate: String?
     var endDate: String?
     var currentRepresentation: CurrentRepresentationModel?
     var member: Member? {
-        currentRepresentation?.member.value
+        currentRepresentation?.member?.value
     }
 
     static func == (lhs: Constituency, rhs: Constituency) -> Bool {
@@ -25,9 +25,9 @@ class Constituency: Codable, Identifiable, Hashable {
 }
 
 class ConstituencyValueModel: Codable, Identifiable {
-    var value: Constituency
-    var id: Int {
-        value.id
+    var value: Constituency?
+    var id: Int? {
+        value?.id
     }
 }
 
