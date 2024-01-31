@@ -1,4 +1,5 @@
 import SwiftUI
+import SkeletonUI
 
 struct BillPublicationRow: View {
     var publication: BillPublication
@@ -12,5 +13,19 @@ struct BillPublicationRow: View {
                 .bold()
         }
         .font(.subheadline)
+    }
+}
+
+struct BillPublicationRowLoading: View {
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("")
+                .skeleton(with: true)
+            Text("")
+                .skeleton(with: true)
+            Text("")
+                .skeleton(with: true)
+        }
+        .frame(height: 40)
     }
 }

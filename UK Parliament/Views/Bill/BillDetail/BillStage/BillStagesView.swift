@@ -12,7 +12,7 @@ struct BillStagesView: View {
             if viewModel.stages.count > 0 {
                 scrollView
             } else if viewModel.loading {
-                ProgressView()
+                loadingView
             } else {
                 Text("No data")
                     .foregroundStyle(.secondary)
@@ -27,6 +27,20 @@ struct BillStagesView: View {
                 viewModel.nextData(for: billId, reset: true)
             }
         }
+    }
+
+    @ViewBuilder
+    var loadingView: some View {
+        List(0..<10) { _ in
+            NavigationLink {
+                Text("")
+            } label: {
+                BillStageRowLoading()
+            }
+            .disabled(true)
+        }
+        .listStyle(.plain)
+        .environment(\.isScrollEnabled, false)
     }
 
     @ViewBuilder

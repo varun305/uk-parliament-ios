@@ -39,6 +39,7 @@ struct CommonsVoteDetailView: View {
             }
         }
         .listStyle(.plain)
+        .environment(\.isScrollEnabled, false)
     }
 
     @ViewBuilder

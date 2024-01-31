@@ -12,24 +12,9 @@ struct BillPublicationsView: View {
     var body: some View {
         Group {
             if viewModel.publications.count > 0 {
-                List {
-                    Section("\(viewModel.publications.count) results") {
-                        ForEach(viewModel.publications) { publication in
-                            let links = publication.links ?? []
-                            let files = publication.files ?? []
-                            if links.count + files.count > 0 {
-                                ContextAwareNavigationLink(value: .billPublicationLinksView(publication: publication)) {
-                                    BillPublicationRow(publication: publication)
-                                }
-                            } else {
-                                BillPublicationRow(publication: publication)
-                            }
-                        }
-                    }
-                }
-                .listStyle(.plain)
+                scrollView
             } else if viewModel.loading {
-                ProgressView()
+                loadingView
             } else {
                 Text("No data")
                     .foregroundStyle(.secondary)
@@ -44,5 +29,39 @@ struct BillPublicationsView: View {
                 viewModel.fetchPublications(for: billId, stageId: stage?.id)
             }
         }
+    }
+
+    @ViewBuilder
+    var loadingView: some View {
+        List(0..<15) { _ in
+            NavigationLink {
+                Text("")
+            } label: {
+                BillPublicationRowLoading()
+            }
+            .disabled(true)
+        }
+        .listStyle(.plain)
+        .environment(\.isScrollEnabled, false)
+    }
+
+    @ViewBuilder
+    var scrollView: some View {
+        List {
+            Section("\(viewModel.publications.count) results") {
+                ForEach(viewModel.publications) { publication in
+                    let links = publication.links ?? []
+                    let files = publication.files ?? []
+                    if links.count + files.count > 0 {
+                        ContextAwareNavigationLink(value: .billPublicationLinksView(publication: publication)) {
+                            BillPublicationRow(publication: publication)
+                        }
+                    } else {
+                        BillPublicationRow(publication: publication)
+                    }
+                }
+            }
+        }
+        .listStyle(.plain)
     }
 }

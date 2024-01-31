@@ -5,10 +5,15 @@ struct CommonsVotesView: View {
 
     var body: some View {
         Group {
-            if viewModel.loading && viewModel.votes.isEmpty {
+            if viewModel.votes.count > 0 {
+                scrollView
+            } else if viewModel.loading {
                 loadingView
             } else {
-                scrollView
+                Text("No data")
+                    .foregroundStyle(.secondary)
+                    .font(.footnote)
+                    .italic()
             }
         }
         .searchable(text: $viewModel.search, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for a commons vote")
@@ -42,6 +47,7 @@ struct CommonsVotesView: View {
             .disabled(true)
         }
         .listStyle(.plain)
+        .environment(\.isScrollEnabled, false)
     }
 
     @ViewBuilder

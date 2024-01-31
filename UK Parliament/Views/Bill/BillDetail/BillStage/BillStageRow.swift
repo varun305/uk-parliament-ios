@@ -1,4 +1,5 @@
 import SwiftUI
+import SkeletonUI
 
 struct BillStageRow: View {
     var stage: Stage
@@ -30,5 +31,33 @@ struct BillStageRow: View {
         .font(.footnote)
         .italic()
         .foregroundStyle(.secondary)
+    }
+}
+
+struct BillStageRowLoading: View {
+    var body: some View {
+        HStack(alignment: .center) {
+            ZStack {
+                Circle()
+                    .stroke(.white, lineWidth: 3)
+                    .skeleton(with: true)
+                Circle()
+                    .fill(.white)
+                    .padding(5)
+                    .skeleton(with: true)
+                Text("2")
+                    .skeleton(with: true)
+            }
+            .frame(width: 60, height: 60)
+            VStack(alignment: .leading) {
+                Text("")
+                    .skeleton(with: true)
+                Spacer()
+                Text("")
+                    .frame(width: 50)
+                    .skeleton(with: true)
+            }
+        }
+        .frame(height: 60)
     }
 }

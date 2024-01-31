@@ -23,8 +23,8 @@ extension BillsView {
                         } else {
                             self.bills += bills ?? []
                         }
+                        loading = false
                     }
-                    loading = false
                 }
             } else {
                 // error
