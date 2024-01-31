@@ -11,15 +11,19 @@ extension BillPublicationsView {
             if let stageId = stageId {
                 BillModel.shared.fetchBillStagePublications(for: id, stageId: stageId) { result in
                     Task { @MainActor in
-                        self.publications = (result?.sittings ?? []).flatMap { $0.publications ?? [] }
-                        self.loading = false
+                        withAnimation {
+                            self.publications = (result?.sittings ?? []).flatMap { $0.publications ?? [] }
+                            self.loading = false
+                        }
                     }
                 }
             } else {
                 BillModel.shared.fetchBillPublications(for: id) { result in
                     Task { @MainActor in
-                        self.publications = result?.publications ?? []
-                        self.loading = false
+                        withAnimation {
+                            self.publications = result?.publications ?? []
+                            self.loading = false
+                        }
                     }
                 }
             }

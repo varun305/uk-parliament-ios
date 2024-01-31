@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 extension BillDetailView {
     @MainActor class BillDetailViewModel: ObservableObject {
@@ -9,8 +10,10 @@ extension BillDetailView {
             loading = true
             BillModel.shared.fetchBill(for: id) { result in
                 Task { @MainActor in
-                    self.bill = result
-                    self.loading = false
+                    withAnimation {
+                        self.bill = result
+                        self.loading = false
+                    }
                 }
             }
         }

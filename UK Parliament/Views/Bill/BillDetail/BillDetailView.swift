@@ -1,4 +1,5 @@
 import SwiftUI
+import SkeletonUI
 
 struct BillDetailView: View {
     @StateObject var viewModel = BillDetailViewModel()
@@ -58,7 +59,67 @@ struct BillDetailView: View {
                     }
                 }
             } else if viewModel.loading {
-                ProgressView()
+                List {
+                    HStack(alignment: .center) {
+                        Spacer()
+                        VStack {
+                            ForEach(0..<5) { _ in
+                                Text("")
+                                    .skeleton(with: true)
+                                    .frame(height: 10)
+                            }
+                        }
+                        Spacer()
+                    }
+                    .multilineTextAlignment(.center)
+                    .listRowBackground(Color.clear)
+
+                    Section {
+                        NavigationLink {
+                            Text("")
+                        } label: {
+                            BillStageRowLoading()
+                        }
+                        .disabled(true)
+
+                        NavigationLink {
+                            Text("")
+                        } label: {
+                            BillStageRowLoading()
+                        }
+                        .disabled(true)
+                    }
+
+                    Section {
+                        Text("")
+                            .skeleton(with: true)
+                            .frame(height: 10)
+                    }
+
+                    Section {
+                        BillStageRowLoading()
+                        NavigationLink {
+                            Text("")
+                        } label: {
+                            Text("")
+                                .skeleton(with: true)
+                                .frame(height: 10)
+                        }
+                        .disabled(true)
+                    }
+
+                    Section {
+                        NavigationLink {
+                            Text("")
+                        } label: {
+                            Text("")
+                                .skeleton(with: true)
+                                .frame(height: 10)
+                        }
+                        .disabled(true)
+                    }
+                }
+                .environment(\.isScrollEnabled, false)
             } else {
                 Text("No data")
                     .foregroundStyle(.secondary)
