@@ -1,4 +1,5 @@
 import SwiftUI
+import SkeletonUI
 
 struct CommonsVoteRow: View {
     var vote: CommonsVote
@@ -27,5 +28,36 @@ struct CommonsVoteRow: View {
                     .foregroundStyle(.secondary)
             }
         }
+    }
+}
+
+
+struct CommonsVoteRowLoading: View {
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("")
+                .skeleton(with: true)
+            HStack(alignment: .center) {
+                HStack {
+                    Image(systemName: "hand.thumbsup.fill")
+                        .skeleton(with: true)
+                    Text("0")
+                        .skeleton(with: true)
+                }
+                .frame(width: 50)
+                Spacer()
+                HStack {
+                    Text("0")
+                        .skeleton(with: true)
+                    Image(systemName: "hand.thumbsdown.fill")
+                        .skeleton(with: true)
+                }
+                .frame(width: 50)
+            }
+            .padding(.vertical, 2)
+            Text("Division")
+                .skeleton(with: true)
+        }
+        .frame(height: 80)
     }
 }

@@ -7,52 +7,76 @@ struct CommonsVoteDetailView: View {
     var body: some View {
         Group {
             if let vote = viewModel.vote {
-                List {
-                    if let ayeTellers = vote.ayeTellers, ayeTellers.count > 0 {
-                        Section("Aye tellers") {
-                            ForEach(ayeTellers) { teller in
-                                VoterNavigationLink(voter: teller)
-                            }
-                        }
-                    }
-
-                    if let noTellers = vote.noTellers, noTellers.count > 0 {
-                        Section("No tellers") {
-                            ForEach(noTellers) { teller in
-                                VoterNavigationLink(voter: teller)
-                            }
-                        }
-                    }
-
-                    if let ayes = vote.ayes, ayes.count > 0 {
-                        Section("Ayes") {
-                            ForEach(ayes) { aye in
-                                VoterNavigationLink(voter: aye)
-                            }
-                        }
-                    }
-
-                    if let noes = vote.noes, noes.count > 0 {
-                        Section("Noes") {
-                            ForEach(noes) { no in
-                                VoterNavigationLink(voter: no)
-                            }
-                        }
-                    }
-                }
-                .listStyle(.plain)
-                .ifLet(vote.title) { $0.navigationTitle("Votes, \($1)") }
+                scrollView
+            } else if viewModel.loading {
+                loadingView
             } else {
                 Text("No data")
                     .foregroundStyle(.secondary)
                     .italic()
             }
         }
+        .ifLet(vote.title) { $0.navigationTitle("Votes, \($1)") }
         .onAppear {
             if let divisionId = vote.divisionId {
                 viewModel.fetchData(for: divisionId)
             }
         }
+    }
+
+    @ViewBuilder
+    var loadingView: some View {
+        List {
+            Section("") {
+                ForEach(0..<20) { _ in
+                    NavigationLink {
+                        Text("")
+                    } label: {
+                        VoterRowLoading()
+                    }
+                    .disabled(true)
+                }
+            }
+        }
+        .listStyle(.plain)
+    }
+
+    @ViewBuilder
+    var scrollView: some View {
+        List {
+            if let ayeTellers = vote.ayeTellers, ayeTellers.count > 0 {
+                Section("Aye tellers") {
+                    ForEach(ayeTellers) { teller in
+                        VoterNavigationLink(voter: teller)
+                    }
+                }
+            }
+
+            if let noTellers = vote.noTellers, noTellers.count > 0 {
+                Section("No tellers") {
+                    ForEach(noTellers) { teller in
+                        VoterNavigationLink(voter: teller)
+                    }
+                }
+            }
+
+            if let ayes = viewModel.vote?.ayes, ayes.count > 0 {
+                Section("Ayes") {
+                    ForEach(ayes) { aye in
+                        VoterNavigationLink(voter: aye)
+                    }
+                }
+            }
+
+            if let noes = viewModel.vote?.noes, noes.count > 0 {
+                Section("Noes") {
+                    ForEach(noes) { no in
+                        VoterNavigationLink(voter: no)
+                    }
+                }
+            }
+        }
+        .listStyle(.plain)
     }
 
     private struct VoterNavigationLink: View {

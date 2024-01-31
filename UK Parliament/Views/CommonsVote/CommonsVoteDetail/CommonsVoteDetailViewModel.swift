@@ -1,14 +1,19 @@
 import Foundation
-
+import SwiftUI
 
 extension CommonsVoteDetailView {
     @MainActor class CommonsVoteDetailViewModel: ObservableObject {
         @Published var vote: CommonsVote? = nil
+        @Published var loading = false
 
         public func fetchData(for id: Int) {
+            loading = true
             VoteModel.shared.fetchCommonsVote(for: id) { result in
                 Task { @MainActor in
-                    self.vote = result
+                    withAnimation {
+                        self.vote = result
+                        self.loading = false
+                    }
                 }
             }
         }

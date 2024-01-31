@@ -5,8 +5,8 @@ struct CommonsVotesView: View {
 
     var body: some View {
         Group {
-            if viewModel.loading {
-                ProgressView()
+            if viewModel.loading && viewModel.votes.isEmpty {
+                loadingView
             } else {
                 scrollView
             }
@@ -29,6 +29,19 @@ struct CommonsVotesView: View {
             }
         }
         .toolbarBackground(Color.commons.opacity(0.1))
+    }
+
+    @ViewBuilder
+    var loadingView: some View {
+        List(0..<10) { _ in
+            NavigationLink {
+                Text("")
+            } label: {
+                CommonsVoteRowLoading()
+            }
+            .disabled(true)
+        }
+        .listStyle(.plain)
     }
 
     @ViewBuilder
