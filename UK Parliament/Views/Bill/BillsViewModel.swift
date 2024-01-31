@@ -19,9 +19,9 @@ extension BillsView {
                     withAnimation {
                         self.result = result
                         if reset {
-                            self.bills = bills
+                            self.bills = bills ?? []
                         } else {
-                            self.bills += bills
+                            self.bills += bills ?? []
                         }
                     }
                     loading = false

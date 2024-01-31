@@ -102,21 +102,21 @@ class Bill: Codable, Identifiable, Hashable {
 }
 
 class BillItemModel: Codable {
-    var items: [Bill]
-    var totalResults: Int
+    var items: [Bill]?
+    var totalResults: Int?
 }
 
 class BillPublicationType: Codable, Identifiable {
-    var id: Int
-    var name: String
+    var id: Int?
+    var name: String?
     var description: String?
 }
 
 class BillPublicationLink: Codable, Identifiable, Hashable {
-    var id: Int
-    var title: String
-    var url: String
-    var contentType: String
+    var id: Int?
+    var title: String?
+    var url: String?
+    var contentType: String?
 
     static func == (lhs: BillPublicationLink, rhs: BillPublicationLink) -> Bool {
         lhs.id == rhs.id && lhs.url == rhs.url
@@ -129,10 +129,10 @@ class BillPublicationLink: Codable, Identifiable, Hashable {
 }
 
 class BillPublicationFile: Codable, Identifiable, Hashable {
-    var id: Int
-    var filename: String
-    var contentType: String
-    var contentLength: Int
+    var id: Int?
+    var filename: String?
+    var contentType: String?
+    var contentLength: Int?
 
     static func == (lhs: BillPublicationFile, rhs: BillPublicationFile) -> Bool {
         lhs.id == rhs.id
@@ -282,7 +282,7 @@ class BillModel {
         
         FetchModel.base.fetchData(BillItemModel.self, from: url) { result in
             if let result = result {
-                self.totalResults = result.totalResults
+                self.totalResults = result.totalResults ?? 0
                 self.skip = [search: self.skip[search, default: 0] + self.take]
                 completion(result)
             } else {

@@ -15,12 +15,14 @@ struct BillPublicationLinksView: View {
                 Section("Links") {
                     ForEach(links) { link in
                         VStack(alignment: .leading) {
-                            Text(link.title)
+                            Text(link.title ?? "")
                                 .bold()
-                            Text(link.contentType)
+                            Text(link.contentType ?? "")
                                 .italic()
-                            Link("Go to content", destination: URL(string: link.url)!)
-                                .foregroundColor(.accentColor)
+                            if let url = link.url {
+                                Link("Go to content", destination: URL(string: url)!)
+                                    .foregroundColor(.accentColor)
+                            }
                         }
                         .font(.footnote)
                     }
@@ -55,13 +57,15 @@ struct BillPublicationLinksView: View {
         var body: some View {
             HStack {
                 VStack(alignment: .leading) {
-                    Text(file.filename)
+                    Text(file.filename ?? "")
                         .bold()
-                    Text(file.contentType)
+                    Text(file.contentType ?? "")
                         .italic()
                 }
                 Spacer()
-                Text(fileSizeString(fromBytes: file.contentLength))
+                if let contentLength = file.contentLength {
+                    Text(fileSizeString(fromBytes: contentLength))
+                }
             }
             .font(.footnote)
         }

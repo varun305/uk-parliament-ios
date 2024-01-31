@@ -6,7 +6,7 @@ struct BillPublicationRow: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(publication.title)
-            Text(publication.publicationType.name)
+            Text(publication.publicationType.name ?? "")
                 .italic()
             Text(publication.displayDate.convertToDate())
                 .bold()

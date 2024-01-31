@@ -16,9 +16,11 @@ struct BillPublicationPDFView: View {
 
     var body: some View {
         pdfView
-            .navigationTitle(file.filename)
+            .navigationTitle(file.filename ?? "")
             .onAppear {
-                viewModel.fetchData(publicationId: publication.id, fileId: file.id)
+                if let fileId = file.id {
+                    viewModel.fetchData(publicationId: publication.id, fileId: fileId)
+                }
             }
     }
 

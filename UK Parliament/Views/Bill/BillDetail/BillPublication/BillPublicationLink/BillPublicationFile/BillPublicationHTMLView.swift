@@ -8,9 +8,11 @@ struct BillPublicationHTMLView: View {
 
     var body: some View {
         htmlView
-            .navigationTitle(file.filename)
+            .navigationTitle(file.filename ?? "")
             .onAppear {
-                viewModel.fetchData(publicationId: publication.id, fileId: file.id)
+                if let fileId = file.id {
+                    viewModel.fetchData(publicationId: publication.id, fileId: fileId)
+                }
             }
     }
 
