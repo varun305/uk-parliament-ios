@@ -28,6 +28,7 @@ struct CommonsVotesView: View {
                 viewModel.nextData(reset: true)
             }
         }
+        .toolbarBackground(Color.commons.opacity(0.1))
     }
 
     @ViewBuilder

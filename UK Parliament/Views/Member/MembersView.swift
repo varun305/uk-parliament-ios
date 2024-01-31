@@ -44,6 +44,7 @@ struct MembersView: View {
                 viewModel.nextData(reset: true)
             }
         }
+        .toolbarBackground(viewModel.house == .commons ? Color.commons.opacity(0.1) : Color.lords.opacity(0.1))
     }
 
     private func onScrollEnd(member: Member) {

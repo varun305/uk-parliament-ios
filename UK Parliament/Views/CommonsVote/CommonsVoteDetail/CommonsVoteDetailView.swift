@@ -11,9 +11,7 @@ struct CommonsVoteDetailView: View {
                     if let ayeTellers = vote.ayeTellers, ayeTellers.count > 0 {
                         Section("Aye tellers") {
                             ForEach(ayeTellers) { teller in
-                                ContextAwareNavigationLink(value: .memberDetailView(memberId: teller.memberId)) {
-                                    VoterRow(voter: teller)
-                                }
+                                VoterNavigationLink(voter: teller)
                             }
                         }
                     }
@@ -21,9 +19,7 @@ struct CommonsVoteDetailView: View {
                     if let noTellers = vote.noTellers, noTellers.count > 0 {
                         Section("No tellers") {
                             ForEach(noTellers) { teller in
-                                ContextAwareNavigationLink(value: .memberDetailView(memberId: teller.memberId)) {
-                                    VoterRow(voter: teller)
-                                }
+                                VoterNavigationLink(voter: teller)
                             }
                         }
                     }
@@ -31,9 +27,7 @@ struct CommonsVoteDetailView: View {
                     if vote.ayes.count > 0 {
                         Section("Ayes") {
                             ForEach(vote.ayes) { aye in
-                                ContextAwareNavigationLink(value: .memberDetailView(memberId: aye.memberId)) {
-                                    VoterRow(voter: aye)
-                                }
+                                VoterNavigationLink(voter: aye)
                             }
                         }
                     }
@@ -41,9 +35,7 @@ struct CommonsVoteDetailView: View {
                     if vote.noes.count > 0 {
                         Section("Noes") {
                             ForEach(vote.noes) { no in
-                                ContextAwareNavigationLink(value: .memberDetailView(memberId: no.memberId)) {
-                                    VoterRow(voter: no)
-                                }
+                                VoterNavigationLink(voter: no)
                             }
                         }
                     }
@@ -58,6 +50,19 @@ struct CommonsVoteDetailView: View {
         }
         .onAppear {
             viewModel.fetchData(for: vote.divisionId)
+        }
+    }
+
+    private struct VoterNavigationLink: View {
+        var voter: CommonsVoter
+        var body: some View {
+            if let memberId = voter.memberId {
+                ContextAwareNavigationLink(value: .memberDetailView(memberId: memberId)) {
+                    VoterRow(voter: voter)
+                }
+            } else {
+                VoterRow(voter: voter)
+            }
         }
     }
 }

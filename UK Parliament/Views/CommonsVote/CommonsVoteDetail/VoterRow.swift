@@ -5,9 +5,9 @@ struct VoterRow: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(voter.name)
+            Text(voter.name ?? "")
                 .bold()
-            Text(voter.party)
+            Text(voter.party ?? "")
         }
     }
 }

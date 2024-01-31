@@ -1,23 +1,23 @@
 import Foundation
 
 protocol Voter: Identifiable, Codable {
-    var memberId: Int { get }
-    var name: String { get }
-    var listAs: String { get }
-    var party: String { get }
-    var partyColour: String { get }
+    var memberId: Int? { get }
+    var name: String? { get }
+    var listAs: String? { get }
+    var party: String? { get }
+    var partyColour: String? { get }
     var partyAbbreviation: String? { get }
-    var memberFrom: String { get }
+    var memberFrom: String? { get }
 }
 
 class CommonsVoter: Voter {
-    var memberId: Int
-    var name: String
-    var listAs: String
-    var party: String
-    var partyColour: String
+    var memberId: Int?
+    var name: String?
+    var listAs: String?
+    var party: String?
+    var partyColour: String?
     var partyAbbreviation: String?
-    var memberFrom: String
+    var memberFrom: String?
 
     enum CodingKeys: String, CodingKey {
         case memberId = "MemberId"
@@ -29,7 +29,7 @@ class CommonsVoter: Voter {
         case memberFrom = "MemberFrom"
     }
 
-    var id: Int {
+    var id: Int? {
         memberId
     }
 }

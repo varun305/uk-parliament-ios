@@ -19,8 +19,8 @@ extension CommonsVotesView {
                             } else {
                                 self.votes += result
                             }
+                            self.loading = false
                         }
-                        self.loading = false
                     }
                 }
             }
