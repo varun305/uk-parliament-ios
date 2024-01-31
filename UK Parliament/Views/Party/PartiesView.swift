@@ -8,32 +8,7 @@ struct PartiesView: View {
             if viewModel.loading {
                 ProgressView()
             } else {
-                ScrollView {
-                    LazyVStack(alignment: .leading) {
-                        ForEach(viewModel.parties) { party in
-                            Text("\(party.party.name) (\(party.total) members)")
-                                .font(.footnote)
-                                .bold()
-                            LazyVGrid(columns: [GridItem(.adaptive(minimum: 10))], spacing: 5) {
-                                ForEach(0..<party.total, id: \.self) { _ in
-                                    if let color = party.party.backgroundColour, color != "ffffff" {
-                                        Color(hexString: party.party.backgroundColour ?? "ffffff")
-                                            .mask {
-                                                RoundedRectangle(cornerRadius: 2)
-                                            }
-                                    } else {
-                                        RoundedRectangle(cornerRadius: 2)
-                                            .stroke(.black, lineWidth: 1)
-                                            .foregroundStyle(.white)
-                                    }
-                                }
-                            }
-                            .padding(.bottom)
-                        }
-                    }
-                    .padding(.top)
-                    .padding(.horizontal)
-                }
+                scrollView
             }
         }
         .navigationTitle(viewModel.house == .commons ? "House of Commons" : "House of Lords")
@@ -48,6 +23,40 @@ struct PartiesView: View {
         }
         .onAppear {
             viewModel.fetchData()
+        }
+    }
+
+    @ViewBuilder
+    var scrollView: some View {
+        ScrollView {
+            LazyVStack(alignment: .leading) {
+                ForEach(viewModel.parties) { party in
+                    if let _party = party.party {
+                        Text("\(_party.name) (\(party.total ?? 0) members)")
+                            .font(.footnote)
+                            .bold()
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 10))], spacing: 5) {
+                            ForEach(0..<(party.total ?? 0), id: \.self) { _ in
+                                if let color = _party.backgroundColour, color != "ffffff" {
+                                    Color(hexString: _party.backgroundColour ?? "ffffff")
+                                        .mask {
+                                            RoundedRectangle(cornerRadius: 2)
+                                        }
+                                } else {
+                                    RoundedRectangle(cornerRadius: 2)
+                                        .stroke(.black, lineWidth: 1)
+                                        .foregroundStyle(.white)
+                                }
+                            }
+                        }
+                        .padding(.bottom)
+                    } else {
+                        EmptyView()
+                    }
+                }
+            }
+            .padding(.top)
+            .padding(.horizontal)
         }
     }
 }

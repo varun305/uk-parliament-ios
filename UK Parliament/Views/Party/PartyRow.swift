@@ -2,22 +2,24 @@ import SwiftUI
 
 struct PartyRow: View {
     var partyResult: PartyResultModel
-    var party: PartyModel {
+    var party: PartyModel? {
         partyResult.party
     }
 
     var body: some View {
         HStack(alignment: .center) {
-            PartyCircleView(party: party)
-                .frame(width: 60, height: 60)
+            if let party = party {
+                PartyCircleView(party: party)
+                    .frame(width: 60, height: 60)
+            }
 
             Spacer()
 
             VStack(alignment: .trailing) {
-                Text(party.name)
+                Text(party?.name ?? "")
                     .bold()
                 HStack {
-                    Text(String(partyResult.total))
+                    Text(String(partyResult.total ?? 0))
                         .bold()
                     Text(partyResult.total == 1 ? "MP" : "MPs")
                 }

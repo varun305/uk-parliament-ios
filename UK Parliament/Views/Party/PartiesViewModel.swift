@@ -12,7 +12,7 @@ extension PartiesView {
         @Published var loading = false
 
         var parties: [PartyResultModel] {
-            (state?.items ?? []).sorted { $0.value.total > $1.value.total }.map { $0.value }
+            (state?.items ?? []).sorted { $0.value?.total ?? 0 > $1.value?.total ?? 0 }.compactMap { $0.value }
         }
 
         func fetchData() {

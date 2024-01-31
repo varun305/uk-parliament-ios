@@ -1,31 +1,31 @@
 import Foundation
 
 class PartyResultModel: Codable, Identifiable {
-    var male: Int
-    var female: Int
-    var nonBinary: Int
-    var total: Int
-    var party: PartyModel
+    var male: Int?
+    var female: Int?
+    var nonBinary: Int?
+    var total: Int?
+    var party: PartyModel?
 
-    var id: Int {
-        party.id
+    var id: Int? {
+        party?.id
     }
 }
 
 class PartyValueModel: Codable, Identifiable {
-    var value: PartyResultModel
+    var value: PartyResultModel?
 
-    var party: PartyModel {
-        value.party
+    var party: PartyModel? {
+        value?.party
     }
 
-    var id: Int {
-        party.id
+    var id: Int? {
+        party?.id
     }
 }
 
 class StateOfThePartiesModel: Codable {
-    var items: [PartyValueModel]
+    var items: [PartyValueModel]?
 }
 
 class HouseModel {
