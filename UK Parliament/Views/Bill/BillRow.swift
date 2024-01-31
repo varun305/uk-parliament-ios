@@ -58,6 +58,7 @@ struct BillRowLoading: View {
                     .skeleton(with: true)
             }
             .frame(width: 60, height: 60)
+
             VStack(alignment: .leading) {
                 HStack {
                     Text("")

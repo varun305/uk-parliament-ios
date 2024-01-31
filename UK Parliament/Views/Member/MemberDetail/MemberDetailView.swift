@@ -1,4 +1,5 @@
 import SwiftUI
+import SkeletonUI
 
 struct MemberDetailView: View {
     @StateObject var viewModel = MemberDetailViewModel()
@@ -14,60 +15,143 @@ struct MemberDetailView: View {
 
     var body: some View {
         Group {
-            if let member = viewModel.member {
-                List {
-                    VStack(alignment: .center) {
-                        HStack {
-                            Spacer()
-                            MemberPictureView(member: member)
-                                .frame(width: 180, height: 180)
-                            Spacer()
-                        }
-                        Text(member.nameFullTitle ?? "")
-                            .bold()
-                        Text(viewModel.synopsis)
-                            .font(.caption)
-                    }
-                    .multilineTextAlignment(.center)
-                    .listRowBackground(Color.clear)
-
-                    Section {
-                        HStack {
-                            Circle()
-                                .frame(width: 20, height: 20)
-                                .foregroundStyle(Color(hexString: member.latestParty?.backgroundColour ?? "ffffff"))
-                            Text(member.latestParty?.name ?? "")
-                        }
-                    }
-
-                    Section {
-                        ContextAwareNavigationLink(value: .billsView(member: member)) {
-                            Text("Bills")
-                        }
-                    }
-
-                    Section(positionTypeString) {
-                        membershipLink
-                    }
-
-                    Section {
-                        ContextAwareNavigationLink(value: .memberInterestsView(member: member)) {
-                            Text("Registered interests")
-                        }
-                        ContextAwareNavigationLink(value: .memberContactView(member: member)) {
-                            Text("Contact details")
-                        }
-                    }
-                }
-                .navigationTitle(member.nameDisplayAs ?? "")
-                .navigationBarTitleDisplayMode(.inline)
+            if viewModel.member != nil {
+                scrollView
             } else {
-                ProgressView()
+                loadingView
             }
         }
+        .navigationTitle(viewModel.member?.nameDisplayAs ?? "")
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             viewModel.fetchMember(for: memberId)
-            viewModel.fetchMemberSynopsis(for: memberId)
+        }
+    }
+
+    @ViewBuilder
+    var loadingView: some View {
+        List {
+            VStack(alignment: .center) {
+                HStack {
+                    Spacer()
+                    ZStack {
+                        Circle()
+                            .stroke(.white, lineWidth: 3)
+                            .skeleton(with: true)
+                        Circle()
+                            .fill(.white)
+                            .padding(5)
+                            .skeleton(with: true)
+                        Text("2")
+                            .skeleton(with: true)
+                    }
+                    .frame(width: 180, height: 180)
+                    Spacer()
+                }
+                Text("")
+                    .skeleton(with: true)
+                Text("")
+                    .skeleton(with: true)
+            }
+            .listRowBackground(Color.clear)
+
+            Section {
+                Text("")
+                    .skeleton(with: true)
+                    .frame(height: 10)
+            }
+
+            Section {
+                NavigationLink {
+                    Text("")
+                } label: {
+                    Text("")
+                        .skeleton(with: true)
+                        .frame(height: 10)
+                }
+                .disabled(true)
+            }
+
+            Section {
+                NavigationLink {
+                    Text("")
+                } label: {
+                    Text("")
+                        .skeleton(with: true)
+                        .frame(height: 10)
+                }
+                .disabled(true)
+            }
+
+            Section {
+                NavigationLink {
+                    Text("")
+                } label: {
+                    Text("")
+                        .skeleton(with: true)
+                        .frame(height: 10)
+                }
+                .disabled(true)
+                NavigationLink {
+                    Text("")
+                } label: {
+                    Text("")
+                        .skeleton(with: true)
+                        .frame(height: 10)
+                }
+                .disabled(true)
+            }
+        }
+        .environment(\.isScrollEnabled, false)
+    }
+
+    @ViewBuilder
+    var scrollView: some View {
+        if let member = viewModel.member {
+            List {
+                VStack(alignment: .center) {
+                    HStack {
+                        Spacer()
+                        MemberPictureView(member: member)
+                            .frame(width: 180, height: 180)
+                        Spacer()
+                    }
+                    Text(member.nameFullTitle ?? "")
+                        .bold()
+                    Text(viewModel.synopsis)
+                        .font(.caption)
+                }
+                .multilineTextAlignment(.center)
+                .listRowBackground(Color.clear)
+
+                Section {
+                    HStack {
+                        Circle()
+                            .frame(width: 20, height: 20)
+                            .foregroundStyle(Color(hexString: member.latestParty?.backgroundColour ?? "ffffff"))
+                        Text(member.latestParty?.name ?? "")
+                    }
+                }
+
+                Section {
+                    ContextAwareNavigationLink(value: .billsView(member: member)) {
+                        Text("Bills")
+                    }
+                }
+
+                Section(positionTypeString) {
+                    membershipLink
+                }
+
+                Section {
+                    ContextAwareNavigationLink(value: .memberInterestsView(member: member)) {
+                        Text("Registered interests")
+                    }
+                    ContextAwareNavigationLink(value: .memberContactView(member: member)) {
+                        Text("Contact details")
+                    }
+                }
+            }
         }
     }
 

@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 extension MemberDetailView {
     @MainActor class MemberDetailViewModel: ObservableObject {
@@ -6,16 +7,22 @@ extension MemberDetailView {
             didSet {
                 if let membershipFromId = member?.latestHouseMembership?.membershipFromId {
                     fetchMemberConstituency(for: membershipFromId)
+                    fetchMemberSynopsis(for: membershipFromId)
                 }
             }
         }
         @Published var constituency: Constituency?
         @Published var synopsis = ""
+        @Published var loading = false
 
         public func fetchMember(for id: Int) {
+            loading = true
             MemberModel.shared.fetchMember(for: id) { result in
                 Task { @MainActor in
-                    self.member = result?.value
+                    withAnimation {
+                        self.member = result?.value
+                        self.loading = false
+                    }
                 }
             }
         }
