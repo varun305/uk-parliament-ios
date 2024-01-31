@@ -1,35 +1,39 @@
 import Foundation
 
 class PostHolderMemberModel: Codable, Identifiable {
-    var member: MemberValueModel
-    var startDate: String
+    var member: MemberValueModel?
+    var startDate: String?
     var endDate: String?
     var layingMinisterName: String?
-    var isPaid: Bool
+    var isPaid: Bool?
 
     var id: Int? {
-        member.id
+        member?.id
+    }
+
+    var formattedStartDate: String {
+        startDate?.convertToDate() ?? ""
     }
 }
 
 class Department: Codable, Identifiable {
-    var id: Int
-    var name: String
+    var id: Int?
+    var name: String?
     var url: String?
     var imageUrl: String?
 }
 
 class Post: Codable, Identifiable {
-    var type: Int
-    var name: String
-    var hansardName: String
-    var id: Int
-    var postHolders: [PostHolderMemberModel]
-    var governmentDepartments: [Department]
+    var type: Int?
+    var name: String?
+    var hansardName: String?
+    var id: Int?
+    var postHolders: [PostHolderMemberModel]?
+    var governmentDepartments: [Department]?
 }
 
 class PostResultModel: Codable {
-    var value: Post
+    var value: Post?
 }
 
 class PostModel {

@@ -10,9 +10,9 @@ extension PostsView {
                 if let posts = posts {
                     Task { @MainActor in
                         if side == .government {
-                            self.governmentPosts = posts.map { $0.value }
+                            self.governmentPosts = posts.compactMap { $0.value }
                         } else {
-                            self.oppositionPosts = posts.map { $0.value }
+                            self.oppositionPosts = posts.compactMap { $0.value }
                         }
                     }
                 }

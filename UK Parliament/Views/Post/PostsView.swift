@@ -14,23 +14,19 @@ struct PostsView: View {
             .listRowBackground(Color.clear)
 
             ForEach(side == .government ? viewModel.governmentPosts : viewModel.oppositionPosts) { post in
-                Section(post.hansardName) {
-                    ForEach(post.postHolders) { holder in
-                        if let memberId = holder.member.id, let member = holder.member.value {
+                Section(post.hansardName ?? "") {
+                    ForEach(post.postHolders ?? []) { holder in
+                        if let memberId = holder.member?.id, let member = holder.member?.value {
                             ContextAwareNavigationLink(value: .memberDetailView(memberId: memberId)) {
                                 MemberRow(member: member)
                             }
-                        } else if let member = holder.member.value {
+                        } else if let member = holder.member?.value {
                             MemberRow(member: member)
                         } else {
                             EmptyView()
                         }
                         HStack {
-                            Text("from \(holder.startDate.convertToDate())")
-                            if holder.isPaid {
-                                Spacer()
-                                Text("Paid role")
-                            }
+                            Text("from \(holder.formattedStartDate)")
                         }
                         .font(.footnote)
                     }
