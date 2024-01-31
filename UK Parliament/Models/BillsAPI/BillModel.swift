@@ -146,12 +146,16 @@ class BillPublicationFile: Codable, Identifiable, Hashable {
 
 class BillPublication: Codable, Identifiable, Equatable, Hashable {
     var house: String?
-    var id: Int
-    var title: String
-    var publicationType: BillPublicationType
-    var displayDate: String
-    var links: [BillPublicationLink]
-    var files: [BillPublicationFile]
+    var id: Int?
+    var title: String?
+    var publicationType: BillPublicationType?
+    var displayDate: String?
+    var links: [BillPublicationLink]?
+    var files: [BillPublicationFile]?
+
+    var formattedDate: String {
+        displayDate?.convertToDate() ?? ""
+    }
 
     static func == (lhs: BillPublication, rhs: BillPublication) -> Bool {
         lhs.id == rhs.id

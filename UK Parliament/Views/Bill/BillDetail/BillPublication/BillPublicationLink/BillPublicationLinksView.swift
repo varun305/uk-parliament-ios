@@ -3,10 +3,10 @@ import SwiftUI
 struct BillPublicationLinksView: View {
     var publication: BillPublication
     var links: [BillPublicationLink] {
-        publication.links
+        publication.links ?? []
     }
     var files: [BillPublicationFile] {
-        publication.files
+        publication.files ?? []
     }
 
     var body: some View {
