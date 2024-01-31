@@ -8,17 +8,18 @@ struct ConstituenciesView: View {
     }
 
     var body: some View {
-        List {
-            Section(resultsText) {
-                ForEach(viewModel.consituencies) { constituency in
-                    ContextAwareNavigationLink(value: .constituencyDetailView(constituency: constituency)) {
-                        ConstituencyRow(consituency: constituency)
-                            .onAppear(perform: { onScrollEnd(constituency: constituency )})
-                    }
-                }
+        Group {
+            if viewModel.consituencies.count > 0 {
+                scrollView
+            } else if viewModel.loading {
+                loadingView
+            } else {
+                Text("No data")
+                    .foregroundStyle(.secondary)
+                    .font(.footnote)
+                    .italic()
             }
         }
-        .listStyle(.plain)
         .searchable(text: $viewModel.search, placement: .navigationBarDrawer(displayMode: .always), prompt: "Enter a name or postcode")
         .onSubmit(of: .search) {
             viewModel.nextData(reset: true)
@@ -36,6 +37,35 @@ struct ConstituenciesView: View {
                 viewModel.nextData(reset: true)
             }
         }
+    }
+
+    @ViewBuilder
+    var loadingView: some View {
+        List(0..<10) { _ in
+            NavigationLink {
+                Text("")
+            } label: {
+                MemberRowLoading()
+            }
+            .disabled(true)
+        }
+        .listStyle(.plain)
+        .environment(\.isScrollEnabled, false)
+    }
+
+    @ViewBuilder
+    var scrollView: some View {
+        List {
+            Section(resultsText) {
+                ForEach(viewModel.consituencies) { constituency in
+                    ContextAwareNavigationLink(value: .constituencyDetailView(constituency: constituency)) {
+                        ConstituencyRow(consituency: constituency)
+                            .onAppear(perform: { onScrollEnd(constituency: constituency )})
+                    }
+                }
+            }
+        }
+        .listStyle(.plain)
     }
 
     private func onScrollEnd(constituency: Constituency) {

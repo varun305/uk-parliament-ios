@@ -6,6 +6,7 @@ extension ConstituenciesView {
         @Published var consituencies: [Constituency] = []
         @Published var result: ConstituenciesModel?
         @Published var search = ""
+        @Published var loading = false
 
         var numResults: Int {
             result?.totalResults ?? 0
@@ -22,6 +23,7 @@ extension ConstituenciesView {
                         } else {
                             self.consituencies += consituencies
                         }
+                        self.loading = false
                     }
                 }
             } else {
@@ -30,6 +32,7 @@ extension ConstituenciesView {
         }
 
         func nextData(reset: Bool = false) {
+            loading = true
             ConstituencyModel.shared.nextData(search: search, reset: reset) { result in
                 self.handleData(result: result, reset: reset)
             }

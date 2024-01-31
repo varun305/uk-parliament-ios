@@ -17,8 +17,13 @@ struct MemberDetailView: View {
         Group {
             if viewModel.member != nil {
                 scrollView
-            } else {
+            } else if viewModel.loading {
                 loadingView
+            } else {
+                Text("No data")
+                    .foregroundStyle(.secondary)
+                    .font(.footnote)
+                    .italic()
             }
         }
         .navigationTitle(viewModel.member?.nameDisplayAs ?? "")
