@@ -5,18 +5,15 @@ struct CommonsVotesView: View {
 
     var body: some View {
         Group {
-            if viewModel.votes.count > 0 {
-                scrollView
-            } else if viewModel.loading {
+            if viewModel.loading && viewModel.votes.isEmpty {
                 loadingView
+            } else if !viewModel.votes.isEmpty {
+                scrollView
             } else {
                 NoDataView()
             }
         }
         .searchable(text: $viewModel.search, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for a commons vote")
-        .onSubmit(of: .search) {
-            viewModel.nextData(reset: true)
-        }
         .onChange(of: viewModel.search) { _, new in
             if new.isEmpty {
                 viewModel.search = ""

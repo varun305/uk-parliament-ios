@@ -87,6 +87,12 @@ class VoteModel {
     public static var shared = VoteModel()
     private init() {}
 
+    public func canGetNextData(search: String = "", reset: Bool = false) -> Bool {
+        if reset {
+            return true
+        }
+        return !commonsReturn[search, default: false]
+    }
 
     public func nextCommonsData(search: String = "", reset: Bool = false, _ completion: @escaping ([CommonsVote]?) -> Void) {
         if reset {
@@ -96,6 +102,7 @@ class VoteModel {
 
         let _skip = commonsSkip[search, default: 0]
         if commonsReturn[search, default: false] {
+            completion(nil)
             return
         }
 
