@@ -1,4 +1,5 @@
 import SwiftUI
+import SafariServices
 
 struct BillPublicationLinksView: View {
     var publication: BillPublication
@@ -9,22 +10,25 @@ struct BillPublicationLinksView: View {
         publication.files ?? []
     }
 
+    @State var linkItem: BillPublicationLink? = nil
+
     var body: some View {
         List {
             if links.count > 0 {
                 Section("Links") {
                     ForEach(links) { link in
-                        VStack(alignment: .leading) {
-                            Text(link.title ?? "")
-                                .bold()
-                            Text(link.contentType ?? "")
-                                .italic()
-                            if let url = link.url {
-                                Link("Go to content", destination: URL(string: url)!)
-                                    .foregroundColor(.accentColor)
+                        Button {
+                            linkItem = link
+                        } label: {
+                            VStack(alignment: .leading) {
+                                Text(link.title ?? "")
+                                    .bold()
+                                Text(link.contentType ?? "")
+                                    .italic()
                             }
+                            .font(.footnote)
                         }
-                        .font(.footnote)
+                        .foregroundStyle(.primary)
                     }
                 }
             }
@@ -39,6 +43,11 @@ struct BillPublicationLinksView: View {
             }
         }
         .listStyle(.grouped)
+        .fullScreenCover(item: $linkItem) { link in
+            NavigationStack {
+                WebView(url: URL(string: link.url ?? "")!)
+            }
+        }
     }
 
     private func getNavigationTypeForFile(file: BillPublicationFile) -> NavigationItem {
@@ -77,4 +86,14 @@ struct BillPublicationLinksView: View {
             return byteCountFormatter.string(fromByteCount: Int64(bytes))
         }
     }
+}
+
+struct WebView: UIViewControllerRepresentable {
+    let url: URL
+
+    func makeUIViewController(context: Context) -> SFSafariViewController {
+        return SFSafariViewController(url: url)
+    }
+
+    func updateUIViewController(_ uiViewController: SFSafariViewController, context: Context) {}
 }
