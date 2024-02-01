@@ -3,23 +3,20 @@ import SwiftUI
 struct MembersView: View {
     @StateObject var viewModel = MembersViewModel()
     private var resultsText: String {
-        "\(viewModel.numResults) results" + (viewModel.search != "" ? " for '\(viewModel.search)'" : "")
+        "\(viewModel.numResults) results"
     }
 
     var body: some View {
         Group {
-            if viewModel.members.count > 0 {
-                scrollView
-            } else if viewModel.loading {
+            if viewModel.loading && viewModel.members.isEmpty {
                 loadingView
+            } else if !viewModel.members.isEmpty {
+                scrollView
             } else {
                 NoDataView()
             }
         }
         .searchable(text: $viewModel.search, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search " + (viewModel.house == .commons ? "MPs" : "lords"))
-        .onSubmit(of: .search) {
-            viewModel.nextData(reset: true)
-        }
         .onChange(of: viewModel.search) { _, new in
             if new.isEmpty {
                 viewModel.search = ""

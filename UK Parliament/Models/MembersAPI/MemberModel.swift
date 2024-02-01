@@ -125,7 +125,14 @@ class MemberModel {
         "https://members-api.parliament.uk/api/Members/\(id)/Contact"
     }
 
-    public func nextData(house: House, search: String? = nil, reset: Bool = false, _ completion: @escaping (MembersModel?) -> Void) {
+    public func canGetNextData(search: String = "", reset: Bool = false) -> Bool {
+        if reset {
+            return true
+        }
+        return !(skip[search, default: 0] > totalResults)
+    }
+
+    public func nextData(house: House, search: String = "", reset: Bool = false, _ completion: @escaping (MembersModel?) -> Void) {
         if reset {
             skip[search] = 0
         }
@@ -135,8 +142,7 @@ class MemberModel {
             return
         }
 
-        let url = search == nil ? constructMembersUrl(house: house, skip: _skip) : constructSearchMembersUrl(search: search!, house: house, skip: _skip)
-
+        let url = search == "" ? constructMembersUrl(house: house, skip: _skip) : constructSearchMembersUrl(search: search, house: house, skip: _skip)
         FetchModel.base.fetchData(MembersModel.self, from: url) { result in
             if let result = result {
                 self.totalResults = result.totalResults ?? 0
