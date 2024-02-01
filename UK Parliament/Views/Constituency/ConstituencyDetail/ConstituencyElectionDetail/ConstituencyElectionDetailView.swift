@@ -1,5 +1,6 @@
 import SwiftUI
 import Charts
+import SkeletonUI
 
 struct ConstituencyElectionDetailView: View {
     @StateObject var viewModel = ConstituencyElectionDetailViewModel()
@@ -8,51 +9,111 @@ struct ConstituencyElectionDetailView: View {
 
     var body: some View {
         Group {
-            if let result = viewModel.result {
-                List {
-                    Section("\(result.constituencyName ?? ""), \(result.formattedDate)") {
-                        HStack {
-                            PartyTaggedText(text: result.result?.uppercased() ?? "", party: result.winningParty)
-
-                            Spacer()
-                            Text(result.formattedDate)
-                                .bold()
-                        }
-                        HStack {
-                            Text("Majority")
-                            Spacer()
-                            Text(String(result.majority ?? 0))
-                                .bold()
-                        }
-                        HStack {
-                            Text("Electorate")
-                            Spacer()
-                            Text(String(result.electorate ?? 0))
-                                .bold()
-                        }
-                    }
-
-                    Section("Vote share") {
-                        pieView
-                            .frame(height: 350)
-                            .padding(3)
-                    }
-
-                    Section("All votes") {
-                        barView
-                            .frame(height: 300 * CGFloat((result.candidates ?? []).count) / 6)
-                            .padding(3)
-                    }
-                }
+            if viewModel.result != nil {
+                scrollView
+            } else if viewModel.loading {
+                loadingView
             } else {
-                ProgressView()
+                Text("No data")
+                    .foregroundStyle(.secondary)
+                    .font(.footnote)
+                    .italic()
             }
         }
         .navigationTitle("Election results")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            if let constituencyId = constituency.id {
-                viewModel.fetchData(in: constituencyId, at: electionResult)
+            if let constituencyId = constituency.id, let electionId = electionResult.id {
+                viewModel.fetchData(in: constituencyId, at: electionId)
+            }
+        }
+    }
+
+    @ViewBuilder
+    var loadingView: some View {
+        List {
+            Section {
+                Text("")
+                    .skeleton(with: true)
+                    .frame(height: 10)
+                Text("")
+                    .skeleton(with: true)
+                    .frame(height: 10)
+                Text("")
+                    .skeleton(with: true)
+                    .frame(height: 10)
+            }
+
+            Section {
+                ZStack {
+                    Circle()
+                        .stroke(.white, lineWidth: 3)
+                        .skeleton(with: true)
+                    Circle()
+                        .fill(.white)
+                        .padding(5)
+                        .skeleton(with: true)
+                    Text("2")
+                        .skeleton(with: true)
+                }
+                .frame(width: 340, height: 340)
+            }
+
+            Section {
+                Text("")
+                    .skeleton(with: true)
+                    .frame(height: 10)
+                Text("")
+                    .skeleton(with: true)
+                    .frame(height: 10)
+                Text("")
+                    .skeleton(with: true)
+                    .frame(height: 10)
+                Text("")
+                    .skeleton(with: true)
+                    .frame(height: 10)
+            }
+        }
+        .environment(\.isScrollEnabled, false)
+    }
+
+    @ViewBuilder
+    var scrollView: some View {
+        if let result = viewModel.result {
+            List {
+                Section("\(result.constituencyName ?? ""), \(result.formattedDate)") {
+                    HStack {
+                        PartyTaggedText(text: result.result?.uppercased() ?? "", party: result.winningParty)
+
+                        Spacer()
+                        Text(result.formattedDate)
+                            .bold()
+                    }
+                    HStack {
+                        Text("Majority")
+                        Spacer()
+                        Text(String(result.majority ?? 0))
+                            .bold()
+                    }
+                    HStack {
+                        Text("Electorate")
+                        Spacer()
+                        Text(String(result.electorate ?? 0))
+                            .bold()
+                    }
+                }
+
+                Section("Vote share") {
+                    pieView
+                        .frame(height: 350)
+                        .padding(3)
+                }
+
+                Section("All votes") {
+                    barView
+                        .frame(height: 300 * CGFloat((result.candidates ?? []).count) / 6)
+                        .padding(3)
+                }
             }
         }
     }

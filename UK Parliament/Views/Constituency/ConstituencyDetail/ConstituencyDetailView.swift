@@ -1,5 +1,6 @@
 import SwiftUI
 import MapKit
+import SkeletonUI
 
 private struct MapConfiguration: Identifiable {
     var constituency: Constituency
@@ -20,26 +21,23 @@ struct ConstituencyDetailView: View {
     var body: some View {
         Group {
             if let constituency = viewModel.constituency {
-                List {
-                    Section("Current MP") {
-                        membershipLink
-                    }
-
-                    Section("Past election results") {
-                        resultsView
-                    }
-                }
-                .navigationTitle(constituency.name ?? "")
-                .navigationBarTitleDisplayMode(.inline)
+                scrollView
+            } else if viewModel.loading {
+                loadingView
             } else {
-                ProgressView()
+                Text("No data")
+                    .foregroundStyle(.secondary)
+                    .font(.footnote)
+                    .italic()
             }
         }
+        .navigationTitle(viewModel.constituency?.name ?? "")
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             if let constituencyId = constituency.id {
                 viewModel.fetchConstituency(for: constituencyId)
                 viewModel.fetchGeometry(for: constituencyId)
-                viewModel.fetchData(for: constituencyId)
+                viewModel.fetchElectionResults(for: constituencyId)
             }
         }
         .toolbar {
@@ -70,6 +68,37 @@ struct ConstituencyDetailView: View {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    @ViewBuilder
+    var loadingView: some View {
+        List {
+            ForEach(0..<5) { _ in
+                Section("") {
+                    Text("")
+                        .skeleton(with: true)
+                        .frame(height: 10)
+                    Text("")
+                        .skeleton(with: true)
+                        .frame(height: 10)
+                }
+            }
+        }
+        .listStyle(.plain)
+        .environment(\.isScrollEnabled, false)
+    }
+
+    @ViewBuilder
+    var scrollView: some View {
+        List {
+            Section("Current MP") {
+                membershipLink
+            }
+
+            Section("Past election results") {
+                resultsView
             }
         }
     }
