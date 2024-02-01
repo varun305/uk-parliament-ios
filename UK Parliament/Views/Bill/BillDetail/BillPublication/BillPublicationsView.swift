@@ -35,13 +35,10 @@ struct BillPublicationsView: View {
     var loadingView: some View {
         List {
             Section("") {
-                ForEach(0..<15) { _ in
-                    NavigationLink {
-                        Text("")
-                    } label: {
+                ForEach(0..<30) { _ in
+                    DummyNavigationLink {
                         BillPublicationRowLoading()
                     }
-                    .disabled(true)
                 }
             }
         }

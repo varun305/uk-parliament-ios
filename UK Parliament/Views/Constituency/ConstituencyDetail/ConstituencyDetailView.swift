@@ -75,18 +75,21 @@ struct ConstituencyDetailView: View {
     @ViewBuilder
     var loadingView: some View {
         List {
-            ForEach(0..<5) { _ in
-                Section("") {
-                    Text("")
-                        .skeleton(with: true)
-                        .frame(height: 10)
-                    Text("")
-                        .skeleton(with: true)
-                        .frame(height: 10)
+            Section("") {
+                Text("")
+                    .skeleton(with: true)
+                    .frame(height: 10)
+            }
+            Section("") {
+                ForEach(0..<4) { _ in
+                    DummyNavigationLink {
+                        Text("")
+                            .skeleton(with: true)
+                            .frame(height: 10)
+                    }
                 }
             }
         }
-        .listStyle(.plain)
         .environment(\.isScrollEnabled, false)
     }
 

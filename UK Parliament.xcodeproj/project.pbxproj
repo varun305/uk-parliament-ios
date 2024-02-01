@@ -16,6 +16,7 @@
 		EE020BC42B618A94004C893B /* SkeletonUI in Frameworks */ = {isa = PBXBuildFile; productRef = EE020BC32B618A94004C893B /* SkeletonUI */; };
 		EE29CCC42B6059E10027CBA4 /* ListExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE29CCC32B6059E10027CBA4 /* ListExtensions.swift */; };
 		EE2F06D02B3C50C600462D3C /* AcknowledgementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2F06CF2B3C50C600462D3C /* AcknowledgementsView.swift */; };
+		EE3194D52B6C181200A5F754 /* DummyNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3194D42B6C181200A5F754 /* DummyNavigationLink.swift */; };
 		EE50F9B92B358F8B00163E52 /* MembersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE50F9B82B358F8B00163E52 /* MembersView.swift */; };
 		EE50F9BB2B358FA200163E52 /* MembersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE50F9BA2B358FA200163E52 /* MembersViewModel.swift */; };
 		EE50F9BD2B3592D200163E52 /* MemberRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE50F9BC2B3592D200163E52 /* MemberRow.swift */; };
@@ -87,6 +88,7 @@
 		EE0186282B385A4E004F7F77 /* PartyTaggedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyTaggedText.swift; sourceTree = "<group>"; };
 		EE29CCC32B6059E10027CBA4 /* ListExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListExtensions.swift; sourceTree = "<group>"; };
 		EE2F06CF2B3C50C600462D3C /* AcknowledgementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsView.swift; sourceTree = "<group>"; };
+		EE3194D42B6C181200A5F754 /* DummyNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyNavigationLink.swift; sourceTree = "<group>"; };
 		EE50F9B82B358F8B00163E52 /* MembersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersView.swift; sourceTree = "<group>"; };
 		EE50F9BA2B358FA200163E52 /* MembersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersViewModel.swift; sourceTree = "<group>"; };
 		EE50F9BC2B3592D200163E52 /* MemberRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRow.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 				EEEC3B0C2B388FE100A8626D /* LordsBadge.swift */,
 				EEEC3B152B389F9D00A8626D /* BillStageBadge.swift */,
 				EEEC3B322B398ADA00A8626D /* ContextAwareNavigationLink.swift */,
+				EE3194D42B6C181200A5F754 /* DummyNavigationLink.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -525,6 +528,7 @@
 			files = (
 				EEEC3B122B38971600A8626D /* BillDetailViewModel.swift in Sources */,
 				EE97BF922B34C32A00FA950C /* ConstituenciesViewModel.swift in Sources */,
+				EE3194D52B6C181200A5F754 /* DummyNavigationLink.swift in Sources */,
 				EE50F9BB2B358FA200163E52 /* MembersViewModel.swift in Sources */,
 				EEEC3B1E2B38ADC500A8626D /* BillStagesView.swift in Sources */,
 				EEEC3B022B38862400A8626D /* BillModel.swift in Sources */,

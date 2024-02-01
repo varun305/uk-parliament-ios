@@ -44,12 +44,9 @@ struct ConstituenciesView: View {
         List {
             Section("") {
                 ForEach(0..<10) { _ in
-                    NavigationLink {
-                        Text("")
-                    } label: {
+                    DummyNavigationLink {
                         MemberRowLoading()
                     }
-                    .disabled(true)
                 }
             }
         }

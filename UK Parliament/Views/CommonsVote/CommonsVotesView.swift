@@ -38,13 +38,10 @@ struct CommonsVotesView: View {
 
     @ViewBuilder
     var loadingView: some View {
-        List(0..<10) { _ in
-            NavigationLink {
-                Text("")
-            } label: {
+        List(0..<20) { _ in
+            DummyNavigationLink {
                 CommonsVoteRowLoading()
             }
-            .disabled(true)
         }
         .listStyle(.grouped)
         .environment(\.isScrollEnabled, false)
