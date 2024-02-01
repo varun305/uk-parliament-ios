@@ -14,7 +14,6 @@ extension CommonsVotesView {
         }
 
         private var cancellables = Set<AnyCancellable>()
-
         private func addSearchSubscriber() {
             $search
                 .debounce(for: 0.3, scheduler: DispatchQueue.main)
@@ -41,11 +40,9 @@ extension CommonsVotesView {
                     withAnimation {
                         if reset {
                             self.votes = result ?? []
+                            self.loading = false
                         } else {
                             self.votes += result ?? []
-                        }
-                        if reset {
-                            self.loading = false
                         }
                     }
                 }

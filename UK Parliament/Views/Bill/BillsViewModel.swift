@@ -1,40 +1,56 @@
 import Foundation
 import SwiftUI
+import Combine
 
-extension BillsView {
-    @MainActor class BillsViewModel: ObservableObject {
-        @Published var loading = false
-        @Published var result: BillItemModel?
-        @Published var bills: [Bill] = []
-        @Published var search = ""
+@MainActor class BillsViewModel: ObservableObject {
+    var member: Member? = nil
+    @Published var loading = false
+    @Published var result: BillItemModel?
+    @Published var bills: [Bill] = []
+    @Published var search = ""
 
-        var numResults: Int {
-            result?.totalResults ?? 0
+    init(member: Member? = nil) {
+        self.member = member
+        addSearchSubscriber()
+    }
+
+    var numResults: Int {
+        result?.totalResults ?? 0
+    }
+
+    private var cancellables = Set<AnyCancellable>()
+    private func addSearchSubscriber() {
+        $search
+            .debounce(for: 0.3, scheduler: DispatchQueue.main)
+            .sink { [weak self] searchText in
+                self?.nextData(searchText: searchText, reset: true)
+            }
+            .store(in: &cancellables)
+    }
+
+    public func nextData(searchText: String? = nil, reset: Bool = false) {
+        let search = searchText ?? self.search
+        if !BillModel.shared.canGetNextData(search: search, reset: reset) {
+            return
         }
 
-        private func handleData(result: BillItemModel?, reset: Bool = false) {
-            if let result = result {
-                let bills = result.items
-                Task { @MainActor in
-                    withAnimation {
-                        self.result = result
-                        if reset {
-                            self.bills = bills ?? []
-                        } else {
-                            self.bills += bills ?? []
-                        }
-                        loading = false
-                    }
-                }
-            } else {
-                // error
+        if reset {
+            withAnimation {
+                loading = true
+                bills = []
             }
         }
-
-        public func nextData(memberId: Int? = nil, reset: Bool = false) {
-            loading = true
-            BillModel.shared.nextData(search: search, memberId: memberId, reset: reset) { result in
-                self.handleData(result: result, reset: reset)
+        BillModel.shared.nextData(search: search, memberId: member?.id, reset: reset) { result in
+            Task { @MainActor in
+                withAnimation {
+                    self.result = result
+                    if reset {
+                        self.bills = result?.items ?? []
+                        self.loading = false
+                    } else {
+                        self.bills += result?.items ?? []
+                    }
+                }
             }
         }
     }

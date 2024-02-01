@@ -252,6 +252,13 @@ class BillModel {
         "https://bills-api.parliament.uk/api/v1/Bills/\(id)"
     }
 
+    public func canGetNextData(search: String = "", reset: Bool = false) -> Bool {
+        if reset {
+            return true
+        }
+        return !(skip[search, default: 0] > totalResults)
+    }
+
     public func nextData(search: String = "", memberId: Int? = nil, reset: Bool = false, _ completion: @escaping (BillItemModel?) -> Void) {
         if reset {
             skip[search] = 0

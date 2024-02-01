@@ -2,14 +2,13 @@ import SwiftUI
 
 struct BillsView: View {
     @StateObject var viewModel = BillsViewModel()
-    var member: Member?
 
     var resultsText: String {
-        "\(viewModel.numResults) results" + (viewModel.search != "" ? " for '\(viewModel.search)'" : "")
+        "\(viewModel.numResults) results"
     }
 
     var navTitle: String {
-        if let nameDisplayAs = member?.nameDisplayAs {
+        if let nameDisplayAs = viewModel.member?.nameDisplayAs {
             "Bills, \(nameDisplayAs)"
         } else {
             "Bills"
@@ -18,29 +17,26 @@ struct BillsView: View {
 
     var body: some View {
         Group {
-            if viewModel.bills.count > 0 {
-                scrollView
-            } else if viewModel.loading {
+            if viewModel.loading && viewModel.bills.isEmpty {
                 loadingView
+            } else if !viewModel.bills.isEmpty {
+                scrollView
             } else {
                 NoDataView()
             }
         }
         .searchable(text: $viewModel.search, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search bills")
-        .onSubmit(of: .search) {
-            viewModel.nextData(memberId: member?.id, reset: true)
-        }
         .onChange(of: viewModel.search) { _, new in
             if new.isEmpty {
                 viewModel.search = ""
-                viewModel.nextData(memberId: member?.id, reset: true)
+                viewModel.nextData(reset: true)
             }
         }
         .navigationTitle(navTitle)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             if viewModel.bills.isEmpty {
-                viewModel.nextData(memberId: member?.id, reset: true)
+                viewModel.nextData(reset: true)
             }
         }
     }
@@ -77,7 +73,7 @@ struct BillsView: View {
 
     private func onScrollEnd(bill: Bill) {
         if bill == viewModel.bills.last {
-            viewModel.nextData(memberId: member?.id)
+            viewModel.nextData()
         }
     }
 }

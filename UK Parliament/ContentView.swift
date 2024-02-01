@@ -68,7 +68,7 @@ struct ContentView: View {
                 case .postsView:
                     PostsView()
                 case .billsView(let member):
-                    BillsView(member: member)
+                    BillsView(viewModel: BillsViewModel(member: member))
                 case .billDetailView(let bill):
                     BillDetailView(bill: bill)
                 case .billStagesView(let bill):
