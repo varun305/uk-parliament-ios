@@ -87,5 +87,6 @@ struct ContentView: View {
                 }
             }
         }
+        .textSelection(.enabled)
     }
 }

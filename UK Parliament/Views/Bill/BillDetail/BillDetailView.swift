@@ -7,7 +7,7 @@ struct BillDetailView: View {
 
     var body: some View {
         Group {
-            if let bill = viewModel.bill {
+            if viewModel.bill != nil {
                 scrollView
             } else if viewModel.loading {
                 loadingView
