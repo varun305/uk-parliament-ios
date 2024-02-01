@@ -20,7 +20,7 @@ struct ConstituencyDetailView: View {
 
     var body: some View {
         Group {
-            if let constituency = viewModel.constituency {
+            if viewModel.constituency != nil {
                 scrollView
             } else if viewModel.loading {
                 loadingView

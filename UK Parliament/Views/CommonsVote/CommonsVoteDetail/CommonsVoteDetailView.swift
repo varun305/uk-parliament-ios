@@ -6,7 +6,7 @@ struct CommonsVoteDetailView: View {
 
     var body: some View {
         Group {
-            if let vote = viewModel.vote {
+            if viewModel.vote != nil {
                 scrollView
             } else if viewModel.loading {
                 loadingView
