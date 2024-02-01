@@ -81,6 +81,7 @@ class CommonsVote: Codable, Identifiable, Hashable {
 
 class VoteModel {
     private var commonsSkip: [String?: Int] = [nil: 0]
+    private var commonsReturn = [String?: Bool]()
     private let take = 20
 
     public static var shared = VoteModel()
@@ -90,13 +91,20 @@ class VoteModel {
     public func nextCommonsData(search: String = "", reset: Bool = false, _ completion: @escaping ([CommonsVote]?) -> Void) {
         if reset {
             commonsSkip[search] = 0
+            commonsReturn[search] = false
         }
 
         let _skip = commonsSkip[search, default: 0]
+        if commonsReturn[search, default: false] {
+            return
+        }
 
         let url = search == "" ? constructCommonsVoteUrl(skip: _skip) : constructSearchCommonsVoteUrl(search: search, skip: _skip)
         FetchModel.base.fetchData([CommonsVote].self, from: url) { result in
             if let result = result {
+                if result.count == 0 {
+                    self.commonsReturn[search] = true
+                }
                 self.commonsSkip = [search: self.commonsSkip[search, default: 0] + self.take]
                 completion(result)
             } else {
