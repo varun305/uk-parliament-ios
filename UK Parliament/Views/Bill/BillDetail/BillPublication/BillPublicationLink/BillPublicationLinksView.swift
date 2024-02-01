@@ -10,7 +10,7 @@ struct BillPublicationLinksView: View {
         publication.files ?? []
     }
 
-    @State var linkItem: BillPublicationLink? = nil
+    @State var linkItem: String? = nil
 
     var body: some View {
         List {
@@ -18,7 +18,7 @@ struct BillPublicationLinksView: View {
                 Section("Links") {
                     ForEach(links) { link in
                         Button {
-                            linkItem = link
+                            linkItem = link.url
                         } label: {
                             VStack(alignment: .leading) {
                                 Text(link.title ?? "")
@@ -35,56 +35,33 @@ struct BillPublicationLinksView: View {
             if files.count > 0 {
                 Section("Files") {
                     ForEach(files) { file in
-                        ContextAwareNavigationLink(value: getNavigationTypeForFile(file: file)) {
-                            FileTile(file: file)
+                        Button {
+                            if let publicationId = publication.id, let fileId = file.id {
+                                linkItem = constructFetchFileUrl(publicationId: publicationId, fileId: fileId)
+                            }
+                        } label: {
+                            VStack(alignment: .leading) {
+                                Text(file.filename ?? "")
+                                    .bold()
+                                Text(file.contentType ?? "")
+                                    .italic()
+                            }
+                            .font(.footnote)
                         }
+                        .foregroundStyle(.primary)
                     }
                 }
             }
         }
         .listStyle(.grouped)
         .fullScreenCover(item: $linkItem) { link in
-            NavigationStack {
-                WebView(url: URL(string: link.url ?? "")!)
-            }
+            WebView(url: URL(string: link)!)
+                .ignoresSafeArea()
         }
     }
 
-    private func getNavigationTypeForFile(file: BillPublicationFile) -> NavigationItem {
-        switch file.contentType {
-        case "application/pdf":
-            return .billPublicationPDFView(publication: publication, file: file)
-        case "text/html":
-            return .billPublicationHTMLView(publication: publication, file: file)
-        default:
-            return ._404
-        }
-    }
-
-    private struct FileTile: View {
-        var file: BillPublicationFile
-        var body: some View {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(file.filename ?? "")
-                        .bold()
-                    Text(file.contentType ?? "")
-                        .italic()
-                }
-                Spacer()
-                if let contentLength = file.contentLength {
-                    Text(fileSizeString(fromBytes: contentLength))
-                }
-            }
-            .font(.footnote)
-        }
-
-        private func fileSizeString(fromBytes bytes: Int) -> String {
-            let byteCountFormatter = ByteCountFormatter()
-            byteCountFormatter.allowedUnits = [.useKB, .useMB, .useGB]
-            byteCountFormatter.countStyle = .file
-            return byteCountFormatter.string(fromByteCount: Int64(bytes))
-        }
+    private func constructFetchFileUrl(publicationId: Int, fileId: Int) -> String {
+        "https://bills-api.parliament.uk/api/v1/Publications/\(publicationId)/Documents/\(fileId)/Download"
     }
 }
 
@@ -96,4 +73,10 @@ struct WebView: UIViewControllerRepresentable {
     }
 
     func updateUIViewController(_ uiViewController: SFSafariViewController, context: Context) {}
+}
+
+extension String: Identifiable {
+    public var id: String {
+        return self
+    }
 }

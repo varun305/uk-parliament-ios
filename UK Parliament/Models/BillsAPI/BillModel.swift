@@ -252,17 +252,6 @@ class BillModel {
         "https://bills-api.parliament.uk/api/v1/Bills/\(id)"
     }
 
-    public func fetchFile(publicationId: Int, fileId: Int, _ completion: @escaping (Data?) -> Void) {
-        let url = constructFetchFileUrl(publicationId: publicationId, fileId: fileId)
-        FetchModel.base.fetchData(from: url) { data in
-            completion(data)
-        }
-    }
-
-    private func constructFetchFileUrl(publicationId: Int, fileId: Int) -> String {
-        "https://bills-api.parliament.uk/api/v1/Publications/\(publicationId)/Documents/\(fileId)/Download"
-    }
-
     public func nextData(search: String = "", memberId: Int? = nil, reset: Bool = false, _ completion: @escaping (BillItemModel?) -> Void) {
         if reset {
             skip[search] = 0
