@@ -1,4 +1,5 @@
 import SwiftUI
+import SkeletonUI
 
 struct RegisteredInterestsView: View {
     @StateObject var viewModel = RegisteredInterestsViewModel()
@@ -7,17 +8,9 @@ struct RegisteredInterestsView: View {
     var body: some View {
         Group {
             if !viewModel.registeredInterests.isEmpty {
-                List {
-                    ForEach(viewModel.registeredInterests.sorted { $0.sortOrder ?? 0 < $1.sortOrder ?? 0 }) { registeredInterest in
-                        Section(registeredInterest.name ?? "") {
-                            ForEach(registeredInterest.interests ?? []) { interest in
-                                InterestRow(interest: interest)
-                            }
-                        }
-                    }
-                }
+                scrollView
             } else if viewModel.loading {
-                ProgressView()
+                loadingView
             } else {
                 Text("No data")
                     .foregroundStyle(.secondary)
@@ -34,36 +27,44 @@ struct RegisteredInterestsView: View {
         }
     }
 
+    @ViewBuilder
+    var loadingView: some View {
+        List {
+            ForEach(0..<5) { _ in
+                Section("") {
+                    Text("")
+                        .skeleton(with: true)
+                        .frame(height: 10)
+                    Text("")
+                        .skeleton(with: true)
+                        .frame(height: 10)
+                }
+            }
+        }
+        .listStyle(.plain)
+        .environment(\.isScrollEnabled, false)
+    }
+
+    @ViewBuilder
+    var scrollView: some View {
+        List {
+            ForEach(viewModel.registeredInterests.sorted { $0.sortOrder ?? 0 < $1.sortOrder ?? 0 }) { registeredInterest in
+                Section(registeredInterest.name ?? "") {
+                    ForEach(registeredInterest.interests ?? []) { interest in
+                        InterestRow(interest: interest)
+                    }
+                }
+            }
+        }
+        .listStyle(.grouped)
+    }
+
     struct InterestRow: View {
         var interest: Interest
 
         var body: some View {
             VStack(alignment: .leading) {
                 Text(interest.interest ?? "")
-                VStack {
-                    if let createdWhen = interest.createdWhen, createdWhen != "" {
-                        HStack {
-                            Text("Created")
-                            Spacer()
-                            Text(createdWhen.convertToDate())
-                        }
-                    }
-                    if let lastAmendedWhen = interest.lastAmendedWhen, lastAmendedWhen != "" {
-                        HStack {
-                            Text("Amended")
-                            Spacer()
-                            Text(lastAmendedWhen.convertToDate())
-                        }
-                    }
-                    if let deletedWhen = interest.deletedWhen, deletedWhen != "" {
-                        HStack {
-                            Text("Created")
-                            Spacer()
-                            Text(deletedWhen.convertToDate())
-                        }
-                    }
-                }
-                .italic()
             }
             .font(.footnote)
         }
