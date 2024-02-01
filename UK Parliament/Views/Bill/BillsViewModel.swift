@@ -4,7 +4,7 @@ import Combine
 
 @MainActor class BillsViewModel: ObservableObject {
     var member: Member? = nil
-    @Published var loading = false
+    @Published var loading = true
     @Published var result: BillItemModel?
     @Published var bills: [Bill] = []
     @Published var search = ""

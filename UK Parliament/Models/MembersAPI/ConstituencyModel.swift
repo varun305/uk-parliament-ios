@@ -108,6 +108,13 @@ class ConstituencyModel {
         "https://members-api.parliament.uk/api/Location/Constituency/\(id)"
     }
 
+    public func canGetNextData(search: String = "", reset: Bool = false) -> Bool {
+        if reset {
+            return true
+        }
+        return !(skip[search, default: 0] > totalResults)
+    }
+
     public func nextData(search: String = "", reset: Bool = false, _ completion: @escaping (ConstituenciesModel?) -> Void) {
         if reset {
             skip[search] = 0

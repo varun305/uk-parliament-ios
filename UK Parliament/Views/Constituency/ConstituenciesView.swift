@@ -9,18 +9,15 @@ struct ConstituenciesView: View {
 
     var body: some View {
         Group {
-            if viewModel.consituencies.count > 0 {
-                scrollView
-            } else if viewModel.loading {
+            if viewModel.loading && viewModel.consituencies.isEmpty {
                 loadingView
+            } else if !viewModel.consituencies.isEmpty {
+                scrollView
             } else {
                 NoDataView()
             }
         }
         .searchable(text: $viewModel.search, placement: .navigationBarDrawer(displayMode: .always), prompt: "Enter a name or postcode")
-        .onSubmit(of: .search) {
-            viewModel.nextData(reset: true)
-        }
         .onChange(of: viewModel.search) { _, new in
             if new.isEmpty {
                 viewModel.search = ""

@@ -5,7 +5,7 @@ import Combine
 
 extension CommonsVotesView {
     @MainActor class CommonsVotesViewModel: ObservableObject {
-        @Published var loading = false
+        @Published var loading = true
         @Published var votes: [CommonsVote] = []
         @Published var search = ""
 

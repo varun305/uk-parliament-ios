@@ -11,7 +11,7 @@ class MembersViewModel: ObservableObject {
         }
     }
     @Published var search = ""
-    @Published var loading = false
+    @Published var loading = true
 
     init() {
         addSearchSubscriber()
