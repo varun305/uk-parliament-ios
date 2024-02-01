@@ -12,10 +12,7 @@ struct BillDetailView: View {
             } else if viewModel.loading {
                 loadingView
             } else {
-                Text("No data")
-                    .foregroundStyle(.secondary)
-                    .font(.footnote)
-                    .italic()
+                NoDataView()
             }
         }
         .navigationTitle(bill.shortTitle ?? "")

@@ -20,10 +20,7 @@ struct MemberDetailView: View {
             } else if viewModel.loading {
                 loadingView
             } else {
-                Text("No data")
-                    .foregroundStyle(.secondary)
-                    .font(.footnote)
-                    .italic()
+                NoDataView()
             }
         }
         .navigationTitle(viewModel.member?.nameDisplayAs ?? "")

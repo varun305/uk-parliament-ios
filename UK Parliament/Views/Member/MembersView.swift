@@ -13,10 +13,7 @@ struct MembersView: View {
             } else if viewModel.loading {
                 loadingView
             } else {
-                Text("No data")
-                    .foregroundStyle(.secondary)
-                    .font(.footnote)
-                    .italic()
+                NoDataView()
             }
         }
         .searchable(text: $viewModel.search, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search " + (viewModel.house == .commons ? "MPs" : "lords"))

@@ -11,6 +11,7 @@ struct ContentView: View {
                     ContextAwareNavigationLink(value: .commonsVotesView) {
                         Label("Commons votes", systemImage: "checkmark.square")
                     }
+
                     ContextAwareNavigationLink(value: .billsView(member: nil)) {
                         Label("Bills", systemImage: "square.on.square")
                     }

@@ -17,6 +17,7 @@
 		EE29CCC42B6059E10027CBA4 /* ListExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE29CCC32B6059E10027CBA4 /* ListExtensions.swift */; };
 		EE2F06D02B3C50C600462D3C /* AcknowledgementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2F06CF2B3C50C600462D3C /* AcknowledgementsView.swift */; };
 		EE3194D52B6C181200A5F754 /* DummyNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3194D42B6C181200A5F754 /* DummyNavigationLink.swift */; };
+		EE3194D72B6C229200A5F754 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3194D62B6C229200A5F754 /* NoDataView.swift */; };
 		EE50F9B92B358F8B00163E52 /* MembersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE50F9B82B358F8B00163E52 /* MembersView.swift */; };
 		EE50F9BB2B358FA200163E52 /* MembersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE50F9BA2B358FA200163E52 /* MembersViewModel.swift */; };
 		EE50F9BD2B3592D200163E52 /* MemberRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE50F9BC2B3592D200163E52 /* MemberRow.swift */; };
@@ -89,6 +90,7 @@
 		EE29CCC32B6059E10027CBA4 /* ListExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListExtensions.swift; sourceTree = "<group>"; };
 		EE2F06CF2B3C50C600462D3C /* AcknowledgementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsView.swift; sourceTree = "<group>"; };
 		EE3194D42B6C181200A5F754 /* DummyNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyNavigationLink.swift; sourceTree = "<group>"; };
+		EE3194D62B6C229200A5F754 /* NoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
 		EE50F9B82B358F8B00163E52 /* MembersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersView.swift; sourceTree = "<group>"; };
 		EE50F9BA2B358FA200163E52 /* MembersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersViewModel.swift; sourceTree = "<group>"; };
 		EE50F9BC2B3592D200163E52 /* MemberRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRow.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 				EEEC3B152B389F9D00A8626D /* BillStageBadge.swift */,
 				EEEC3B322B398ADA00A8626D /* ContextAwareNavigationLink.swift */,
 				EE3194D42B6C181200A5F754 /* DummyNavigationLink.swift */,
+				EE3194D62B6C229200A5F754 /* NoDataView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -575,6 +578,7 @@
 				EE50F9B92B358F8B00163E52 /* MembersView.swift in Sources */,
 				EE86A45F2B344BA6007BEA83 /* UK_ParliamentApp.swift in Sources */,
 				EEEC3B072B388B2600A8626D /* BillsViewModel.swift in Sources */,
+				EE3194D72B6C229200A5F754 /* NoDataView.swift in Sources */,
 				EE0186292B385A4E004F7F77 /* PartyTaggedText.swift in Sources */,
 				EE86A4762B3452F4007BEA83 /* PartiesViewModel.swift in Sources */,
 				EEEC3B332B398ADA00A8626D /* ContextAwareNavigationLink.swift in Sources */,
@@ -724,7 +728,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"UK Parliament/Preview Content\"";
 				DEVELOPMENT_TEAM = 53MK4G2GN4;
 				ENABLE_PREVIEWS = YES;
@@ -758,7 +762,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"UK Parliament/Preview Content\"";
 				DEVELOPMENT_TEAM = 53MK4G2GN4;
 				ENABLE_PREVIEWS = YES;

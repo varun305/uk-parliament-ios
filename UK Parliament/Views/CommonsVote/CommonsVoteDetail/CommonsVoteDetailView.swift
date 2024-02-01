@@ -11,9 +11,7 @@ struct CommonsVoteDetailView: View {
             } else if viewModel.loading {
                 loadingView
             } else {
-                Text("No data")
-                    .foregroundStyle(.secondary)
-                    .italic()
+                NoDataView()
             }
         }
         .ifLet(vote.title) { $0.navigationTitle("Votes, \($1)") }

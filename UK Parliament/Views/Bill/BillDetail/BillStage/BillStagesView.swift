@@ -14,10 +14,7 @@ struct BillStagesView: View {
             } else if viewModel.loading {
                 loadingView
             } else {
-                Text("No data")
-                    .foregroundStyle(.secondary)
-                    .font(.footnote)
-                    .italic()
+                NoDataView()
             }
         }
         .navigationTitle("Stages, \(bill.shortTitle ?? "")")
