@@ -38,7 +38,7 @@ struct BillPublicationLinksView: View {
                 }
             }
         }
-        .listStyle(.plain)
+        .listStyle(.grouped)
     }
 
     private func getNavigationTypeForFile(file: BillPublicationFile) -> NavigationItem {

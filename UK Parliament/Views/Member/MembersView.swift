@@ -49,15 +49,19 @@ struct MembersView: View {
 
     @ViewBuilder
     var loadingView: some View {
-        List(0..<10) { _ in
-            NavigationLink {
-                Text("")
-            } label: {
-                MemberRowLoading()
+        List {
+            Section("") {
+                ForEach(0..<10) { _ in
+                    NavigationLink {
+                        Text("")
+                    } label: {
+                        MemberRowLoading()
+                    }
+                    .disabled(true)
+                }
             }
-            .disabled(true)
         }
-        .listStyle(.plain)
+        .listStyle(.grouped)
         .environment(\.isScrollEnabled, false)
     }
 
@@ -79,7 +83,7 @@ struct MembersView: View {
                 }
             }
         }
-        .listStyle(.plain)
+        .listStyle(.grouped)
     }
 
     private func onScrollEnd(member: Member) {

@@ -31,15 +31,19 @@ struct BillStagesView: View {
 
     @ViewBuilder
     var loadingView: some View {
-        List(0..<10) { _ in
-            NavigationLink {
-                Text("")
-            } label: {
-                BillStageRowLoading()
+        List {
+            Section("") {
+                ForEach(0..<10) { _ in
+                    NavigationLink {
+                        Text("")
+                    } label: {
+                        BillStageRowLoading()
+                    }
+                    .disabled(true)
+                }
             }
-            .disabled(true)
         }
-        .listStyle(.plain)
+        .listStyle(.grouped)
         .environment(\.isScrollEnabled, false)
     }
 
@@ -55,7 +59,7 @@ struct BillStagesView: View {
                 }
             }
         }
-        .listStyle(.plain)
+        .listStyle(.grouped)
     }
 
     private func onScrollEnd(stage: Stage) {

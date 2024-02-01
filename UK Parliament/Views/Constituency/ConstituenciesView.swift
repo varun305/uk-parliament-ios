@@ -41,15 +41,19 @@ struct ConstituenciesView: View {
 
     @ViewBuilder
     var loadingView: some View {
-        List(0..<10) { _ in
-            NavigationLink {
-                Text("")
-            } label: {
-                MemberRowLoading()
+        List {
+            Section("") {
+                ForEach(0..<10) { _ in
+                    NavigationLink {
+                        Text("")
+                    } label: {
+                        MemberRowLoading()
+                    }
+                    .disabled(true)
+                }
             }
-            .disabled(true)
         }
-        .listStyle(.plain)
+        .listStyle(.grouped)
         .environment(\.isScrollEnabled, false)
     }
 
@@ -65,7 +69,7 @@ struct ConstituenciesView: View {
                 }
             }
         }
-        .listStyle(.plain)
+        .listStyle(.grouped)
     }
 
     private func onScrollEnd(constituency: Constituency) {

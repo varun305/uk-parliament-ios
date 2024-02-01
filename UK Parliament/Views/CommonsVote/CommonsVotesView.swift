@@ -46,7 +46,7 @@ struct CommonsVotesView: View {
             }
             .disabled(true)
         }
-        .listStyle(.plain)
+        .listStyle(.grouped)
         .environment(\.isScrollEnabled, false)
     }
 
@@ -58,7 +58,7 @@ struct CommonsVotesView: View {
                     .onAppear(perform: { onScrollEnd(vote: vote) })
             }
         }
-        .listStyle(.plain)
+        .listStyle(.grouped)
     }
 
     private func onScrollEnd(vote: CommonsVote) {

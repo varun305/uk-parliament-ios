@@ -33,15 +33,19 @@ struct BillPublicationsView: View {
 
     @ViewBuilder
     var loadingView: some View {
-        List(0..<15) { _ in
-            NavigationLink {
-                Text("")
-            } label: {
-                BillPublicationRowLoading()
+        List {
+            Section("") {
+                ForEach(0..<15) { _ in
+                    NavigationLink {
+                        Text("")
+                    } label: {
+                        BillPublicationRowLoading()
+                    }
+                    .disabled(true)
+                }
             }
-            .disabled(true)
         }
-        .listStyle(.plain)
+        .listStyle(.grouped)
         .environment(\.isScrollEnabled, false)
     }
 
@@ -62,6 +66,6 @@ struct BillPublicationsView: View {
                 }
             }
         }
-        .listStyle(.plain)
+        .listStyle(.grouped)
     }
 }
