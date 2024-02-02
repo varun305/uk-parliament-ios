@@ -12,6 +12,7 @@ struct PostsView: View {
             }
             .pickerStyle(.segmented)
             .listRowBackground(Color.clear)
+            .listSectionSeparator(.hidden)
 
             ForEach(side == .government ? viewModel.governmentPosts : viewModel.oppositionPosts) { post in
                 Section(post.hansardName ?? "") {
@@ -33,6 +34,7 @@ struct PostsView: View {
                 }
             }
         }
+        .listStyle(.grouped)
         .navigationTitle(side == .government ? "Government posts" : "Opposition posts")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {

@@ -40,6 +40,7 @@ struct BillDetailView: View {
             }
             .multilineTextAlignment(.center)
             .listRowBackground(Color.clear)
+            .listSectionSeparator(.hidden)
 
             Section {
                 NavigationLink {
@@ -86,6 +87,7 @@ struct BillDetailView: View {
                 .disabled(true)
             }
         }
+        .listStyle(.grouped)
         .environment(\.isScrollEnabled, false)
     }
 
@@ -103,6 +105,7 @@ struct BillDetailView: View {
                 }
                 .multilineTextAlignment(.center)
                 .listRowBackground(Color.clear)
+                .listSectionSeparator(.hidden)
 
                 if let sponsors = bill.sponsors {
                     Section("Sponsors") {
@@ -142,6 +145,7 @@ struct BillDetailView: View {
                     }
                 }
             }
+            .listStyle(.grouped)
         }
     }
 }

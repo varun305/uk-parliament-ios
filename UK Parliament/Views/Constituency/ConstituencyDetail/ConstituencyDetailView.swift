@@ -87,6 +87,7 @@ struct ConstituencyDetailView: View {
                 }
             }
         }
+        .listStyle(.grouped)
         .environment(\.isScrollEnabled, false)
     }
 
@@ -101,6 +102,7 @@ struct ConstituencyDetailView: View {
                 resultsView
             }
         }
+        .listStyle(.grouped)
     }
 
     @ViewBuilder

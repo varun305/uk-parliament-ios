@@ -33,9 +33,9 @@ struct MemberDetailView: View {
     @ViewBuilder
     var loadingView: some View {
         List {
-            VStack(alignment: .center) {
-                HStack {
-                    Spacer()
+            HStack {
+                Spacer()
+                VStack(alignment: .center) {
                     ZStack {
                         Circle()
                             .stroke(.white, lineWidth: 3)
@@ -48,14 +48,17 @@ struct MemberDetailView: View {
                             .skeleton(with: true)
                     }
                     .frame(width: 180, height: 180)
+
+                    Text("")
+                        .skeleton(with: true)
+                    Text("")
+                        .skeleton(with: true)
                     Spacer()
                 }
-                Text("")
-                    .skeleton(with: true)
-                Text("")
-                    .skeleton(with: true)
             }
+            .multilineTextAlignment(.center)
             .listRowBackground(Color.clear)
+            .listRowSeparator(.hidden)
 
             Section {
                 Text("")
@@ -104,6 +107,7 @@ struct MemberDetailView: View {
                 .disabled(true)
             }
         }
+        .listStyle(.grouped)
         .environment(\.isScrollEnabled, false)
     }
 
@@ -111,20 +115,21 @@ struct MemberDetailView: View {
     var scrollView: some View {
         if let member = viewModel.member {
             List {
-                VStack(alignment: .center) {
-                    HStack {
-                        Spacer()
+                HStack {
+                    Spacer()
+                    VStack(alignment: .center) {
                         MemberPictureView(member: member)
                             .frame(width: 180, height: 180)
-                        Spacer()
+                        Text(member.nameFullTitle ?? "")
+                            .bold()
+                        Text(viewModel.synopsis)
+                            .font(.caption)
                     }
-                    Text(member.nameFullTitle ?? "")
-                        .bold()
-                    Text(viewModel.synopsis)
-                        .font(.caption)
+                    Spacer()
                 }
                 .multilineTextAlignment(.center)
                 .listRowBackground(Color.clear)
+                .listRowSeparator(.hidden)
 
                 Section {
                     HStack {
@@ -155,6 +160,7 @@ struct MemberDetailView: View {
                     }
                 }
             }
+            .listStyle(.grouped)
         }
     }
 
@@ -173,7 +179,7 @@ struct MemberDetailView: View {
     var votesLink: some View {
         if let member = viewModel.member, member.isCommonsMember {
             ContextAwareNavigationLink(value: .memberCommonsVotesView(member: member)) {
-                Text("View votes")
+                Text("Commons votes")
             }
         }
     }
