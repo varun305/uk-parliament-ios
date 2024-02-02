@@ -19,7 +19,7 @@ struct BillPublicationsView: View {
                 NoDataView()
             }
         }
-        .searchable(text: $viewModel.search, prompt: Text("Search by publication title or type"))
+        .searchable(text: $viewModel.search, placement: .navigationBarDrawer(displayMode: .always), prompt: Text("Search by publication title or type"))
         .navigationTitle(navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
