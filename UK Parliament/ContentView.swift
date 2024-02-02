@@ -81,6 +81,8 @@ struct ContentView: View {
                     CommonsVotesView()
                 case .commonsVoteDetailView(let vote):
                     CommonsVoteDetailView(vote: vote)
+                case .memberCommonsVotesView(let member):
+                    MemberCommonsVotesView(viewModel: MemberCommonsVotesViewModel(member: member))
                 }
             }
         }

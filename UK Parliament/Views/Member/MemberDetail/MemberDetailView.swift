@@ -139,6 +139,7 @@ struct MemberDetailView: View {
                     ContextAwareNavigationLink(value: .billsView(member: member)) {
                         Text("Bills")
                     }
+                    votesLink
                 }
 
                 Section(positionTypeString) {
@@ -165,6 +166,15 @@ struct MemberDetailView: View {
             }
         } else {
             membershipTile
+        }
+    }
+
+    @ViewBuilder
+    var votesLink: some View {
+        if let member = viewModel.member, member.isCommonsMember {
+            ContextAwareNavigationLink(value: .memberCommonsVotesView(member: member)) {
+                Text("View votes")
+            }
         }
     }
 

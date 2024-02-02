@@ -109,14 +109,12 @@ class VoteModel {
         let url = search == "" ? constructCommonsVoteUrl(skip: _skip) : constructSearchCommonsVoteUrl(search: search, skip: _skip)
         FetchModel.base.fetchData([CommonsVote].self, from: url) { result in
             if let result = result {
-                if result.count == 0 {
+                if result.isEmpty {
                     self.commonsReturn[search] = true
                 }
                 self.commonsSkip = [search: self.commonsSkip[search, default: 0] + self.take]
-                completion(result)
-            } else {
-                completion(nil)
             }
+            completion(result)
         }
     }
 
