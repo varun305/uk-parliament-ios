@@ -8,4 +8,12 @@ extension Array where Element: Any {
         }
         return map
     }
+
+    public func reversedIf(_ condition: Bool) -> [Element] {
+        if condition {
+            return self.reversed()
+        } else {
+            return self
+        }
+    }
 }

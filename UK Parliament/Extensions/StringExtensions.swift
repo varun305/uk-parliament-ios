@@ -12,4 +12,8 @@ extension String {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         return dateFormatter.date(from: self.components(separatedBy: ".").first ?? "")?.formatted(date: .long, time: .shortened) ?? ""
     }
+
+    public func searchContains(_ search: String) -> Bool {
+        self.lowercased().contains(search.lowercased()) || search.isEmpty
+    }
 }

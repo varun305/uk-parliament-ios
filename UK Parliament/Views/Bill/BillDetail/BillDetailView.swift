@@ -132,9 +132,6 @@ struct BillDetailView: View {
                         BillStageRow(stage: currentStage)
                         ContextAwareNavigationLink(value: .billStagesView(bill: bill)) {
                             Text("See all stages")
-                                .foregroundStyle(.secondary)
-                                .italic()
-                                .font(.footnote)
                         }
                     }
                 }

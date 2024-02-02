@@ -14,6 +14,12 @@ struct BillPublicationLinksView: View {
 
     var body: some View {
         List {
+            if let description = publication.publicationType?.description {
+                VStack(alignment: .leading) {
+                    Text(description)
+                        .font(.caption)
+                }
+            }
             if links.count > 0 {
                 Section("Links") {
                     ForEach(links) { link in
@@ -53,6 +59,7 @@ struct BillPublicationLinksView: View {
                 }
             }
         }
+        .navigationTitle(publication.publicationType?.name ?? "")
         .listStyle(.grouped)
         .fullScreenCover(item: $linkItem) { link in
             WebView(url: URL(string: link)!)
