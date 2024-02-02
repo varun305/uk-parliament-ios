@@ -4,16 +4,13 @@ import Combine
 
 @MainActor class MemberCommonsVotesViewModel: ObservableObject {
     var member: Member
-    @Published var memberVotes: [MemberCommonsVote] = [] {
-        didSet {
-            print(memberVotes.compactMap { $0.publishedDivision?.title }.joined(separator: "\n"))
-        }
-    }
+    @Published var memberVotes: [MemberCommonsVote] = []
     @Published var search = ""
     @Published var loading = true
 
     init(member: Member) {
         self.member = member
+        addSearchSubscriber()
     }
 
     private var cancellables = Set<AnyCancellable>()
@@ -39,7 +36,7 @@ import Combine
             }
         }
         if let memberId = member.id {
-            MemberVoteModel.shared.nextMemberCommonsData(memberId: memberId, reset: reset) { result in
+            MemberVoteModel.shared.nextMemberCommonsData(memberId: memberId, search: search, reset: reset) { result in
                 Task { @MainActor in
                     withAnimation {
                         if reset {

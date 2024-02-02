@@ -50,7 +50,6 @@ class MemberVoteModel {
         }
 
         let _skip = memberCommonsSkip[search, default: 0]
-        print("MEMBER VOTES \(memberId) \(search) \(reset) \(_skip)")
         if memberCommonsReturn[search, default: false] {
             completion(nil)
             return

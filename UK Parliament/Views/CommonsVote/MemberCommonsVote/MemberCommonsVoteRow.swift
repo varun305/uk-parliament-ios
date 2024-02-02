@@ -15,13 +15,15 @@ struct MemberCommonsVoteRow: View {
                             Image(systemName: "hand.thumbsup.fill")
                                 .foregroundStyle(.secondary)
                             Text("Voted aye")
+                            Spacer()
                         }
                         .foregroundStyle(.green)
                     } else {
                         HStack {
+                            Spacer()
+                            Text("Voted no")
                             Image(systemName: "hand.thumbsdown.fill")
                                 .foregroundStyle(.secondary)
-                            Text("Voted no")
                         }
                         .foregroundStyle(.red)
                     }
