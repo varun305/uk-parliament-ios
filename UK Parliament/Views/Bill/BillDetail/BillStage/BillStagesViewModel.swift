@@ -24,6 +24,7 @@ import SwiftUI
         BillModel.shared.fetchBillStages(for: id, reset: reset) { result in
             Task { @MainActor in
                 withAnimation {
+                    self.result = result
                     if reset {
                         self.stages = result?.items ?? []
                     } else {
