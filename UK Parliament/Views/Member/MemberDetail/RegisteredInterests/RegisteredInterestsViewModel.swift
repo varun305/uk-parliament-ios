@@ -1,21 +1,20 @@
 import Foundation
 import SwiftUI
 
-extension RegisteredInterestsView {
-    @MainActor class RegisteredInterestsViewModel: ObservableObject {
-        @Published var registeredInterests: [RegisteredInterest] = []
-        @Published var loading = false
+@MainActor class RegisteredInterestsViewModel: ObservableObject {
+    @Published var registeredInterests: [RegisteredInterest] = []
+    @Published var loading = false
 
-        public func fetchData(for id: Int) {
-            loading = true
-            RegisteredInterestModel.shared.getRegisteredInterests(for: id) { result in
-                Task { @MainActor in
-                    withAnimation {
-                        self.registeredInterests = result?.value ?? []
-                        self.loading = false
-                    }
+    public func fetchData(for id: Int) {
+        loading = true
+        RegisteredInterestModel.shared.getRegisteredInterests(for: id) { result in
+            Task { @MainActor in
+                withAnimation {
+                    self.registeredInterests = result?.value ?? []
+                    self.loading = false
                 }
             }
         }
     }
 }
+

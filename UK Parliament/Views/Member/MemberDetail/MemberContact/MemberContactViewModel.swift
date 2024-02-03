@@ -1,21 +1,20 @@
 import Foundation
 import SwiftUI
 
-extension MemberContactView {
-    @MainActor class MemberContactViewModel: ObservableObject {
-        @Published var contacts: [MemberContact] = []
-        @Published var loading = false
+@MainActor class MemberContactViewModel: ObservableObject {
+    @Published var contacts: [MemberContact] = []
+    @Published var loading = false
 
-        public func fetchContacts(for id: Int) {
-            loading = true
-            MemberModel.shared.fetchMemberContacts(for: id) { result in
-                Task { @MainActor in
-                    withAnimation {
-                        self.contacts = result?.value ?? []
-                        self.loading = false
-                    }
+    public func fetchContacts(for id: Int) {
+        loading = true
+        MemberModel.shared.fetchMemberContacts(for: id) { result in
+            Task { @MainActor in
+                withAnimation {
+                    self.contacts = result?.value ?? []
+                    self.loading = false
                 }
             }
         }
     }
 }
+

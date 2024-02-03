@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 import Combine
 
-class MembersViewModel: ObservableObject {
+@MainActor class MembersViewModel: ObservableObject {
     @Published var members: [Member] = []
     @Published var result: MembersModel?
     @Published var house: House = .commons {
