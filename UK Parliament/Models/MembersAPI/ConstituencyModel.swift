@@ -93,8 +93,8 @@ class ConstituencyModel {
         }
     }
 
-    private func constructConstituencyGeometryUrl(for id: Int) -> String {
-        "https://members-api.parliament.uk/api/Location/Constituency/\(id)/Geometry"
+    private func constructConstituencyGeometryUrl(for id: Int) -> URL {
+        URL(string: "https://members-api.parliament.uk/api/Location/Constituency/\(id)/Geometry")!
     }
 
     public func getConstituency(for id: Int, _ completion: @escaping (ConstituencyValueModel?) -> Void) {
@@ -104,8 +104,8 @@ class ConstituencyModel {
         }
     }
 
-    private func constructConstituencyUrl(for id: Int) -> String {
-        "https://members-api.parliament.uk/api/Location/Constituency/\(id)"
+    private func constructConstituencyUrl(for id: Int) -> URL {
+        URL(string: "https://members-api.parliament.uk/api/Location/Constituency/\(id)")!
     }
 
     public func canGetNextData(search: String = "", reset: Bool = false) -> Bool {
@@ -137,11 +137,11 @@ class ConstituencyModel {
         }
     }
 
-    private func constructConstituenciesUrl(skip: Int) -> String {
-        "https://members-api.parliament.uk/api/Location/Constituency/Search?skip=\(skip)&take=\(take)"
+    private func constructConstituenciesUrl(skip: Int) -> URL {
+        URL(string: "https://members-api.parliament.uk/api/Location/Constituency/Search?skip=\(skip)&take=\(take)")!
     }
 
-    private func constructSearchConstituenciesUrl(search: String, skip: Int) -> String {
-        "https://members-api.parliament.uk/api/Location/Constituency/Search?searchText=\(search)&skip=\(skip)&take=\(take)"
+    private func constructSearchConstituenciesUrl(search: String, skip: Int) -> URL {
+        URL(string: "https://members-api.parliament.uk/api/Location/Constituency/Search?searchText=\(search)&skip=\(skip)&take=\(take)")!
     }
 }

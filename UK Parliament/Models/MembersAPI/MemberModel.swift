@@ -99,8 +99,8 @@ class MemberModel {
         }
     }
 
-    private func constructMemberUrl(for id: Int) -> String {
-        "https://members-api.parliament.uk/api/Members/\(id)"
+    private func constructMemberUrl(for id: Int) -> URL {
+        URL(string: "https://members-api.parliament.uk/api/Members/\(id)")!
     }
 
     public func fetchMemberSynopsis(for id: Int, _ completion: @escaping (MemberSynopsisModel?) -> Void) {
@@ -110,8 +110,8 @@ class MemberModel {
         }
     }
 
-    private func constructMemberSynopsisUrl(for id: Int) -> String {
-        "https://members-api.parliament.uk/api/Members/\(id)/Synopsis"
+    private func constructMemberSynopsisUrl(for id: Int) -> URL {
+        URL(string: "https://members-api.parliament.uk/api/Members/\(id)/Synopsis")!
     }
 
     public func fetchMemberContacts(for id: Int, _ completion: @escaping (MemberContactValueModel?) -> Void) {
@@ -121,8 +121,8 @@ class MemberModel {
         }
     }
 
-    private func constructMemberContactUrl(for id: Int) -> String {
-        "https://members-api.parliament.uk/api/Members/\(id)/Contact"
+    private func constructMemberContactUrl(for id: Int) -> URL {
+        URL(string: "https://members-api.parliament.uk/api/Members/\(id)/Contact")!
     }
 
     public func canGetNextData(search: String = "", reset: Bool = false) -> Bool {
@@ -133,17 +133,8 @@ class MemberModel {
     }
 
     public func nextData(house: House, search: String = "", reset: Bool = false, _ completion: @escaping (MembersModel?) -> Void) {
-        if reset {
-            skip[search] = 0
-        }
-
-        let _skip = skip[search, default: 0]
-        if _skip > totalResults {
-            return
-        }
-
-        let url = search == "" ? constructMembersUrl(house: house, skip: _skip) : constructSearchMembersUrl(search: search, house: house, skip: _skip)
-        FetchModel.base.fetchData(MembersModel.self, from: url) { result in
+        let url = constructMembersUrl(search: search, house: house)
+        FetchModel.base.fetchDataSkipTake(MembersModel.self, from: url, reset: reset) { result in
             if let result = result {
                 self.totalResults = result.totalResults ?? 0
                 self.skip = [search: self.skip[search, default: 0] + self.take]
@@ -154,11 +145,19 @@ class MemberModel {
         }
     }
 
-    private func constructMembersUrl(house: House, skip: Int) -> String {
-        "https://members-api.parliament.uk/api/Members/Search?House=\(house.rawValue)&IsEligible=true&skip=\(skip)&take=\(take)"
-    }
+    private let membersUrl = "https://members-api.parliament.uk/api/Members/Search"
 
-    private func constructSearchMembersUrl(search: String, house: House, skip: Int) -> String {
-        "https://members-api.parliament.uk/api/Members/Search?Name=\(search)&House=\(house.rawValue)&IsEligible=true&skip=\(skip)&take=\(take)"
+    private func constructMembersUrl(search: String, house: House) -> URL {
+        var components = URLComponents(string: membersUrl)!
+        var queryItems = [URLQueryItem]()
+        if !search.isEmpty {
+            queryItems.append(URLQueryItem(name: "Name", value: search))
+        }
+        queryItems += [
+            URLQueryItem(name: "House", value: String(house.rawValue)),
+            URLQueryItem(name: "IsEligible", value: "true")
+        ]
+        components.queryItems = queryItems
+        return components.url!
     }
 }

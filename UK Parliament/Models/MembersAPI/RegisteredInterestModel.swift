@@ -31,7 +31,7 @@ class RegisteredInterestModel {
         }
     }
 
-    private func getRegisteredInterestsUrl(for id: Int) -> String {
-        "https://members-api.parliament.uk/api/Members/\(id)/RegisteredInterests"
+    private func getRegisteredInterestsUrl(for id: Int) -> URL {
+        URL(string: "https://members-api.parliament.uk/api/Members/\(id)/RegisteredInterests")!
     }
 }

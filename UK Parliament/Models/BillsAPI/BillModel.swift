@@ -201,8 +201,8 @@ class BillModel {
         }
     }
 
-    private func constructBillPublicationsUrl(for id: Int) -> String {
-        "https://bills-api.parliament.uk/api/v1/Bills/\(id)/Publications"
+    private func constructBillPublicationsUrl(for id: Int) -> URL {
+        URL(string: "https://bills-api.parliament.uk/api/v1/Bills/\(id)/Publications")!
     }
 
     public func fetchBillStagePublications(for id: Int, stageId: Int, _ completion: @escaping (BillStagePublicationResultModel?) -> Void) {
@@ -212,8 +212,8 @@ class BillModel {
         }
     }
 
-    private func constructBillStagePublicationsUrl(for id: Int, stageId: Int) -> String {
-        "https://bills-api.parliament.uk/api/v1/Bills/\(id)/Stages/\(stageId)/Publications"
+    private func constructBillStagePublicationsUrl(for id: Int, stageId: Int) -> URL {
+        URL(string: "https://bills-api.parliament.uk/api/v1/Bills/\(id)/Stages/\(stageId)/Publications")!
     }
 
     public func fetchBillStages(for id: Int, reset: Bool = false, _ completion: @escaping (StageResultModel?) -> Void) {
@@ -237,8 +237,8 @@ class BillModel {
         }
     }
 
-    private func constructBillStagesUrl(for id: Int, skip: Int) -> String {
-        "https://bills-api.parliament.uk/api/v1/Bills/\(id)/Stages?Skip=\(skip)&Take=20"
+    private func constructBillStagesUrl(for id: Int, skip: Int) -> URL {
+        URL(string: "https://bills-api.parliament.uk/api/v1/Bills/\(id)/Stages?Skip=\(skip)&Take=20")!
     }
 
     public func fetchBill(for id: Int, _ completion: @escaping (Bill?) -> Void) {
@@ -248,8 +248,8 @@ class BillModel {
         }
     }
 
-    private func constructBillUrl(for id: Int) -> String {
-        "https://bills-api.parliament.uk/api/v1/Bills/\(id)"
+    private func constructBillUrl(for id: Int) -> URL {
+        URL(string: "https://bills-api.parliament.uk/api/v1/Bills/\(id)")!
     }
 
     public func canGetNextData(search: String = "", reset: Bool = false) -> Bool {
@@ -269,7 +269,7 @@ class BillModel {
             return
         }
 
-        let url: String
+        let url: URL
         if search != "", let memberId = memberId {
             url = constructSearchMemberBillsUrl(search: search, memberId: memberId, skip: _skip)
         } else if search != "" {
@@ -291,19 +291,19 @@ class BillModel {
         }
     }
 
-    private func constructBillsUrl(skip: Int) -> String {
-        "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&Skip=\(skip)&Take=20"
+    private func constructBillsUrl(skip: Int) -> URL {
+        URL(string: "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&Skip=\(skip)&Take=20")!
     }
 
-    private func constructSearchBillsUrl(search: String, skip: Int) -> String {
-        "https://bills-api.parliament.uk/api/v1/Bills?SearchTerm=\(search)&SortOrder=DateUpdatedDescending&Skip=\(skip)&Take=20"
+    private func constructSearchBillsUrl(search: String, skip: Int) -> URL {
+        URL(string: "https://bills-api.parliament.uk/api/v1/Bills?SearchTerm=\(search)&SortOrder=DateUpdatedDescending&Skip=\(skip)&Take=20")!
     }
 
-    private func constructMemberBillsUrl(memberId: Int, skip: Int) -> String {
-        "https://bills-api.parliament.uk/api/v1/Bills?MemberId=\(memberId)&SortOrder=DateUpdatedDescending&Skip=\(skip)&Take=20"
+    private func constructMemberBillsUrl(memberId: Int, skip: Int) -> URL {
+        URL(string: "https://bills-api.parliament.uk/api/v1/Bills?MemberId=\(memberId)&SortOrder=DateUpdatedDescending&Skip=\(skip)&Take=20")!
     }
 
-    private func constructSearchMemberBillsUrl(search: String, memberId: Int, skip: Int) -> String {
-        "https://bills-api.parliament.uk/api/v1/Bills?SearchTerm=\(search)&MemberId=\(memberId)&SortOrder=DateUpdatedDescending&Skip=\(skip)&Take=20"
+    private func constructSearchMemberBillsUrl(search: String, memberId: Int, skip: Int) -> URL {
+        URL(string: "https://bills-api.parliament.uk/api/v1/Bills?SearchTerm=\(search)&MemberId=\(memberId)&SortOrder=DateUpdatedDescending&Skip=\(skip)&Take=20")!
     }
 }

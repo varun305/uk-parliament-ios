@@ -47,11 +47,11 @@ class PostModel {
         }
     }
 
-    private func constructGovernmentPostsUrl() -> String {
-        "https://members-api.parliament.uk/api/Posts/GovernmentPosts"
+    private func constructGovernmentPostsUrl() -> URL {
+        URL(string: "https://members-api.parliament.uk/api/Posts/GovernmentPosts")!
     }
 
-    private func constructOppositionPostsUrl() -> String {
-        "https://members-api.parliament.uk/api/Posts/OppositionPosts"
+    private func constructOppositionPostsUrl() -> URL {
+        URL(string: "https://members-api.parliament.uk/api/Posts/OppositionPosts")!
     }
 }

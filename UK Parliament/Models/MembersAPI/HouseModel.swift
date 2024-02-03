@@ -47,13 +47,13 @@ class HouseModel {
         }
     }
 
-    private func constructStateUrl(house: House) -> String {
+    private func constructStateUrl(house: House) -> URL {
         let today = Date.now
         let formatter3 = DateFormatter()
         formatter3.dateFormat = "yyyy-MM-dd"
         let dateString = formatter3.string(from: today)
 
-        return "https://members-api.parliament.uk/api/Parties/StateOfTheParties/\(house.rawValue)/\(dateString)"
+        return URL(string: "https://members-api.parliament.uk/api/Parties/StateOfTheParties/\(house.rawValue)/\(dateString)")!
     }
 }
 

@@ -78,11 +78,11 @@ class ElectionResultModel {
         }
     }
 
-    private func constructElectionResultUrl(for constituency: Int) -> String {
-        "https://members-api.parliament.uk/api/Location/Constituency/\(constituency)/ElectionResults"
+    private func constructElectionResultUrl(for constituency: Int) -> URL {
+        URL(string: "https://members-api.parliament.uk/api/Location/Constituency/\(constituency)/ElectionResults")!
     }
 
-    private func constructConstituencyElectionResultUrl(in constituency: Int, at election: Int) -> String {
-        "https://members-api.parliament.uk/api/Location/Constituency/\(constituency)/ElectionResult/\(election)"
+    private func constructConstituencyElectionResultUrl(in constituency: Int, at election: Int) -> URL {
+        URL(string: "https://members-api.parliament.uk/api/Location/Constituency/\(constituency)/ElectionResult/\(election)")!
     }
 }

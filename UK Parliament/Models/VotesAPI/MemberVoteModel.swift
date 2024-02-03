@@ -66,11 +66,11 @@ class MemberVoteModel {
         }
     }
 
-    private func constructMemberCommonsVoteUrl(memberId: Int, skip: Int) -> String {
-        "https://commonsvotes-api.parliament.uk/data/divisions.json/membervoting?queryParameters.memberId=\(memberId)&queryParameters.skip=\(skip)&queryParameters.take=\(take)"
+    private func constructMemberCommonsVoteUrl(memberId: Int, skip: Int) -> URL {
+        URL(string: "https://commonsvotes-api.parliament.uk/data/divisions.json/membervoting?queryParameters.memberId=\(memberId)&queryParameters.skip=\(skip)&queryParameters.take=\(take)")!
     }
 
-    private func constructSearchMemberCommonsVote(memberId: Int, search: String, skip: Int) -> String {
-        "https://commonsvotes-api.parliament.uk/data/divisions.json/membervoting?queryParameters.memberId=\(memberId)&queryParameters.skip=\(skip)&queryParameters.take=\(take)&queryParameters.searchTerm=\(search)"
+    private func constructSearchMemberCommonsVote(memberId: Int, search: String, skip: Int) -> URL {
+        URL(string: "https://commonsvotes-api.parliament.uk/data/divisions.json/membervoting?queryParameters.memberId=\(memberId)&queryParameters.skip=\(skip)&queryParameters.take=\(take)&queryParameters.searchTerm=\(search)")!
     }
 }

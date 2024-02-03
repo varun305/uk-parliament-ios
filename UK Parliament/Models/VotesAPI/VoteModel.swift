@@ -118,12 +118,12 @@ class VoteModel {
         }
     }
 
-    private func constructCommonsVoteUrl(skip: Int) -> String {
-        "https://commonsvotes-api.parliament.uk/data/divisions.json/search?queryParameters.skip=\(skip)&queryParameters.take=\(take)"
+    private func constructCommonsVoteUrl(skip: Int) -> URL {
+        URL(string: "https://commonsvotes-api.parliament.uk/data/divisions.json/search?queryParameters.skip=\(skip)&queryParameters.take=\(take)")!
     }
 
-    private func constructSearchCommonsVoteUrl(search: String, skip: Int) -> String {
-        "https://commonsvotes-api.parliament.uk/data/divisions.json/search?queryParameters.skip=\(skip)&queryParameters.take=\(take)&queryParameters.searchTerm=\(search)"
+    private func constructSearchCommonsVoteUrl(search: String, skip: Int) -> URL {
+        URL(string: "https://commonsvotes-api.parliament.uk/data/divisions.json/search?queryParameters.skip=\(skip)&queryParameters.take=\(take)&queryParameters.searchTerm=\(search)")!
     }
 
     public func fetchCommonsVote(for id: Int, _ completion: @escaping (CommonsVote?) -> Void) {
@@ -133,7 +133,7 @@ class VoteModel {
         }
     }
 
-    private func constructFetchCommonsVoteUrl(for id: Int) -> String {
-        "https://commonsvotes-api.parliament.uk/data/division/\(id).json"
+    private func constructFetchCommonsVoteUrl(for id: Int) -> URL {
+        URL(string: "https://commonsvotes-api.parliament.uk/data/division/\(id).json")!
     }
 }
