@@ -64,8 +64,6 @@ class ConstituencyGeometryValueModel: Codable {
 }
 
 class ConstituencyModel {
-    private var skip: [String?: Int] = [nil: 0]
-    private let take = 20
     private var totalResults: Int = .max
 
     public static var shared = ConstituencyModel()
@@ -112,24 +110,15 @@ class ConstituencyModel {
         if reset {
             return true
         }
-        return !(skip[search, default: 0] > totalResults)
+        let url = constructConstituenciesUrl(search: search)
+        return FetchModel.base.canGetNextData(from: url, totalResults: totalResults)
     }
 
     public func nextData(search: String = "", reset: Bool = false, _ completion: @escaping (ConstituenciesModel?) -> Void) {
-        if reset {
-            skip[search] = 0
-        }
-
-        let _skip = skip[search, default: 0]
-        if _skip > totalResults {
-            return
-        }
-
-        let url = search == "" ? constructConstituenciesUrl(skip: _skip) : constructSearchConstituenciesUrl(search: search, skip: _skip)
+        let url = constructConstituenciesUrl(search: search)
         FetchModel.base.fetchData(ConstituenciesModel.self, from: url) { result in
             if let result = result {
                 self.totalResults = result.totalResults ?? 0
-                self.skip = [search: self.skip[search, default: 0] + self.take]
                 completion(result)
             } else {
                 completion(nil)
@@ -137,11 +126,14 @@ class ConstituencyModel {
         }
     }
 
-    private func constructConstituenciesUrl(skip: Int) -> URL {
-        URL(string: "https://members-api.parliament.uk/api/Location/Constituency/Search?skip=\(skip)&take=\(take)")!
-    }
-
-    private func constructSearchConstituenciesUrl(search: String, skip: Int) -> URL {
-        URL(string: "https://members-api.parliament.uk/api/Location/Constituency/Search?searchText=\(search)&skip=\(skip)&take=\(take)")!
+    private let constituenciesUrl = "https://members-api.parliament.uk/api/Location/Constituency/Search"
+    private func constructConstituenciesUrl(search: String) -> URL {
+        var components = URLComponents(string: constituenciesUrl)!
+        var queryItems = [URLQueryItem]()
+        if !search.isEmpty {
+            queryItems.append(URLQueryItem(name: "searchText", value: search))
+        }
+        components.queryItems = queryItems
+        return components.url!
     }
 }

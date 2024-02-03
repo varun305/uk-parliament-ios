@@ -80,7 +80,6 @@ class CommonsVote: Codable, Identifiable, Hashable {
 }
 
 class VoteModel {
-    private var commonsSkip: [String?: Int] = [nil: 0]
     private var commonsReturn = [String?: Bool]()
     private let take = 20
 
