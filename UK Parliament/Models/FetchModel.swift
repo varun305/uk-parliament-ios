@@ -51,6 +51,11 @@ class FetchModel {
             completion(UtilsModel.resolveData(T.self, from: data))
         }.resume()
     }
+
+    public func canGetNextData(from url: URL, totalResults: Int) -> Bool {
+        let hashable = UtilsModel.constructURLHashable(from: url)
+        return paginationCache[hashable, default: .reset].skip >= totalResults
+    }
 }
 
 private struct SkipTakeModel {

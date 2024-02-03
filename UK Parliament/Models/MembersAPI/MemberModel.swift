@@ -85,8 +85,6 @@ class MemberContactValueModel: Codable {
 }
 
 class MemberModel {
-    private var skip: [String?: Int] = [nil: 0]
-    private var take = 20
     private var totalResults: Int = .max
 
     public static var shared = MemberModel()
@@ -125,19 +123,19 @@ class MemberModel {
         URL(string: "https://members-api.parliament.uk/api/Members/\(id)/Contact")!
     }
 
-    public func canGetNextData(search: String = "", reset: Bool = false) -> Bool {
+    public func canGetNextData(house: House, search: String = "", reset: Bool = false) -> Bool {
         if reset {
             return true
         }
-        return !(skip[search, default: 0] > totalResults)
+        let url = constructMembersUrl(house: house, search: search)
+        return FetchModel.base.canGetNextData(from: url, totalResults: totalResults)
     }
 
     public func nextData(house: House, search: String = "", reset: Bool = false, _ completion: @escaping (MembersModel?) -> Void) {
-        let url = constructMembersUrl(search: search, house: house)
+        let url = constructMembersUrl(house: house, search: search)
         FetchModel.base.fetchDataSkipTake(MembersModel.self, from: url, reset: reset) { result in
             if let result = result {
                 self.totalResults = result.totalResults ?? 0
-                self.skip = [search: self.skip[search, default: 0] + self.take]
                 completion(result)
             } else {
                 completion(nil)
@@ -146,8 +144,7 @@ class MemberModel {
     }
 
     private let membersUrl = "https://members-api.parliament.uk/api/Members/Search"
-
-    private func constructMembersUrl(search: String, house: House) -> URL {
+    private func constructMembersUrl(house: House, search: String) -> URL {
         var components = URLComponents(string: membersUrl)!
         var queryItems = [URLQueryItem]()
         if !search.isEmpty {

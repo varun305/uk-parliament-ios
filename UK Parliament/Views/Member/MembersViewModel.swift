@@ -33,7 +33,7 @@ import Combine
 
     func nextData(searchText: String? = nil, reset: Bool = false) {
         let search = searchText ?? self.search
-        if !MemberModel.shared.canGetNextData(search: search, reset: reset) {
+        if !MemberModel.shared.canGetNextData(house: house, search: search, reset: reset) {
             return
         }
 
