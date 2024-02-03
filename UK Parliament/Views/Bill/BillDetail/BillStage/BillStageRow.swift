@@ -22,7 +22,7 @@ struct BillStageRow: View {
                 if stageSittings.count == 1 {
                     Text("Sitting on \(stageSittings[0].formattedDate)")
                 } else if stageSittings.count > 1 {
-                    Text("Sittings from \(stageSittings.sorted { $0.formattedDate < $1.formattedDate }[0].formattedDate)")
+                    Text("Sittings from \(stageSittings.sorted { $0.date ?? "" < $1.date ?? "" }[0].formattedDate)")
                 }
             } else {
                 EmptyView()

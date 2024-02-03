@@ -22,6 +22,8 @@
 		EE3194DC2B6CD4FE00A5F754 /* MemberCommonsVotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3194DB2B6CD4FE00A5F754 /* MemberCommonsVotesView.swift */; };
 		EE3194DE2B6CD52400A5F754 /* MemberCommonsVotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3194DD2B6CD52400A5F754 /* MemberCommonsVotesViewModel.swift */; };
 		EE3194E02B6CD7CD00A5F754 /* MemberCommonsVoteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3194DF2B6CD7CD00A5F754 /* MemberCommonsVoteRow.swift */; };
+		EE3194E52B6E3BA400A5F754 /* BillStageSittingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3194E42B6E3BA400A5F754 /* BillStageSittingsView.swift */; };
+		EE3194E72B6E3E9C00A5F754 /* BillAmendmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3194E62B6E3E9C00A5F754 /* BillAmendmentsView.swift */; };
 		EE50F9B92B358F8B00163E52 /* MembersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE50F9B82B358F8B00163E52 /* MembersView.swift */; };
 		EE50F9BB2B358FA200163E52 /* MembersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE50F9BA2B358FA200163E52 /* MembersViewModel.swift */; };
 		EE50F9BD2B3592D200163E52 /* MemberRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE50F9BC2B3592D200163E52 /* MemberRow.swift */; };
@@ -99,6 +101,8 @@
 		EE3194DB2B6CD4FE00A5F754 /* MemberCommonsVotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCommonsVotesView.swift; sourceTree = "<group>"; };
 		EE3194DD2B6CD52400A5F754 /* MemberCommonsVotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCommonsVotesViewModel.swift; sourceTree = "<group>"; };
 		EE3194DF2B6CD7CD00A5F754 /* MemberCommonsVoteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCommonsVoteRow.swift; sourceTree = "<group>"; };
+		EE3194E42B6E3BA400A5F754 /* BillStageSittingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillStageSittingsView.swift; sourceTree = "<group>"; };
+		EE3194E62B6E3E9C00A5F754 /* BillAmendmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillAmendmentsView.swift; sourceTree = "<group>"; };
 		EE50F9B82B358F8B00163E52 /* MembersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersView.swift; sourceTree = "<group>"; };
 		EE50F9BA2B358FA200163E52 /* MembersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersViewModel.swift; sourceTree = "<group>"; };
 		EE50F9BC2B3592D200163E52 /* MemberRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRow.swift; sourceTree = "<group>"; };
@@ -201,6 +205,22 @@
 				EE3194DF2B6CD7CD00A5F754 /* MemberCommonsVoteRow.swift */,
 			);
 			path = MemberCommonsVote;
+			sourceTree = "<group>";
+		};
+		EE3194E22B6E36FD00A5F754 /* BillAmendment */ = {
+			isa = PBXGroup;
+			children = (
+				EE3194E62B6E3E9C00A5F754 /* BillAmendmentsView.swift */,
+			);
+			path = BillAmendment;
+			sourceTree = "<group>";
+		};
+		EE3194E32B6E3B9300A5F754 /* BillStageSitting */ = {
+			isa = PBXGroup;
+			children = (
+				EE3194E42B6E3BA400A5F754 /* BillStageSittingsView.swift */,
+			);
+			path = BillStageSitting;
 			sourceTree = "<group>";
 		};
 		EE50F9B72B358F7E00163E52 /* Member */ = {
@@ -396,6 +416,8 @@
 		EEEC3B1C2B38ADB900A8626D /* BillStage */ = {
 			isa = PBXGroup;
 			children = (
+				EE3194E32B6E3B9300A5F754 /* BillStageSitting */,
+				EE3194E22B6E36FD00A5F754 /* BillAmendment */,
 				EEEC3B1D2B38ADC500A8626D /* BillStagesView.swift */,
 				EEEC3B1F2B38AE7300A8626D /* BillStageRow.swift */,
 				EEEC3B212B38AED000A8626D /* BillStagesViewModel.swift */,
@@ -560,6 +582,7 @@
 				EEFC7CA32B36290B00183203 /* ConstituencyElectionDetailView.swift in Sources */,
 				EE3194D92B6CCBB800A5F754 /* MemberVoteModel.swift in Sources */,
 				EEEC3B362B39A2C700A8626D /* VoteModel.swift in Sources */,
+				EE3194E72B6E3E9C00A5F754 /* BillAmendmentsView.swift in Sources */,
 				EE97BF942B34C60300FA950C /* MemberModel.swift in Sources */,
 				EEEC3B3B2B39A98900A8626D /* CommonsVotesViewModel.swift in Sources */,
 				EE86A4702B344D4C007BEA83 /* PartiesView.swift in Sources */,
@@ -597,6 +620,7 @@
 				EE3194DC2B6CD4FE00A5F754 /* MemberCommonsVotesView.swift in Sources */,
 				EEEC3B252B38BA7900A8626D /* BillPublicationsView.swift in Sources */,
 				EE01861E2B375B0C004F7F77 /* PostsView.swift in Sources */,
+				EE3194E52B6E3BA400A5F754 /* BillStageSittingsView.swift in Sources */,
 				EE50F9B92B358F8B00163E52 /* MembersView.swift in Sources */,
 				EE86A45F2B344BA6007BEA83 /* UK_ParliamentApp.swift in Sources */,
 				EEEC3B072B388B2600A8626D /* BillsViewModel.swift in Sources */,
@@ -752,7 +776,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"UK Parliament/Preview Content\"";
 				DEVELOPMENT_TEAM = 53MK4G2GN4;
 				ENABLE_PREVIEWS = YES;
@@ -786,7 +810,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"UK Parliament/Preview Content\"";
 				DEVELOPMENT_TEAM = 53MK4G2GN4;
 				ENABLE_PREVIEWS = YES;

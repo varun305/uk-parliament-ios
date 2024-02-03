@@ -14,6 +14,8 @@ enum NavigationItem: Hashable, Codable {
     case billsView(member: Member?)
     case billDetailView(bill: Bill)
     case billStagesView(bill: Bill)
+    case billStageSittingsView(stage: Stage)
+    case billAmendmentsView(bill: Bill, stage: Stage)
     case billPublicationsView(bill: Bill, stage: Stage?)
     case billPublicationLinksView(publication: BillPublication)
     case commonsVotesView
@@ -44,6 +46,10 @@ enum NavigationItem: Hashable, Codable {
             return bill1 == bill2
         case let (.billStagesView(bill1), .billStagesView(bill2)):
             return bill1 == bill2
+        case let (.billStageSittingsView(stage1), .billStageSittingsView(stage2)):
+            return stage1 == stage2
+        case let (.billAmendmentsView(bill1, stage1), .billAmendmentsView(bill2, stage2)):
+            return bill1 == bill2 && stage1 == stage2
         case let (.billPublicationsView(bill1, stage1), .billPublicationsView(bill2, stage2)):
             return bill1 == bill2 && stage1 == stage2
         case let (.billPublicationLinksView(publication1), .billPublicationLinksView(publication2)):
@@ -64,50 +70,57 @@ enum NavigationItem: Hashable, Codable {
         case .partiesView:
             hasher.combine(0)
         case .membersView:
-            hasher.combine(1)
+            hasher.combine(100)
         case .memberDetailView(let member):
-            hasher.combine(2)
-            hasher.combine(member) // Ensure Member is also Hashable
+            hasher.combine(200)
+            hasher.combine(member)
         case .memberContactView(let member):
-            hasher.combine(3)
+            hasher.combine(300)
             hasher.combine(member)
         case .memberInterestsView(let member):
-            hasher.combine(4)
+            hasher.combine(400)
             hasher.combine(member)
         case .constituenciesView:
-            hasher.combine(5)
+            hasher.combine(500)
         case .constituencyDetailView(let constituency):
-            hasher.combine(6)
+            hasher.combine(600)
             hasher.combine(constituency)
         case .constituencyElectionDetailView(let constituency, let election):
-            hasher.combine(7)
+            hasher.combine(700)
             hasher.combine(constituency)
             hasher.combine(election)
         case .postsView:
-            hasher.combine(8)
+            hasher.combine(800)
         case .billsView(let member):
-            hasher.combine(9)
+            hasher.combine(900)
             hasher.combine(member)
         case .billDetailView(let bill):
-            hasher.combine(10)
+            hasher.combine(1000)
             hasher.combine(bill)
         case .billStagesView(let bill):
-            hasher.combine(11)
+            hasher.combine(1100)
             hasher.combine(bill)
+        case .billStageSittingsView(let stage):
+            hasher.combine(1200)
+            hasher.combine(stage)
+        case .billAmendmentsView(let bill, let stage):
+            hasher.combine(1201)
+            hasher.combine(bill)
+            hasher.combine(stage)
         case .billPublicationsView(let bill, let stage):
-            hasher.combine(12)
+            hasher.combine(1300)
             hasher.combine(bill)
             hasher.combine(stage)
         case .billPublicationLinksView(let publication):
-            hasher.combine(13)
+            hasher.combine(1400)
             hasher.combine(publication)
         case .commonsVotesView:
-            hasher.combine(14)
+            hasher.combine(1500)
         case .commonsVoteDetailView(let vote):
-            hasher.combine(15)
+            hasher.combine(1600)
             hasher.combine(vote)
         case .memberCommonsVotesView(let member):
-            hasher.combine(16)
+            hasher.combine(1700)
             hasher.combine(member)
         }
     }
