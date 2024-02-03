@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 @MainActor class BillStagesViewModel: ObservableObject {
-    @Published var loading = false
+    @Published var loading = true
     @Published var result: StageResultModel?
     @Published var stages: [Stage] = []
 
@@ -11,19 +11,25 @@ import SwiftUI
     }
 
     public func nextData(for id: Int, reset: Bool = false) {
-        loading = true
+        if !BillModel.shared.canGetNextStagesData(for: id, reset: reset) {
+            return
+        }
+        
+        if reset {
+            withAnimation {
+                loading = true
+                stages = []
+            }
+        }
         BillModel.shared.fetchBillStages(for: id, reset: reset) { result in
-            if let result = result {
-                Task { @MainActor in
-                    withAnimation {
-                        self.result = result
-                        if reset {
-                            self.stages = result.items ?? []
-                        } else {
-                            self.stages += result.items ?? []
-                        }
-                        self.loading = false
+            Task { @MainActor in
+                withAnimation {
+                    if reset {
+                        self.stages = result?.items ?? []
+                    } else {
+                        self.stages += result?.items ?? []
                     }
+                    self.loading = false
                 }
             }
         }

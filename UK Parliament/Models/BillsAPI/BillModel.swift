@@ -184,9 +184,7 @@ class BillStagePublicationResultModel: Codable {
 }
 
 class BillModel {
-    private var stagesSkip = 0
     private var stagesTotalResults: Int = .max
-
     private var totalResults: Int = .max
 
     public static var shared = BillModel()
@@ -214,20 +212,19 @@ class BillModel {
         URL(string: "https://bills-api.parliament.uk/api/v1/Bills/\(id)/Stages/\(stageId)/Publications")!
     }
 
-    public func fetchBillStages(for id: Int, reset: Bool = false, _ completion: @escaping (StageResultModel?) -> Void) {
+    public func canGetNextStagesData(for id: Int, reset: Bool = false) -> Bool {
         if reset {
-            stagesSkip = 0
+            return true
         }
+        let url = constructBillStagesUrl(for: id)
+        return FetchModel.base.canGetNextData(from: url, totalResults: stagesTotalResults)
+    }
 
-        if stagesSkip > stagesTotalResults {
-            return
-        }
-
-        let url = constructBillStagesUrl(for: id, skip: stagesSkip)
+    public func fetchBillStages(for id: Int, reset: Bool = false, _ completion: @escaping (StageResultModel?) -> Void) {
+        let url = constructBillStagesUrl(for: id)
         FetchModel.base.fetchData(StageResultModel.self, from: url) { result in
             if let result = result {
                 self.stagesTotalResults = result.totalResults ?? 0
-                self.stagesSkip += self.take
                 completion(result)
             } else {
                 completion(nil)
@@ -235,8 +232,9 @@ class BillModel {
         }
     }
 
-    private func constructBillStagesUrl(for id: Int, skip: Int) -> URL {
-        URL(string: "https://bills-api.parliament.uk/api/v1/Bills/\(id)/Stages?Skip=\(skip)&Take=20")!
+    private func constructBillStagesUrl(for id: Int) -> URL {
+        let components = URLComponents(string: "https://bills-api.parliament.uk/api/v1/Bills/\(id)/Stages")!
+        return components.url!
     }
 
     public func fetchBill(for id: Int, _ completion: @escaping (Bill?) -> Void) {
