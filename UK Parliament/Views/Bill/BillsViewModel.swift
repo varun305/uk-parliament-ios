@@ -30,7 +30,7 @@ import Combine
 
     public func nextData(searchText: String? = nil, reset: Bool = false) {
         let search = searchText ?? self.search
-        if !BillModel.shared.canGetNextData(search: search, reset: reset) {
+        if !BillModel.shared.canGetNextData(search: search, memberId: member?.id, reset: reset) {
             return
         }
 
