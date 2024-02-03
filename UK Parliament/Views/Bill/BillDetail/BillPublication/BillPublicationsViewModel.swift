@@ -8,8 +8,7 @@ extension BillPublicationsView {
         @Published var search = ""
         var filteredPublications: [BillPublication] {
             publications.filter {
-                $0.title?.searchContains(search) ?? false ||
-                $0.publicationType?.name?.searchContains(search) ?? false
+                $0.title?.searchContains(search) ?? false
             }.reversedIf(!sortOrderAscending)
         }
         @Published var sortOrderAscending = true

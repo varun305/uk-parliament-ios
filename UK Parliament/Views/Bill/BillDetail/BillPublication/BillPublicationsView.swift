@@ -19,7 +19,7 @@ struct BillPublicationsView: View {
                 NoDataView()
             }
         }
-        .searchable(text: $viewModel.search, placement: .navigationBarDrawer(displayMode: .always), prompt: Text("Search by publication title or type"))
+        .searchable(text: $viewModel.search, placement: .navigationBarDrawer(displayMode: .always), prompt: Text("Search by publication title"))
         .navigationTitle(navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -59,18 +59,24 @@ struct BillPublicationsView: View {
         List {
             Section("\(viewModel.filteredPublications.count) results") {
                 ForEach(viewModel.filteredPublications) { publication in
-                    let links = publication.links ?? []
-                    let files = publication.files ?? []
-                    if links.count + files.count > 0 {
-                        ContextAwareNavigationLink(value: .billPublicationLinksView(publication: publication)) {
-                            BillPublicationRow(publication: publication)
-                        }
-                    } else {
-                        BillPublicationRow(publication: publication)
-                    }
+                    BillPublicationNavigationLink(publication: publication)
                 }
             }
         }
         .listStyle(.grouped)
+    }
+
+    private struct BillPublicationNavigationLink: View {
+        var publication: BillPublication
+        var body: some View {
+            let links = publication.links ?? []
+            let files = publication.files ?? []
+            BillPublicationRow(publication: publication)
+                .if(!links.isEmpty || !files.isEmpty) { view in
+                    ContextAwareNavigationLink(value: .billPublicationLinksView(publication: publication)) {
+                        view
+                    }
+                }
+        }
     }
 }

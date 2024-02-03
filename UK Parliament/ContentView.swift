@@ -8,20 +8,24 @@ struct ContentView: View {
         NavigationStack(path: $contextModel.navigationPath) {
             List {
                 Section {
-                    ContextAwareNavigationLink(value: .commonsVotesView) {
-                        Label("Commons votes", systemImage: "checkmark.square")
+                    ContextAwareNavigationLink(value: .billsView(member: nil)) {
+                        BillsViewRow()
                     }
 
-                    ContextAwareNavigationLink(value: .billsView(member: nil)) {
-                        Label("Bills", systemImage: "square.on.square")
+                    ContextAwareNavigationLink(value: .commonsVotesView) {
+                        CommonsVotesViewRow()
+                    }
+
+                    DummyNavigationLink {
+                        LordsVotesViewRow()
                     }
 
                     ContextAwareNavigationLink(value: .membersView) {
-                        Label("MPs and Lords", systemImage: "person.3.fill")
+                        MembersViewRow()
                     }
 
                     ContextAwareNavigationLink(value: .constituenciesView) {
-                        Label("Constituencies", systemImage: "map.fill")
+                        ConstituenciesViewRow()
                     }
 
                     ContextAwareNavigationLink(value: .postsView) {
@@ -44,6 +48,7 @@ struct ContentView: View {
                     }
                 }
             }
+            .listStyle(.grouped)
             .navigationTitle("Home")
             .navigationDestination(for: NavigationItem.self) { item in
                 switch item {
@@ -87,5 +92,96 @@ struct ContentView: View {
             }
         }
         .textSelection(.enabled)
+    }
+}
+
+private struct CommonsVotesViewRow: View {
+    var body: some View {
+        HStack(alignment: .center) {
+            Image("commons")
+                .resizable()
+                .frame(width: 60, height: 60)
+                .mask {
+                    Circle()
+                        .frame(width: 60, height: 60)
+                }
+            VStack(alignment: .leading) {
+                Text("Commons votes")
+                    .bold()
+                Text("View and filter the results of votes in the House of Commons")
+                    .font(.caption)
+            }
+        }
+    }
+}
+
+private struct LordsVotesViewRow: View {
+    var body: some View {
+        HStack(alignment: .center) {
+            Image("lords")
+                .resizable()
+                .frame(width: 60, height: 60)
+                .mask {
+                    Circle()
+                        .frame(width: 60, height: 60)
+                }
+            VStack(alignment: .leading) {
+                Text("Lords votes")
+                    .bold()
+                Text("View and filter the results of votes in the House of Lords")
+                    .font(.caption)
+            }
+        }
+    }
+}
+
+private struct BillsViewRow: View {
+    var body: some View {
+        HStack(alignment: .center) {
+            Image(systemName: "doc.circle")
+                .resizable()
+                .frame(width: 60, height: 60)
+                .foregroundStyle(.accent)
+            VStack(alignment: .leading) {
+                Text("Bills")
+                    .bold()
+                Text("View bills, stages and publications")
+                    .font(.caption)
+            }
+        }
+    }
+}
+
+private struct MembersViewRow: View {
+    var body: some View {
+        HStack(alignment: .center) {
+            Image(systemName: "person.bust.circle")
+                .resizable()
+                .frame(width: 60, height: 60)
+                .foregroundStyle(.accent)
+            VStack(alignment: .leading) {
+                Text("MPs and Lords")
+                    .bold()
+                Text("View and search for MPs and Lords")
+                    .font(.caption)
+            }
+        }
+    }
+}
+
+private struct ConstituenciesViewRow: View {
+    var body: some View {
+        HStack(alignment: .center) {
+            Image(systemName: "map.circle")
+                .resizable()
+                .frame(width: 60, height: 60)
+                .foregroundStyle(.accent)
+            VStack(alignment: .leading) {
+                Text("Constituencies")
+                    .bold()
+                Text("View and search for constituencies")
+                    .font(.caption)
+            }
+        }
     }
 }
