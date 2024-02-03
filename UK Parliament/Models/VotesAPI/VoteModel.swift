@@ -109,7 +109,6 @@ class VoteModel {
                 if result.isEmpty {
                     self.commonsReturn[search] = true
                 }
-                self.commonsSkip = [search: self.commonsSkip[search, default: 0] + self.take]
             }
             completion(result)
         }

@@ -116,7 +116,7 @@ class ConstituencyModel {
 
     public func nextData(search: String = "", reset: Bool = false, _ completion: @escaping (ConstituenciesModel?) -> Void) {
         let url = constructConstituenciesUrl(search: search)
-        FetchModel.base.fetchData(ConstituenciesModel.self, from: url) { result in
+        FetchModel.base.fetchDataSkipTake(ConstituenciesModel.self, from: url, reset: reset) { result in
             if let result = result {
                 self.totalResults = result.totalResults ?? 0
                 completion(result)

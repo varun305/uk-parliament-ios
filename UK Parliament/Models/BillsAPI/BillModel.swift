@@ -187,8 +187,6 @@ class BillModel {
     private var stagesSkip = 0
     private var stagesTotalResults: Int = .max
 
-    private var skip: [String?: Int] = [nil: 0]
-    private let take = 20
     private var totalResults: Int = .max
 
     public static var shared = BillModel()
@@ -260,30 +258,10 @@ class BillModel {
     }
 
     public func nextData(search: String = "", memberId: Int? = nil, reset: Bool = false, _ completion: @escaping (BillItemModel?) -> Void) {
-        if reset {
-            skip[search] = 0
-        }
-
-        let _skip = skip[search, default: 0]
-        if _skip > totalResults {
-            return
-        }
-
-        let url: URL
-        if search != "", let memberId = memberId {
-            url = constructSearchMemberBillsUrl(search: search, memberId: memberId, skip: _skip)
-        } else if search != "" {
-            url = constructSearchBillsUrl(search: search, skip: _skip)
-        } else if let memberId = memberId {
-            url = constructMemberBillsUrl(memberId: memberId, skip: _skip)
-        } else {
-            url = constructBillsUrl(skip: _skip)
-        }
-
-        FetchModel.base.fetchData(BillItemModel.self, from: url) { result in
+        let url = constructBillsUrl(search: search, memberId: memberId)
+        FetchModel.base.fetchDataSkipTake(BillItemModel.self, from: url, reset: reset) { result in
             if let result = result {
                 self.totalResults = result.totalResults ?? 0
-                self.skip = [search: self.skip[search, default: 0] + self.take]
                 completion(result)
             } else {
                 completion(nil)
@@ -291,19 +269,20 @@ class BillModel {
         }
     }
 
-    private func constructBillsUrl(skip: Int) -> URL {
-        URL(string: "https://bills-api.parliament.uk/api/v1/Bills?SortOrder=DateUpdatedDescending&Skip=\(skip)&Take=20")!
-    }
-
-    private func constructSearchBillsUrl(search: String, skip: Int) -> URL {
-        URL(string: "https://bills-api.parliament.uk/api/v1/Bills?SearchTerm=\(search)&SortOrder=DateUpdatedDescending&Skip=\(skip)&Take=20")!
-    }
-
-    private func constructMemberBillsUrl(memberId: Int, skip: Int) -> URL {
-        URL(string: "https://bills-api.parliament.uk/api/v1/Bills?MemberId=\(memberId)&SortOrder=DateUpdatedDescending&Skip=\(skip)&Take=20")!
-    }
-
-    private func constructSearchMemberBillsUrl(search: String, memberId: Int, skip: Int) -> URL {
-        URL(string: "https://bills-api.parliament.uk/api/v1/Bills?SearchTerm=\(search)&MemberId=\(memberId)&SortOrder=DateUpdatedDescending&Skip=\(skip)&Take=20")!
+    private let billsUrl = "https://bills-api.parliament.uk/api/v1/Bills"
+    private func constructBillsUrl(search: String, memberId: Int?) -> URL {
+        var components = URLComponents(string: billsUrl)!
+        var queryItems = [URLQueryItem]()
+        if !search.isEmpty {
+            queryItems.append(URLQueryItem(name: "SearchTerm", value: search))
+        }
+        if let memberId = memberId {
+            queryItems.append(URLQueryItem(name: "MemberId", value: String(memberId)))
+        }
+        queryItems += [
+            URLQueryItem(name: "SortOrder", value: "DateUpdatedDescending"),
+        ]
+        components.queryItems = queryItems
+        return components.url!
     }
 }
