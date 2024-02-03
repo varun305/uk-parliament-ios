@@ -62,7 +62,7 @@ private struct SkipTakeModel {
     var skip: Int
     var take: Int
 
-    static var reset = SkipTakeModel(skip: 0, take: 0)
+    static var reset = SkipTakeModel(skip: 0, take: 20)
     public func updated(_ taken: Int) -> SkipTakeModel {
         return SkipTakeModel(skip: skip + taken, take: take)
     }

@@ -96,18 +96,16 @@ class VoteModel {
 
     public func nextCommonsData(search: String = "", reset: Bool = false, _ completion: @escaping ([CommonsVote]?) -> Void) {
         if reset {
-            commonsSkip[search] = 0
             commonsReturn[search] = false
         }
 
-        let _skip = commonsSkip[search, default: 0]
         if commonsReturn[search, default: false] {
             completion(nil)
             return
         }
 
-        let url = search == "" ? constructCommonsVoteUrl(skip: _skip) : constructSearchCommonsVoteUrl(search: search, skip: _skip)
-        FetchModel.base.fetchData([CommonsVote].self, from: url) { result in
+        let url = constructCommonsVoteUrl(search: search)
+        FetchModel.base.fetchDataSkipTake([CommonsVote].self, from: url, reset: reset) { result in
             if let result = result {
                 if result.isEmpty {
                     self.commonsReturn[search] = true
@@ -118,12 +116,15 @@ class VoteModel {
         }
     }
 
-    private func constructCommonsVoteUrl(skip: Int) -> URL {
-        URL(string: "https://commonsvotes-api.parliament.uk/data/divisions.json/search?queryParameters.skip=\(skip)&queryParameters.take=\(take)")!
-    }
-
-    private func constructSearchCommonsVoteUrl(search: String, skip: Int) -> URL {
-        URL(string: "https://commonsvotes-api.parliament.uk/data/divisions.json/search?queryParameters.skip=\(skip)&queryParameters.take=\(take)&queryParameters.searchTerm=\(search)")!
+    private let commonsVoteUrl = "https://commonsvotes-api.parliament.uk/data/divisions.json/search"
+    private func constructCommonsVoteUrl(search: String) -> URL {
+        var components = URLComponents(string: commonsVoteUrl)!
+        var queryItems = [URLQueryItem]()
+        if !search.isEmpty {
+            queryItems.append(URLQueryItem(name: "queryParameters.searchTerm", value: search))
+        }
+        components.queryItems = queryItems
+        return components.url!
     }
 
     public func fetchCommonsVote(for id: Int, _ completion: @escaping (CommonsVote?) -> Void) {
