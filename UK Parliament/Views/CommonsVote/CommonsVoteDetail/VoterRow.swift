@@ -13,7 +13,6 @@ struct VoterRow: View {
     }
 }
 
-
 struct VoterRowLoading: View {
     var body: some View {
         VStack(alignment: .leading) {

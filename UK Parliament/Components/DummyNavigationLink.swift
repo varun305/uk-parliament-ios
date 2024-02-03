@@ -17,4 +17,3 @@ struct DummyNavigationLink<Content: View>: View {
         .disabled(true)
     }
 }
-

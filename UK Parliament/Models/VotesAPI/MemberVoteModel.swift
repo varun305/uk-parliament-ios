@@ -1,6 +1,5 @@
 import Foundation
 
-
 class MemberCommonsVote: Codable, Identifiable, Hashable {
     var memberId: Int?
     var memberVotedAye: Bool?
@@ -39,7 +38,7 @@ class MemberVoteModel {
     public func canGetNextData(search: String = "", reset: Bool = false) -> Bool {
         if reset {
             return true
-        } 
+        }
         return !memberCommonsReturn[search, default: false]
     }
 

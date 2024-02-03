@@ -36,7 +36,7 @@ import Combine
         if !MemberModel.shared.canGetNextData(search: search, reset: reset) {
             return
         }
-        
+
         if reset {
             withAnimation {
                 loading = true

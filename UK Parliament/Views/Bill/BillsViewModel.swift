@@ -3,7 +3,7 @@ import SwiftUI
 import Combine
 
 @MainActor class BillsViewModel: ObservableObject {
-    var member: Member? = nil
+    var member: Member?
     @Published var loading = true
     @Published var result: BillItemModel?
     @Published var bills: [Bill] = []

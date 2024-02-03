@@ -10,7 +10,7 @@ struct BillPublicationLinksView: View {
         publication.files ?? []
     }
 
-    @State var linkItem: String? = nil
+    @State var linkItem: String?
 
     var body: some View {
         List {

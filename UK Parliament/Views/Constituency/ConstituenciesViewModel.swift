@@ -7,15 +7,15 @@ import Combine
     @Published var result: ConstituenciesModel?
     @Published var search = ""
     @Published var loading = true
-    
+
     init() {
         addSearchSubscriber()
     }
-    
+
     var numResults: Int {
         result?.totalResults ?? 0
     }
-    
+
     private var cancellables = Set<AnyCancellable>()
     private func addSearchSubscriber() {
         $search
@@ -25,13 +25,13 @@ import Combine
             }
             .store(in: &cancellables)
     }
-    
+
     func nextData(searchText: String? = nil, reset: Bool = false) {
         let search = searchText ?? self.search
         if !ConstituencyModel.shared.canGetNextData(search: search, reset: reset) {
             return
         }
-        
+
         if reset {
             withAnimation {
                 loading = true

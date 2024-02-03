@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MemberCommonsVotesView: View {
     @StateObject var viewModel: MemberCommonsVotesViewModel
-    
+
     var body: some View {
         Group {
             if viewModel.loading && viewModel.memberVotes.isEmpty {

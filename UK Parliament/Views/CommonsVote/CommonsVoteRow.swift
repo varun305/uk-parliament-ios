@@ -31,7 +31,6 @@ struct CommonsVoteRow: View {
     }
 }
 
-
 struct CommonsVoteRowLoading: View {
     var body: some View {
         VStack(alignment: .leading) {

@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 @MainActor class CommonsVoteDetailViewModel: ObservableObject {
-    @Published var vote: CommonsVote? = nil
+    @Published var vote: CommonsVote?
     @Published var loading = false
 
     public func fetchData(for id: Int) {

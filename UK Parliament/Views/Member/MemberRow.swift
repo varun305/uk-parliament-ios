@@ -38,7 +38,7 @@ struct MemberRowLoading: View {
                     .skeleton(with: true)
             }
             .frame(width: 60, height: 60)
-            
+
             VStack(alignment: .leading) {
                 Text("")
                     .skeleton(with: true)

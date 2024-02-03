@@ -279,7 +279,7 @@ class BillModel {
         } else {
             url = constructBillsUrl(skip: _skip)
         }
-        
+
         FetchModel.base.fetchData(BillItemModel.self, from: url) { result in
             if let result = result {
                 self.totalResults = result.totalResults ?? 0

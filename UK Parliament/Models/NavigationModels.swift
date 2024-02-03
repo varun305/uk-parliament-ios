@@ -112,4 +112,3 @@ enum NavigationItem: Hashable, Codable {
         }
     }
 }
-

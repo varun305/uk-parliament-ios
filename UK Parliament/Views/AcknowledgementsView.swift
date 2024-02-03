@@ -1,6 +1,5 @@
 import SwiftUI
 
-
 struct AcknowledgementsView: View {
     var body: some View {
         VStack(alignment: .leading) {
