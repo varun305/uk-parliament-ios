@@ -3,17 +3,14 @@ import SwiftUI
 import Combine
 
 @MainActor class MembersViewModel: ObservableObject {
+    var house: House
     @Published var members: [Member] = []
     @Published var result: MembersModel?
-    @Published var house: House = .commons {
-        didSet {
-            nextData(reset: true)
-        }
-    }
     @Published var search = ""
     @Published var loading = true
 
-    init() {
+    init(house: House) {
+        self.house = house
         addSearchSubscriber()
     }
 

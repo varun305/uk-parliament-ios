@@ -3,7 +3,8 @@ import Foundation
 enum NavigationItem: Hashable, Codable {
     case _404
     case partiesView
-    case membersView
+    case mpsView
+    case lordsView
     case memberDetailView(memberId: Int)
     case memberContactView(member: Member)
     case memberInterestsView(member: Member)
@@ -29,7 +30,8 @@ enum NavigationItem: Hashable, Codable {
         switch (lhs, rhs) {
         case (._404, ._404),
             (.partiesView, .partiesView),
-            (.membersView, .membersView),
+            (.mpsView, .mpsView),
+            (.lordsView, .lordsView),
             (.constituenciesView, .constituenciesView),
             (.postsView, .postsView),
             (.commonsVotesView, .commonsVotesView),
@@ -77,7 +79,9 @@ enum NavigationItem: Hashable, Codable {
             hasher.combine(-1)
         case .partiesView:
             hasher.combine(0)
-        case .membersView:
+        case .mpsView:
+            hasher.combine(100)
+        case .lordsView:
             hasher.combine(100)
         case .memberDetailView(let member):
             hasher.combine(200)

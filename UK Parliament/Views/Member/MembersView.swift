@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct MembersView: View {
-    @StateObject var viewModel = MembersViewModel()
+    @StateObject var viewModel: MembersViewModel
     private var resultsText: String {
         "\(viewModel.numResults) results"
     }
@@ -25,14 +25,6 @@ struct MembersView: View {
         }
         .navigationTitle(viewModel.house == .commons ? "MPs" : "Lords")
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                Picker("House", selection: $viewModel.house) {
-                    Label("House of Commons", image: "commons").tag(House.commons)
-                    Label("House of Lords", image: "lords").tag(House.lords)
-                }
-            }
-        }
         .onAppear {
             if viewModel.members.isEmpty {
                 viewModel.nextData(reset: true)

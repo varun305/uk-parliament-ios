@@ -16,12 +16,16 @@ struct ContentView: View {
                         CommonsVotesViewRow()
                     }
 
+                    ContextAwareNavigationLink(value: .mpsView) {
+                        MPsViewRow()
+                    }
+
                     ContextAwareNavigationLink(value: .lordsVotesView) {
                         LordsVotesViewRow()
                     }
 
-                    ContextAwareNavigationLink(value: .membersView) {
-                        MembersViewRow()
+                    ContextAwareNavigationLink(value: .lordsView) {
+                        LordsViewRow()
                     }
 
                     ContextAwareNavigationLink(value: .constituenciesView) {
@@ -56,8 +60,10 @@ struct ContentView: View {
                     Text("Oops! This page doesn't exist")
                 case .partiesView:
                     PartiesView()
-                case .membersView:
-                    MembersView()
+                case .mpsView:
+                    MembersView(viewModel: MembersViewModel(house: .commons))
+                case .lordsView:
+                    MembersView(viewModel: MembersViewModel(house: .lords))
                 case .memberDetailView(let memberId):
                     MemberDetailView(memberId: memberId)
                 case .memberContactView(let member):
@@ -156,17 +162,34 @@ private struct BillsViewRow: View {
     }
 }
 
-private struct MembersViewRow: View {
+private struct MPsViewRow: View {
     var body: some View {
         HStack(alignment: .center) {
             Image(systemName: "person.bust.circle")
                 .resizable()
                 .frame(width: 60, height: 60)
-                .foregroundStyle(.accent)
+                .foregroundStyle(Color.commons)
             VStack(alignment: .leading) {
-                Text("MPs and Lords")
+                Text("Members of Parliament (MPs)")
                     .bold()
-                Text("View and search for MPs and Lords")
+                Text("View and search for members of the House of Commons")
+                    .font(.caption)
+            }
+        }
+    }
+}
+
+private struct LordsViewRow: View {
+    var body: some View {
+        HStack(alignment: .center) {
+            Image(systemName: "person.bust.circle")
+                .resizable()
+                .frame(width: 60, height: 60)
+                .foregroundStyle(Color.lords)
+            VStack(alignment: .leading) {
+                Text("Lords")
+                    .bold()
+                Text("View and search for members of the House of Lords")
                     .font(.caption)
             }
         }
