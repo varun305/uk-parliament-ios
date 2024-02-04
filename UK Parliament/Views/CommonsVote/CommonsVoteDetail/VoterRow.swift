@@ -2,7 +2,7 @@ import SwiftUI
 import SkeletonUI
 
 struct VoterRow: View {
-    var voter: Voter
+    var voter: any Voter
 
     var body: some View {
         VStack(alignment: .leading) {

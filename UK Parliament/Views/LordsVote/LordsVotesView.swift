@@ -44,10 +44,10 @@ struct LordsVotesView: View {
     @ViewBuilder
     var scrollView: some View {
         List(viewModel.votes) { vote in
-//            ContextAwareNavigationLink() {
+            ContextAwareNavigationLink(value: .lordsVoteDetailView(vote: vote)) {
                 LordsVoteRow(vote: vote)
                     .onAppear(perform: { onScrollEnd(vote: vote) })
-//            }
+            }
         }
         .listStyle(.grouped)
     }

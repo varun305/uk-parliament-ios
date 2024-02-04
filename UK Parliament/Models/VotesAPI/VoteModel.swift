@@ -1,6 +1,16 @@
 import Foundation
 
-class Voter: Identifiable, Codable {
+protocol Voter: Identifiable, Codable {
+    var memberId: Int? { get }
+    var name: String? { get }
+    var listAs: String? { get }
+    var party: String? { get }
+    var partyColour: String? { get }
+    var partyAbbreviation: String? { get }
+    var memberFrom: String? { get }
+}
+
+class CommonsVoter: Voter {
     var memberId: Int?
     var name: String?
     var listAs: String?
@@ -24,6 +34,20 @@ class Voter: Identifiable, Codable {
     }
 }
 
+class LordsVoter: Voter {
+    var memberId: Int?
+    var name: String?
+    var listAs: String?
+    var party: String?
+    var partyColour: String?
+    var partyAbbreviation: String?
+    var memberFrom: String?
+
+    var id: Int? {
+        memberId
+    }
+}
+
 class CommonsVote: Codable, Identifiable, Hashable {
     var divisionId: Int?
     var date: String?
@@ -33,11 +57,11 @@ class CommonsVote: Codable, Identifiable, Hashable {
     var title: String?
     var ayeCount: Int?
     var noCount: Int?
-    var ayeTellers: [Voter]?
-    var noTellers: [Voter]?
-    var ayes: [Voter]?
-    var noes: [Voter]?
-    var noVoteRecorded: [Voter]?
+    var ayeTellers: [CommonsVoter]?
+    var noTellers: [CommonsVoter]?
+    var ayes: [CommonsVoter]?
+    var noes: [CommonsVoter]?
+    var noVoteRecorded: [CommonsVoter]?
 
     enum CodingKeys: String, CodingKey {
         case divisionId = "DivisionId"
@@ -83,10 +107,10 @@ class LordsVote: Codable, Identifiable, Hashable {
     var isHouse: Bool?
     var amendmentNotes: String?
     var isGovernmentWin: Bool?
-    var contentTellers: [Voter]?
-    var notContentTellers: [Voter]?
-    var contents: [Voter]?
-    var notContents: [Voter]?
+    var contentTellers: [LordsVoter]?
+    var notContentTellers: [LordsVoter]?
+    var contents: [LordsVoter]?
+    var notContents: [LordsVoter]?
 
     var id: Int? {
         divisionId

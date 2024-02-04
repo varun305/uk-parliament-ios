@@ -1,8 +1,8 @@
 import SwiftUI
 
-struct CommonsVoteDetailView: View {
-    @StateObject var viewModel = CommonsVoteDetailViewModel()
-    var vote: CommonsVote
+struct LordsVoteDetailView: View {
+    @StateObject var viewModel = LordsVoteDetailViewModel()
+    var vote: LordsVote
 
     var body: some View {
         Group {
@@ -43,33 +43,33 @@ struct CommonsVoteDetailView: View {
     @ViewBuilder
     var scrollView: some View {
         List {
-            if let ayeTellers = vote.ayeTellers, ayeTellers.count > 0 {
-                Section("Aye tellers") {
-                    ForEach(ayeTellers) { teller in
+            if let contentTellers = vote.contentTellers, contentTellers.count > 0 {
+                Section("Content tellers") {
+                    ForEach(contentTellers) { teller in
                         VoterNavigationLink(voter: teller)
                     }
                 }
             }
 
-            if let noTellers = vote.noTellers, noTellers.count > 0 {
-                Section("No tellers") {
-                    ForEach(noTellers) { teller in
+            if let notContentTellers = vote.notContentTellers, notContentTellers.count > 0 {
+                Section("Not content tellers") {
+                    ForEach(notContentTellers) { teller in
                         VoterNavigationLink(voter: teller)
                     }
                 }
             }
 
-            if let ayes = viewModel.vote?.ayes, ayes.count > 0 {
-                Section("Ayes") {
-                    ForEach(ayes) { aye in
+            if let contents = viewModel.vote?.contents, contents.count > 0 {
+                Section("Contents") {
+                    ForEach(contents) { aye in
                         VoterNavigationLink(voter: aye)
                     }
                 }
             }
 
-            if let noes = viewModel.vote?.noes, noes.count > 0 {
-                Section("Noes") {
-                    ForEach(noes) { no in
+            if let notContents = viewModel.vote?.notContents, notContents.count > 0 {
+                Section("Not contents") {
+                    ForEach(notContents) { no in
                         VoterNavigationLink(voter: no)
                     }
                 }
@@ -79,7 +79,7 @@ struct CommonsVoteDetailView: View {
     }
 
     private struct VoterNavigationLink: View {
-        var voter: CommonsVoter
+        var voter: LordsVoter
         var body: some View {
             if let memberId = voter.memberId {
                 ContextAwareNavigationLink(value: .memberDetailView(memberId: memberId)) {
