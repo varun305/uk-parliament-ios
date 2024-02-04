@@ -222,7 +222,7 @@ class BillModel {
 
     public func fetchBillStages(for id: Int, reset: Bool = false, _ completion: @escaping (StageResultModel?) -> Void) {
         let url = constructBillStagesUrl(for: id)
-        FetchModel.base.fetchData(StageResultModel.self, from: url) { result in
+        FetchModel.base.fetchDataSkipTake(StageResultModel.self, from: url, reset: reset) { result in
             if let result = result {
                 self.stagesTotalResults = result.totalResults ?? 0
                 completion(result)

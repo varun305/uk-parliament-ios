@@ -51,9 +51,6 @@ struct BillStagesView: View {
                         BillStageRow(stage: stage)
                             .onAppear(perform: { onScrollEnd(stage: stage) })
                             .contextMenu(menuItems: {
-                                Button("See amendments", systemImage: "doc.text") {
-                                    contextModel.manualNavigate(to: .billAmendmentsView(bill: bill, stage: stage))
-                                }
                                 Button("See sittings", systemImage: "person.2.wave.2") {
                                     contextModel.manualNavigate(to: .billStageSittingsView(stage: stage))
                                 }
