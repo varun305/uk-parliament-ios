@@ -73,7 +73,7 @@ class MemberVoteModel {
         }
 
         let url = constructMemberCommonsVoteUrl(memberId: memberId, search: search)
-        FetchModel.base.fetchDataSkipTake([MemberCommonsVote].self, from: url) { result in
+        FetchModel.base.fetchDataSkipTake([MemberCommonsVote].self, from: url, reset: reset, skipTakeParameters: .commonsVotes) { result in
             if let result = result {
                 if result.isEmpty {
                     self.memberCommonsReturn[search] = true
@@ -110,7 +110,7 @@ class MemberVoteModel {
         }
 
         let url = constructMemberLordsVoteUrl(memberId: memberId, search: search)
-        FetchModel.base.fetchDataSkipTake([MemberLordsVote].self, from: url) { result in
+        FetchModel.base.fetchDataSkipTake([MemberLordsVote].self, from: url, reset: reset) { result in
             if let result = result {
                 if result.isEmpty {
                     self.memberLordsReturn[search] = true

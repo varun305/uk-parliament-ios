@@ -38,7 +38,6 @@ import Combine
         if let memberId = member.id {
             MemberVoteModel.shared.nextMemberLordsData(memberId: memberId, search: search, reset: reset) { result in
                 Task { @MainActor in
-                    print(result?.compactMap { $0.publishedDivision?.title } ?? "")
                     withAnimation {
                         if reset {
                             self.memberVotes = result ?? []

@@ -20,7 +20,13 @@ class FetchModel {
         }.resume()
     }
 
-    public func fetchDataSkipTake<T>(_ type: T.Type, from url: URL, reset: Bool = false, _ completion: @escaping (T?) -> Void) where T: Decodable {
+    public func fetchDataSkipTake<T>(
+        _ type: T.Type,
+        from url: URL,
+        reset: Bool,
+        skipTakeParameters: SkipTakeParameters = .normal,
+        _ completion: @escaping (T?) -> Void
+    ) where T: Decodable {
         let hashable = UtilsModel.constructURLHashable(from: url)
         
         if reset {
@@ -31,8 +37,8 @@ class FetchModel {
         let skip = skipTake.skip
         let take = skipTake.take
         let newUrl = UtilsModel.addURLQueries(to: url, queries: [
-            URLQueryItem(name: "skip", value: String(skip)),
-            URLQueryItem(name: "take", value: String(take))
+            URLQueryItem(name: skipTakeParameters.skip, value: String(skip)),
+            URLQueryItem(name: skipTakeParameters.take, value: String(take))
         ])
 
         paginationCache[hashable] = paginationCache[hashable, default: .reset].updated(20)
@@ -66,4 +72,12 @@ private struct SkipTakeModel {
     public func updated(_ taken: Int) -> SkipTakeModel {
         return SkipTakeModel(skip: skip + taken, take: take)
     }
+}
+
+struct SkipTakeParameters {
+    var skip: String
+    var take: String
+
+    static var normal = SkipTakeParameters(skip: "skip", take: "take")
+    static var commonsVotes = SkipTakeParameters(skip: "queryParameters.skip", take: "queryParameters.take")
 }
