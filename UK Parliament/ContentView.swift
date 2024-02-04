@@ -29,11 +29,11 @@ struct ContentView: View {
                     }
 
                     ContextAwareNavigationLink(value: .postsView) {
-                        Label("Posts", systemImage: "building.columns.fill")
+                        PostsViewRow()
                     }
 
                     ContextAwareNavigationLink(value: .partiesView) {
-                        Label("Parties", systemImage: "house")
+                        PartiesViewRow()
                     }
                 }
 
@@ -108,13 +108,10 @@ struct ContentView: View {
 private struct CommonsVotesViewRow: View {
     var body: some View {
         HStack(alignment: .center) {
-            Image("commons")
+            Image(systemName: "building.columns.circle")
                 .resizable()
                 .frame(width: 60, height: 60)
-                .mask {
-                    Circle()
-                        .frame(width: 60, height: 60)
-                }
+                .foregroundStyle(Color.commons)
             VStack(alignment: .leading) {
                 Text("Commons votes")
                     .bold()
@@ -128,13 +125,10 @@ private struct CommonsVotesViewRow: View {
 private struct LordsVotesViewRow: View {
     var body: some View {
         HStack(alignment: .center) {
-            Image("lords")
+            Image(systemName: "building.columns.circle")
                 .resizable()
                 .frame(width: 60, height: 60)
-                .mask {
-                    Circle()
-                        .frame(width: 60, height: 60)
-                }
+                .foregroundStyle(Color.lords)
             VStack(alignment: .leading) {
                 Text("Lords votes")
                     .bold()
@@ -190,6 +184,40 @@ private struct ConstituenciesViewRow: View {
                 Text("Constituencies")
                     .bold()
                 Text("View and search for constituencies")
+                    .font(.caption)
+            }
+        }
+    }
+}
+
+private struct PostsViewRow: View {
+    var body: some View {
+        HStack(alignment: .center) {
+            Image(systemName: "briefcase.circle")
+                .resizable()
+                .frame(width: 60, height: 60)
+                .foregroundStyle(.accent)
+            VStack(alignment: .leading) {
+                Text("Posts")
+                    .bold()
+                Text("View government and opposition posts")
+                    .font(.caption)
+            }
+        }
+    }
+}
+
+private struct PartiesViewRow: View {
+    var body: some View {
+        HStack(alignment: .center) {
+            Image(systemName: "chart.pie")
+                .resizable()
+                .frame(width: 60, height: 60)
+                .foregroundStyle(.accent)
+            VStack(alignment: .leading) {
+                Text("Parties")
+                    .bold()
+                Text("View the state of the parties in the Commons and the Lords")
                     .font(.caption)
             }
         }

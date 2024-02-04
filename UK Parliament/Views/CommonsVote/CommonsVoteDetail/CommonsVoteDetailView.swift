@@ -43,7 +43,7 @@ struct CommonsVoteDetailView: View {
     @ViewBuilder
     var scrollView: some View {
         List {
-            if let ayeTellers = vote.ayeTellers, ayeTellers.count > 0 {
+            if let ayeTellers = viewModel.vote?.ayeTellers, ayeTellers.count > 0 {
                 Section("Aye tellers") {
                     ForEach(ayeTellers) { teller in
                         VoterNavigationLink(voter: teller)
@@ -51,7 +51,7 @@ struct CommonsVoteDetailView: View {
                 }
             }
 
-            if let noTellers = vote.noTellers, noTellers.count > 0 {
+            if let noTellers = viewModel.vote?.noTellers, noTellers.count > 0 {
                 Section("No tellers") {
                     ForEach(noTellers) { teller in
                         VoterNavigationLink(voter: teller)
