@@ -60,7 +60,7 @@ class FetchModel {
 
     public func canGetNextData(from url: URL, totalResults: Int) -> Bool {
         let hashable = UtilsModel.constructURLHashable(from: url)
-        return paginationCache[hashable, default: .reset].skip >= totalResults
+        return paginationCache[hashable, default: .reset].skip <= totalResults
     }
 }
 
