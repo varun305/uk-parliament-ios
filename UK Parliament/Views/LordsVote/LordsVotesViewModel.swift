@@ -2,9 +2,9 @@ import Foundation
 import SwiftUI
 import Combine
 
-@MainActor class CommonsVotesViewModel: ObservableObject {
+@MainActor class LordsVotesViewModel: ObservableObject {
     @Published var loading = true
-    @Published var votes: [CommonsVote] = []
+    @Published var votes: [LordsVote] = []
     @Published var search = ""
 
     init() {
@@ -23,7 +23,7 @@ import Combine
 
     public func nextData(searchText: String? = nil, reset: Bool = false) {
         let search = searchText ?? self.search
-        if !VoteModel.shared.canGetNextCommonsData(search: search, reset: reset) {
+        if !VoteModel.shared.canGetNextLordsData(search: search, reset: reset) {
             return
         }
 
@@ -33,7 +33,7 @@ import Combine
                 votes = []
             }
         }
-        VoteModel.shared.nextCommonsData(search: search, reset: reset) { result in
+        VoteModel.shared.nextLordsData(search: search, reset: reset) { result in
             Task { @MainActor in
                 withAnimation {
                     if reset {

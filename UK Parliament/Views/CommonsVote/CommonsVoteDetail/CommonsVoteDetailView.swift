@@ -79,7 +79,7 @@ struct CommonsVoteDetailView: View {
     }
 
     private struct VoterNavigationLink: View {
-        var voter: CommonsVoter
+        var voter: Voter
         var body: some View {
             if let memberId = voter.memberId {
                 ContextAwareNavigationLink(value: .memberDetailView(memberId: memberId)) {

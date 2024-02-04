@@ -3,7 +3,6 @@ import SkeletonUI
 
 struct CommonsVoteRow: View {
     var vote: CommonsVote
-
     var body: some View {
         VStack(alignment: .leading) {
             Text(vote.title ?? "")

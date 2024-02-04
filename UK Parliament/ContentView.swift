@@ -16,7 +16,7 @@ struct ContentView: View {
                         CommonsVotesViewRow()
                     }
 
-                    DummyNavigationLink {
+                    ContextAwareNavigationLink(value: .lordsVotesView) {
                         LordsVotesViewRow()
                     }
 
@@ -92,6 +92,8 @@ struct ContentView: View {
                     CommonsVoteDetailView(vote: vote)
                 case .memberCommonsVotesView(let member):
                     MemberCommonsVotesView(viewModel: MemberCommonsVotesViewModel(member: member))
+                case .lordsVotesView:
+                    LordsVotesView()
                 }
             }
         }

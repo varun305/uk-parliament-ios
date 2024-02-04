@@ -1,16 +1,6 @@
 import Foundation
 
-protocol Voter: Identifiable, Codable {
-    var memberId: Int? { get }
-    var name: String? { get }
-    var listAs: String? { get }
-    var party: String? { get }
-    var partyColour: String? { get }
-    var partyAbbreviation: String? { get }
-    var memberFrom: String? { get }
-}
-
-class CommonsVoter: Voter {
+class Voter: Identifiable, Codable {
     var memberId: Int?
     var name: String?
     var listAs: String?
@@ -43,11 +33,11 @@ class CommonsVote: Codable, Identifiable, Hashable {
     var title: String?
     var ayeCount: Int?
     var noCount: Int?
-    var ayeTellers: [CommonsVoter]?
-    var noTellers: [CommonsVoter]?
-    var ayes: [CommonsVoter]?
-    var noes: [CommonsVoter]?
-    var noVoteRecorded: [CommonsVoter]?
+    var ayeTellers: [Voter]?
+    var noTellers: [Voter]?
+    var ayes: [Voter]?
+    var noes: [Voter]?
+    var noVoteRecorded: [Voter]?
 
     enum CodingKeys: String, CodingKey {
         case divisionId = "DivisionId"
@@ -79,18 +69,53 @@ class CommonsVote: Codable, Identifiable, Hashable {
     }
 }
 
+class LordsVote: Codable, Identifiable, Hashable {
+    var divisionId: Int?
+    var date: String?
+    var number: Int?
+    var notes: String?
+    var title: String?
+    var isWhipped: Bool?
+    var isGovernmentContent: Bool?
+    var authoritativeContentCount: Int?
+    var authoritativeNotContentCount: Int?
+    var sponsoringMemberId: Int?
+    var isHouse: Bool?
+    var amendmentNotes: String?
+    var isGovernmentWin: Bool?
+    var contentTellers: [Voter]?
+    var notContentTellers: [Voter]?
+    var contents: [Voter]?
+    var notContents: [Voter]?
+
+    var id: Int? {
+        divisionId
+    }
+
+    static func == (lhs: LordsVote, rhs: LordsVote) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(divisionId)
+        hasher.combine(title)
+    }
+}
+
 class VoteModel {
+    // TODO: need to change this whole system. it's disgusting
     private var commonsReturn = [String?: Bool]()
-    private let take = 20
+    private var lordsReturn = [String?: Bool]()
 
     public static var shared = VoteModel()
     private init() {}
 
-    public func canGetNextData(search: String = "", reset: Bool = false) -> Bool {
-        if reset {
-            return true
-        }
-        return !commonsReturn[search, default: false]
+    private func canGetNextData(house: House, search: String = "", reset: Bool = false) -> Bool {
+        return reset || house == .commons ? !commonsReturn[search, default: false] : !lordsReturn[search, default: false]
+    }
+
+    public func canGetNextCommonsData(search: String = "", reset: Bool = false) -> Bool {
+        self.canGetNextData(house: .commons, search: search, reset: reset)
     }
 
     public func nextCommonsData(search: String = "", reset: Bool = false, _ completion: @escaping ([CommonsVote]?) -> Void) {
@@ -134,5 +159,52 @@ class VoteModel {
 
     private func constructFetchCommonsVoteUrl(for id: Int) -> URL {
         URL(string: "https://commonsvotes-api.parliament.uk/data/division/\(id).json")!
+    }
+
+    public func canGetNextLordsData(search: String = "", reset: Bool = false) -> Bool {
+        self.canGetNextData(house: .lords, search: search, reset: reset)
+    }
+
+    public func nextLordsData(search: String = "", reset: Bool = false, _ completion: @escaping ([LordsVote]?) -> Void) {
+        if reset {
+            lordsReturn[search] = false
+        }
+
+        if lordsReturn[search, default: false] {
+            completion(nil)
+            return
+        }
+
+        let url = constructLordsVoteUrl(search: search)
+        FetchModel.base.fetchDataSkipTake([LordsVote].self, from: url, reset: reset) { result in
+            if let result = result {
+                if result.isEmpty {
+                    self.lordsReturn[search] = true
+                }
+            }
+            completion(result)
+        }
+    }
+
+    private let lordsVoteUrl = "https://lordsvotes-api.parliament.uk/data/Divisions/search"
+    private func constructLordsVoteUrl(search: String) -> URL {
+        var components = URLComponents(string: lordsVoteUrl)!
+        var queryItems = [URLQueryItem]()
+        if !search.isEmpty {
+            queryItems.append(URLQueryItem(name: "SearchTerm", value: search))
+        }
+        components.queryItems = queryItems
+        return components.url!
+    }
+
+    public func fetchLordsVote(for id: Int, _ completion: @escaping (LordsVote?) -> Void) {
+        let url = constructFetchLordsVoteUrl(for: id)
+        FetchModel.base.fetchData(LordsVote.self, from: url) { result in
+            completion(result)
+        }
+    }
+
+    private func constructFetchLordsVoteUrl(for id: Int) -> URL {
+        URL(string: "https://lordsvotes-api.parliament.uk/data/Divisions/\(id)")!
     }
 }

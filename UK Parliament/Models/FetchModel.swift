@@ -13,8 +13,8 @@ class FetchModel {
             return
         }
 
+        print("FETCHING \(url)")
         URLSession.shared.dataTask(with: url) { data, _, _ in
-            print("FETCHING \(url)")
             self.cache[url] = data
             completion(data)
         }.resume()
@@ -45,8 +45,8 @@ class FetchModel {
             return
         }
 
+        print("FETCHING \(url)")
         URLSession.shared.dataTask(with: url) { data, _, _ in
-            print("FETCHING \(url)")
             self.cache[url] = data
             completion(UtilsModel.resolveData(T.self, from: data))
         }.resume()
