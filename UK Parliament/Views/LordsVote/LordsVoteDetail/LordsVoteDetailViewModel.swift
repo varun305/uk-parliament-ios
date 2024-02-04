@@ -9,7 +9,6 @@ import SwiftUI
         loading = true
         VoteModel.shared.fetchLordsVote(for: id) { result in
             Task { @MainActor in
-                print(result?.title)
                 withAnimation {
                     self.vote = result
                     self.loading = false

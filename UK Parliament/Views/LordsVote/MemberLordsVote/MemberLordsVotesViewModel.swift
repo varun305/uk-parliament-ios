@@ -2,9 +2,9 @@ import Foundation
 import SwiftUI
 import Combine
 
-@MainActor class MemberCommonsVotesViewModel: ObservableObject {
+@MainActor class MemberLordsVotesViewModel: ObservableObject {
     var member: Member
-    @Published var memberVotes: [MemberCommonsVote] = []
+    @Published var memberVotes: [MemberLordsVote] = []
     @Published var search = ""
     @Published var loading = true
 
@@ -25,7 +25,7 @@ import Combine
 
     public func nextData(searchText: String? = nil, reset: Bool = false) {
         let search = searchText ?? self.search
-        if !MemberVoteModel.shared.canGetNextCommonsData(search: search, reset: reset) {
+        if !MemberVoteModel.shared.canGetNextLordsData(search: search, reset: reset) {
             return
         }
 
@@ -36,7 +36,7 @@ import Combine
             }
         }
         if let memberId = member.id {
-            MemberVoteModel.shared.nextMemberCommonsData(memberId: memberId, search: search, reset: reset) { result in
+            MemberVoteModel.shared.nextMemberLordsData(memberId: memberId, search: search, reset: reset) { result in
                 Task { @MainActor in
                     print(result?.compactMap { $0.publishedDivision?.title } ?? "")
                     withAnimation {

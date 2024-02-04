@@ -181,6 +181,10 @@ struct MemberDetailView: View {
             ContextAwareNavigationLink(value: .memberCommonsVotesView(member: member)) {
                 Text("Commons votes")
             }
+        } else if let member = viewModel.member, !member.isCommonsMember {
+            ContextAwareNavigationLink(value: .memberLordsVotesView(member: member)) {
+                Text("Lords votes")
+            }
         }
     }
 
