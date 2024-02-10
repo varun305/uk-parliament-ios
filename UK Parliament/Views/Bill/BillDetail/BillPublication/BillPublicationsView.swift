@@ -30,6 +30,7 @@ struct BillPublicationsView: View {
             } label: {
                 Image(systemName: "chevron.up.circle")
                     .rotationEffect(.degrees(viewModel.sortOrderAscending ? 0 : 180))
+                    .accessibilityLabel(Text(viewModel.sortOrderAscending ? "Sort by descending date" : "Sort by ascending date"))
             }
         }
         .onAppear {
