@@ -2,56 +2,21 @@ import Foundation
 import SwiftUI
 import Combine
 
-@MainActor class BillsViewModel: ObservableObject {
+@MainActor class BillsViewModel: UnifiedListViewModel<Bill> {
     var member: Member?
-    @Published var loading = true
-    @Published var result: BillItemModel?
-    @Published var bills: [Bill] = []
-    @Published var search = ""
 
     init(member: Member? = nil) {
         self.member = member
-        addSearchSubscriber()
+        super.init()
     }
 
-    var numResults: Int {
-        result?.totalResults ?? 0
-    }
-
-    private var cancellables = Set<AnyCancellable>()
-    private func addSearchSubscriber() {
-        $search
-            .debounce(for: 0.3, scheduler: DispatchQueue.main)
-            .sink { [weak self] searchText in
-                self?.nextData(searchText: searchText, reset: true)
-            }
-            .store(in: &cancellables)
-    }
-
-    public func nextData(searchText: String? = nil, reset: Bool = false) {
-        let search = searchText ?? self.search
-        if !BillModel.shared.canGetNextData(search: search, memberId: member?.id, reset: reset) {
-            return
-        }
-
-        if reset {
-            withAnimation {
-                loading = true
-                bills = []
-            }
-        }
+    override public func fetchNextData(search: String, reset: Bool, completion: @escaping ([Bill], Int) -> Void) {
         BillModel.shared.nextData(search: search, memberId: member?.id, reset: reset) { result in
-            Task { @MainActor in
-                withAnimation {
-                    self.result = result
-                    if reset {
-                        self.bills = result?.items ?? []
-                        self.loading = false
-                    } else {
-                        self.bills += result?.items ?? []
-                    }
-                }
-            }
+            completion(result?.items ?? [], result?.totalResults ?? 0)
         }
+    }
+
+    override public func canFetchNextData(search: String, reset: Bool) -> Bool {
+        return BillModel.shared.canGetNextData(search: search, memberId: member?.id, reset: reset)
     }
 }

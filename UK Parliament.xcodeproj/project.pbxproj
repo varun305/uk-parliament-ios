@@ -14,6 +14,7 @@
 		EE0186272B38258B004F7F77 /* MemberContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0186262B38258B004F7F77 /* MemberContactViewModel.swift */; };
 		EE0186292B385A4E004F7F77 /* PartyTaggedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0186282B385A4E004F7F77 /* PartyTaggedText.swift */; };
 		EE020BC42B618A94004C893B /* SkeletonUI in Frameworks */ = {isa = PBXBuildFile; productRef = EE020BC32B618A94004C893B /* SkeletonUI */; };
+		EE208E842B7949DC005125BA /* UnifiedListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE208E832B7949DC005125BA /* UnifiedListViewModel.swift */; };
 		EE29CCC42B6059E10027CBA4 /* ListExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE29CCC32B6059E10027CBA4 /* ListExtensions.swift */; };
 		EE2F06D02B3C50C600462D3C /* AcknowledgementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2F06CF2B3C50C600462D3C /* AcknowledgementsView.swift */; };
 		EE3194D52B6C181200A5F754 /* DummyNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3194D42B6C181200A5F754 /* DummyNavigationLink.swift */; };
@@ -113,6 +114,7 @@
 		EE0186242B38255D004F7F77 /* MemberContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberContactView.swift; sourceTree = "<group>"; };
 		EE0186262B38258B004F7F77 /* MemberContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberContactViewModel.swift; sourceTree = "<group>"; };
 		EE0186282B385A4E004F7F77 /* PartyTaggedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyTaggedText.swift; sourceTree = "<group>"; };
+		EE208E832B7949DC005125BA /* UnifiedListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnifiedListViewModel.swift; sourceTree = "<group>"; };
 		EE29CCC32B6059E10027CBA4 /* ListExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListExtensions.swift; sourceTree = "<group>"; };
 		EE2F06CF2B3C50C600462D3C /* AcknowledgementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsView.swift; sourceTree = "<group>"; };
 		EE3194D42B6C181200A5F754 /* DummyNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyNavigationLink.swift; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 				EE97BF8C2B34A5A000FA950C /* Constituency */,
 				EE97BF882B34A4ED00FA950C /* Party */,
 				EE2F06CF2B3C50C600462D3C /* AcknowledgementsView.swift */,
+				EE208E832B7949DC005125BA /* UnifiedListViewModel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -724,6 +727,7 @@
 				EEEC3B392B39A97900A8626D /* CommonsVotesView.swift in Sources */,
 				EE97BF9C2B3571C800FA950C /* PartyCircleView.swift in Sources */,
 				EE8F2CC92B36DA5600D771F2 /* RegisteredInterestsViewModel.swift in Sources */,
+				EE208E842B7949DC005125BA /* UnifiedListViewModel.swift in Sources */,
 				EE3194F82B6E55C200A5F754 /* UtilsModel.swift in Sources */,
 				EEFC7C9B2B36132200183203 /* MemberDetailView.swift in Sources */,
 				EE2F06D02B3C50C600462D3C /* AcknowledgementsView.swift in Sources */,

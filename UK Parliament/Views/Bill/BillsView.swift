@@ -4,7 +4,7 @@ struct BillsView: View {
     @StateObject var viewModel = BillsViewModel()
 
     var resultsText: String {
-        "\(viewModel.numResults) results"
+        "\(viewModel.totalResults) results"
     }
 
     var navTitle: String {
@@ -17,9 +17,9 @@ struct BillsView: View {
 
     var body: some View {
         Group {
-            if viewModel.loading && viewModel.bills.isEmpty {
+            if viewModel.loading && viewModel.items.isEmpty {
                 loadingView
-            } else if !viewModel.bills.isEmpty {
+            } else if !viewModel.items.isEmpty {
                 scrollView
             } else {
                 NoDataView()
@@ -35,7 +35,7 @@ struct BillsView: View {
         .navigationTitle(navTitle)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            if viewModel.bills.isEmpty {
+            if viewModel.items.isEmpty {
                 viewModel.nextData(reset: true)
             }
         }
@@ -60,7 +60,7 @@ struct BillsView: View {
     var scrollView: some View {
         List {
             Section(resultsText) {
-                ForEach(viewModel.bills) { bill in
+                ForEach(viewModel.items) { bill in
                     ContextAwareNavigationLink(value: .billDetailView(bill: bill)) {
                         BillRow(bill: bill)
                             .onAppear(perform: { onScrollEnd(bill: bill) })
@@ -72,7 +72,7 @@ struct BillsView: View {
     }
 
     private func onScrollEnd(bill: Bill) {
-        if bill == viewModel.bills.last {
+        if bill == viewModel.items.last {
             viewModel.nextData()
         }
     }
