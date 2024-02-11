@@ -3,14 +3,14 @@ import SwiftUI
 struct MembersView: View {
     @StateObject var viewModel: MembersViewModel
     private var resultsText: String {
-        "\(viewModel.numResults) results"
+        "\(viewModel.totalResults) results"
     }
 
     var body: some View {
         Group {
-            if viewModel.loading && viewModel.members.isEmpty {
+            if viewModel.loading && viewModel.items.isEmpty {
                 loadingView
-            } else if !viewModel.members.isEmpty {
+            } else if !viewModel.items.isEmpty {
                 scrollView
             } else {
                 NoDataView()
@@ -26,7 +26,7 @@ struct MembersView: View {
         .navigationTitle(viewModel.house == .commons ? "MPs" : "Lords")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            if viewModel.members.isEmpty {
+            if viewModel.items.isEmpty {
                 viewModel.nextData(reset: true)
             }
         }
@@ -52,7 +52,7 @@ struct MembersView: View {
     var scrollView: some View {
         List {
             Section(resultsText) {
-                ForEach(viewModel.members) { member in
+                ForEach(viewModel.items) { member in
                     Group {
                         if let memberId = member.id {
                             ContextAwareNavigationLink(value: .memberDetailView(memberId: memberId)) {
@@ -70,7 +70,7 @@ struct MembersView: View {
     }
 
     private func onScrollEnd(member: Member) {
-        if member == viewModel.members.last {
+        if member == viewModel.items.last {
             viewModel.nextData()
         }
     }

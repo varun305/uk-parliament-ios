@@ -2,57 +2,21 @@ import Foundation
 import SwiftUI
 import Combine
 
-@MainActor class MembersViewModel: ObservableObject {
+@MainActor class MembersViewModel: UnifiedListViewModel<Member> {
     var house: House
-    @Published var members: [Member] = []
-    @Published var result: MembersModel?
-    @Published var search = ""
-    @Published var loading = true
-
+    
     init(house: House) {
         self.house = house
-        addSearchSubscriber()
+        super.init()
     }
 
-    var numResults: Int {
-        result?.totalResults ?? 0
-    }
-
-    private var cancellables = Set<AnyCancellable>()
-    private func addSearchSubscriber() {
-        $search
-            .debounce(for: 0.3, scheduler: DispatchQueue.main)
-            .sink { [weak self] searchText in
-                self?.nextData(searchText: searchText, reset: true)
-            }
-            .store(in: &cancellables)
-    }
-
-    func nextData(searchText: String? = nil, reset: Bool = false) {
-        let search = searchText ?? self.search
-        if !MemberModel.shared.canGetNextData(house: house, search: search, reset: reset) {
-            return
-        }
-
-        if reset {
-            withAnimation {
-                loading = true
-                members = []
-            }
-        }
+    override internal func fetchNextData(search: String, reset: Bool, completion: @escaping ([Member], Int) -> Void) {
         MemberModel.shared.nextData(house: house, search: search, reset: reset) { result in
-            let members = (result?.items ?? []).compactMap { $0.value }
-            Task { @MainActor in
-                self.result = result
-                withAnimation {
-                    if reset {
-                        self.members = members
-                        self.loading = false
-                    } else {
-                        self.members += members
-                    }
-                }
-            }
+            completion((result?.items ?? []).compactMap { $0.value }, result?.totalResults ?? 0)
         }
+    }
+
+    override internal func canFetchNextData(search: String, reset: Bool) -> Bool {
+        return MemberModel.shared.canGetNextData(house: house, search: search, reset: reset)
     }
 }
