@@ -8,4 +8,8 @@ import Combine
             completion((result?.items ?? []).compactMap { $0.value }, result?.totalResults ?? 0)
         }
     }
+
+    override internal func canFetchNextData(search: String, reset: Bool) -> Bool {
+        return ConstituencyModel.shared.canGetNextData(search: search, reset: reset)
+    }
 }
