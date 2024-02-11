@@ -4,14 +4,14 @@ struct ConstituenciesView: View {
     @StateObject var viewModel = ConstituenciesViewModel()
 
     var resultsText: String {
-        "\(viewModel.numResults) results" + (viewModel.search != "" ? " for '\(viewModel.search)'" : "")
+        "\(viewModel.totalResults) results" + (viewModel.search != "" ? " for '\(viewModel.search)'" : "")
     }
 
     var body: some View {
         Group {
-            if viewModel.loading && viewModel.consituencies.isEmpty {
+            if viewModel.loading && viewModel.items.isEmpty {
                 loadingView
-            } else if !viewModel.consituencies.isEmpty {
+            } else if !viewModel.items.isEmpty {
                 scrollView
             } else {
                 NoDataView()
@@ -27,7 +27,7 @@ struct ConstituenciesView: View {
         .navigationTitle("Constituencies")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            if viewModel.consituencies.isEmpty {
+            if viewModel.items.isEmpty {
                 viewModel.nextData(reset: true)
             }
         }
@@ -52,7 +52,7 @@ struct ConstituenciesView: View {
     var scrollView: some View {
         List {
             Section(resultsText) {
-                ForEach(viewModel.consituencies) { constituency in
+                ForEach(viewModel.items) { constituency in
                     ContextAwareNavigationLink(value: .constituencyDetailView(constituency: constituency)) {
                         ConstituencyRow(consituency: constituency)
                             .onAppear(perform: { onScrollEnd(constituency: constituency )})
@@ -64,7 +64,7 @@ struct ConstituenciesView: View {
     }
 
     private func onScrollEnd(constituency: Constituency) {
-        if constituency == viewModel.consituencies.last {
+        if constituency == viewModel.items.last {
             viewModel.nextData()
         }
     }

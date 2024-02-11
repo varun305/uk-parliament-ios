@@ -37,19 +37,24 @@ import Combine
         self.fetchNextData(search: search, reset: reset) { result, totalResults in
             Task { @MainActor in
                 withAnimation {
-                    self.items = result
                     self.totalResults = totalResults
+                    if reset {
+                        self.items = result
+                        self.loading = false
+                    } else {
+                        self.items += result
+                    }
                 }
             }
         }
     }
 
-    public func fetchNextData(search: String, reset: Bool, completion: @escaping ([T], Int) -> Void) {
+    internal func fetchNextData(search: String, reset: Bool, completion: @escaping ([T], Int) -> Void) {
         // OVERRIDE
         completion([], 0)
     }
 
-    public func canFetchNextData(search: String, reset: Bool) -> Bool {
+    internal func canFetchNextData(search: String, reset: Bool) -> Bool {
         // OVERRIDE
         return true
     }
