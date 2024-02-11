@@ -2,15 +2,15 @@ import SwiftUI
 
 struct BillStagesView: View {
     @EnvironmentObject var contextModel: ContextModel
-    @StateObject var viewModel = BillStagesViewModel()
-    var bill: Bill
+    @StateObject var viewModel: BillStagesViewModel
+    
     private var resultsText: String {
-        "\(viewModel.numResults) results"
+        "\(viewModel.totalResults) results"
     }
 
     var body: some View {
         Group {
-            if viewModel.stages.count > 0 {
+            if viewModel.items.count > 0 {
                 scrollView
             } else if viewModel.loading {
                 loadingView
@@ -18,11 +18,11 @@ struct BillStagesView: View {
                 NoDataView()
             }
         }
-        .navigationTitle("Stages, \(bill.shortTitle ?? "")")
+        .navigationTitle("Stages, \(viewModel.bill.shortTitle ?? "")")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            if let billId = bill.billId, viewModel.stages.isEmpty {
-                viewModel.nextData(for: billId, reset: true)
+            if viewModel.items.isEmpty {
+                viewModel.nextData(reset: true)
             }
         }
     }
@@ -46,8 +46,8 @@ struct BillStagesView: View {
     var scrollView: some View {
         List {
             Section(resultsText) {
-                ForEach(viewModel.stages) { stage in
-                    ContextAwareNavigationLink(value: .billPublicationsView(bill: bill, stage: stage)) {
+                ForEach(viewModel.items) { stage in
+                    ContextAwareNavigationLink(value: .billPublicationsView(bill: viewModel.bill, stage: stage)) {
                         BillStageRow(stage: stage)
                             .onAppear(perform: { onScrollEnd(stage: stage) })
                             .contextMenu(menuItems: {
@@ -63,8 +63,8 @@ struct BillStagesView: View {
     }
 
     private func onScrollEnd(stage: Stage) {
-        if let billId = bill.billId, stage == viewModel.stages.last {
-            viewModel.nextData(for: billId)
+        if stage == viewModel.items.last {
+            viewModel.nextData()
         }
     }
 }

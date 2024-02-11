@@ -83,7 +83,7 @@ struct ContentView: View {
                 case .billDetailView(let bill):
                     BillDetailView(bill: bill)
                 case .billStagesView(let bill):
-                    BillStagesView(bill: bill)
+                    BillStagesView(viewModel: BillStagesViewModel(bill: bill))
                 case .billStageSittingsView(let stage):
                     BillStageSittingsView(stage: stage)
                 case .billAmendmentsView(let bill, let stage):
