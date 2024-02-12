@@ -2,52 +2,25 @@ import Foundation
 import SwiftUI
 import Combine
 
-@MainActor class MemberLordsVotesViewModel: ObservableObject {
+@MainActor class MemberLordsVotesViewModel: UnifiedListViewModel<MemberLordsVote> {
     var member: Member
-    @Published var memberVotes: [MemberLordsVote] = []
-    @Published var search = ""
-    @Published var loading = true
 
     init(member: Member) {
         self.member = member
-        addSearchSubscriber()
+        super.init()
     }
 
-    private var cancellables = Set<AnyCancellable>()
-    private func addSearchSubscriber() {
-        $search
-            .debounce(for: 0.3, scheduler: DispatchQueue.main)
-            .sink { [weak self] searchText in
-                self?.nextData(searchText: searchText, reset: true)
+    override internal func fetchNextData(search: String, reset: Bool, completion: @escaping ([MemberLordsVote], Int) -> Void) {
+        if let id = member.id {
+            MemberVoteModel.shared.nextMemberLordsData(memberId: id, search: search, reset: reset) { result in
+                completion(result ?? [], 0)
             }
-            .store(in: &cancellables)
+        } else {
+            completion([], 0)
+        }
     }
 
-    public func nextData(searchText: String? = nil, reset: Bool = false) {
-        let search = searchText ?? self.search
-        if !MemberVoteModel.shared.canGetNextLordsData(search: search, reset: reset) {
-            return
-        }
-
-        if reset {
-            withAnimation {
-                loading = true
-                memberVotes = []
-            }
-        }
-        if let memberId = member.id {
-            MemberVoteModel.shared.nextMemberLordsData(memberId: memberId, search: search, reset: reset) { result in
-                Task { @MainActor in
-                    withAnimation {
-                        if reset {
-                            self.memberVotes = result ?? []
-                            self.loading = false
-                        } else {
-                            self.memberVotes += result ?? []
-                        }
-                    }
-                }
-            }
-        }
+    override internal func canFetchNextData(search: String, reset: Bool) -> Bool {
+        return MemberVoteModel.shared.canGetNextLordsData(search: search, reset: reset)
     }
 }

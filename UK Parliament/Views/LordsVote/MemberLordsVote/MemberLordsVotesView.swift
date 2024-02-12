@@ -5,9 +5,9 @@ struct MemberLordsVotesView: View {
 
     var body: some View {
         Group {
-            if viewModel.loading && viewModel.memberVotes.isEmpty {
+            if viewModel.loading && viewModel.items.isEmpty {
                 loadingView
-            } else if !viewModel.memberVotes.isEmpty {
+            } else if !viewModel.items.isEmpty {
                 scrollView
             } else {
                 NoDataView()
@@ -23,7 +23,7 @@ struct MemberLordsVotesView: View {
         .navigationTitle("Lords votes, \(viewModel.member.nameDisplayAs ?? "")")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            if viewModel.memberVotes.isEmpty {
+            if viewModel.items.isEmpty {
                 viewModel.nextData(reset: true)
             }
         }
@@ -43,7 +43,7 @@ struct MemberLordsVotesView: View {
 
     @ViewBuilder
     var scrollView: some View {
-        List(viewModel.memberVotes) { memberVote in
+        List(viewModel.items) { memberVote in
             MemberLordsVoteRow(memberVote: memberVote)
                 .ifLet(memberVote.publishedDivision) { view, lordsVote in
                     ContextAwareNavigationLink(value: .lordsVoteDetailView(vote: lordsVote)) {
@@ -56,7 +56,7 @@ struct MemberLordsVotesView: View {
     }
 
     private func onScrollEnd(memberVote: MemberLordsVote) {
-        if memberVote == viewModel.memberVotes.last {
+        if memberVote == viewModel.items.last {
             viewModel.nextData()
         }
     }
