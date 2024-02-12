@@ -5,9 +5,9 @@ struct CommonsVotesView: View {
 
     var body: some View {
         Group {
-            if viewModel.loading && viewModel.votes.isEmpty {
+            if viewModel.loading && viewModel.items.isEmpty {
                 loadingView
-            } else if !viewModel.votes.isEmpty {
+            } else if !viewModel.items.isEmpty {
                 scrollView
             } else {
                 NoDataView()
@@ -23,7 +23,7 @@ struct CommonsVotesView: View {
         .navigationTitle("Commons votes")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            if viewModel.votes.isEmpty {
+            if viewModel.items.isEmpty {
                 viewModel.nextData(reset: true)
             }
         }
@@ -43,7 +43,7 @@ struct CommonsVotesView: View {
 
     @ViewBuilder
     var scrollView: some View {
-        List(viewModel.votes) { vote in
+        List(viewModel.items) { vote in
             ContextAwareNavigationLink(value: .commonsVoteDetailView(vote: vote)) {
                 CommonsVoteRow(vote: vote)
                     .onAppear(perform: { onScrollEnd(vote: vote) })
@@ -53,7 +53,7 @@ struct CommonsVotesView: View {
     }
 
     private func onScrollEnd(vote: CommonsVote) {
-        if vote == viewModel.votes.last {
+        if vote == viewModel.items.last {
             viewModel.nextData()
         }
     }
