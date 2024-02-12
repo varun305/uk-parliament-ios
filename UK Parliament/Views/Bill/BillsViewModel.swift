@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 import Combine
 
-@MainActor class BillsViewModel: UnifiedListViewModel<Bill> {
+class BillsViewModel: UnifiedListViewModel<Bill> {
     var member: Member?
 
     init(member: Member? = nil) {
