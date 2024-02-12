@@ -16,7 +16,8 @@ struct MemberCommonsVotesView: View {
             rowLoadingView: {
                 CommonsVoteRowLoading()
             },
-            navigationTitle: "Commons votes, \(viewModel.member.nameDisplayAs ?? "")"
+            navigationTitle: "Commons votes, \(viewModel.member.nameDisplayAs ?? "")",
+            showNumResults: false
         )
     }
 }
