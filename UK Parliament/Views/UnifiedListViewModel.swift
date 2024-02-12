@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 import Combine
 
-@MainActor class UnifiedListViewModel<T: Identifiable>: ObservableObject {
+class UnifiedListViewModel<T: Identifiable>: ObservableObject {
     @Published var items = [T]()
     @Published var totalResults = 0
     @Published var search = ""

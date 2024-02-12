@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-@MainActor class BillStagesViewModel: UnifiedListViewModel<Stage> {
+class BillStagesViewModel: UnifiedListViewModel<Stage> {
     var bill: Bill
 
     init(bill: Bill) {

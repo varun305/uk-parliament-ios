@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 import Combine
 
-@MainActor class MembersViewModel: UnifiedListViewModel<Member> {
+class MembersViewModel: UnifiedListViewModel<Member> {
     var house: House
     
     init(house: House) {
