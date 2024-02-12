@@ -2,48 +2,14 @@ import Foundation
 import SwiftUI
 import Combine
 
-@MainActor class LordsVotesViewModel: ObservableObject {
-    @Published var loading = true
-    @Published var votes: [LordsVote] = []
-    @Published var search = ""
-
-    init() {
-        addSearchSubscriber()
-    }
-
-    private var cancellables = Set<AnyCancellable>()
-    private func addSearchSubscriber() {
-        $search
-            .debounce(for: 0.3, scheduler: DispatchQueue.main)
-            .sink { [weak self] searchText in
-                self?.nextData(searchText: searchText, reset: true)
-            }
-            .store(in: &cancellables)
-    }
-
-    public func nextData(searchText: String? = nil, reset: Bool = false) {
-        let search = searchText ?? self.search
-        if !VoteModel.shared.canGetNextLordsData(search: search, reset: reset) {
-            return
-        }
-
-        if reset {
-            withAnimation {
-                loading = true
-                votes = []
-            }
-        }
+@MainActor class LordsVotesViewModel: UnifiedListViewModel<LordsVote> {
+    override internal func fetchNextData(search: String, reset: Bool, completion: @escaping ([LordsVote], Int) -> Void) {
         VoteModel.shared.nextLordsData(search: search, reset: reset) { result in
-            Task { @MainActor in
-                withAnimation {
-                    if reset {
-                        self.votes = result ?? []
-                        self.loading = false
-                    } else {
-                        self.votes += result ?? []
-                    }
-                }
-            }
+            completion(result ?? [], 0)
         }
+    }
+
+    override internal func canFetchNextData(search: String, reset: Bool) -> Bool {
+        return VoteModel.shared.canGetNextLordsData(search: search, reset: reset)
     }
 }
