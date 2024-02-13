@@ -8,12 +8,14 @@ struct BillStagesView: View {
         UnifiedListView(
             viewModel: viewModel,
             rowView: { stage in
-                BillStageRow(stage: stage)
-                    .contextMenu(menuItems: {
-                        Button("See sittings", systemImage: "person.2.wave.2") {
-                            contextModel.manualNavigate(to: .billStageSittingsView(stage: stage))
-                        }
-                    })
+                ContextAwareNavigationLink(value: .billPublicationsView(bill: viewModel.bill, stage: stage)) {
+                    BillStageRow(stage: stage)
+                        .contextMenu(menuItems: {
+                            Button("See sittings", systemImage: "person.2.wave.2") {
+                                contextModel.manualNavigate(to: .billStageSittingsView(stage: stage))
+                            }
+                        })
+                }
             },
             rowLoadingView: {
                 BillStageRowLoading()
