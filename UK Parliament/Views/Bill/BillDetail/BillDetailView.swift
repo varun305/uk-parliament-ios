@@ -107,7 +107,7 @@ struct BillDetailView: View {
                 .listRowBackground(Color.clear)
                 .listSectionSeparator(.hidden)
 
-                if let sponsors = bill.sponsors {
+                if let sponsors = bill.sponsors, !sponsors.isEmpty {
                     Section("Sponsors") {
                         ForEach(sponsors) { sponsor in
                             if let memberId = sponsor.member?.memberId {
