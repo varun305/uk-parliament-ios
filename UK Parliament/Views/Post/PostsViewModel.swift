@@ -1,6 +1,6 @@
 import Foundation
 
-@MainActor class PostsViewModel: ObservableObject {
+class PostsViewModel: ObservableObject {
     @Published var governmentPosts: [Post] = []
     @Published var oppositionPosts: [Post] = []
 

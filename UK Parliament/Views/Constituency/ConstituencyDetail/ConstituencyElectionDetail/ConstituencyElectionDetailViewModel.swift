@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-@MainActor class ConstituencyElectionDetailViewModel: ObservableObject {
+class ConstituencyElectionDetailViewModel: ObservableObject {
     @Published var result: ElectionResult?
     @Published var loading = false
 

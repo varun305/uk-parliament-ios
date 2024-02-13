@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-@MainActor class MemberDetailViewModel: ObservableObject {
+class MemberDetailViewModel: ObservableObject {
     @Published var member: Member? {
         didSet {
             if let membershipFromId = member?.latestHouseMembership?.membershipFromId {

@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-@MainActor class LordsVoteDetailViewModel: ObservableObject {
+class LordsVoteDetailViewModel: ObservableObject {
     @Published var vote: LordsVote?
     @Published var loading = false
 

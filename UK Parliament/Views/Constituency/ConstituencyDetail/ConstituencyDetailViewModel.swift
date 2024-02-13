@@ -2,7 +2,7 @@ import Foundation
 import MapKit
 import SwiftUI
 
-@MainActor class ConstituencyDetailViewModel: ObservableObject {
+class ConstituencyDetailViewModel: ObservableObject {
     @Published var constituency: Constituency?
     @Published var electionResults: [ElectionResult] = []
     @Published var geometry: Geometry?

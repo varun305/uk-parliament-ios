@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-@MainActor class BillDetailViewModel: ObservableObject {
+class BillDetailViewModel: ObservableObject {
     @Published var loading = false
     @Published var bill: Bill?
 

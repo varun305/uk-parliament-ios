@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-@MainActor class CommonsVoteDetailViewModel: ObservableObject {
+class CommonsVoteDetailViewModel: ObservableObject {
     @Published var vote: CommonsVote?
     @Published var loading = false
 

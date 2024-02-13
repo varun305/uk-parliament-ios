@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-@MainActor class BillPublicationsViewModel: ObservableObject {
+class BillPublicationsViewModel: ObservableObject {
     @Published var loading = false
     @Published var publications: [BillPublication] = []
     @Published var search = ""

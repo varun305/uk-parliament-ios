@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-@MainActor class MemberContactViewModel: ObservableObject {
+class MemberContactViewModel: ObservableObject {
     @Published var contacts: [MemberContact] = []
     @Published var loading = false
 

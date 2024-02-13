@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-@MainActor class RegisteredInterestsViewModel: ObservableObject {
+class RegisteredInterestsViewModel: ObservableObject {
     @Published var registeredInterests: [RegisteredInterest] = []
     @Published var loading = false
 

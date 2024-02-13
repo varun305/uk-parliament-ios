@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-@MainActor class PartiesViewModel: ObservableObject {
+class PartiesViewModel: ObservableObject {
     @Published var state: StateOfThePartiesModel?
     @Published var house: House = .commons {
         didSet {
