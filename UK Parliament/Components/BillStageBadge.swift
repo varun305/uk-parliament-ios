@@ -42,5 +42,7 @@ struct BillStageBadge: View {
                 .font(.largeTitle)
                 .foregroundStyle(.white)
         }
+        .textSelection(.disabled)
+        .accessibilityLabel(Text(stage.description ?? ""))
     }
 }
