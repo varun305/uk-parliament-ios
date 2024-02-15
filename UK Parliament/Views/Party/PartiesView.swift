@@ -13,14 +13,6 @@ struct PartiesView: View {
         }
         .navigationTitle(viewModel.house == .commons ? "House of Commons" : "House of Lords")
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                Picker("House", selection: $viewModel.house) {
-                    Label("House of Commons", image: "commons").tag(House.commons)
-                    Label("House of Lords", image: "lords").tag(House.lords)
-                }
-            }
-        }
         .onAppear {
             viewModel.fetchData()
         }
@@ -30,6 +22,17 @@ struct PartiesView: View {
     var scrollView: some View {
         ScrollView {
             LazyVStack(alignment: .leading) {
+                HStack {
+                    Spacer()
+                    Picker("House", selection: $viewModel.house) {
+                        Text("Commons").tag(House.commons)
+                        Text("Lords").tag(House.lords)
+                    }
+                    .pickerStyle(.segmented)
+                    Spacer()
+                }
+                .padding(.bottom, 10)
+
                 ForEach(viewModel.parties) { party in
                     if let _party = party.party {
                         Text("\(_party.name ?? "") (\(party.total ?? 0) members)")
