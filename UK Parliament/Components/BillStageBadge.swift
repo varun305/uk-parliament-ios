@@ -43,6 +43,6 @@ struct BillStageBadge: View {
                 .foregroundStyle(.white)
         }
         .textSelection(.disabled)
-        .accessibilityLabel(Text(stage.description ?? ""))
+        .accessibilityHidden(true)
     }
 }
