@@ -7,6 +7,14 @@ struct ConstituencyElectionDetailView: View {
     var constituency: Constituency
     var electionResult: ElectionResult
 
+    var navTitle: String {
+        if let name = constituency.name, electionResult.formattedDate != "" {
+            return "\(name) election result, \(electionResult.formattedDate)"
+        } else {
+            return "Election result"
+        }
+    }
+
     var body: some View {
         Group {
             if viewModel.result != nil {
@@ -17,7 +25,7 @@ struct ConstituencyElectionDetailView: View {
                 NoDataView()
             }
         }
-        .navigationTitle("Election results")
+        .navigationTitle(navTitle)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             if let constituencyId = constituency.id, let electionId = electionResult.id {
