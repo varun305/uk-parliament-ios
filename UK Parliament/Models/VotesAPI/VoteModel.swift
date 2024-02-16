@@ -105,7 +105,7 @@ class LordsVote: Codable, Identifiable, Hashable {
     var authoritativeNotContentCount: Int?
     var sponsoringMemberId: Int?
     var isHouse: Bool?
-    var amendmentNotes: String?
+    var amendmentMotionNotes: String?
     var isGovernmentWin: Bool?
     var contentTellers: [LordsVoter]?
     var notContentTellers: [LordsVoter]?

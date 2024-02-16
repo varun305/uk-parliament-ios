@@ -43,6 +43,17 @@ struct LordsVoteDetailView: View {
     @ViewBuilder
     var scrollView: some View {
         List {
+            if let amendmentNotes = vote.amendmentMotionNotes {
+                HStack {
+                    Spacer()
+                    Text(amendmentNotes.htmlToMarkdown())
+                    Spacer()
+                }
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
+                .padding(.bottom, 20)
+            }
+            
             if let contentTellers = viewModel.vote?.contentTellers, contentTellers.count > 0 {
                 Section("Content tellers") {
                     ForEach(contentTellers) { teller in

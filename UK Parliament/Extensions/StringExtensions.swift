@@ -16,4 +16,25 @@ extension String {
     public func searchContains(_ search: String) -> Bool {
         self.lowercased().contains(search.lowercased()) || search.isEmpty
     }
+
+    public func htmlToMarkdown() -> String {
+        var text = self
+
+        text = text.replacing("<div>", with: "\n")
+        text = text.replacing("</div>", with: "")
+        text = text.replacing("<p>", with: "\n")
+        text = text.replacing("</p>", with: "")
+        text = text.replacing("<br>", with: "\n")
+
+        text = text.replacing("<strong>", with: "**")
+        text = text.replacing("</strong>", with: "**")
+        text = text.replacing("<b>", with: "**")
+        text = text.replacing("</b>", with: "**")
+        text = text.replacing("<em>", with: "*")
+        text = text.replacing("</em>", with: "*")
+        text = text.replacing("<i>", with: "*")
+        text = text.replacing("</i>", with: "*")
+
+        return text
+    }
 }
