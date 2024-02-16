@@ -94,6 +94,12 @@ struct ConstituencyElectionDetailView: View {
                             .bold()
                     }
                     HStack {
+                        Text("Turnout")
+                        Spacer()
+                        Text(String(result.turnout ?? 0))
+                            .bold()
+                    }
+                    HStack {
                         Text("Electorate")
                         Spacer()
                         Text(String(result.electorate ?? 0))
@@ -149,15 +155,25 @@ struct ConstituencyElectionDetailView: View {
             Chart((result.candidates ?? []).sorted { $0.votes ?? 0 > $1.votes ?? 0 }, id: \.name) { candidate in
                 BarMark(
                     x: .value("Votes", candidate.votes ?? 0),
-                    y: .value("Candidate", "\(candidate.name), \(candidate.party?.abbreviation?.uppercased() ?? candidate.party?.name ?? "")")
+                    y: .value("Candidate", "\(candidate.name), \(candidate.party?.name ?? "")")
                 )
                 .annotation(position: .trailing) {
-                    Text(String(candidate.votes ?? 0))
+                    Text(getBarAnnotation(for: candidate))
                         .font(.caption)
                 }
                 .foregroundStyle(candidate.party?.bgColor ?? .black)
             }
             .chartXAxis(.hidden)
+        }
+    }
+
+    private func getBarAnnotation(for candidate: CandidateResultModel) -> String {
+        if let votes = candidate.votes, let resultChange = candidate.resultChange, resultChange != "" {
+            return "\(votes) (\(resultChange))"
+        } else if let votes = candidate.votes {
+            return String(votes)
+        } else {
+            return ""
         }
     }
 }
