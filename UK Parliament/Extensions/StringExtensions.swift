@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 extension String {
     public func convertToDate() -> String {
@@ -17,7 +18,7 @@ extension String {
         self.lowercased().contains(search.lowercased()) || search.isEmpty
     }
 
-    public func htmlToMarkdown() -> String {
+    public func htmlToMarkdown() -> LocalizedStringKey {
         var text = self
 
         text = text.replacing("<div>", with: "\n")
@@ -35,6 +36,9 @@ extension String {
         text = text.replacing("<i>", with: "*")
         text = text.replacing("</i>", with: "*")
 
-        return text
+        text = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        print(text)
+
+        return LocalizedStringKey(text)
     }
 }
