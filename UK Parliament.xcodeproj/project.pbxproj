@@ -57,6 +57,10 @@
 		EE8F2CC72B36D88200D771F2 /* RegisteredInterestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8F2CC62B36D88200D771F2 /* RegisteredInterestModel.swift */; };
 		EE8F2CC92B36DA5600D771F2 /* RegisteredInterestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8F2CC82B36DA5600D771F2 /* RegisteredInterestsViewModel.swift */; };
 		EE8FCD892B7FF2DA00B54609 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8FCD882B7FF2DA00B54609 /* DateExtensions.swift */; };
+		EE91A37F2B8211DC00901743 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE91A37E2B8211DC00901743 /* GoogleService-Info.plist */; };
+		EE91A3822B8212A400901743 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = EE91A3812B8212A400901743 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		EE91A3842B8212A400901743 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = EE91A3832B8212A400901743 /* FirebaseCrashlytics */; };
+		EE91A3862B8212A400901743 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EE91A3852B8212A400901743 /* FirebaseFirestoreSwift */; };
 		EE97BF8E2B34BF5E00FA950C /* ConstituencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BF8D2B34BF5E00FA950C /* ConstituencyModel.swift */; };
 		EE97BF902B34C30800FA950C /* ConstituenciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BF8F2B34C30800FA950C /* ConstituenciesView.swift */; };
 		EE97BF922B34C32A00FA950C /* ConstituenciesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BF912B34C32A00FA950C /* ConstituenciesViewModel.swift */; };
@@ -162,6 +166,7 @@
 		EE8F2CC62B36D88200D771F2 /* RegisteredInterestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredInterestModel.swift; sourceTree = "<group>"; };
 		EE8F2CC82B36DA5600D771F2 /* RegisteredInterestsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredInterestsViewModel.swift; sourceTree = "<group>"; };
 		EE8FCD882B7FF2DA00B54609 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
+		EE91A37E2B8211DC00901743 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EE97BF8D2B34BF5E00FA950C /* ConstituencyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstituencyModel.swift; sourceTree = "<group>"; };
 		EE97BF8F2B34C30800FA950C /* ConstituenciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstituenciesView.swift; sourceTree = "<group>"; };
 		EE97BF912B34C32A00FA950C /* ConstituenciesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstituenciesViewModel.swift; sourceTree = "<group>"; };
@@ -216,7 +221,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE91A3842B8212A400901743 /* FirebaseCrashlytics in Frameworks */,
 				EE020BC42B618A94004C893B /* SkeletonUI in Frameworks */,
+				EE91A3822B8212A400901743 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				EE91A3862B8212A400901743 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +356,7 @@
 		EE86A45D2B344BA6007BEA83 /* UK Parliament */ = {
 			isa = PBXGroup;
 			children = (
+				EE91A37E2B8211DC00901743 /* GoogleService-Info.plist */,
 				EEEC3B172B38A3EE00A8626D /* Extensions */,
 				EE8F2CC52B36D81C00D771F2 /* UK-Parliament-Info.plist */,
 				EE97BF9A2B35717A00FA950C /* Components */,
@@ -621,6 +630,9 @@
 			name = "UK Parliament";
 			packageProductDependencies = (
 				EE020BC32B618A94004C893B /* SkeletonUI */,
+				EE91A3812B8212A400901743 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				EE91A3832B8212A400901743 /* FirebaseCrashlytics */,
+				EE91A3852B8212A400901743 /* FirebaseFirestoreSwift */,
 			);
 			productName = "UK Parliament";
 			productReference = EE86A45B2B344BA6007BEA83 /* UK Parliament.app */;
@@ -657,6 +669,7 @@
 			mainGroup = EE86A4522B344BA6007BEA83;
 			packageReferences = (
 				EE020BC22B618A94004C893B /* XCRemoteSwiftPackageReference "SkeletonUI" */,
+				EE91A3802B8212A400901743 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = EE86A45C2B344BA6007BEA83 /* Products */;
 			projectDirPath = "";
@@ -682,6 +695,7 @@
 			files = (
 				EE86A4662B344BA7007BEA83 /* Preview Assets.xcassets in Resources */,
 				EE86A4632B344BA7007BEA83 /* Assets.xcassets in Resources */,
+				EE91A37F2B8211DC00901743 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -966,7 +980,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"UK Parliament/Preview Content\"";
 				DEVELOPMENT_TEAM = 53MK4G2GN4;
 				ENABLE_PREVIEWS = YES;
@@ -981,7 +995,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2024.7;
+				MARKETING_VERSION = 2024.8;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.vsanth.UK-Parliament";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -990,7 +1004,7 @@
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1000,7 +1014,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"UK Parliament/Preview Content\"";
 				DEVELOPMENT_TEAM = 53MK4G2GN4;
 				ENABLE_PREVIEWS = YES;
@@ -1015,7 +1029,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2024.7;
+				MARKETING_VERSION = 2024.8;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.vsanth.UK-Parliament";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1024,7 +1038,7 @@
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1069,6 +1083,14 @@
 				minimumVersion = 2.0.1;
 			};
 		};
+		EE91A3802B8212A400901743 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.21.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1076,6 +1098,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EE020BC22B618A94004C893B /* XCRemoteSwiftPackageReference "SkeletonUI" */;
 			productName = SkeletonUI;
+		};
+		EE91A3812B8212A400901743 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EE91A3802B8212A400901743 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		EE91A3832B8212A400901743 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EE91A3802B8212A400901743 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		EE91A3852B8212A400901743 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EE91A3802B8212A400901743 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
