@@ -3,6 +3,7 @@ import SwiftUI
 
 class ContextModel: ObservableObject {
     @Published var navigationPath = [NavigationItem]()
+    @Published var country = Country.unitedKingdom
 
     private func isViewInStack(_ view: NavigationItem) -> Bool {
         navigationPath.contains(view)
@@ -13,4 +14,8 @@ class ContextModel: ObservableObject {
             navigationPath.append(view)
         }
     }
+}
+
+enum Country {
+    case unitedKingdom, scotland
 }

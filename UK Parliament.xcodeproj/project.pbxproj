@@ -66,7 +66,9 @@
 		EEE171B22B9DE78100C89859 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEE171B12B9DE78100C89859 /* GoogleService-Info.plist */; };
 		EEE171B52B9DE7DD00C89859 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = EEE171B42B9DE7DD00C89859 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		EEE171B72B9DE7DD00C89859 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = EEE171B62B9DE7DD00C89859 /* FirebaseCrashlytics */; };
-		EEE171B92B9DEAAD00C89859 /* EndpointsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE171B82B9DEAAD00C89859 /* EndpointsView.swift */; };
+		EEE171B92B9DEAAD00C89859 /* UKPagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE171B82B9DEAAD00C89859 /* UKPagesView.swift */; };
+		EEE171BD2B9E19D200C89859 /* Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE171BC2B9E19D200C89859 /* Flags.swift */; };
+		EEE171C12B9E21E600C89859 /* GridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE171C02B9E21E600C89859 /* GridItemView.swift */; };
 		EEEC3B022B38862400A8626D /* BillModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B012B38862400A8626D /* BillModel.swift */; };
 		EEEC3B052B388B1900A8626D /* BillsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B042B388B1900A8626D /* BillsView.swift */; };
 		EEEC3B072B388B2600A8626D /* BillsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B062B388B2600A8626D /* BillsViewModel.swift */; };
@@ -173,7 +175,9 @@
 		EE97BF952B34C6DD00FA950C /* ConstituencyRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstituencyRow.swift; sourceTree = "<group>"; };
 		EE97BF9B2B3571C800FA950C /* PartyCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyCircleView.swift; sourceTree = "<group>"; };
 		EEE171B12B9DE78100C89859 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		EEE171B82B9DEAAD00C89859 /* EndpointsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointsView.swift; sourceTree = "<group>"; };
+		EEE171B82B9DEAAD00C89859 /* UKPagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UKPagesView.swift; sourceTree = "<group>"; };
+		EEE171BC2B9E19D200C89859 /* Flags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flags.swift; sourceTree = "<group>"; };
+		EEE171C02B9E21E600C89859 /* GridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridItemView.swift; sourceTree = "<group>"; };
 		EEEC3B012B38862400A8626D /* BillModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillModel.swift; sourceTree = "<group>"; };
 		EEEC3B042B388B1900A8626D /* BillsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillsView.swift; sourceTree = "<group>"; };
 		EEEC3B062B388B2600A8626D /* BillsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillsViewModel.swift; sourceTree = "<group>"; };
@@ -383,17 +387,8 @@
 		EE86A46C2B344C14007BEA83 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EE3194FB2B6F804800A5F754 /* LordsVote */,
-				EEEC3B372B39A96D00A8626D /* CommonsVote */,
-				EEEC3B032B388B0B00A8626D /* Bill */,
-				EE01861C2B375B00004F7F77 /* Post */,
-				EE50F9B72B358F7E00163E52 /* Member */,
-				EE97BF8C2B34A5A000FA950C /* Constituency */,
-				EE97BF882B34A4ED00FA950C /* Party */,
-				EE2F06CF2B3C50C600462D3C /* AcknowledgementsView.swift */,
-				EE208E832B7949DC005125BA /* UnifiedListViewModel.swift */,
-				EE167D8D2B7A108900415100 /* UnifiedListView.swift */,
-				EEE171B82B9DEAAD00C89859 /* EndpointsView.swift */,
+				EEE171BF2B9E20E700C89859 /* Scotland */,
+				EEE171BE2B9E20D600C89859 /* UK */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -453,6 +448,8 @@
 				EEEC3B322B398ADA00A8626D /* ContextAwareNavigationLink.swift */,
 				EE3194D42B6C181200A5F754 /* DummyNavigationLink.swift */,
 				EE3194D62B6C229200A5F754 /* NoDataView.swift */,
+				EEE171BC2B9E19D200C89859 /* Flags.swift */,
+				EEE171C02B9E21E600C89859 /* GridItemView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -462,6 +459,31 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EEE171BE2B9E20D600C89859 /* UK */ = {
+			isa = PBXGroup;
+			children = (
+				EE3194FB2B6F804800A5F754 /* LordsVote */,
+				EEEC3B372B39A96D00A8626D /* CommonsVote */,
+				EEEC3B032B388B0B00A8626D /* Bill */,
+				EE01861C2B375B00004F7F77 /* Post */,
+				EE50F9B72B358F7E00163E52 /* Member */,
+				EE97BF8C2B34A5A000FA950C /* Constituency */,
+				EE97BF882B34A4ED00FA950C /* Party */,
+				EE2F06CF2B3C50C600462D3C /* AcknowledgementsView.swift */,
+				EE208E832B7949DC005125BA /* UnifiedListViewModel.swift */,
+				EE167D8D2B7A108900415100 /* UnifiedListView.swift */,
+				EEE171B82B9DEAAD00C89859 /* UKPagesView.swift */,
+			);
+			path = UK;
+			sourceTree = "<group>";
+		};
+		EEE171BF2B9E20E700C89859 /* Scotland */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Scotland;
 			sourceTree = "<group>";
 		};
 		EEEC3AFF2B38834900A8626D /* MembersAPI */ = {
@@ -752,7 +774,7 @@
 				EEEC3B402B39B54200A8626D /* CommonsVoteDetailView.swift in Sources */,
 				EE31950B2B6F954900A5F754 /* MemberLordsVotesViewModel.swift in Sources */,
 				EE8FCD892B7FF2DA00B54609 /* DateExtensions.swift in Sources */,
-				EEE171B92B9DEAAD00C89859 /* EndpointsView.swift in Sources */,
+				EEE171B92B9DEAAD00C89859 /* UKPagesView.swift in Sources */,
 				EE86A4782B34564C007BEA83 /* PartyRow.swift in Sources */,
 				EEEC3B392B39A97900A8626D /* CommonsVotesView.swift in Sources */,
 				EE97BF9C2B3571C800FA950C /* PartyCircleView.swift in Sources */,
@@ -761,6 +783,7 @@
 				EE3194F82B6E55C200A5F754 /* UtilsModel.swift in Sources */,
 				EE167D8E2B7A108900415100 /* UnifiedListView.swift in Sources */,
 				EEFC7C9B2B36132200183203 /* MemberDetailView.swift in Sources */,
+				EEE171C12B9E21E600C89859 /* GridItemView.swift in Sources */,
 				EE2F06D02B3C50C600462D3C /* AcknowledgementsView.swift in Sources */,
 				EEEC3B222B38AED000A8626D /* BillStagesViewModel.swift in Sources */,
 				EEFC7C992B35B4E000183203 /* MemberPictureView.swift in Sources */,
@@ -781,6 +804,7 @@
 				EE3194DC2B6CD4FE00A5F754 /* MemberCommonsVotesView.swift in Sources */,
 				EE3194FF2B6F808C00A5F754 /* LordsVotesViewModel.swift in Sources */,
 				EEEC3B252B38BA7900A8626D /* BillPublicationsView.swift in Sources */,
+				EEE171BD2B9E19D200C89859 /* Flags.swift in Sources */,
 				EE01861E2B375B0C004F7F77 /* PostsView.swift in Sources */,
 				EE3194E52B6E3BA400A5F754 /* BillStageSittingsView.swift in Sources */,
 				EE50F9B92B358F8B00163E52 /* MembersView.swift in Sources */,
