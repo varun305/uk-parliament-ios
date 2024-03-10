@@ -13,7 +13,7 @@ struct CommonsVotesView: View {
             rowLoadingView: {
                 CommonsVoteRowLoading()
             },
-            navigationTitle: "Commons vote",
+            navigationTitle: "Commons votes",
             showNumResults: false
         )
     }

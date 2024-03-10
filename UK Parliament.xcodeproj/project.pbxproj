@@ -66,6 +66,7 @@
 		EEE171B22B9DE78100C89859 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEE171B12B9DE78100C89859 /* GoogleService-Info.plist */; };
 		EEE171B52B9DE7DD00C89859 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = EEE171B42B9DE7DD00C89859 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		EEE171B72B9DE7DD00C89859 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = EEE171B62B9DE7DD00C89859 /* FirebaseCrashlytics */; };
+		EEE171B92B9DEAAD00C89859 /* EndpointsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE171B82B9DEAAD00C89859 /* EndpointsView.swift */; };
 		EEEC3B022B38862400A8626D /* BillModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B012B38862400A8626D /* BillModel.swift */; };
 		EEEC3B052B388B1900A8626D /* BillsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B042B388B1900A8626D /* BillsView.swift */; };
 		EEEC3B072B388B2600A8626D /* BillsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B062B388B2600A8626D /* BillsViewModel.swift */; };
@@ -172,6 +173,7 @@
 		EE97BF952B34C6DD00FA950C /* ConstituencyRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstituencyRow.swift; sourceTree = "<group>"; };
 		EE97BF9B2B3571C800FA950C /* PartyCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyCircleView.swift; sourceTree = "<group>"; };
 		EEE171B12B9DE78100C89859 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EEE171B82B9DEAAD00C89859 /* EndpointsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointsView.swift; sourceTree = "<group>"; };
 		EEEC3B012B38862400A8626D /* BillModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillModel.swift; sourceTree = "<group>"; };
 		EEEC3B042B388B1900A8626D /* BillsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillsView.swift; sourceTree = "<group>"; };
 		EEEC3B062B388B2600A8626D /* BillsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillsViewModel.swift; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 				EE2F06CF2B3C50C600462D3C /* AcknowledgementsView.swift */,
 				EE208E832B7949DC005125BA /* UnifiedListViewModel.swift */,
 				EE167D8D2B7A108900415100 /* UnifiedListView.swift */,
+				EEE171B82B9DEAAD00C89859 /* EndpointsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -749,6 +752,7 @@
 				EEEC3B402B39B54200A8626D /* CommonsVoteDetailView.swift in Sources */,
 				EE31950B2B6F954900A5F754 /* MemberLordsVotesViewModel.swift in Sources */,
 				EE8FCD892B7FF2DA00B54609 /* DateExtensions.swift in Sources */,
+				EEE171B92B9DEAAD00C89859 /* EndpointsView.swift in Sources */,
 				EE86A4782B34564C007BEA83 /* PartyRow.swift in Sources */,
 				EEEC3B392B39A97900A8626D /* CommonsVotesView.swift in Sources */,
 				EE97BF9C2B3571C800FA950C /* PartyCircleView.swift in Sources */,
