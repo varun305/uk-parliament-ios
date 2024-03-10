@@ -35,6 +35,7 @@ struct UnifiedListView<T, RowContent, LoadingContent>: View where T: Identifiabl
             }
         }
         .searchable(text: $viewModel.search, placement: .navigationBarDrawer(displayMode: .always), prompt: searchPrompt)
+        .autocorrectionDisabled(true)
         .onChange(of: viewModel.search) { _, new in
             if new.isEmpty {
                 viewModel.search = ""
