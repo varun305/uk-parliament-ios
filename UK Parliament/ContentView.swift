@@ -21,7 +21,7 @@ struct ContentView: View {
                     case .unitedKingdom:
                         UKPagesView()
                     case .scotland:
-                        Text("SCOTLAND")
+                        ScottishPagesView()
                     }
                 }
                 .padding(.top, 20)
@@ -78,6 +78,9 @@ struct ContentView: View {
                     LordsVoteDetailView(vote: vote)
                 case .memberLordsVotesView(let member):
                     MemberLordsVotesView(viewModel: MemberLordsVotesViewModel(member: member))
+                
+                case .mspsView:
+                    ScotlandMembersView()
                 }
             }
             .toolbar {
