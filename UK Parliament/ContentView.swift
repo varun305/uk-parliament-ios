@@ -7,9 +7,9 @@ struct ContentView: View {
     var navTitle: String {
         switch contextModel.country {
         case .unitedKingdom:
-            return "UK parliament"
+            return "UK Parliament"
         case .scotland:
-            return "Scottish parliament"
+            return "Scottish Parliament"
         }
     }
 

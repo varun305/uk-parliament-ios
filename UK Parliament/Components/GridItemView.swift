@@ -64,7 +64,3 @@ struct GridItemView: View {
         .frame(maxWidth: 160)
     }
 }
-
-#Preview {
-    GridItemView()
-}
