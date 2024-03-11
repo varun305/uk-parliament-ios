@@ -2,15 +2,17 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var contextModel: ContextModel
+    @State var search = ""
 
     var body: some View {
         NavigationStack(path: $contextModel.navigationPath) {
             ScrollView {
                 VStack(alignment: .leading) {
-                    UKPagesView()
+                    UKPagesView(search: $search)
                         .padding()
                 }
             }
+            .searchable(text: $search)
             .navigationTitle("Home")
             .listStyle(.grouped)
             .navigationDestination(for: NavigationItem.self) { item in

@@ -1,34 +1,19 @@
 import SwiftUI
 
-struct GridItemView: View {
+struct LargePageItemView: View {
     @EnvironmentObject var contextModel: ContextModel
 
-    var title: String
-    var subtitle: String
-    var systemImage: Image
-    var background: Color
-    var foreground: Color
-    var navigateTo: NavigationItem
+    var gridItem: PageItem
 
     init(
-        title: String,
-        subtitle: String,
-        systemImage: String,
-        background: Color,
-        foreground: Color,
-        navigateTo: NavigationItem
+        gridItem: PageItem
     ) {
-        self.title = title
-        self.subtitle = subtitle
-        self.systemImage = Image(systemName: systemImage)
-        self.background = background
-        self.foreground = foreground
-        self.navigateTo = navigateTo
+        self.gridItem = gridItem
     }
 
     var body: some View {
         Button {
-            contextModel.manualNavigate(to: navigateTo)
+            contextModel.manualNavigate(to: gridItem.navigateTo)
         } label: {
             face
                 .accessibilityElement(children: .combine)
@@ -39,23 +24,23 @@ struct GridItemView: View {
     @ViewBuilder
     var face: some View {
         ZStack {
-            background
+            gridItem.background
             HStack(alignment: .center) {
                 VStack(alignment: .leading) {
-                    Text(title)
+                    Text(gridItem.title)
                         .font(.headline)
                         .bold()
-                    Text(subtitle)
+                    Text(gridItem.subtitle)
                         .font(.caption)
                 }
-                .foregroundStyle(foreground)
+                .foregroundStyle(gridItem.foreground)
                 .multilineTextAlignment(.leading)
                 Spacer(minLength: 40)
-                systemImage
+                Image(systemName: gridItem.systemImage)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: 60, maxHeight: 60)
-                    .foregroundStyle(foreground)
+                    .foregroundStyle(gridItem.foreground)
                     .accessibilityHidden(true)
             }
             .padding(.horizontal, 30)
