@@ -3,6 +3,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var contextModel: ContextModel
     @State var search = ""
+    @State var showHelpSheet = false
 
     var body: some View {
         NavigationStack(path: $contextModel.navigationPath) {
@@ -15,6 +16,19 @@ struct ContentView: View {
             .searchable(text: $search)
             .navigationTitle("Home")
             .listStyle(.grouped)
+            .toolbar {
+                ToolbarItem(placement: .automatic) {
+                    Button {
+                        showHelpSheet = true
+                    } label: {
+                        Image(systemName: "questionmark.circle")
+                    }
+                }
+            }
+            .sheet(isPresented: $showHelpSheet) {
+                HelpView()
+                    .textSelection(.disabled)
+            }
             .navigationDestination(for: NavigationItem.self) { item in
                 switch item {
                 case ._404:

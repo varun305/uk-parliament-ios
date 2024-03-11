@@ -68,7 +68,7 @@
 		EEE171B72B9DE7DD00C89859 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = EEE171B62B9DE7DD00C89859 /* FirebaseCrashlytics */; };
 		EEE171B92B9DEAAD00C89859 /* UKPagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE171B82B9DEAAD00C89859 /* UKPagesView.swift */; };
 		EEE171BD2B9E19D200C89859 /* Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE171BC2B9E19D200C89859 /* Flags.swift */; };
-		EEE171C12B9E21E600C89859 /* LargePageItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE171C02B9E21E600C89859 /* LargePageItemView.swift */; };
+		EEE171C12B9E21E600C89859 /* PageItemViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE171C02B9E21E600C89859 /* PageItemViews.swift */; };
 		EEEC3B022B38862400A8626D /* BillModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B012B38862400A8626D /* BillModel.swift */; };
 		EEEC3B052B388B1900A8626D /* BillsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B042B388B1900A8626D /* BillsView.swift */; };
 		EEEC3B072B388B2600A8626D /* BillsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B062B388B2600A8626D /* BillsViewModel.swift */; };
@@ -98,6 +98,7 @@
 		EEEC3B402B39B54200A8626D /* CommonsVoteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B3F2B39B54200A8626D /* CommonsVoteDetailView.swift */; };
 		EEEC3B422B39B55000A8626D /* CommonsVoteDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B412B39B55000A8626D /* CommonsVoteDetailViewModel.swift */; };
 		EEEC3B442B39B83A00A8626D /* VoterRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B432B39B83A00A8626D /* VoterRow.swift */; };
+		EEF543C52B9FA12400AD29D0 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF543C42B9FA12400AD29D0 /* HelpView.swift */; };
 		EEFC7C992B35B4E000183203 /* MemberPictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFC7C982B35B4E000183203 /* MemberPictureView.swift */; };
 		EEFC7C9B2B36132200183203 /* MemberDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFC7C9A2B36132200183203 /* MemberDetailView.swift */; };
 		EEFC7C9D2B36140400183203 /* ElectionResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFC7C9C2B36140400183203 /* ElectionResultModel.swift */; };
@@ -177,7 +178,7 @@
 		EEE171B12B9DE78100C89859 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EEE171B82B9DEAAD00C89859 /* UKPagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UKPagesView.swift; sourceTree = "<group>"; };
 		EEE171BC2B9E19D200C89859 /* Flags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flags.swift; sourceTree = "<group>"; };
-		EEE171C02B9E21E600C89859 /* LargePageItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargePageItemView.swift; sourceTree = "<group>"; };
+		EEE171C02B9E21E600C89859 /* PageItemViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageItemViews.swift; sourceTree = "<group>"; };
 		EEEC3B012B38862400A8626D /* BillModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillModel.swift; sourceTree = "<group>"; };
 		EEEC3B042B388B1900A8626D /* BillsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillsView.swift; sourceTree = "<group>"; };
 		EEEC3B062B388B2600A8626D /* BillsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillsViewModel.swift; sourceTree = "<group>"; };
@@ -207,6 +208,7 @@
 		EEEC3B3F2B39B54200A8626D /* CommonsVoteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonsVoteDetailView.swift; sourceTree = "<group>"; };
 		EEEC3B412B39B55000A8626D /* CommonsVoteDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonsVoteDetailViewModel.swift; sourceTree = "<group>"; };
 		EEEC3B432B39B83A00A8626D /* VoterRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoterRow.swift; sourceTree = "<group>"; };
+		EEF543C42B9FA12400AD29D0 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		EEFC7C982B35B4E000183203 /* MemberPictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberPictureView.swift; sourceTree = "<group>"; };
 		EEFC7C9A2B36132200183203 /* MemberDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailView.swift; sourceTree = "<group>"; };
 		EEFC7C9C2B36140400183203 /* ElectionResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElectionResultModel.swift; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 		EE86A46C2B344C14007BEA83 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EEF543C32B9FA11900AD29D0 /* Help */,
 				EEE171BE2B9E20D600C89859 /* UK */,
 			);
 			path = Views;
@@ -445,7 +448,7 @@
 				EE3194D42B6C181200A5F754 /* DummyNavigationLink.swift */,
 				EE3194D62B6C229200A5F754 /* NoDataView.swift */,
 				EEE171BC2B9E19D200C89859 /* Flags.swift */,
-				EEE171C02B9E21E600C89859 /* LargePageItemView.swift */,
+				EEE171C02B9E21E600C89859 /* PageItemViews.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -603,6 +606,14 @@
 				EEEC3B432B39B83A00A8626D /* VoterRow.swift */,
 			);
 			path = CommonsVoteDetail;
+			sourceTree = "<group>";
+		};
+		EEF543C32B9FA11900AD29D0 /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				EEF543C42B9FA12400AD29D0 /* HelpView.swift */,
+			);
+			path = Help;
 			sourceTree = "<group>";
 		};
 		EEFC7CA02B36230700183203 /* MemberDetail */ = {
@@ -783,6 +794,7 @@
 				EEEC3B362B39A2C700A8626D /* VoteModel.swift in Sources */,
 				EE3194E72B6E3E9C00A5F754 /* BillAmendmentsView.swift in Sources */,
 				EE97BF942B34C60300FA950C /* MemberModel.swift in Sources */,
+				EEF543C52B9FA12400AD29D0 /* HelpView.swift in Sources */,
 				EEEC3B3B2B39A98900A8626D /* CommonsVotesViewModel.swift in Sources */,
 				EE86A4702B344D4C007BEA83 /* PartiesView.swift in Sources */,
 				EE3195092B6F952700A5F754 /* MemberLordsVotesView.swift in Sources */,
@@ -809,7 +821,7 @@
 				EE3194F82B6E55C200A5F754 /* UtilsModel.swift in Sources */,
 				EE167D8E2B7A108900415100 /* UnifiedListView.swift in Sources */,
 				EEFC7C9B2B36132200183203 /* MemberDetailView.swift in Sources */,
-				EEE171C12B9E21E600C89859 /* LargePageItemView.swift in Sources */,
+				EEE171C12B9E21E600C89859 /* PageItemViews.swift in Sources */,
 				EE2F06D02B3C50C600462D3C /* AcknowledgementsView.swift in Sources */,
 				EEEC3B222B38AED000A8626D /* BillStagesViewModel.swift in Sources */,
 				EEFC7C992B35B4E000183203 /* MemberPictureView.swift in Sources */,
