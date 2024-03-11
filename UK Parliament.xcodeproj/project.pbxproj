@@ -69,11 +69,6 @@
 		EEE171B92B9DEAAD00C89859 /* UKPagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE171B82B9DEAAD00C89859 /* UKPagesView.swift */; };
 		EEE171BD2B9E19D200C89859 /* Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE171BC2B9E19D200C89859 /* Flags.swift */; };
 		EEE171C12B9E21E600C89859 /* GridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE171C02B9E21E600C89859 /* GridItemView.swift */; };
-		EEE171C42B9E273E00C89859 /* ScottishPagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE171C32B9E273E00C89859 /* ScottishPagesView.swift */; };
-		EEE171C72B9E282D00C89859 /* ScotlandMembersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE171C62B9E282D00C89859 /* ScotlandMembersView.swift */; };
-		EEE171C92B9E283F00C89859 /* ScotlandMembersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE171C82B9E283F00C89859 /* ScotlandMembersViewModel.swift */; };
-		EEE171CD2B9E286D00C89859 /* ScotlandMemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE171CC2B9E286D00C89859 /* ScotlandMemberModel.swift */; };
-		EEE171CF2B9E2B8F00C89859 /* ScotlandMemberRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE171CE2B9E2B8F00C89859 /* ScotlandMemberRow.swift */; };
 		EEEC3B022B38862400A8626D /* BillModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B012B38862400A8626D /* BillModel.swift */; };
 		EEEC3B052B388B1900A8626D /* BillsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B042B388B1900A8626D /* BillsView.swift */; };
 		EEEC3B072B388B2600A8626D /* BillsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B062B388B2600A8626D /* BillsViewModel.swift */; };
@@ -183,11 +178,6 @@
 		EEE171B82B9DEAAD00C89859 /* UKPagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UKPagesView.swift; sourceTree = "<group>"; };
 		EEE171BC2B9E19D200C89859 /* Flags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flags.swift; sourceTree = "<group>"; };
 		EEE171C02B9E21E600C89859 /* GridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridItemView.swift; sourceTree = "<group>"; };
-		EEE171C32B9E273E00C89859 /* ScottishPagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScottishPagesView.swift; sourceTree = "<group>"; };
-		EEE171C62B9E282D00C89859 /* ScotlandMembersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScotlandMembersView.swift; sourceTree = "<group>"; };
-		EEE171C82B9E283F00C89859 /* ScotlandMembersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScotlandMembersViewModel.swift; sourceTree = "<group>"; };
-		EEE171CC2B9E286D00C89859 /* ScotlandMemberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScotlandMemberModel.swift; sourceTree = "<group>"; };
-		EEE171CE2B9E2B8F00C89859 /* ScotlandMemberRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScotlandMemberRow.swift; sourceTree = "<group>"; };
 		EEEC3B012B38862400A8626D /* BillModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillModel.swift; sourceTree = "<group>"; };
 		EEEC3B042B388B1900A8626D /* BillsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillsView.swift; sourceTree = "<group>"; };
 		EEEC3B062B388B2600A8626D /* BillsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillsViewModel.swift; sourceTree = "<group>"; };
@@ -397,7 +387,6 @@
 		EE86A46C2B344C14007BEA83 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EEE171BF2B9E20E700C89859 /* Scotland */,
 				EEE171BE2B9E20D600C89859 /* UK */,
 			);
 			path = Views;
@@ -406,7 +395,6 @@
 		EE86A46D2B344C1A007BEA83 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				EEE171CB2B9E286300C89859 /* Scotland */,
 				EEE171CA2B9E285900C89859 /* UK */,
 				EE50F9BE2B35A09E00163E52 /* FetchModel.swift */,
 				EE3194F72B6E55C200A5F754 /* UtilsModel.swift */,
@@ -487,25 +475,6 @@
 			path = UK;
 			sourceTree = "<group>";
 		};
-		EEE171BF2B9E20E700C89859 /* Scotland */ = {
-			isa = PBXGroup;
-			children = (
-				EEE171C52B9E279A00C89859 /* Member */,
-				EEE171C32B9E273E00C89859 /* ScottishPagesView.swift */,
-			);
-			path = Scotland;
-			sourceTree = "<group>";
-		};
-		EEE171C52B9E279A00C89859 /* Member */ = {
-			isa = PBXGroup;
-			children = (
-				EEE171C62B9E282D00C89859 /* ScotlandMembersView.swift */,
-				EEE171C82B9E283F00C89859 /* ScotlandMembersViewModel.swift */,
-				EEE171CE2B9E2B8F00C89859 /* ScotlandMemberRow.swift */,
-			);
-			path = Member;
-			sourceTree = "<group>";
-		};
 		EEE171CA2B9E285900C89859 /* UK */ = {
 			isa = PBXGroup;
 			children = (
@@ -515,14 +484,6 @@
 				EEEC3B302B3983C100A8626D /* NavigationModels.swift */,
 			);
 			path = UK;
-			sourceTree = "<group>";
-		};
-		EEE171CB2B9E286300C89859 /* Scotland */ = {
-			isa = PBXGroup;
-			children = (
-				EEE171CC2B9E286D00C89859 /* ScotlandMemberModel.swift */,
-			);
-			path = Scotland;
 			sourceTree = "<group>";
 		};
 		EEEC3AFF2B38834900A8626D /* MembersAPI */ = {
@@ -815,7 +776,6 @@
 				EE50F9BB2B358FA200163E52 /* MembersViewModel.swift in Sources */,
 				EEEC3B1E2B38ADC500A8626D /* BillStagesView.swift in Sources */,
 				EEEC3B022B38862400A8626D /* BillModel.swift in Sources */,
-				EEE171CF2B9E2B8F00C89859 /* ScotlandMemberRow.swift in Sources */,
 				EEEC3B142B3899EC00A8626D /* SponsorRow.swift in Sources */,
 				EE0186222B375B66004F7F77 /* PostModel.swift in Sources */,
 				EEFC7CA32B36290B00183203 /* ConstituencyElectionDetailView.swift in Sources */,
@@ -890,15 +850,11 @@
 				EE29CCC42B6059E10027CBA4 /* ListExtensions.swift in Sources */,
 				EE0186202B375B4D004F7F77 /* PostsViewModel.swift in Sources */,
 				EEEC3B422B39B55000A8626D /* CommonsVoteDetailViewModel.swift in Sources */,
-				EEE171C42B9E273E00C89859 /* ScottishPagesView.swift in Sources */,
 				EEEC3B3D2B39AC4600A8626D /* CommonsVoteRow.swift in Sources */,
 				EEEC3B092B388E5600A8626D /* BillRow.swift in Sources */,
 				EE5AE8262B4C7AC000550126 /* ViewExtensions.swift in Sources */,
-				EEE171C92B9E283F00C89859 /* ScotlandMembersViewModel.swift in Sources */,
-				EEE171C72B9E282D00C89859 /* ScotlandMembersView.swift in Sources */,
 				EE8F2CBF2B36C53700D771F2 /* MemberDetailViewModel.swift in Sources */,
 				EEEC3B192B38A3FD00A8626D /* ColorExtensions.swift in Sources */,
-				EEE171CD2B9E286D00C89859 /* ScotlandMemberModel.swift in Sources */,
 				EE3194DE2B6CD52400A5F754 /* MemberCommonsVotesViewModel.swift in Sources */,
 				EE8F2CBD2B36341300D771F2 /* ConstituencyElectionDetailViewModel.swift in Sources */,
 				EEFC7C9F2B3615AD00183203 /* ConstituencyDetailViewModel.swift in Sources */,

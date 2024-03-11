@@ -2,13 +2,9 @@ import SwiftUI
 
 struct UKPagesView: View {
     @EnvironmentObject var contextModel: ContextModel
-
-    let columns = [
-        GridItem(.adaptive(minimum: 175))
-    ]
-
+    
     var body: some View {
-        LazyVGrid(columns: columns, spacing: 25) {
+        LazyVStack(spacing: 25) {
             billsViewItem
             constituenciesViewItem
             commonsVotesViewItem

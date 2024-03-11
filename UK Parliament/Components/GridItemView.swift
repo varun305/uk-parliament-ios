@@ -31,36 +31,39 @@ struct GridItemView: View {
             contextModel.manualNavigate(to: navigateTo)
         } label: {
             face
+                .accessibilityElement(children: .combine)
         }
         .foregroundStyle(.primary)
     }
 
     @ViewBuilder
     var face: some View {
-        VStack(alignment: .center, spacing: 10) {
-            ZStack {
-                background
-                VStack(alignment: .center, spacing: 10) {
-                    systemImage
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: 60, maxHeight: 60)
-                        .foregroundStyle(foreground)
+        ZStack {
+            background
+            HStack(alignment: .center) {
+                VStack(alignment: .leading) {
                     Text(title)
                         .font(.headline)
                         .bold()
-                        .foregroundStyle(foreground)
+                    Text(subtitle)
+                        .font(.caption)
                 }
-                .padding(.horizontal, 2)
+                .foregroundStyle(foreground)
+                .multilineTextAlignment(.leading)
+                Spacer(minLength: 40)
+                systemImage
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: 60, maxHeight: 60)
+                    .foregroundStyle(foreground)
+                    .accessibilityHidden(true)
             }
-            .frame(width: 160, height: 160)
-            .mask {
-                RoundedRectangle(cornerRadius: 20)
-            }
-            .shadow(radius: 2)
-            Text(subtitle)
-                .font(.caption)
+            .padding(.horizontal, 30)
         }
-        .frame(maxWidth: 160)
+        .frame(minHeight: 120)
+        .mask {
+            RoundedRectangle(cornerRadius: 20)
+        }
+        .shadow(radius: 2)
     }
 }

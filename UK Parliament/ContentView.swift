@@ -3,30 +3,15 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var contextModel: ContextModel
 
-    @State private var countrySheetShown = false
-    var navTitle: String {
-        switch contextModel.country {
-        case .unitedKingdom:
-            return "UK Parliament"
-        case .scotland:
-            return "Scottish Parliament"
-        }
-    }
-
     var body: some View {
         NavigationStack(path: $contextModel.navigationPath) {
             ScrollView {
                 VStack(alignment: .leading) {
-                    switch contextModel.country {
-                    case .unitedKingdom:
-                        UKPagesView()
-                    case .scotland:
-                        ScottishPagesView()
-                    }
+                    UKPagesView()
+                        .padding()
                 }
-                .padding(.top, 20)
             }
-            .navigationTitle(navTitle)
+            .navigationTitle("Home")
             .listStyle(.grouped)
             .navigationDestination(for: NavigationItem.self) { item in
                 switch item {
@@ -78,92 +63,9 @@ struct ContentView: View {
                     LordsVoteDetailView(vote: vote)
                 case .memberLordsVotesView(let member):
                     MemberLordsVotesView(viewModel: MemberLordsVotesViewModel(member: member))
-                
-                case .mspsView:
-                    ScotlandMembersView()
                 }
-            }
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button {
-                        countrySheetShown = true
-                    } label: {
-                        switch contextModel.country {
-                        case .unitedKingdom:
-                            UKFlag()
-                        case .scotland:
-                            ScotlandFlag()
-                        }
-                    }
-                }
-            }
-            .sheet(isPresented: $countrySheetShown) {
-                countrySheet
             }
         }
         .textSelection(.enabled)
-    }
-
-    @ViewBuilder
-    var countrySheet: some View {
-        NavigationView {
-            List {
-                Button {
-                    countrySheetShown = false
-                    withAnimation {
-                        contextModel.country = .unitedKingdom
-                    }
-                } label: {
-                    ukRow
-                }
-                .foregroundStyle(.primary)
-
-                Button {
-                    countrySheetShown = false
-                    withAnimation {
-                        contextModel.country = .scotland
-                    }
-                } label: {
-                    scotlandRow
-                }
-                .foregroundStyle(.primary)
-            }
-            .navigationTitle("Select country")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button {
-                        countrySheetShown = false
-                    } label: {
-                        Image(systemName: "xmark.circle")
-                    }
-                }
-            }
-        }
-        .presentationDetents([.medium])
-    }
-
-    @ViewBuilder
-    var ukRow: some View {
-        HStack(spacing: 25) {
-            UKFlag()
-            Text("United Kingdom")
-            if contextModel.country == .unitedKingdom {
-                Spacer()
-                Image(systemName: "checkmark")
-            }
-        }
-    }
-
-    @ViewBuilder
-    var scotlandRow: some View {
-        HStack(spacing: 25) {
-            ScotlandFlag()
-            Text("Scotland")
-            if contextModel.country == .scotland{
-                Spacer()
-                Image(systemName: "checkmark")
-            }
-        }
     }
 }
