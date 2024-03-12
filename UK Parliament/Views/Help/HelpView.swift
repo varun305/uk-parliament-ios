@@ -22,18 +22,6 @@ struct HelpView: View {
                         }
                     }
                 }
-                Section("Help with pages") {
-                    NavigationLink {
-
-                    } label: {
-                        Label("Bills", systemImage: "doc.on.doc.fill")
-                    }
-                    NavigationLink {
-
-                    } label: {
-                        Label("Constituencies", systemImage: "map.fill")
-                    }
-                }
             }
             .navigationTitle("Help")
             .navigationBarTitleDisplayMode(.inline)

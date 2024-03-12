@@ -12,9 +12,7 @@ struct LargePageItemView: View {
     }
 
     var body: some View {
-        Button {
-            contextModel.manualNavigate(to: gridItem.navigateTo)
-        } label: {
+        ContextAwareNavigationLink(value: gridItem.navigateTo) {
             face
                 .accessibilityElement(children: .combine)
         }
@@ -45,7 +43,7 @@ struct LargePageItemView: View {
             }
             .padding(.horizontal, 30)
         }
-        .frame(minHeight: 120)
+        .frame(minHeight: 100)
         .mask {
             RoundedRectangle(cornerRadius: 20)
         }

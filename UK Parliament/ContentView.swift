@@ -22,6 +22,7 @@ struct ContentView: View {
                         showHelpSheet = true
                     } label: {
                         Image(systemName: "questionmark.circle")
+                            .accessibilityLabel(Text("Help"))
                     }
                 }
             }
