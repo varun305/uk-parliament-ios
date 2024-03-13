@@ -9,8 +9,9 @@ struct BillRow: View {
             if let currentStage = bill.currentStage {
                 BillStageBadge(stage: currentStage)
                     .frame(width: 60, height: 60)
+                    .accessibilityHidden(true)
             }
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 5) {
                 HStack {
                     Text(bill.shortTitle ?? "")
                         .bold()
@@ -23,9 +24,8 @@ struct BillRow: View {
                             .italic()
                     }
                 }
-                HStack {
+                Group {
                     Text(bill.formattedDate)
-                    Spacer()
                     Group {
                         if bill.originatingHouse == "Commons" {
                             Text("From House of Commons")
@@ -33,12 +33,25 @@ struct BillRow: View {
                             Text("From House of Lords")
                         }
                     }
-                    .italic()
                 }
-                .foregroundStyle(.secondary)
+                .bold()
                 .font(.footnote)
             }
             .multilineTextAlignment(.leading)
+            .accessibilityElement(children: .combine)
+            Spacer()
+            Image(systemName: "chevron.right")
+                .bold()
+                .accessibilityHidden(true)
+        }
+        .padding(10)
+        .background(Color(UIColor.systemBackground))
+        .mask {
+            RoundedRectangle(cornerRadius: 20)
+        }
+        .overlay {
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(Color.secondary, lineWidth: 1)
         }
     }
 }
@@ -78,4 +91,8 @@ struct BillRowLoading: View {
         }
         .frame(height: 60)
     }
+}
+
+#Preview {
+    BillRow(bill: Mocks.mockBill)
 }

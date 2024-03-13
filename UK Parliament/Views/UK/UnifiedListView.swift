@@ -53,8 +53,8 @@ struct UnifiedListView<T, RowContent, LoadingContent>: View where T: Identifiabl
 
     @ViewBuilder
     var loadingView: some View {
-        List {
-            Section("") {
+        ScrollView {
+            LazyVStack {
                 ForEach(0..<20) { _ in
                     DummyNavigationLink {
                         rowLoadingView()
@@ -72,16 +72,21 @@ struct UnifiedListView<T, RowContent, LoadingContent>: View where T: Identifiabl
 
     @ViewBuilder
     var scrollView: some View {
-        List {
-            ForEach(viewModel.items) { item in
-                rowView(item)
-                    .onAppear(perform: { onScrollEnd(item: item) })
-            }
-            .if(showNumResults) { view in
-                Section(resultsText) {
-                    view
+        ScrollView {
+            LazyVStack(alignment: .leading, spacing: 10) {
+                if showNumResults {
+                    Text(resultsText)
+                }
+                ForEach(viewModel.items) { item in
+                    rowView(item)
+                        .foregroundStyle(.primary)
+                        .onAppear(perform: { onScrollEnd(item: item) })
                 }
             }
+            .padding()
+        }
+        .background {
+            Color(UIColor.secondarySystemBackground).ignoresSafeArea()
         }
         .listStyle(.grouped)
     }
