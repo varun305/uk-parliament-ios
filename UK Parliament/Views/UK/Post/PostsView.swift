@@ -5,34 +5,35 @@ struct PostsView: View {
     @State var side = Side.government
 
     var body: some View {
-        List {
-            Picker("Side", selection: $side.animation()) {
-                Text("Government").tag(Side.government)
-                Text("Opposition").tag(Side.opposition)
-            }
-            .pickerStyle(.segmented)
-            .listRowBackground(Color.clear)
-            .listSectionSeparator(.hidden)
+        ScrollView {
+            LazyVStack(alignment: .center, spacing: 20) {
+                Picker("Side", selection: $side.animation()) {
+                    Text("Government").tag(Side.government)
+                    Text("Opposition").tag(Side.opposition)
+                }
+                .pickerStyle(.segmented)
 
-            ForEach(side == .government ? viewModel.governmentPosts : viewModel.oppositionPosts) { post in
-                Section(post.hansardName ?? "") {
-                    ForEach(post.postHolders ?? []) { holder in
-                        if let memberId = holder.member?.id, let member = holder.member?.value {
-                            ContextAwareNavigationLink(value: .memberDetailView(memberId: memberId)) {
+                ForEach(side == .government ? viewModel.governmentPosts : viewModel.oppositionPosts) { post in
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text(post.hansardName ?? "")
+                            .padding(.leading, 10)
+                            .font(.callout)
+                            .bold()
+                        ForEach(post.postHolders ?? []) { holder in
+                            if let member = holder.member?.value {
                                 MemberRow(member: member)
+                                    .ifLet(member.id) { view, memberId in
+                                        ContextAwareNavigationLink(value: .memberDetailView(memberId: memberId)) { view }
+                                    }
+                                    .foregroundStyle(.primary)
+                            } else {
+                                EmptyView()
                             }
-                        } else if let member = holder.member?.value {
-                            MemberRow(member: member)
-                        } else {
-                            EmptyView()
                         }
-                        HStack {
-                            Text("from \(holder.formattedStartDate)")
-                        }
-                        .font(.footnote)
                     }
                 }
             }
+            .padding()
         }
         .listStyle(.grouped)
         .navigationTitle(side == .government ? "Government posts" : "Opposition posts")
