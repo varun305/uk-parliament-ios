@@ -4,6 +4,8 @@ import SkeletonUI
 struct MemberRow: View {
     var member: Member
 
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         HStack(alignment: .center) {
             MemberPictureView(member: member)
@@ -17,13 +19,22 @@ struct MemberRow: View {
                 Text(member.latestHouseMembership?.membershipFrom ?? "")
                     .font(.caption)
             }
-
             Spacer()
+            Image(systemName: "chevron.right")
+                .bold()
+                .accessibilityHidden(true)
         }
+        .padding(10)
+        .appOverlay()
+        .appBackground(colorScheme: colorScheme)
+        .appMask()
+        .appShadow()
     }
 }
 
 struct MemberRowLoading: View {
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         HStack(alignment: .center) {
             ZStack {
@@ -49,6 +60,11 @@ struct MemberRowLoading: View {
             }
             Spacer()
         }
-        .frame(height: 70)
+        .padding(10)
+        .appOverlay()
+        .appBackground(colorScheme: colorScheme)
+        .appMask()
+        .appShadow()
+        .frame(height: 90)
     }
 }
