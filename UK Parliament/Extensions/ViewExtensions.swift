@@ -1,12 +1,8 @@
 import SwiftUI
 
 extension View {
-    /// Applies the given transform if the given condition evaluates to `true`.
-    /// - Parameters:
-    ///   - condition: The condition to evaluate.
-    ///   - transform: The transform to apply to the source `View`.
-    /// - Returns: Either the original `View` or the modified `View` if the condition is `true`.
-    @ViewBuilder func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+    @ViewBuilder
+    func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
         if condition {
             transform(self)
         } else {
@@ -14,11 +10,43 @@ extension View {
         }
     }
 
-    @ViewBuilder func `ifLet`<Content: View, T: Any>(_ variable: T?, transform: (Self, T) -> Content) -> some View {
+    @ViewBuilder
+    func ifLet<Content: View, T: Any>(_ variable: T?, transform: (Self, T) -> Content) -> some View {
         if let variable = variable {
             transform(self, variable)
         } else {
             self
         }
+    }
+
+    @ViewBuilder
+    func appMask() -> some View {
+        self
+            .mask {
+                RoundedRectangle(cornerRadius: 20)
+            }
+    }
+
+    @ViewBuilder
+    func appOverlay() -> some View {
+        self
+            .overlay {
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color.secondary, lineWidth: 2)
+            }
+    }
+
+    @ViewBuilder
+    func appBackground(colorScheme: ColorScheme) -> some View {
+        self
+            .background {
+                Color(UIColor.systemBackground)
+            }
+    }
+
+    @ViewBuilder
+    func appShadow() -> some View {
+        self
+            .shadow(radius: 2)
     }
 }

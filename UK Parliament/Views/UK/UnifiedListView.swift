@@ -54,14 +54,21 @@ struct UnifiedListView<T, RowContent, LoadingContent>: View where T: Identifiabl
     @ViewBuilder
     var loadingView: some View {
         ScrollView {
-            LazyVStack {
+            LazyVStack(alignment: .leading, spacing: 10) {
+                if showNumResults {
+                    Text(resultsText)
+                        .padding(.leading, 10)
+                        .skeleton(with: true)
+                }
                 ForEach(0..<20) { _ in
                     DummyNavigationLink {
                         rowLoadingView()
                     }
                 }
             }
+            .padding()
         }
+        .appBackground(colorScheme: colorScheme)
         .listStyle(.grouped)
         .environment(\.isScrollEnabled, false)
     }
@@ -70,12 +77,16 @@ struct UnifiedListView<T, RowContent, LoadingContent>: View where T: Identifiabl
         "\(viewModel.totalResults) results"
     }
 
+    @Environment(\.colorScheme) var colorScheme
+
     @ViewBuilder
     var scrollView: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 10) {
                 if showNumResults {
                     Text(resultsText)
+                        .foregroundStyle(.secondary)
+                        .padding(.leading, 10)
                 }
                 ForEach(viewModel.items) { item in
                     rowView(item)
@@ -85,9 +96,7 @@ struct UnifiedListView<T, RowContent, LoadingContent>: View where T: Identifiabl
             }
             .padding()
         }
-        .background {
-            Color(UIColor.secondarySystemBackground).ignoresSafeArea()
-        }
+        .appBackground(colorScheme: colorScheme)
         .listStyle(.grouped)
     }
 

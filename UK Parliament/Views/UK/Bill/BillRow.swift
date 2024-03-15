@@ -4,6 +4,8 @@ import SkeletonUI
 struct BillRow: View {
     var bill: Bill
 
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         HStack(alignment: .center) {
             if let currentStage = bill.currentStage {
@@ -15,14 +17,6 @@ struct BillRow: View {
                 HStack {
                     Text(bill.shortTitle ?? "")
                         .bold()
-                    Spacer()
-                    if bill.isDefeated ?? false {
-                        Text("Defeated")
-                            .foregroundStyle(.red)
-                            .font(.footnote)
-                            .opacity(0.5)
-                            .italic()
-                    }
                 }
                 Group {
                     Text(bill.formattedDate)
@@ -34,7 +28,6 @@ struct BillRow: View {
                         }
                     }
                 }
-                .bold()
                 .font(.footnote)
             }
             .multilineTextAlignment(.leading)
@@ -45,18 +38,16 @@ struct BillRow: View {
                 .accessibilityHidden(true)
         }
         .padding(10)
-        .background(Color(UIColor.systemBackground))
-        .mask {
-            RoundedRectangle(cornerRadius: 20)
-        }
-        .overlay {
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(Color.secondary, lineWidth: 1)
-        }
+        .appOverlay()
+        .appBackground(colorScheme: colorScheme)
+        .appMask()
+        .appShadow()
     }
 }
 
 struct BillRowLoading: View {
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         HStack(alignment: .center) {
             ZStack {
@@ -71,25 +62,32 @@ struct BillRowLoading: View {
                     .skeleton(with: true)
             }
             .frame(width: 60, height: 60)
-
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 5) {
                 HStack {
                     Text("")
                         .skeleton(with: true)
-                    Spacer()
                 }
-                HStack {
+                Group {
                     Text("")
-                        .frame(width: 50)
                         .skeleton(with: true)
-                    Spacer()
                     Text("")
-                        .frame(width: 50)
                         .skeleton(with: true)
                 }
+                .font(.footnote)
             }
+            .multilineTextAlignment(.leading)
+            .accessibilityElement(children: .combine)
+            Spacer()
+            Image(systemName: "chevron.right")
+                .bold()
+                .accessibilityHidden(true)
         }
-        .frame(height: 60)
+        .padding(10)
+        .appOverlay()
+        .appBackground(colorScheme: colorScheme)
+        .appMask()
+        .appShadow()
+        .frame(height: 90)
     }
 }
 
