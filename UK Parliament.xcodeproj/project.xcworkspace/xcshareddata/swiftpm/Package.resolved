@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/abseil-cpp-binary.git",
       "state" : {
-        "revision" : "bfc0b6f81adc06ce5121eb23f628473638d67c5c",
-        "version" : "1.2022062300.0"
+        "revision" : "df308b8b46607675f2b9ec8e569109008f9155ce",
+        "version" : "1.2022062300.1"
       }
     },
     {
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleDataTransport.git",
       "state" : {
-        "revision" : "a732a4b47f59e4f725a2ea10f0c77e93a7131117",
-        "version" : "9.3.0"
+        "revision" : "a637d318ae7ae246b02d7305121275bc75ed5565",
+        "version" : "9.4.0"
       }
     },
     {
@@ -51,8 +51,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleUtilities.git",
       "state" : {
-        "revision" : "bc27fad73504f3d4af235de451f02ee22586ebd3",
-        "version" : "7.12.1"
+        "revision" : "26c898aed8bed13b8a63057ee26500abbbcb8d55",
+        "version" : "7.13.1"
       }
     },
     {
@@ -60,8 +60,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/grpc-binary.git",
       "state" : {
-        "revision" : "a673bc2937fbe886dd1f99c401b01b6d977a9c98",
-        "version" : "1.49.1"
+        "revision" : "ea4cb5cc0c39c732b85386263116d2e2fdbbdc61",
+        "version" : "1.49.2"
       }
     },
     {
@@ -87,8 +87,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/leveldb.git",
       "state" : {
-        "revision" : "9d108e9112aa1d65ce508facf804674546116d9c",
-        "version" : "1.22.3"
+        "revision" : "43aaef65e0c665daadf848761d560e446d350d3d",
+        "version" : "1.22.4"
       }
     },
     {
@@ -96,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/nanopb.git",
       "state" : {
-        "revision" : "819d0a2173aff699fb8c364b6fb906f7cdb1a692",
-        "version" : "2.30909.0"
+        "revision" : "b7e1104502eca3a213b46303391ca4d3bc8ddec1",
+        "version" : "2.30910.0"
       }
     },
     {
@@ -105,8 +105,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/promises.git",
       "state" : {
-        "revision" : "e70e889c0196c76d22759eb50d6a0270ca9f1d9e",
-        "version" : "2.3.1"
+        "revision" : "540318ecedd63d883069ae7f1ed811a2df00b6ac",
+        "version" : "2.4.0"
       }
     },
     {
@@ -132,17 +132,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-snapshot-testing",
       "state" : {
-        "revision" : "8e68404f641300bfd0e37d478683bb275926760c",
-        "version" : "1.15.2"
+        "revision" : "5b0c434778f2c1a4c9b5ebdb8682b28e84dd69bd",
+        "version" : "1.15.4"
       }
     },
     {
       "identity" : "swift-syntax",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-syntax.git",
+      "location" : "https://github.com/apple/swift-syntax",
       "state" : {
-        "revision" : "64889f0c732f210a935a0ad7cda38f77f876262d",
-        "version" : "509.1.1"
+        "revision" : "fa8f95c2d536d6620cc2f504ebe8a6167c9fc2dd",
+        "version" : "510.0.1"
       }
     }
   ],

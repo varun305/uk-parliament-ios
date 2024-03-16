@@ -2,21 +2,9 @@ import SwiftUI
 import MapKit
 import SkeletonUI
 
-private struct MapConfiguration: Identifiable {
-    var constituency: Constituency
-    var coordinates: [[[Double]]]
-    var party: PartyModel?
-
-    var id: Int? {
-        constituency.id
-    }
-}
-
 struct ConstituencyDetailView: View {
     @StateObject var viewModel = ConstituencyDetailViewModel()
     var constituency: Constituency
-
-    @State private var mapConfig: MapConfiguration?
 
     var body: some View {
         Group {
@@ -37,41 +25,16 @@ struct ConstituencyDetailView: View {
                 viewModel.fetchElectionResults(for: constituencyId)
             }
         }
-        .toolbar {
-            if let constituency = viewModel.constituency, let geometry = viewModel.geometry {
-                Button {
-                    mapConfig = MapConfiguration(constituency: constituency, coordinates: geometry.flattenedCoordinates ?? [], party: constituency.member?.latestParty)
-                } label: {
-                    Image(systemName: "map.fill")
-                }
-            }
-        }
-        .sheet(item: $mapConfig) { config in
-            NavigationStack {
-                Map {
-                    ForEach(0..<config.coordinates.count, id: \.self) { i in
-                        MapPolygon(coordinates: viewModel.coordinates[i])
-                            .stroke((config.party?.bgColor ?? .white), lineWidth: 1)
-                            .foregroundStyle((config.party?.bgColor ?? .white).opacity(0.5))
-                    }
-                }
-                .ignoresSafeArea(.all, edges: .bottom)
-                .navigationTitle(config.constituency.name ?? "")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Close") {
-                            mapConfig = nil
-                        }
-                    }
-                }
-            }
-        }
     }
 
     @ViewBuilder
     var loadingView: some View {
         List {
+            Section("") {
+                Text("")
+                    .skeleton(with: true)
+                    .frame(height: 10)
+            }
             Section("") {
                 Text("")
                     .skeleton(with: true)
@@ -91,18 +54,72 @@ struct ConstituencyDetailView: View {
         .environment(\.isScrollEnabled, false)
     }
 
+    @State var showMapView = false
+    private var mapConfig: MapConfiguration? {
+        if let constituency = viewModel.constituency, let geometry = viewModel.geometry {
+            return MapConfiguration(constituency: constituency, coordinates: geometry.flattenedCoordinates ?? [], party: constituency.member?.latestParty)
+        }
+        return nil
+    }
+
     @ViewBuilder
     var scrollView: some View {
         List {
             Section("Current MP") {
                 membershipLink
             }
-
+            if let config = mapConfig {
+                Section("Map view") {
+                    Button {
+                        showMapView = true
+                    } label: {
+                        Label("View on a map", systemImage: "map.fill")
+                    }
+                    .foregroundStyle(.primary)
+                    .sheet(isPresented: $showMapView) {
+                        mapSheet(config)
+                    }
+                }
+            }
             Section("Past election results") {
                 resultsView
             }
         }
         .listStyle(.grouped)
+    }
+
+    @ViewBuilder
+    func mapSheet(_ config: MapConfiguration) -> some View {
+        NavigationStack {
+            mapView(config)
+                .ignoresSafeArea(.all, edges: .bottom)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button {
+                            showMapView = false
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                        }
+                        .foregroundStyle(.primary)
+                    }
+                }
+        }
+    }
+
+    @ViewBuilder
+    func mapView(_ config: MapConfiguration) -> some View {
+        Map(interactionModes: [.all]) {
+            let formattedCoords = config.coordinates.map {
+                $0.map {
+                    CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0])
+                }
+            }
+            ForEach(0..<formattedCoords.count, id: \.self) { i in
+                MapPolygon(coordinates: formattedCoords[i])
+                    .stroke((config.party?.bgColor ?? .white), lineWidth: 1)
+                    .foregroundStyle((config.party?.bgColor ?? .white).opacity(0.5))
+            }
+        }
     }
 
     @ViewBuilder

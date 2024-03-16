@@ -2,19 +2,21 @@ import Foundation
 import MapKit
 import SwiftUI
 
+struct MapConfiguration: Identifiable {
+   var constituency: Constituency
+   var coordinates: [[[Double]]]
+   var party: PartyModel?
+
+   var id: Int? {
+       constituency.id
+   }
+}
+
 class ConstituencyDetailViewModel: ObservableObject {
     @Published var constituency: Constituency?
     @Published var electionResults: [ElectionResult] = []
-    @Published var geometry: Geometry?
     @Published var loading = false
-
-    var coordinates: [[CLLocationCoordinate2D]] {
-        (geometry?.flattenedCoordinates ?? []).map {
-            $0.map {
-                CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0])
-            }
-        }
-    }
+    @Published var geometry: Geometry?
 
     public func fetchConstituency(for id: Int) {
         loading = true
