@@ -26,7 +26,7 @@ struct UnifiedListView<T, RowContent, LoadingContent>: View where T: Identifiabl
 
     var body: some View {
         Group {
-            if viewModel.loading || forceLoading {
+            if viewModel.loading {
                 loadingView
                     .opacity(0.5)
             } else if !viewModel.items.isEmpty {
