@@ -32,7 +32,7 @@ extension View {
         self
             .overlay {
                 RoundedRectangle(cornerRadius: 20)
-                    .stroke(.secondary, lineWidth: 3)
+                    .stroke(Color(UIColor.systemGray2), lineWidth: 3)
             }
     }
 
@@ -47,6 +47,6 @@ extension View {
     @ViewBuilder
     func appShadow() -> some View {
         self
-            .shadow(radius: 2)
+            .shadow(color: .secondary, radius: 0)
     }
 }

@@ -26,8 +26,9 @@ struct UnifiedListView<T, RowContent, LoadingContent>: View where T: Identifiabl
 
     var body: some View {
         Group {
-            if viewModel.loading {
+            if viewModel.loading || forceLoading {
                 loadingView
+                    .opacity(0.5)
             } else if !viewModel.items.isEmpty {
                 scrollView
             } else {
@@ -68,8 +69,6 @@ struct UnifiedListView<T, RowContent, LoadingContent>: View where T: Identifiabl
             }
             .padding()
         }
-        .appBackground(colorScheme: colorScheme)
-        .listStyle(.grouped)
         .environment(\.isScrollEnabled, false)
     }
 
@@ -87,6 +86,7 @@ struct UnifiedListView<T, RowContent, LoadingContent>: View where T: Identifiabl
                     Text(resultsText)
                         .foregroundStyle(.secondary)
                         .padding(.leading, 10)
+                        .frame(height: 20)
                 }
                 ForEach(viewModel.items) { item in
                     rowView(item)
@@ -97,7 +97,6 @@ struct UnifiedListView<T, RowContent, LoadingContent>: View where T: Identifiabl
             .padding()
         }
         .appBackground(colorScheme: colorScheme)
-        .listStyle(.grouped)
     }
 
     private func onScrollEnd(item: T) {
