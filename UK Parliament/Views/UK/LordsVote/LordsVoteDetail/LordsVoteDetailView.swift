@@ -44,17 +44,6 @@ struct LordsVoteDetailView: View {
     @ViewBuilder
     var scrollView: some View {
         List {
-            if let amendmentNotes = vote.amendmentMotionNotes {
-                HStack {
-                    Spacer()
-                    Text(amendmentNotes.htmlToMarkdown())
-                    Spacer()
-                }
-                .listRowSeparator(.hidden)
-                .listRowBackground(Color.clear)
-                .padding(.bottom, 10)
-            }
-
             if let authoritativeContentCount = vote.authoritativeContentCount, let authoritativeNotContentCount = vote.authoritativeNotContentCount {
                 HStack(alignment: .center) {
                     HStack {
@@ -66,6 +55,8 @@ struct LordsVoteDetailView: View {
                             .font(.title)
                             .if(authoritativeContentCount > authoritativeNotContentCount) { $0.bold() }
                     }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel(Text("Contents \(authoritativeContentCount)"))
                     Spacer()
                     HStack {
                         Text("\(authoritativeNotContentCount)")
@@ -76,6 +67,8 @@ struct LordsVoteDetailView: View {
                             .frame(width: 30, height: 30)
                             .foregroundStyle(.secondary)
                     }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel(Text("Not contents \(authoritativeNotContentCount)"))
                 }
                 .listRowSeparator(.hidden)
                 .listRowBackground(Color.clear)

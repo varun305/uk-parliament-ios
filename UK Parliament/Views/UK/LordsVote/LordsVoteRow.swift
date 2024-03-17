@@ -25,6 +25,7 @@ struct LordsVoteRow: View {
                     }
                 }
                 .padding(.vertical, 2)
+                .accessibilityElement(children: .combine)
                 .accessibilityLabel(Text("Contents \(vote.authoritativeContentCount ?? 0), Not contents \(vote.authoritativeNotContentCount ?? 0)"))
                 if let number = vote.number, let date = vote.date {
                     Text("Division \(number) on \(date.convertToDate())")

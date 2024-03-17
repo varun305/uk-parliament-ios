@@ -54,6 +54,8 @@ struct CommonsVoteDetailView: View {
                             .font(.title)
                             .if(ayeCount > noCount) { $0.bold() }
                     }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel(Text("Ayes \(ayeCount)"))
                     Spacer()
                     HStack {
                         Text("\(noCount)")
@@ -64,6 +66,8 @@ struct CommonsVoteDetailView: View {
                             .frame(width: 30, height: 30)
                             .foregroundStyle(.secondary)
                     }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel(Text("Noes \(noCount)"))
                 }
                 .listRowSeparator(.hidden)
                 .listRowBackground(Color.clear)

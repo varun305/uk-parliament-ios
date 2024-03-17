@@ -26,6 +26,7 @@ struct CommonsVoteRow: View {
                     }
                 }
                 .padding(.vertical, 2)
+                .accessibilityElement(children: .combine)
                 .accessibilityLabel(Text("Ayes \(vote.ayeCount ?? 0), Noes \(vote.noCount ?? 0)"))
                 if let number = vote.number, let date = vote.date {
                     Text("Division \(number) on \(date.convertToDate())")
