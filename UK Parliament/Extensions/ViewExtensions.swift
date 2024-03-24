@@ -23,7 +23,7 @@ extension View {
     func appMask() -> some View {
         self
             .mask {
-                RoundedRectangle(cornerRadius: 20)
+                RoundedRectangle(cornerRadius: 15)
             }
     }
 
@@ -31,8 +31,8 @@ extension View {
     func appOverlay() -> some View {
         self
             .overlay {
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(Color(UIColor.systemGray2), lineWidth: 3)
+                RoundedRectangle(cornerRadius: 15)
+                    .stroke(Color(UIColor.systemGray3), lineWidth: 3)
             }
     }
 

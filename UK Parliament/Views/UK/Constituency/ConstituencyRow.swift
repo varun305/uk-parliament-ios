@@ -6,8 +6,6 @@ struct ConstituencyRow: View {
         consituency.member?.latestParty
     }
 
-    @Environment(\.colorScheme) var colorScheme
-
     var body: some View {
         HStack(alignment: .center) {
             if let member = consituency.member {
@@ -28,15 +26,8 @@ struct ConstituencyRow: View {
                         .font(.caption)
                 }
             }
+
             Spacer()
-            Image(systemName: "chevron.right")
-                .bold()
-                .accessibilityHidden(true)
         }
-        .padding(10)
-        .appOverlay()
-        .appBackground(colorScheme: colorScheme)
-        .appMask()
-        .appShadow()
     }
 }
