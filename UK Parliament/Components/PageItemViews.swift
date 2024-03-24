@@ -23,7 +23,13 @@ struct LargePageItemView: View {
     var face: some View {
         ZStack {
             gridItem.background
-            HStack(alignment: .center) {
+            HStack(alignment: .center, spacing: 20) {
+                Image(systemName: gridItem.systemImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: 60, maxHeight: 60)
+                    .foregroundStyle(gridItem.foreground)
+                    .accessibilityHidden(true)
                 VStack(alignment: .leading) {
                     Text(gridItem.title)
                         .font(.headline)
@@ -33,17 +39,11 @@ struct LargePageItemView: View {
                 }
                 .foregroundStyle(gridItem.foreground)
                 .multilineTextAlignment(.leading)
-                Spacer(minLength: 40)
-                HStack(alignment: .center, spacing: 20) {
-                    Image(systemName: gridItem.systemImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: 60, maxHeight: 60)
-                    Image(systemName: "chevron.right")
-                        .bold()
-                }
-                .foregroundStyle(gridItem.foreground)
-                .accessibilityHidden(true)
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .bold()
+                    .foregroundStyle(gridItem.foreground)
+                    .accessibilityHidden(true)
             }
             .padding(.horizontal, 30)
         }
