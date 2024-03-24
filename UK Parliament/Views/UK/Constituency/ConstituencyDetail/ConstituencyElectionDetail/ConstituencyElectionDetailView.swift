@@ -120,6 +120,7 @@ struct ConstituencyElectionDetailView: View {
                         .frame(height: 350)
                         .padding(3)
                 }
+                .accessibilityHidden(true)
 
                 Section("All votes") {
                     barView

@@ -5,9 +5,17 @@ struct HelpView: View {
 
     let faqItems = [
         FAQItem(
-            question: "How can I find my constituency?",
+            question: "How do I find my constituency?",
             answer: "You can select the constituencies page from the home screen, and enter your postcode in the search bar"
-        )
+        ),
+        FAQItem(
+            question: "How do I see how my MP voted?",
+            answer: "From the MPs page, search for your MP, select your MP, and select 'Commons votes'"
+        ),
+        FAQItem(
+            question: "How do I see the latest version of a bill?",
+            answer: "From the Bills page, search for the bill, select your bill and click 'All publications'"
+        ),
     ]
 
     var body: some View {

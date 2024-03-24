@@ -131,7 +131,7 @@ struct MemberDetailView: View {
                 .listRowBackground(Color.clear)
                 .listRowSeparator(.hidden)
 
-                Section {
+                Section("Party") {
                     HStack {
                         Circle()
                             .frame(width: 20, height: 20)
