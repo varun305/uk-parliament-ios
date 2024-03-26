@@ -23,11 +23,11 @@ struct LargePageItemView: View {
     var face: some View {
         ZStack {
             gridItem.background
-            HStack(alignment: .center, spacing: 20) {
+            HStack(alignment: .center, spacing: 15) {
                 Image(systemName: gridItem.systemImage)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: 60, maxHeight: 60)
+                    .frame(maxWidth: 45, maxHeight: 45)
                     .foregroundStyle(gridItem.foreground)
                     .accessibilityHidden(true)
                 VStack(alignment: .leading) {
@@ -45,9 +45,9 @@ struct LargePageItemView: View {
                     .foregroundStyle(gridItem.foreground)
                     .accessibilityHidden(true)
             }
-            .padding(.horizontal, 30)
+            .padding(.horizontal, 20)
         }
-        .frame(minHeight: 100)
+        .frame(minHeight: 80)
         .mask {
             RoundedRectangle(cornerRadius: 20)
         }
