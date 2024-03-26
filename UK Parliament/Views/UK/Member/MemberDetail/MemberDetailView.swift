@@ -132,7 +132,7 @@ struct MemberDetailView: View {
                 .listRowSeparator(.hidden)
 
                 Section("Party") {
-                    HStack {
+                    HStack(alignment: .center) {
                         Circle()
                             .frame(width: 20, height: 20)
                             .foregroundStyle(Color(hexString: member.latestParty?.backgroundColour ?? "ffffff"))
@@ -142,7 +142,7 @@ struct MemberDetailView: View {
 
                 Section {
                     ContextAwareNavigationLink(value: .billsView(member: member)) {
-                        Text("Bills")
+                        Text("View bills")
                     }
                     votesLink
                 }
@@ -170,8 +170,6 @@ struct MemberDetailView: View {
             ContextAwareNavigationLink(value: .constituencyDetailView(constituency: constituency)) {
                 membershipTile
             }
-        } else {
-            membershipTile
         }
     }
 
@@ -179,11 +177,23 @@ struct MemberDetailView: View {
     var votesLink: some View {
         if let member = viewModel.member, member.isCommonsMember {
             ContextAwareNavigationLink(value: .memberCommonsVotesView(member: member)) {
-                Text("Commons votes")
+                HStack(alignment: .center) {
+                    Circle()
+                        .frame(width: 20, height: 20)
+                        .foregroundStyle(Color.commons)
+                        .accessibilityHidden(true)
+                    Text("View commons votes")
+                }
             }
         } else if let member = viewModel.member, !member.isCommonsMember {
             ContextAwareNavigationLink(value: .memberLordsVotesView(member: member)) {
-                Text("Lords votes")
+                HStack(alignment: .center) {
+                    Circle()
+                        .frame(width: 20, height: 20)
+                        .foregroundStyle(Color.lords)
+                        .accessibilityHidden(true)
+                    Text("View lords votes")
+                }
             }
         }
     }

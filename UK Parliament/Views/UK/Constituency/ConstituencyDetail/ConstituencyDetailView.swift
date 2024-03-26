@@ -69,7 +69,7 @@ struct ConstituencyDetailView: View {
                 membershipLink
             }
             if let config = mapConfig {
-                Section("Map view") {
+                Section {
                     Button {
                         showMapView = true
                     } label: {
