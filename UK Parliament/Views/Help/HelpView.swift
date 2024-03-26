@@ -38,8 +38,9 @@ struct HelpView: View {
                     Button {
                         dismiss()
                     } label: {
-                        Image(systemName: "xmark")
+                        Image(systemName: "xmark.circle.fill")
                     }
+                    .foregroundStyle(.primary)
                 }
             }
         }

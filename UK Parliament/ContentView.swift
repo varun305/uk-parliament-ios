@@ -24,6 +24,7 @@ struct ContentView: View {
                         Image(systemName: "questionmark.circle")
                             .accessibilityLabel(Text("Help"))
                     }
+                    .foregroundStyle(.primary)
                 }
             }
             .sheet(isPresented: $showHelpSheet) {
