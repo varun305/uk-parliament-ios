@@ -33,7 +33,7 @@ struct ConstituencyDetailView: View {
             Section("") {
                 Text("")
                     .skeleton(with: true)
-                    .frame(height: 10)
+                    .frame(height: 50)
             }
             Section("") {
                 Text("")
@@ -124,28 +124,10 @@ struct ConstituencyDetailView: View {
 
     @ViewBuilder
     var membershipLink: some View {
-        if let constituency = viewModel.constituency, let memberId = constituency.member?.id {
+        if let member = viewModel.constituency?.member, let memberId = member.id {
             ContextAwareNavigationLink(value: .memberDetailView(memberId: memberId)) {
-                membershipTile
+                MemberRow(member: member)
             }
-        } else {
-            membershipTile
-        }
-    }
-
-    @ViewBuilder
-    var membershipTile: some View {
-        if let constituency = viewModel.constituency, let member = constituency.member {
-            HStack {
-                Text(member.nameDisplayAs ?? "")
-                    .bold()
-                Spacer()
-                MemberPictureView(member: member)
-                    .frame(width: 30, height: 30)
-            }
-        } else {
-            Text("No member found")
-                .italic()
         }
     }
 
