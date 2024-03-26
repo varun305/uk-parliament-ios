@@ -15,7 +15,7 @@ struct HelpView: View {
         FAQItem(
             question: "How do I see the latest version of a bill?",
             answer: "From the Bills page, search for the bill, select your bill and click 'All publications'"
-        ),
+        )
     ]
 
     var body: some View {

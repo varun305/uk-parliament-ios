@@ -4,7 +4,7 @@ import Combine
 
 class MembersViewModel: UnifiedListViewModel<Member> {
     var house: House
-    
+
     init(house: House) {
         self.house = house
         super.init()

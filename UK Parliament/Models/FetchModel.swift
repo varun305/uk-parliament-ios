@@ -28,7 +28,7 @@ class FetchModel {
         _ completion: @escaping (T?) -> Void
     ) where T: Decodable {
         let hashable = UtilsModel.constructURLHashable(from: url)
-        
+
         if reset {
             paginationCache[hashable] = .reset
         }

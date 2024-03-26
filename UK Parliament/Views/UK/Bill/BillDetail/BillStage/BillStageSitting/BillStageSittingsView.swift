@@ -5,7 +5,7 @@ struct BillStageSittingsView: View {
     var sittings: [StageSitting] {
         (stage.stageSittings ?? []).sorted { $0.date ?? "" < $1.date ?? "" }
     }
-    
+
     var body: some View {
         List(sittings) { sitting in
             Text(sitting.formattedDate)

@@ -279,7 +279,7 @@ class BillModel {
             queryItems.append(URLQueryItem(name: "MemberId", value: String(memberId)))
         }
         queryItems += [
-            URLQueryItem(name: "SortOrder", value: "DateUpdatedDescending"),
+            URLQueryItem(name: "SortOrder", value: "DateUpdatedDescending")
         ]
         components.queryItems = queryItems
         return components.url!

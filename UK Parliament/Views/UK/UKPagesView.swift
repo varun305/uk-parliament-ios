@@ -88,7 +88,6 @@ struct UKPagesView: View {
     }
 }
 
-
 struct PageItem: Identifiable {
     var title: String
     var subtitle: String
