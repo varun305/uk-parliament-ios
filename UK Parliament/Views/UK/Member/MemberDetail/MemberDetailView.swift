@@ -117,13 +117,12 @@ struct MemberDetailView: View {
             List {
                 HStack {
                     Spacer()
-                    VStack(alignment: .center) {
+                    VStack(alignment: .center, spacing: 20) {
                         MemberPictureView(member: member)
                             .frame(width: 180, height: 180)
-                        Text(member.nameFullTitle ?? "")
-                            .bold()
                         Text(viewModel.synopsis)
                             .font(.caption)
+                            .multilineTextAlignment(.leading)
                     }
                     Spacer()
                 }
