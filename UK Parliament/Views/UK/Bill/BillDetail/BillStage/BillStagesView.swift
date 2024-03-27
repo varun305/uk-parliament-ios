@@ -20,7 +20,8 @@ struct BillStagesView: View {
             rowLoadingView: {
                 BillStageRowLoading()
             },
-            navigationTitle: "Stages, \(viewModel.bill.shortTitle ?? "")"
+            navigationTitle: "Stages, \(viewModel.bill.shortTitle ?? "")",
+            searchable: false
         )
     }
 }

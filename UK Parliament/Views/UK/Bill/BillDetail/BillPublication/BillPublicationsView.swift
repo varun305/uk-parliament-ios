@@ -32,6 +32,7 @@ struct BillPublicationsView: View {
                     .rotationEffect(.degrees(viewModel.sortOrderAscending ? 0 : 180))
                     .accessibilityLabel(Text(viewModel.sortOrderAscending ? "Sort by descending date" : "Sort by ascending date"))
             }
+            .foregroundStyle(.primary)
         }
         .onAppear {
             if let billId = bill.billId {

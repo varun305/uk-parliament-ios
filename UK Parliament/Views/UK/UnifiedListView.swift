@@ -5,6 +5,7 @@ struct UnifiedListView<T, RowContent, LoadingContent>: View where T: Identifiabl
     var rowView: (T) -> RowContent
     var rowLoadingView: () -> LoadingContent
     var navigationTitle: String
+    var searchable: Bool
     var searchPrompt: String
     var showNumResults: Bool
 
@@ -13,6 +14,7 @@ struct UnifiedListView<T, RowContent, LoadingContent>: View where T: Identifiabl
         rowView: @escaping (T) -> RowContent,
         rowLoadingView: @escaping () -> LoadingContent,
         navigationTitle: String,
+        searchable: Bool = true,
         searchPrompt: String = "Search",
         showNumResults: Bool = true
     ) {
@@ -20,6 +22,7 @@ struct UnifiedListView<T, RowContent, LoadingContent>: View where T: Identifiabl
         self.rowView = rowView
         self.rowLoadingView = rowLoadingView
         self.navigationTitle = navigationTitle
+        self.searchable = searchable
         self.searchPrompt = searchPrompt
         self.showNumResults = showNumResults
     }
@@ -35,7 +38,10 @@ struct UnifiedListView<T, RowContent, LoadingContent>: View where T: Identifiabl
                 NoDataView()
             }
         }
-        .searchable(text: $viewModel.search, placement: .navigationBarDrawer(displayMode: .always), prompt: searchPrompt)
+        .if(searchable) { view in
+            view
+                .searchable(text: $viewModel.search, placement: .navigationBarDrawer(displayMode: .always), prompt: searchPrompt)
+        }
         .autocorrectionDisabled(true)
         .onChange(of: viewModel.search) { _, new in
             if new.isEmpty {

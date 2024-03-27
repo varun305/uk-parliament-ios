@@ -30,6 +30,19 @@ struct HelpView: View {
                         }
                     }
                 }
+                Section {
+                    NavigationLink("Acknowledgements") {
+                        VStack(alignment: .leading) {
+                            Text("This product makes use of the UK Parliament API")
+                            Link(
+                                "Open parliament licence",
+                                destination: URL(string: "https://www.parliament.uk/site-information/copyright-parliament/open-parliament-licence/")!
+                            )
+                            Text("© App developer " + String(Calendar.current.component(.year, from: Date())))
+                        }
+                        .padding()
+                    }
+                }
             }
             .navigationTitle("Help")
             .navigationBarTitleDisplayMode(.inline)
