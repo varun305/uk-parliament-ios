@@ -184,7 +184,7 @@ struct MemberDetailView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     var membershipTile: some View {
         if let member = viewModel.member {
