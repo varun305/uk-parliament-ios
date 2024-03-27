@@ -176,27 +176,15 @@ struct MemberDetailView: View {
     var votesLink: some View {
         if let member = viewModel.member, member.isCommonsMember {
             ContextAwareNavigationLink(value: .memberCommonsVotesView(member: member)) {
-                HStack(alignment: .center) {
-                    Circle()
-                        .frame(width: 20, height: 20)
-                        .foregroundStyle(Color.commons)
-                        .accessibilityHidden(true)
-                    Text("View commons votes")
-                }
+                Text("View commons votes")
             }
         } else if let member = viewModel.member, !member.isCommonsMember {
             ContextAwareNavigationLink(value: .memberLordsVotesView(member: member)) {
-                HStack(alignment: .center) {
-                    Circle()
-                        .frame(width: 20, height: 20)
-                        .foregroundStyle(Color.lords)
-                        .accessibilityHidden(true)
-                    Text("View lords votes")
-                }
+                Text("View lords votes")
             }
         }
     }
-
+    
     @ViewBuilder
     var membershipTile: some View {
         if let member = viewModel.member {
