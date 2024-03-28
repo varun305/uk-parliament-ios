@@ -190,6 +190,8 @@ class BillModel {
     public static var shared = BillModel()
     private init() {}
 
+    public var billPublicationFilterCache = [BillPublicationsFilterKey: Set<String>]()
+
     public func fetchBillPublications(for id: Int, _ completion: @escaping (BillPublicationResultModel?) -> Void) {
         let url = constructBillPublicationsUrl(for: id)
         FetchModel.base.fetchData(BillPublicationResultModel.self, from: url) { result in
@@ -283,5 +285,15 @@ class BillModel {
         ]
         components.queryItems = queryItems
         return components.url!
+    }
+}
+
+public struct BillPublicationsFilterKey: Hashable {
+    var billId: Int
+    var stageId: Int?
+
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(billId)
+        hasher.combine(stageId)
     }
 }

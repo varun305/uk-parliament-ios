@@ -20,6 +20,15 @@ extension View {
     }
 
     @ViewBuilder
+    func ifElse<TrueContent: View, FalseContent: View>(_ condition: Bool, trueTransform: (Self) -> TrueContent, falseTransform: (Self) -> FalseContent) -> some View {
+        if condition {
+            trueTransform(self)
+        } else {
+            falseTransform(self)
+        }
+    }
+
+    @ViewBuilder
     func appMask() -> some View {
         self
             .mask {

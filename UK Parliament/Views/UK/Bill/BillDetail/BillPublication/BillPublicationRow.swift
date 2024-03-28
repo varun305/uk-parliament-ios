@@ -13,6 +13,7 @@ struct BillPublicationRow: View {
                 .bold()
         }
         .font(.subheadline)
+        .multilineTextAlignment(.leading)
     }
 }
 
