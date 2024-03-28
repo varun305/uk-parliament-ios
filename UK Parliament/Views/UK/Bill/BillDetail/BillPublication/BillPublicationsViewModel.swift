@@ -19,16 +19,19 @@ class BillPublicationsViewModel: ObservableObject {
     @Published var sortOrderAscending = true
 
     var filteredPublications: [BillPublication] {
-        publications.reversedIf(!sortOrderAscending)
-            .filter {
-                $0.title?.searchContains(search) ?? false
-            }.filter {
-                if let type = $0.publicationType?.name {
-                    typeFilters.contains(type) || typeFilters.isEmpty
-                } else {
-                    typeFilters.isEmpty
-                }
+        publications.sorted {
+            $0.displayDate ?? "" < $1.displayDate ?? ""
+        }
+        .reversedIf(!sortOrderAscending)
+        .filter {
+            $0.title?.searchContains(search) ?? false
+        }.filter {
+            if let type = $0.publicationType?.name {
+                typeFilters.contains(type) || typeFilters.isEmpty
+            } else {
+                typeFilters.isEmpty
             }
+        }
     }
 
     @Published var typeFilters = Set<String>() {

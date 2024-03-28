@@ -30,7 +30,9 @@ struct BillPublicationsView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             Button {
-                viewModel.sortOrderAscending.toggle()
+                withAnimation(.interactiveSpring) {
+                    viewModel.sortOrderAscending.toggle()
+                }
             } label: {
                 Image(systemName: "chevron.up.circle")
                     .rotationEffect(.degrees(viewModel.sortOrderAscending ? 0 : 180))
