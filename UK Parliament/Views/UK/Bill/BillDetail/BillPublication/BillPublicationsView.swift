@@ -30,9 +30,7 @@ struct BillPublicationsView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             Button {
-                withAnimation {
-                    viewModel.sortOrderAscending.toggle()
-                }
+                viewModel.sortOrderAscending.toggle()
             } label: {
                 Image(systemName: "chevron.up.circle")
                     .rotationEffect(.degrees(viewModel.sortOrderAscending ? 0 : 180))
@@ -41,9 +39,7 @@ struct BillPublicationsView: View {
             .foregroundStyle(.primary)
         }
         .onAppear {
-            if let billId = bill.billId {
-                viewModel.fetchPublications()
-            }
+            viewModel.fetchPublications()
         }
     }
 
@@ -70,14 +66,23 @@ struct BillPublicationsView: View {
                     ScrollView(.horizontal) {
                         HStack(alignment: .center) {
                             ForEach(viewModel.allPublicationTypes.sorted { $0 < $1 }) { type in
-                                CapsuleTextView(text: type) {
-
-                                }
-                                .environmentObject(viewModel)
+                                FilterCapsule(text: type)
+                                    .environmentObject(viewModel)
+                                    .accessibilityElement(children: .combine)
+                                    .accessibilityLabel(Text("Filter by \(type)"))
                             }
                         }
                     }
+
+                }
+                .scrollIndicators(.hidden)
+                .padding(.bottom, 20)
+                .padding(.horizontal)
+
+                HStack {
+                    Text("\(viewModel.filteredPublications.count) results")
                     if !viewModel.typeFilters.isEmpty {
+                        Spacer()
                         Button(role: .destructive) {
                             withAnimation {
                                 viewModel.typeFilters.removeAll()
@@ -87,12 +92,7 @@ struct BillPublicationsView: View {
                         }
                     }
                 }
-                .scrollIndicators(.hidden)
-                .padding(.bottom, 20)
                 .padding(.horizontal)
-
-                Text("\(viewModel.filteredPublications.count) results")
-                    .padding(.horizontal)
 
                 LazyVStack(alignment: .leading) {
                     Divider()
@@ -129,9 +129,8 @@ struct BillPublicationsView: View {
     }
 }
 
-private struct CapsuleTextView: View {
+private struct FilterCapsule: View {
     var text: String
-    var action: () -> Void
 
     @EnvironmentObject var viewModel: BillPublicationsViewModel
 

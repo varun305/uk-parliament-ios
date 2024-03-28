@@ -65,7 +65,6 @@ struct BillDetailView: View {
             }
 
             Section {
-                BillStageRowLoading()
                 NavigationLink {
                     Text("")
                 } label: {
@@ -77,6 +76,7 @@ struct BillDetailView: View {
             }
 
             Section {
+                BillStageRowLoading()
                 NavigationLink {
                     Text("")
                 } label: {
@@ -127,18 +127,18 @@ struct BillDetailView: View {
                     }
                 }
 
+                Section {
+                    ContextAwareNavigationLink(value: .billPublicationsView(bill: bill, stage: nil)) {
+                        Text("View publications")
+                    }
+                }
+
                 if let currentStage = bill.currentStage {
                     Section("Current stage") {
                         BillStageRow(stage: currentStage)
                         ContextAwareNavigationLink(value: .billStagesView(bill: bill)) {
                             Text("See all stages")
                         }
-                    }
-                }
-
-                Section {
-                    ContextAwareNavigationLink(value: .billPublicationsView(bill: bill, stage: nil)) {
-                        Text("All publications")
                     }
                 }
             }
