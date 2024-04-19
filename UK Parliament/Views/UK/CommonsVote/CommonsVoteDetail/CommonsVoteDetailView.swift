@@ -84,7 +84,7 @@ struct CommonsVoteDetailView: View {
     var votesView: some View {
         if let ayeTellers = viewModel.vote?.ayeTellers, ayeTellers.count > 0 {
             Section("Aye tellers") {
-                ForEach(ayeTellers) { teller in
+                ForEach(ayeTellers.sorted { $0.listAs ?? "" < $1.listAs ?? "" }) { teller in
                     VoterNavigationLink(voter: teller)
                 }
             }
@@ -92,7 +92,7 @@ struct CommonsVoteDetailView: View {
 
         if let noTellers = viewModel.vote?.noTellers, noTellers.count > 0 {
             Section("No tellers") {
-                ForEach(noTellers) { teller in
+                ForEach(noTellers.sorted { $0.listAs ?? "" < $1.listAs ?? "" }) { teller in
                     VoterNavigationLink(voter: teller)
                 }
             }
@@ -100,7 +100,7 @@ struct CommonsVoteDetailView: View {
 
         if let ayes = viewModel.vote?.ayes, ayes.count > 0 {
             Section("Ayes") {
-                ForEach(ayes) { aye in
+                ForEach(ayes.sorted { $0.listAs ?? "" < $1.listAs ?? "" }) { aye in
                     VoterNavigationLink(voter: aye)
                 }
             }
@@ -108,7 +108,7 @@ struct CommonsVoteDetailView: View {
 
         if let noes = viewModel.vote?.noes, noes.count > 0 {
             Section("Noes") {
-                ForEach(noes) { no in
+                ForEach(noes.sorted { $0.listAs ?? "" < $1.listAs ?? "" }) { no in
                     VoterNavigationLink(voter: no)
                 }
             }
