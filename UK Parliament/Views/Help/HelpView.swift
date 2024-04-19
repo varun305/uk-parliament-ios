@@ -5,16 +5,16 @@ struct HelpView: View {
 
     let faqItems = [
         FAQItem(
-            question: "How do I find my constituency?",
-            answer: "You can select the constituencies page from the home screen, and enter your postcode in the search bar"
+            question: "How can I find my constituency?",
+            answer: "You can locate your constituency by selecting the \"Constituencies\" page from the home screen and entering your postcode in the search bar"
         ),
         FAQItem(
-            question: "How do I see how my MP voted?",
-            answer: "From the MPs page, search for your MP, select your MP, and select 'Commons votes'"
+            question: "How can I check how my MP voted?",
+            answer: "To see how your MP voted, navigate to the \"MPs\" page, search for and select your MP, then click on \"Commons votes\""
         ),
         FAQItem(
-            question: "How do I see the latest version of a bill?",
-            answer: "From the Bills page, search for the bill, select your bill and click 'All publications'"
+            question: "How can I access the latest version of a bill?",
+            answer: "To view the latest version of a bill, go to the \"Bills\" page, search for the bill you are interested in, select it, and then click on \"All publications\""
         )
     ]
 

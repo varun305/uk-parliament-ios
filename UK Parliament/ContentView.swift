@@ -10,8 +10,8 @@ struct ContentView: View {
             ScrollView {
                 VStack(alignment: .leading) {
                     UKPagesView(search: $search)
-                        .padding()
                 }
+                .padding()
             }
             .searchable(text: $search)
             .navigationTitle("Home")

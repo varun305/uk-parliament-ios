@@ -74,12 +74,11 @@ struct BillPublicationsView: View {
                                     .accessibilityLabel(Text("Filter by \(type)"))
                             }
                         }
+                        .padding(.horizontal)
                     }
-
                 }
                 .scrollIndicators(.hidden)
                 .padding(.bottom, 20)
-                .padding(.horizontal)
 
                 HStack {
                     Text("\(viewModel.filteredPublications.count) results")
