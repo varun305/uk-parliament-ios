@@ -98,7 +98,7 @@ struct BillPublicationsView: View {
                 LazyVStack(alignment: .leading) {
                     Divider()
                     ForEach(viewModel.filteredPublications) { publication in
-                        BillPublicationNavigationLink(publication: publication)
+                        billPulicationRow(publication)
                             .foregroundStyle(.primary)
                             .padding(.horizontal)
                         Divider()
@@ -109,24 +109,17 @@ struct BillPublicationsView: View {
         .listStyle(.grouped)
     }
 
-    private struct BillPublicationNavigationLink: View {
-        var publication: BillPublication
-        var body: some View {
-            let links = publication.links ?? []
-            let files = publication.files ?? []
-            HStack {
-                BillPublicationRow(publication: publication)
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .foregroundStyle(.secondary)
-            }
+    @ViewBuilder
+    func billPulicationRow(_ publication: BillPublication) -> some View {
+        let links = publication.links ?? []
+        let files = publication.files ?? []
+        BillPublicationRow(publication: publication)
             .frame(maxWidth: .infinity)
             .if(!links.isEmpty || !files.isEmpty) { view in
                 ContextAwareNavigationLink(value: .billPublicationLinksView(publication: publication)) {
                     view
                 }
             }
-        }
     }
 }
 

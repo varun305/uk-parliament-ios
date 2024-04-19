@@ -7,10 +7,13 @@ struct BillPublicationRow: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(publication.title ?? "")
-            Text(publication.publicationType?.name ?? "")
-                .italic()
-            Text(publication.formattedDate)
                 .bold()
+            HStack {
+                Text(publication.formattedDate)
+                Spacer()
+                Text(publication.publicationType?.name ?? "")
+                    .italic()
+            }
         }
         .font(.subheadline)
         .multilineTextAlignment(.leading)
