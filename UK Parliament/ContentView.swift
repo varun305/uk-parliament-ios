@@ -21,8 +21,8 @@ struct ContentView: View {
                     Button {
                         showHelpSheet = true
                     } label: {
-                        Image(systemName: "questionmark.circle")
-                            .accessibilityLabel(Text("Help"))
+                        Image(systemName: "gearshape.circle.fill")
+                            .accessibilityLabel(Text("Settings"))
                     }
                     .foregroundStyle(.primary)
                 }

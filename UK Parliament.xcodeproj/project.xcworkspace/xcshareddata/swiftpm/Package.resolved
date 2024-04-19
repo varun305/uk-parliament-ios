@@ -1,5 +1,5 @@
 {
-  "originHash" : "73c0aa87c9dcae929c268483d61784084e1fa4d5d08f0c625dc72b7fe5283262",
+  "originHash" : "9889f4eeb6bf0e3a11fa11b23d72073d1677e984ed733a91258ec594136700e2",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -89,6 +89,15 @@
       "state" : {
         "revision" : "43aaef65e0c665daadf848761d560e446d350d3d",
         "version" : "1.22.4"
+      }
+    },
+    {
+      "identity" : "licenselist",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/cybozu/LicenseList.git",
+      "state" : {
+        "revision" : "0828b88c1a6130d56ede2cc6c41ec50068a7ebd6",
+        "version" : "0.7.0"
       }
     },
     {

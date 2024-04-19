@@ -1,4 +1,5 @@
 import SwiftUI
+import LicenseList
 
 struct HelpView: View {
     @Environment(\.dismiss) var dismiss
@@ -21,7 +22,7 @@ struct HelpView: View {
     var body: some View {
         NavigationStack {
             List {
-                Section("FAQ") {
+                Section("Help") {
                     ForEach(faqItems) { faqItem in
                         DisclosureGroup(faqItem.question) {
                             Text(faqItem.answer)
@@ -31,20 +32,24 @@ struct HelpView: View {
                     }
                 }
                 Section {
-                    NavigationLink("Acknowledgements") {
-                        VStack(alignment: .leading) {
-                            Text("This product makes use of the UK Parliament API")
-                            Link(
-                                "Open parliament licence",
-                                destination: URL(string: "https://www.parliament.uk/site-information/copyright-parliament/open-parliament-licence/")!
-                            )
-                            Text("© App developer " + String(Calendar.current.component(.year, from: Date())))
-                        }
-                        .padding()
+                    NavigationLink("Licences") {
+                        LicenseListView()
+                            .licenseListViewStyle(.withRepositoryAnchorLink)
+                            .navigationTitle("Licences")
+                            .navigationBarTitleDisplayMode(.inline)
                     }
+                    Link(
+                        "Open parliament licence",
+                        destination: URL(string: "https://www.parliament.uk/site-information/copyright-parliament/open-parliament-licence/")!
+                    )
+                    .foregroundStyle(.primary)
+                }
+
+                Section {
+                    Text("© App developer " + String(Calendar.current.component(.year, from: Date())))
                 }
             }
-            .navigationTitle("Help")
+            .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
