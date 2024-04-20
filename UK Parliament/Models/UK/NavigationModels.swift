@@ -18,7 +18,6 @@ enum NavigationItem: Hashable, Codable {
     case billStageSittingsView(stage: Stage)
     case billAmendmentsView(bill: Bill, stage: Stage)
     case billPublicationsView(bill: Bill, stage: Stage?)
-    case billPublicationLinksView(publication: BillPublication)
     case commonsVotesView
     case commonsVoteDetailView(vote: CommonsVote)
     case memberCommonsVotesView(member: Member)
@@ -58,8 +57,6 @@ enum NavigationItem: Hashable, Codable {
             return bill1 == bill2 && stage1 == stage2
         case let (.billPublicationsView(bill1, stage1), .billPublicationsView(bill2, stage2)):
             return bill1 == bill2 && stage1 == stage2
-        case let (.billPublicationLinksView(publication1), .billPublicationLinksView(publication2)):
-            return publication1 == publication2
         case let (.commonsVoteDetailView(vote1), .commonsVoteDetailView(vote2)):
             return vote1 == vote2
         case let (.memberCommonsVotesView(member1), .memberCommonsVotesView(member2)):
@@ -123,9 +120,6 @@ enum NavigationItem: Hashable, Codable {
             hasher.combine(1300)
             hasher.combine(bill)
             hasher.combine(stage)
-        case .billPublicationLinksView(let publication):
-            hasher.combine(1400)
-            hasher.combine(publication)
         case .commonsVotesView:
             hasher.combine(1500)
         case .commonsVoteDetailView(let vote):

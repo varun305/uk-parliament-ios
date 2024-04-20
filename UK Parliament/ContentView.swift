@@ -67,8 +67,6 @@ struct ContentView: View {
                     BillAmendmentsView(bill: bill, stage: stage)
                 case .billPublicationsView(let bill, let stage):
                     BillPublicationsView(bill: bill, stage: stage)
-                case .billPublicationLinksView(let publication):
-                    BillPublicationLinksView(publication: publication)
                 case .commonsVotesView:
                     CommonsVotesView()
                 case .commonsVoteDetailView(let vote):

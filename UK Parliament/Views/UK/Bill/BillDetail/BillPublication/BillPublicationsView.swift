@@ -1,4 +1,5 @@
 import SwiftUI
+import SafariServices
 
 struct BillPublicationsView: View {
     @StateObject var viewModel: BillPublicationsViewModel
@@ -64,21 +65,23 @@ struct BillPublicationsView: View {
     var scrollView: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 5) {
-                VStack(alignment: .leading, spacing: 10) {
-                    ScrollView(.horizontal) {
-                        HStack(alignment: .center) {
-                            ForEach(viewModel.allPublicationTypes.sorted { $0 < $1 }) { type in
-                                FilterCapsule(text: type)
-                                    .environmentObject(viewModel)
-                                    .accessibilityElement(children: .combine)
-                                    .accessibilityLabel(Text("Filter by \(type)"))
+                if viewModel.publications.count > 1 {
+                    VStack(alignment: .leading, spacing: 10) {
+                        ScrollView(.horizontal) {
+                            HStack(alignment: .center) {
+                                ForEach(viewModel.allPublicationTypes.sorted { $0 < $1 }) { type in
+                                    FilterCapsule(text: type)
+                                        .environmentObject(viewModel)
+                                        .accessibilityElement(children: .combine)
+                                        .accessibilityLabel(Text("Filter by \(type)"))
+                                }
                             }
+                            .padding(.horizontal)
                         }
-                        .padding(.horizontal)
                     }
+                    .scrollIndicators(.hidden)
+                    .padding(.bottom, 20)
                 }
-                .scrollIndicators(.hidden)
-                .padding(.bottom, 20)
 
                 HStack {
                     Text("\(viewModel.filteredPublications.count) results")
@@ -100,26 +103,24 @@ struct BillPublicationsView: View {
                     ForEach(viewModel.filteredPublications) { publication in
                         billPulicationRow(publication)
                             .foregroundStyle(.primary)
-                            .padding(.horizontal)
                         Divider()
                     }
                 }
             }
         }
         .listStyle(.grouped)
+        .fullScreenCover(item: $linkItem) { link in
+            WebView(url: URL(string: link)!)
+                .ignoresSafeArea()
+        }
     }
+
+    @State var linkItem: String? = nil
 
     @ViewBuilder
     func billPulicationRow(_ publication: BillPublication) -> some View {
-        let links = publication.links ?? []
-        let files = publication.files ?? []
-        BillPublicationRow(publication: publication)
-            .frame(maxWidth: .infinity)
-            .if(!links.isEmpty || !files.isEmpty) { view in
-                ContextAwareNavigationLink(value: .billPublicationLinksView(publication: publication)) {
-                    view
-                }
-            }
+        BillPublicationRow(publication: publication, linkItem: $linkItem)
+            .padding(.horizontal)
     }
 }
 
