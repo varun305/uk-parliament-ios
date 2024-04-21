@@ -29,51 +29,50 @@ struct BillPublicationRow: View {
         "https://bills-api.parliament.uk/api/v1/Publications/\(publicationId)/Documents/\(fileId)/Download"
     }
 
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(publication.title ?? "")
-                .bold()
-            Text(publication.formattedDate)
-                .font(.subheadline)
-            HStack(alignment: .center) {
-                ForEach(texts, id: \.1) { filetype, url in
-                    linkCapsule(filetype, url)
-                        .frame(maxWidth: 130)
-                }
-                Spacer()
-            }
-        }
-        .multilineTextAlignment(.leading)
-    }
-
     @Binding var linkItem: String?
 
-    @ViewBuilder
-    private func linkCapsule(_ filetype: String, _ url: String) -> some View {
-        Button {
-            linkItem = url
-        } label: {
-            ZStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(.primary, lineWidth: 3)
-                HStack {
-                    Image(systemName: "doc.fill")
-                    Text("Open " + filetypeToString[filetype, default: filetype])
-                }
-                .padding(.vertical, 5)
-                .padding(.horizontal, 7)
+    var body: some View {
+        HStack(alignment: .center) {
+            VStack(alignment: .leading) {
+                Text(publication.title ?? "")
+                    .bold()
+                Text(publication.formattedDate)
+                    .font(.subheadline)
             }
-            .mask {
-                RoundedRectangle(cornerRadius: 10)
+            .multilineTextAlignment(.leading)
+            .accessibilityElement(children: .combine)
+            Spacer()
+            
+            if texts.count == 1 {
+                Button {
+                    linkItem = texts[0].1
+                } label: {
+                    Text("Open")
+                        .bold()
+                }
+                .buttonStyle(.bordered)
+            } else if texts.count > 1 {
+                Menu {
+                    ForEach(texts, id: \.1) { filetype, link in
+                        Button {
+                            linkItem = link
+                        } label: {
+                            Label(filetypeToString[filetype, default: filetype], systemImage: "doc.fill")
+                        }
+                    }
+                } label: {
+                    Text("Open")
+                        .bold()
+                }
+                .buttonStyle(.bordered)
             }
         }
-        .foregroundStyle(.primary)
     }
 
     private var filetypeToString = [
-        "application/pdf": "pdf",
-        "text/html": "link",
-        "text/xml": "xml",
+        "application/pdf": "PDF",
+        "text/html": "HTML",
+        "text/xml": "XML",
     ]
 }
 
