@@ -1,7 +1,7 @@
 import SwiftUI
 import LicenseList
 
-struct HelpView: View {
+struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
 
     let faqItems = [
@@ -22,13 +22,25 @@ struct HelpView: View {
     var body: some View {
         NavigationStack {
             List {
-                Section("Help") {
-                    ForEach(faqItems) { faqItem in
-                        DisclosureGroup(faqItem.question) {
-                            Text(faqItem.answer)
-                                .font(.callout)
-                                .foregroundStyle(.secondary)
-                        }
+                Section {
+                    NavigationLink {
+                        helpView
+                    } label: {
+                        Label(
+                            title: { Text("Help") },
+                            icon: {
+                                ZStack {
+                                    Rectangle()
+                                        .aspectRatio(1.0, contentMode: .fit)
+                                        .foregroundStyle(.accent)
+                                        .mask {
+                                            RoundedRectangle(cornerRadius: 5)
+                                        }
+                                    Image(systemName: "questionmark")
+                                        .foregroundStyle(.white)
+                                }
+                            }
+                        )
                     }
                 }
                 Section {
@@ -63,6 +75,23 @@ struct HelpView: View {
             }
         }
     }
+
+    @ViewBuilder
+    var helpView: some View {
+        List {
+            Section {
+                ForEach(faqItems) { faqItem in
+                    DisclosureGroup(faqItem.question) {
+                        Text(faqItem.answer)
+                            .font(.callout)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            }
+        }
+        .navigationTitle("Help")
+        .navigationBarTitleDisplayMode(.inline)
+    }
 }
 
 struct FAQItem: Identifiable {
@@ -80,5 +109,5 @@ struct FAQItem: Identifiable {
 }
 
 #Preview {
-    HelpView()
+    SettingsView()
 }

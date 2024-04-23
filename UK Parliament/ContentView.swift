@@ -28,8 +28,7 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented: $showHelpSheet) {
-                HelpView()
-                    .textSelection(.disabled)
+                SettingsView()
             }
             .navigationDestination(for: NavigationItem.self) { item in
                 switch item {
@@ -82,6 +81,5 @@ struct ContentView: View {
                 }
             }
         }
-        .textSelection(.enabled)
     }
 }

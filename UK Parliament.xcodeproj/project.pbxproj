@@ -100,7 +100,7 @@
 		EEEC3B442B39B83A00A8626D /* VoterRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B432B39B83A00A8626D /* VoterRow.swift */; };
 		EEF10F022BD04B1700FE7D21 /* Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF10F012BD04B1700FE7D21 /* Tips.swift */; };
 		EEF10F052BD2BCD100FE7D21 /* LicenseList in Frameworks */ = {isa = PBXBuildFile; productRef = EEF10F042BD2BCD100FE7D21 /* LicenseList */; };
-		EEF543C52B9FA12400AD29D0 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF543C42B9FA12400AD29D0 /* HelpView.swift */; };
+		EEF543C52B9FA12400AD29D0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF543C42B9FA12400AD29D0 /* SettingsView.swift */; };
 		EEFC7C992B35B4E000183203 /* MemberPictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFC7C982B35B4E000183203 /* MemberPictureView.swift */; };
 		EEFC7C9B2B36132200183203 /* MemberDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFC7C9A2B36132200183203 /* MemberDetailView.swift */; };
 		EEFC7C9D2B36140400183203 /* ElectionResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFC7C9C2B36140400183203 /* ElectionResultModel.swift */; };
@@ -211,7 +211,7 @@
 		EEEC3B412B39B55000A8626D /* CommonsVoteDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonsVoteDetailViewModel.swift; sourceTree = "<group>"; };
 		EEEC3B432B39B83A00A8626D /* VoterRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoterRow.swift; sourceTree = "<group>"; };
 		EEF10F012BD04B1700FE7D21 /* Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tips.swift; sourceTree = "<group>"; };
-		EEF543C42B9FA12400AD29D0 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
+		EEF543C42B9FA12400AD29D0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EEFC7C982B35B4E000183203 /* MemberPictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberPictureView.swift; sourceTree = "<group>"; };
 		EEFC7C9A2B36132200183203 /* MemberDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailView.swift; sourceTree = "<group>"; };
 		EEFC7C9C2B36140400183203 /* ElectionResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElectionResultModel.swift; sourceTree = "<group>"; };
@@ -394,7 +394,7 @@
 		EE86A46C2B344C14007BEA83 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EEF543C32B9FA11900AD29D0 /* Help */,
+				EEF543C32B9FA11900AD29D0 /* Settings */,
 				EEE171BE2B9E20D600C89859 /* UK */,
 			);
 			path = Views;
@@ -605,12 +605,12 @@
 			path = CommonsVoteDetail;
 			sourceTree = "<group>";
 		};
-		EEF543C32B9FA11900AD29D0 /* Help */ = {
+		EEF543C32B9FA11900AD29D0 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				EEF543C42B9FA12400AD29D0 /* HelpView.swift */,
+				EEF543C42B9FA12400AD29D0 /* SettingsView.swift */,
 			);
-			path = Help;
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		EEFC7CA02B36230700183203 /* MemberDetail */ = {
@@ -793,7 +793,7 @@
 				EEEC3B362B39A2C700A8626D /* VoteModel.swift in Sources */,
 				EE3194E72B6E3E9C00A5F754 /* BillAmendmentsView.swift in Sources */,
 				EE97BF942B34C60300FA950C /* MemberModel.swift in Sources */,
-				EEF543C52B9FA12400AD29D0 /* HelpView.swift in Sources */,
+				EEF543C52B9FA12400AD29D0 /* SettingsView.swift in Sources */,
 				EEEC3B3B2B39A98900A8626D /* CommonsVotesViewModel.swift in Sources */,
 				EE86A4702B344D4C007BEA83 /* PartiesView.swift in Sources */,
 				EE3195092B6F952700A5F754 /* MemberLordsVotesView.swift in Sources */,
