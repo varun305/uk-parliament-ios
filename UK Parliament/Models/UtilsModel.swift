@@ -28,4 +28,14 @@ class UtilsModel {
             return nil
         }
     }
+
+    public static func groupVoters(_ voters: [any Voter]) -> [String: Int] {
+        var results = [String: Int]()
+        for voter in voters {
+            if let party = voter.party {
+                results[party] = results[party, default: 0] + 1
+            }
+        }
+        return results
+    }
 }
