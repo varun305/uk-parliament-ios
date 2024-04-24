@@ -29,13 +29,34 @@ class UtilsModel {
         }
     }
 
-    public static func groupVoters(_ voters: [any Voter]) -> [String: Int] {
-        var results = [String: Int]()
+    public static func groupVoters(_ voters: [any Voter]) -> [(PartyHashable, Int)] {
+        var results = [PartyHashable: Int]()
         for voter in voters {
             if let party = voter.party {
-                results[party] = results[party, default: 0] + 1
+                let hashable = PartyHashable(party: party, partyColour: voter.partyColour, partyAbbreviation: voter.partyAbbreviation)
+                results[hashable] = results[hashable, default: 0] + 1
             }
         }
-        return results
+        return results.map { party, number in
+            (party, number)
+        }.sorted { $0.1 > $1.1 }
+    }
+}
+
+public struct PartyHashable: Hashable {
+    var party: String
+    var partyColour: String?
+    var partyAbbreviation: String?
+
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(party)
+        hasher.combine(partyColour)
+        hasher.combine(partyAbbreviation)
+    }
+
+    public static func ==(lhs: PartyHashable, rhs: PartyHashable) -> Bool {
+        return lhs.party == rhs.party &&
+               lhs.partyColour == rhs.partyColour &&
+               lhs.partyAbbreviation == rhs.partyAbbreviation
     }
 }
