@@ -48,7 +48,16 @@ class LordsVoter: Voter {
     }
 }
 
-class CommonsVote: Codable, Identifiable, Hashable {
+protocol AllVotesModel {
+    var title: String? { get }
+    var house: House { get }
+    var yesVoteTellers: [any Voter]? { get }
+    var noVoteTellers: [any Voter]? { get }
+    var yesVotes: [any Voter]? { get }
+    var noVotes: [any Voter]? { get }
+}
+
+class CommonsVote: AllVotesModel, Codable, Identifiable, Hashable {
     var divisionId: Int?
     var date: String?
     var publicationUpdated: String?
@@ -62,6 +71,22 @@ class CommonsVote: Codable, Identifiable, Hashable {
     var ayes: [CommonsVoter]?
     var noes: [CommonsVoter]?
     var noVoteRecorded: [CommonsVoter]?
+
+    var house: House {
+        House.commons
+    }
+    var yesVoteTellers: [any Voter]? {
+        ayeTellers
+    }
+    var noVoteTellers: [any Voter]? {
+        noTellers
+    }
+    var yesVotes: [any Voter]? {
+        ayes
+    }
+    var noVotes: [any Voter]? {
+        noes
+    }
 
     enum CodingKeys: String, CodingKey {
         case divisionId = "DivisionId"
@@ -93,7 +118,7 @@ class CommonsVote: Codable, Identifiable, Hashable {
     }
 }
 
-class LordsVote: Codable, Identifiable, Hashable {
+class LordsVote: AllVotesModel, Codable, Identifiable, Hashable {
     var divisionId: Int?
     var date: String?
     var number: Int?
@@ -111,6 +136,22 @@ class LordsVote: Codable, Identifiable, Hashable {
     var notContentTellers: [LordsVoter]?
     var contents: [LordsVoter]?
     var notContents: [LordsVoter]?
+
+    var house: House {
+        House.commons
+    }
+    var yesVoteTellers: [any Voter]? {
+        contentTellers
+    }
+    var noVoteTellers: [any Voter]? {
+        notContentTellers
+    }
+    var yesVotes: [any Voter]? {
+        contents
+    }
+    var noVotes: [any Voter]? {
+        notContents
+    }
 
     var id: Int? {
         divisionId

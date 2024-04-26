@@ -13,6 +13,7 @@
 		EE0186252B38255D004F7F77 /* MemberContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0186242B38255D004F7F77 /* MemberContactView.swift */; };
 		EE0186272B38258B004F7F77 /* MemberContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0186262B38258B004F7F77 /* MemberContactViewModel.swift */; };
 		EE0186292B385A4E004F7F77 /* PartyTaggedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0186282B385A4E004F7F77 /* PartyTaggedText.swift */; };
+		EE01A7362BDB7BA800B34EE4 /* VotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE01A7352BDB7BA800B34EE4 /* VotesView.swift */; };
 		EE020BC42B618A94004C893B /* SkeletonUI in Frameworks */ = {isa = PBXBuildFile; productRef = EE020BC32B618A94004C893B /* SkeletonUI */; };
 		EE167D8E2B7A108900415100 /* UnifiedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE167D8D2B7A108900415100 /* UnifiedListView.swift */; };
 		EE208E842B7949DC005125BA /* UnifiedListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE208E832B7949DC005125BA /* UnifiedListViewModel.swift */; };
@@ -125,6 +126,7 @@
 		EE0186242B38255D004F7F77 /* MemberContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberContactView.swift; sourceTree = "<group>"; };
 		EE0186262B38258B004F7F77 /* MemberContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberContactViewModel.swift; sourceTree = "<group>"; };
 		EE0186282B385A4E004F7F77 /* PartyTaggedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyTaggedText.swift; sourceTree = "<group>"; };
+		EE01A7352BDB7BA800B34EE4 /* VotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotesView.swift; sourceTree = "<group>"; };
 		EE167D8D2B7A108900415100 /* UnifiedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnifiedListView.swift; sourceTree = "<group>"; };
 		EE208E832B7949DC005125BA /* UnifiedListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnifiedListViewModel.swift; sourceTree = "<group>"; };
 		EE29CCC32B6059E10027CBA4 /* ListExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListExtensions.swift; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 				EE208E832B7949DC005125BA /* UnifiedListViewModel.swift */,
 				EE167D8D2B7A108900415100 /* UnifiedListView.swift */,
 				EEE171B82B9DEAAD00C89859 /* UKPagesView.swift */,
+				EE01A7352BDB7BA800B34EE4 /* VotesView.swift */,
 			);
 			path = UK;
 			sourceTree = "<group>";
@@ -862,6 +865,7 @@
 				EE29CCC42B6059E10027CBA4 /* ListExtensions.swift in Sources */,
 				EE0186202B375B4D004F7F77 /* PostsViewModel.swift in Sources */,
 				EEEC3B422B39B55000A8626D /* CommonsVoteDetailViewModel.swift in Sources */,
+				EE01A7362BDB7BA800B34EE4 /* VotesView.swift in Sources */,
 				EEEC3B3D2B39AC4600A8626D /* CommonsVoteRow.swift in Sources */,
 				EEEC3B092B388E5600A8626D /* BillRow.swift in Sources */,
 				EE5AE8262B4C7AC000550126 /* ViewExtensions.swift in Sources */,

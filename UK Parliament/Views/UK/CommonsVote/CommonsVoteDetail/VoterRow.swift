@@ -8,7 +8,12 @@ struct VoterRow: View {
         VStack(alignment: .leading) {
             Text(voter.name ?? "")
                 .bold()
-            Text(voter.party ?? "")
+            HStack {
+                Circle()
+                    .frame(width: 20, height: 20)
+                    .foregroundStyle(Color(hexString: voter.partyColour ?? "0000000"))
+                Text(voter.party ?? "")
+            }
         }
     }
 }

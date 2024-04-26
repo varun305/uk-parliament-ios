@@ -42,8 +42,6 @@ struct CommonsVoteDetailView: View {
         .environment(\.isScrollEnabled, false)
     }
 
-    @State private var grouping = Grouping.byParty
-
     @ViewBuilder
     var scrollView: some View {
         List {
@@ -75,26 +73,36 @@ struct CommonsVoteDetailView: View {
                 }
                 .listRowSeparator(.hidden)
                 .listRowBackground(Color.clear)
-                .padding(.bottom, 20)
                 .padding(.horizontal, 20)
             }
 
-            Picker("Group by", selection: $grouping.animation()) {
-                Text("Group by party").tag(Grouping.byParty)
-                Text("Group by member").tag(Grouping.byMember)
-            }
-            .pickerStyle(.segmented)
-            .listRowBackground(Color.clear)
-            .listSectionSeparator(.hidden)
+            partiesView
+                .accessibilityHidden(true)
 
-            switch grouping {
-            case .byParty:
-                partiesView
-            case .byMember:
-                votesView
+            Label(
+                title: { Text("View all votes") },
+                icon: {
+                    ZStack {
+                        Rectangle()
+                            .aspectRatio(1.0, contentMode: .fit)
+                            .foregroundStyle(.accent)
+                            .mask {
+                                RoundedRectangle(cornerRadius: 5)
+                            }
+                        Image(systemName: "person.3.fill")
+                            .resizable()
+                            .padding(3)
+                            .aspectRatio(contentMode: .fit)
+                            .foregroundStyle(.white)
+                    }
+                }
+            )
+            .ifLet(viewModel.vote) { view, vote in
+                ContextAwareNavigationLink(value: .allVotesView(allVotes: vote)) {
+                    view
+                }
             }
         }
-        .listStyle(.grouped)
     }
 
     @ViewBuilder
@@ -118,6 +126,7 @@ struct CommonsVoteDetailView: View {
             }
             .chartForegroundStyleScale(range: graphColours())
             .chartLegend(.hidden)
+            .chartYAxis(.hidden)
             .frame(height: 300)
 
             HStack(alignment: .top) {
@@ -170,55 +179,4 @@ struct CommonsVoteDetailView: View {
             Color(hexString: $0.0.partyColour ?? "000000")
         }
     }
-
-    @ViewBuilder
-    var votesView: some View {
-        if let ayeTellers = viewModel.vote?.ayeTellers, ayeTellers.count > 0 {
-            Section("Aye tellers") {
-                ForEach(ayeTellers.sorted { $0.listAs ?? "" < $1.listAs ?? "" }) { teller in
-                    VoterNavigationLink(voter: teller)
-                }
-            }
-        }
-
-        if let noTellers = viewModel.vote?.noTellers, noTellers.count > 0 {
-            Section("No tellers") {
-                ForEach(noTellers.sorted { $0.listAs ?? "" < $1.listAs ?? "" }) { teller in
-                    VoterNavigationLink(voter: teller)
-                }
-            }
-        }
-
-        if let ayes = viewModel.vote?.ayes, ayes.count > 0 {
-            Section("Ayes") {
-                ForEach(ayes.sorted { $0.listAs ?? "" < $1.listAs ?? "" }) { aye in
-                    VoterNavigationLink(voter: aye)
-                }
-            }
-        }
-
-        if let noes = viewModel.vote?.noes, noes.count > 0 {
-            Section("Noes") {
-                ForEach(noes.sorted { $0.listAs ?? "" < $1.listAs ?? "" }) { no in
-                    VoterNavigationLink(voter: no)
-                }
-            }
-        }
-    }
-
-    private struct VoterNavigationLink: View {
-        var voter: CommonsVoter
-        var body: some View {
-            VoterRow(voter: voter)
-                .ifLet(voter.memberId) { view, memberId in
-                    ContextAwareNavigationLink(value: .memberDetailView(memberId: memberId)) {
-                        view
-                    }
-                }
-        }
-    }
-}
-
-private enum Grouping {
-    case byParty, byMember
 }

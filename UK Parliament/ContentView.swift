@@ -78,6 +78,8 @@ struct ContentView: View {
                     LordsVoteDetailView(vote: vote)
                 case .memberLordsVotesView(let member):
                     MemberLordsVotesView(viewModel: MemberLordsVotesViewModel(member: member))
+                case .allVotesView(let allVotes):
+                    VotesView(allVotesModel: allVotes)
                 }
             }
         }

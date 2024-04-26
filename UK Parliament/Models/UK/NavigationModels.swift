@@ -1,6 +1,6 @@
 import Foundation
 
-enum NavigationItem: Hashable, Codable {
+enum NavigationItem: Hashable {
     case _404
     case partiesView
     case mpsView
@@ -24,6 +24,7 @@ enum NavigationItem: Hashable, Codable {
     case lordsVotesView
     case lordsVoteDetailView(vote: LordsVote)
     case memberLordsVotesView(member: Member)
+    case allVotesView(allVotes: any AllVotesModel)
 
     static func == (lhs: NavigationItem, rhs: NavigationItem) -> Bool {
         switch (lhs, rhs) {
@@ -65,6 +66,13 @@ enum NavigationItem: Hashable, Codable {
             return vote1 == vote2
         case let (.memberLordsVotesView(member1), .memberLordsVotesView(member2)):
             return member1 == member2
+        case let (.allVotesView(allVotes1), .allVotesView(allVotes2)):
+            return allVotes1.title == allVotes2.title &&
+            allVotes1.house == allVotes2.house &&
+            allVotes1.yesVoteTellers?.compactMap { $0.memberId } == allVotes2.yesVoteTellers?.compactMap { $0.memberId } &&
+            allVotes1.noVoteTellers?.compactMap { $0.memberId } == allVotes2.noVoteTellers?.compactMap { $0.memberId } &&
+            allVotes1.yesVotes?.compactMap { $0.memberId } == allVotes2.yesVotes?.compactMap { $0.memberId } &&
+            allVotes1.noVotes?.compactMap { $0.memberId } == allVotes2.noVotes?.compactMap { $0.memberId }
         default:
             return false
         }
@@ -136,6 +144,22 @@ enum NavigationItem: Hashable, Codable {
         case .memberLordsVotesView(let member):
             hasher.combine(1800)
             hasher.combine(member)
+        case .allVotesView(let allVotes):
+            hasher.combine(1900)
+            hasher.combine(allVotes.house)
+            hasher.combine(allVotes.title)
+            for voter in allVotes.yesVoteTellers ?? [] {
+                hasher.combine(voter.memberId)
+            }
+            for voter in allVotes.noVoteTellers ?? [] {
+                hasher.combine(voter.memberId)
+            }
+            for voter in allVotes.yesVotes ?? [] {
+                hasher.combine(voter.memberId)
+            }
+            for voter in allVotes.noVotes ?? [] {
+                hasher.combine(voter.memberId)
+            }
         }
     }
 }
