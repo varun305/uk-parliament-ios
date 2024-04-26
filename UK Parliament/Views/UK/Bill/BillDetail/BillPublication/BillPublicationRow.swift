@@ -42,7 +42,7 @@ struct BillPublicationRow: View {
             .multilineTextAlignment(.leading)
             .accessibilityElement(children: .combine)
             Spacer()
-            
+
             if texts.count == 1 {
                 Button {
                     linkItem = texts[0].1
@@ -72,7 +72,7 @@ struct BillPublicationRow: View {
     private var filetypeToString = [
         "application/pdf": "PDF",
         "text/html": "HTML",
-        "text/xml": "XML",
+        "text/xml": "XML"
     ]
 }
 

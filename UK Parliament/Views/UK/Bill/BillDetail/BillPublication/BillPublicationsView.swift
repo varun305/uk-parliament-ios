@@ -115,7 +115,7 @@ struct BillPublicationsView: View {
         }
     }
 
-    @State var linkItem: String? = nil
+    @State var linkItem: String?
 
     @ViewBuilder
     func billPulicationRow(_ publication: BillPublication) -> some View {

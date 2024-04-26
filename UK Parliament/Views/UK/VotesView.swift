@@ -12,7 +12,6 @@ struct VotesView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 
-
     @ViewBuilder
     var votesView: some View {
         if let yesTellers = allVotesModel.yesVoteTellers, yesTellers.count > 0 {
