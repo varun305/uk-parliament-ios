@@ -76,55 +76,33 @@ struct LordsVoteDetailView: View {
                 .padding(.horizontal, 20)
             }
 
-            votesView
-        }
-        .listStyle(.grouped)
-    }
+            Section("Votes") {
+                VoteChart(yesVotes: viewModel.contentsGrouping, noVotes: viewModel.notContentsGrouping)
+            }
+            .accessibilityHidden(true)
 
-    @ViewBuilder
-    var votesView: some View {
-        if let contentTellers = viewModel.vote?.contentTellers, contentTellers.count > 0 {
-            Section("Content tellers") {
-                ForEach(contentTellers.sorted { $0.listAs ?? "" < $1.listAs ?? "" }) { teller in
-                    VoterNavigationLink(voter: teller)
+            if let vote = viewModel.vote {
+                ContextAwareNavigationLink(value: .allVotesView(allVotes: vote)) {
+                    Label(
+                        title: { Text("View all votes") },
+                        icon: {
+                            ZStack {
+                                Rectangle()
+                                    .aspectRatio(1.0, contentMode: .fit)
+                                    .foregroundStyle(Color.lords)
+                                    .mask {
+                                        RoundedRectangle(cornerRadius: 5)
+                                    }
+                                Image(systemName: "person.3.fill")
+                                    .resizable()
+                                    .padding(3)
+                                    .aspectRatio(contentMode: .fit)
+                                    .foregroundStyle(.white)
+                            }
+                        }
+                    )
                 }
             }
-        }
-
-        if let notContentTellers = viewModel.vote?.notContentTellers, notContentTellers.count > 0 {
-            Section("Not content tellers") {
-                ForEach(notContentTellers.sorted { $0.listAs ?? "" < $1.listAs ?? "" }) { teller in
-                    VoterNavigationLink(voter: teller)
-                }
-            }
-        }
-
-        if let contents = viewModel.vote?.contents, contents.count > 0 {
-            Section("Contents") {
-                ForEach(contents.sorted { $0.listAs ?? "" < $1.listAs ?? "" }) { aye in
-                    VoterNavigationLink(voter: aye)
-                }
-            }
-        }
-
-        if let notContents = viewModel.vote?.notContents, notContents.count > 0 {
-            Section("Not contents") {
-                ForEach(notContents.sorted { $0.listAs ?? "" < $1.listAs ?? "" }) { no in
-                    VoterNavigationLink(voter: no)
-                }
-            }
-        }
-    }
-
-    private struct VoterNavigationLink: View {
-        var voter: LordsVoter
-        var body: some View {
-            VoterRow(voter: voter)
-                .ifLet(voter.memberId) { view, memberId in
-                    ContextAwareNavigationLink(value: .memberDetailView(memberId: memberId)) {
-                        view
-                    }
-                }
         }
     }
 }

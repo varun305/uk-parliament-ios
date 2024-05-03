@@ -39,7 +39,7 @@ class UtilsModel {
         }
         return results.map { party, number in
             (party, number)
-        }.sorted { $0.1 > $1.1 }
+        }.sorted { (-$0.1, $0.0.party) < (-$1.1, $1.0.party) }
     }
 }
 

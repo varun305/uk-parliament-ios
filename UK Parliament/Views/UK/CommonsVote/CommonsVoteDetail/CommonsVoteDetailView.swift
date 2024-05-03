@@ -1,5 +1,4 @@
 import SwiftUI
-import Charts
 
 struct CommonsVoteDetailView: View {
     @StateObject var viewModel = CommonsVoteDetailViewModel()
@@ -76,107 +75,33 @@ struct CommonsVoteDetailView: View {
                 .padding(.horizontal, 20)
             }
 
-            partiesView
-                .accessibilityHidden(true)
+            Section("Votes") {
+                VoteChart(yesVotes: viewModel.ayesGrouping, noVotes: viewModel.noesGrouping)
+            }
+            .accessibilityHidden(true)
 
-            Label(
-                title: { Text("View all votes") },
-                icon: {
-                    ZStack {
-                        Rectangle()
-                            .aspectRatio(1.0, contentMode: .fit)
-                            .foregroundStyle(.accent)
-                            .mask {
-                                RoundedRectangle(cornerRadius: 5)
-                            }
-                        Image(systemName: "person.3.fill")
-                            .resizable()
-                            .padding(3)
-                            .aspectRatio(contentMode: .fit)
-                            .foregroundStyle(.white)
-                    }
-                }
-            )
-            .ifLet(viewModel.vote) { view, vote in
+            if let vote = viewModel.vote {
                 ContextAwareNavigationLink(value: .allVotesView(allVotes: vote)) {
-                    view
-                }
-            }
-        }
-    }
-
-    @ViewBuilder
-    var partiesView: some View {
-        Section("Votes") {
-            Chart {
-                ForEach(viewModel.ayesGrouping, id: \.0) { party, number in
-                    BarMark(
-                        x: .value("Ayes", "Ayes"),
-                        y: .value("Votes", number)
+                    Label(
+                        title: { Text("View all votes") },
+                        icon: {
+                            ZStack {
+                                Rectangle()
+                                    .aspectRatio(1.0, contentMode: .fit)
+                                    .foregroundStyle(Color.commons)
+                                    .mask {
+                                        RoundedRectangle(cornerRadius: 5)
+                                    }
+                                Image(systemName: "person.3.fill")
+                                    .resizable()
+                                    .padding(3)
+                                    .aspectRatio(contentMode: .fit)
+                                    .foregroundStyle(.white)
+                            }
+                        }
                     )
-                    .foregroundStyle(by: .value("Party", "\(party.party), \(number)"))
-                }
-                ForEach(viewModel.noesGrouping, id: \.0) { party, number in
-                    BarMark(
-                        x: .value("Noes", "Noes"),
-                        y: .value("Votes", number)
-                    )
-                    .foregroundStyle(by: .value("Party", "\(party.party), \(number)"))
                 }
             }
-            .chartForegroundStyleScale(range: graphColours())
-            .chartLegend(.hidden)
-            .chartYAxis(.hidden)
-            .frame(height: 300)
-
-            HStack(alignment: .top) {
-                VStack(alignment: .leading) {
-                    ForEach(viewModel.ayesGrouping, id: \.0) { party, number in
-                        legendRow(party, number)
-                    }
-                }
-                Spacer()
-                VStack(alignment: .trailing) {
-                    ForEach(viewModel.noesGrouping, id: \.0) { party, number in
-                        legendRowRight(party, number)
-                    }
-                }
-            }
-        }
-    }
-
-    @ViewBuilder
-    private func legendRow(_ party: PartyHashable, _ number: Int) -> some View {
-        HStack {
-            Circle()
-                .frame(width: 10, height: 10)
-                .foregroundStyle(Color(hexString: party.partyColour ?? "0000000"))
-            Text("\(party.party), \(number)")
-                .multilineTextAlignment(.leading)
-                .lineLimit(nil)
-        }
-        .foregroundStyle(.primary)
-        .font(.footnote)
-    }
-
-    @ViewBuilder
-    private func legendRowRight(_ party: PartyHashable, _ number: Int) -> some View {
-        HStack {
-            Text("\(party.party), \(number)")
-                .multilineTextAlignment(.trailing)
-                .foregroundStyle(.primary)
-            Circle()
-                .frame(width: 10, height: 10)
-                .foregroundStyle(Color(hexString: party.partyColour ?? "0000000"))
-        }
-        .font(.footnote)
-    }
-
-    private func graphColours() -> [Color] {
-        viewModel.ayesGrouping.map {
-            Color(hexString: $0.0.partyColour ?? "000000")
-        } + viewModel.noesGrouping.map {
-            Color(hexString: $0.0.partyColour ?? "000000")
         }
     }
 }
