@@ -79,7 +79,6 @@ struct ConstituencyElectionDetailView: View {
                     .frame(height: 10)
             }
         }
-        .listStyle(.grouped)
         .environment(\.isScrollEnabled, false)
     }
 
@@ -128,7 +127,6 @@ struct ConstituencyElectionDetailView: View {
                         .padding(3)
                 }
             }
-            .listStyle(.grouped)
         }
     }
 

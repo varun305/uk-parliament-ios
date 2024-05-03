@@ -107,7 +107,6 @@ struct MemberDetailView: View {
                 .disabled(true)
             }
         }
-        .listStyle(.grouped)
         .environment(\.isScrollEnabled, false)
     }
 
@@ -159,7 +158,6 @@ struct MemberDetailView: View {
                     }
                 }
             }
-            .listStyle(.grouped)
         }
     }
 

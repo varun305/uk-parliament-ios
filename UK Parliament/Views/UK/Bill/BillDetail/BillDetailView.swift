@@ -87,7 +87,6 @@ struct BillDetailView: View {
                 .disabled(true)
             }
         }
-        .listStyle(.grouped)
         .environment(\.isScrollEnabled, false)
     }
 
@@ -142,7 +141,6 @@ struct BillDetailView: View {
                     }
                 }
             }
-            .listStyle(.grouped)
         }
     }
 }
