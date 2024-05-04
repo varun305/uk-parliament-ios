@@ -167,6 +167,8 @@ struct MemberDetailView: View {
             ContextAwareNavigationLink(value: .constituencyDetailView(constituency: constituency)) {
                 membershipTile
             }
+        } else if let member = viewModel.member, !member.isCommonsMember {
+            Text(member.latestHouseMembership?.membershipFrom ?? "")
         }
     }
 

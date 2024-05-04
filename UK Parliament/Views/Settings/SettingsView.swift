@@ -37,6 +37,7 @@ struct SettingsView: View {
                                             RoundedRectangle(cornerRadius: 5)
                                         }
                                     Image(systemName: "questionmark")
+                                        .bold()
                                         .foregroundStyle(.white)
                                 }
                             }
