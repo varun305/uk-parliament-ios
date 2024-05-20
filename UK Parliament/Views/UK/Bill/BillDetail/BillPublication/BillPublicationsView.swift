@@ -9,7 +9,7 @@ struct BillPublicationsView: View {
     init(bill: Bill, stage: Stage? = nil) {
         self.bill = bill
         self.stage = stage
-        self._viewModel = StateObject(wrappedValue: BillPublicationsViewModel(billId: bill.billId, stageId: stage?.stageId))
+        self._viewModel = StateObject(wrappedValue: BillPublicationsViewModel(billId: bill.billId, stageId: stage?.id))
     }
 
     private var navigationTitle: String {
