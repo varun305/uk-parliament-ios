@@ -25,7 +25,7 @@ struct MemberDetailView: View {
         }
         .navigationTitle(viewModel.member?.nameDisplayAs ?? "")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
+        .task {
             viewModel.fetchMember(for: memberId)
         }
     }

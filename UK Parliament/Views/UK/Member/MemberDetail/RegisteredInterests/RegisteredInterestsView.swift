@@ -17,7 +17,7 @@ struct RegisteredInterestsView: View {
         }
         .navigationTitle("Registered Interests, \(member.nameDisplayAs ?? "")")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
+        .task {
             if let memberId = member.id {
                 viewModel.fetchData(for: memberId)
             }

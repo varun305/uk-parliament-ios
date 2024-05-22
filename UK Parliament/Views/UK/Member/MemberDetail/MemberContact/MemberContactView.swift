@@ -15,7 +15,7 @@ struct MemberContactView: View {
                 NoDataView()
             }
         }
-        .onAppear {
+        .task {
             if let memberId = member.id {
                 viewModel.fetchContacts(for: memberId)
             }

@@ -17,7 +17,7 @@ struct BillDetailView: View {
         }
         .navigationTitle(bill.shortTitle ?? "")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
+        .task {
             if let billId = bill.billId {
                 viewModel.fetchData(for: billId)
             }

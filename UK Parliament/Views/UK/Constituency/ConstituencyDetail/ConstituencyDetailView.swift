@@ -18,7 +18,7 @@ struct ConstituencyDetailView: View {
         }
         .navigationTitle(viewModel.constituency?.name ?? "")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
+        .task {
             if let constituencyId = constituency.id {
                 viewModel.fetchConstituency(for: constituencyId)
                 viewModel.fetchGeometry(for: constituencyId)

@@ -16,7 +16,7 @@ struct CommonsVoteDetailView: View {
         }
         .ifLet(vote.title) { $0.navigationTitle("Votes, \($1)") }
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
+        .task {
             if let divisionId = vote.divisionId {
                 viewModel.fetchData(for: divisionId)
             }

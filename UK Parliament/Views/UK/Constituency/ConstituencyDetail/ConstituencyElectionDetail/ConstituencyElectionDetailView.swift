@@ -27,7 +27,7 @@ struct ConstituencyElectionDetailView: View {
         }
         .navigationTitle(navTitle)
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
+        .task {
             if let constituencyId = constituency.id, let electionId = electionResult.id {
                 viewModel.fetchData(in: constituencyId, at: electionId)
             }

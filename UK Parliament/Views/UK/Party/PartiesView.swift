@@ -13,7 +13,7 @@ struct PartiesView: View {
         }
         .navigationTitle(viewModel.house == .commons ? "House of Commons" : "House of Lords")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
+        .task {
             viewModel.fetchData()
         }
     }

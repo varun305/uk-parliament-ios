@@ -51,7 +51,7 @@ struct UnifiedListView<T, RowContent, LoadingContent>: View where T: Identifiabl
         }
         .navigationTitle(navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
+        .task {
             if viewModel.items.isEmpty {
                 viewModel.nextData(reset: true)
             }

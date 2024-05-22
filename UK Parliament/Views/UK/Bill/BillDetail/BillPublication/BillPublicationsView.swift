@@ -41,7 +41,7 @@ struct BillPublicationsView: View {
             }
             .foregroundStyle(.primary)
         }
-        .onAppear {
+        .task {
             viewModel.fetchPublications()
         }
     }

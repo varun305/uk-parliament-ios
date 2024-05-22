@@ -2,7 +2,6 @@ import SwiftUI
 
 struct LordsVoteDetailView: View {
     @StateObject var viewModel = LordsVoteDetailViewModel()
-    @State fileprivate var viewOption = ViewOption.votes
     var vote: LordsVote
 
     var body: some View {
@@ -16,7 +15,7 @@ struct LordsVoteDetailView: View {
             }
         }
         .ifLet(vote.title) { $0.navigationTitle("Votes, \($1)") }
-        .onAppear {
+        .task {
             if let divisionId = vote.divisionId {
                 viewModel.fetchData(for: divisionId)
             }
@@ -44,37 +43,7 @@ struct LordsVoteDetailView: View {
     @ViewBuilder
     var scrollView: some View {
         List {
-            if let authoritativeContentCount = vote.authoritativeContentCount, let authoritativeNotContentCount = vote.authoritativeNotContentCount {
-                HStack(alignment: .center) {
-                    HStack {
-                        Image(systemName: "hand.thumbsup.fill")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .foregroundStyle(.secondary)
-                        Text("\(authoritativeContentCount)")
-                            .font(.title)
-                            .if(authoritativeContentCount > authoritativeNotContentCount) { $0.bold() }
-                    }
-                    .accessibilityElement(children: .combine)
-                    .accessibilityLabel(Text("Contents \(authoritativeContentCount)"))
-                    Spacer()
-                    HStack {
-                        Text("\(authoritativeNotContentCount)")
-                            .font(.title)
-                            .if(authoritativeContentCount < authoritativeNotContentCount) { $0.bold() }
-                        Image(systemName: "hand.thumbsdown.fill")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .foregroundStyle(.secondary)
-                    }
-                    .accessibilityElement(children: .combine)
-                    .accessibilityLabel(Text("Not contents \(authoritativeNotContentCount)"))
-                }
-                .listRowSeparator(.hidden)
-                .listRowBackground(Color.clear)
-                .padding(.bottom, 20)
-                .padding(.horizontal, 20)
-            }
+            voteCount
 
             Section("Votes") {
                 VoteChart(yesVotes: viewModel.contentsGrouping, noVotes: viewModel.notContentsGrouping)
@@ -105,6 +74,39 @@ struct LordsVoteDetailView: View {
             }
         }
     }
-}
 
-private enum ViewOption { case party, votes }
+    @ViewBuilder
+    private var voteCount: some View {
+        if let authoritativeContentCount = vote.authoritativeContentCount, let authoritativeNotContentCount = vote.authoritativeNotContentCount {
+            HStack(alignment: .center) {
+                HStack {
+                    Image(systemName: "hand.thumbsup.fill")
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                        .foregroundStyle(.secondary)
+                    Text("\(authoritativeContentCount)")
+                        .font(.title)
+                        .if(authoritativeContentCount > authoritativeNotContentCount) { $0.bold() }
+                }
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel(Text("Contents \(authoritativeContentCount)"))
+                Spacer()
+                HStack {
+                    Text("\(authoritativeNotContentCount)")
+                        .font(.title)
+                        .if(authoritativeContentCount < authoritativeNotContentCount) { $0.bold() }
+                    Image(systemName: "hand.thumbsdown.fill")
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                        .foregroundStyle(.secondary)
+                }
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel(Text("Not contents \(authoritativeNotContentCount)"))
+            }
+            .listRowSeparator(.hidden)
+            .listRowBackground(Color.clear)
+            .padding(.bottom, 20)
+            .padding(.horizontal, 20)
+        }
+    }
+}

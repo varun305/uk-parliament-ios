@@ -37,7 +37,7 @@ struct PostsView: View {
         .listStyle(.grouped)
         .navigationTitle(side == .government ? "Government posts" : "Opposition posts")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
+        .task {
             viewModel.getPosts(side: .government)
             viewModel.getPosts(side: .opposition)
         }
