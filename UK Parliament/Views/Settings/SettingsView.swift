@@ -26,22 +26,7 @@ struct SettingsView: View {
                     NavigationLink {
                         helpView
                     } label: {
-                        Label(
-                            title: { Text("Help") },
-                            icon: {
-                                ZStack {
-                                    Rectangle()
-                                        .aspectRatio(1.0, contentMode: .fit)
-                                        .foregroundStyle(.accent)
-                                        .mask {
-                                            RoundedRectangle(cornerRadius: 5)
-                                        }
-                                    Image(systemName: "questionmark")
-                                        .bold()
-                                        .foregroundStyle(.white)
-                                }
-                            }
-                        )
+                        Label("Help", image: "help")
                     }
                 }
                 Section {
