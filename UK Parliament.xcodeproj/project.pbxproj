@@ -16,6 +16,10 @@
 		EE01A7362BDB7BA800B34EE4 /* VotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE01A7352BDB7BA800B34EE4 /* VotesView.swift */; };
 		EE020BC42B618A94004C893B /* SkeletonUI in Frameworks */ = {isa = PBXBuildFile; productRef = EE020BC32B618A94004C893B /* SkeletonUI */; };
 		EE167D8E2B7A108900415100 /* UnifiedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE167D8D2B7A108900415100 /* UnifiedListView.swift */; };
+		EE1BE5742C161BDA00ED3F0F /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1BE5732C161BDA00ED3F0F /* Banner.swift */; };
+		EE1BE5762C161D4C00ED3F0F /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1BE5752C161D4C00ED3F0F /* BannerView.swift */; };
+		EE1BE5782C17849100ED3F0F /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1BE5772C17849100ED3F0F /* ContentViewModel.swift */; };
+		EE1BE57A2C17857400ED3F0F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EE1BE5792C17857400ED3F0F /* FirebaseFirestore */; };
 		EE208E842B7949DC005125BA /* UnifiedListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE208E832B7949DC005125BA /* UnifiedListViewModel.swift */; };
 		EE29CCC42B6059E10027CBA4 /* ListExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE29CCC32B6059E10027CBA4 /* ListExtensions.swift */; };
 		EE3194D52B6C181200A5F754 /* DummyNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3194D42B6C181200A5F754 /* DummyNavigationLink.swift */; };
@@ -129,6 +133,9 @@
 		EE0186282B385A4E004F7F77 /* PartyTaggedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyTaggedText.swift; sourceTree = "<group>"; };
 		EE01A7352BDB7BA800B34EE4 /* VotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotesView.swift; sourceTree = "<group>"; };
 		EE167D8D2B7A108900415100 /* UnifiedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnifiedListView.swift; sourceTree = "<group>"; };
+		EE1BE5732C161BDA00ED3F0F /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
+		EE1BE5752C161D4C00ED3F0F /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
+		EE1BE5772C17849100ED3F0F /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		EE208E832B7949DC005125BA /* UnifiedListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnifiedListViewModel.swift; sourceTree = "<group>"; };
 		EE29CCC32B6059E10027CBA4 /* ListExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListExtensions.swift; sourceTree = "<group>"; };
 		EE3194D42B6C181200A5F754 /* DummyNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyNavigationLink.swift; sourceTree = "<group>"; };
@@ -238,6 +245,7 @@
 				EEE171B72B9DE7DD00C89859 /* FirebaseCrashlytics in Frameworks */,
 				EE020BC42B618A94004C893B /* SkeletonUI in Frameworks */,
 				EEF10F052BD2BCD100FE7D21 /* LicenseList in Frameworks */,
+				EE1BE57A2C17857400ED3F0F /* FirebaseFirestore in Frameworks */,
 				EEE171B52B9DE7DD00C89859 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,6 +387,7 @@
 				EE86A46C2B344C14007BEA83 /* Views */,
 				EE86A45E2B344BA6007BEA83 /* UK_ParliamentApp.swift */,
 				EE86A4602B344BA6007BEA83 /* ContentView.swift */,
+				EE1BE5772C17849100ED3F0F /* ContentViewModel.swift */,
 				EEEC3B2E2B397BEA00A8626D /* ContextModel.swift */,
 				EE86A4622B344BA7007BEA83 /* Assets.xcassets */,
 				EE86A4642B344BA7007BEA83 /* Preview Content */,
@@ -411,6 +420,7 @@
 				EE50F9BE2B35A09E00163E52 /* FetchModel.swift */,
 				EE3194F72B6E55C200A5F754 /* UtilsModel.swift */,
 				EE8B07B92BA188DF001C878A /* Mocks.swift */,
+				EE1BE5732C161BDA00ED3F0F /* Banner.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -460,6 +470,7 @@
 				EEE171BC2B9E19D200C89859 /* Flags.swift */,
 				EEE171C02B9E21E600C89859 /* PageItemViews.swift */,
 				EEB657EC2BD3D5FC00F47995 /* WebView.swift */,
+				EE1BE5752C161D4C00ED3F0F /* BannerView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -679,6 +690,7 @@
 				EEE171B42B9DE7DD00C89859 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				EEE171B62B9DE7DD00C89859 /* FirebaseCrashlytics */,
 				EEF10F042BD2BCD100FE7D21 /* LicenseList */,
+				EE1BE5792C17857400ED3F0F /* FirebaseFirestore */,
 			);
 			productName = "UK Parliament";
 			productReference = EE86A45B2B344BA6007BEA83 /* UK Parliament.app */;
@@ -826,6 +838,7 @@
 				EE3194F82B6E55C200A5F754 /* UtilsModel.swift in Sources */,
 				EE167D8E2B7A108900415100 /* UnifiedListView.swift in Sources */,
 				EEFC7C9B2B36132200183203 /* MemberDetailView.swift in Sources */,
+				EE1BE5762C161D4C00ED3F0F /* BannerView.swift in Sources */,
 				EEE171C12B9E21E600C89859 /* PageItemViews.swift in Sources */,
 				EEB657ED2BD3D5FC00F47995 /* WebView.swift in Sources */,
 				EEEC3B222B38AED000A8626D /* BillStagesViewModel.swift in Sources */,
@@ -841,6 +854,7 @@
 				EE8F2CC72B36D88200D771F2 /* RegisteredInterestModel.swift in Sources */,
 				EE50F9C22B35A59700163E52 /* ConstituencyDetailView.swift in Sources */,
 				EE50F9BD2B3592D200163E52 /* MemberRow.swift in Sources */,
+				EE1BE5782C17849100ED3F0F /* ContentViewModel.swift in Sources */,
 				EEEC3B0B2B388F4800A8626D /* CommonsBadge.swift in Sources */,
 				EEF10F022BD04B1700FE7D21 /* Tips.swift in Sources */,
 				EE97BF962B34C6DD00FA950C /* ConstituencyRow.swift in Sources */,
@@ -879,6 +893,7 @@
 				EE8F2CBD2B36341300D771F2 /* ConstituencyElectionDetailViewModel.swift in Sources */,
 				EEFC7C9F2B3615AD00183203 /* ConstituencyDetailViewModel.swift in Sources */,
 				EE0186272B38258B004F7F77 /* MemberContactViewModel.swift in Sources */,
+				EE1BE5742C161BDA00ED3F0F /* Banner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1188,6 +1203,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EE020BC22B618A94004C893B /* XCRemoteSwiftPackageReference "SkeletonUI" */;
 			productName = SkeletonUI;
+		};
+		EE1BE5792C17857400ED3F0F /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EE91A3802B8212A400901743 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 		EEE171B42B9DE7DD00C89859 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
 			isa = XCSwiftPackageProductDependency;
