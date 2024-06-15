@@ -95,7 +95,7 @@
 		EEEC3B272B38BAF500A8626D /* BillPublicationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B262B38BAF500A8626D /* BillPublicationsViewModel.swift */; };
 		EEEC3B292B38BCD200A8626D /* BillPublicationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B282B38BCD200A8626D /* BillPublicationRow.swift */; };
 		EEEC3B2F2B397BEA00A8626D /* ContextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B2E2B397BEA00A8626D /* ContextModel.swift */; };
-		EEEC3B312B3983C100A8626D /* NavigationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B302B3983C100A8626D /* NavigationModels.swift */; };
+		EEEC3B312B3983C100A8626D /* NavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B302B3983C100A8626D /* NavigationItem.swift */; };
 		EEEC3B332B398ADA00A8626D /* ContextAwareNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B322B398ADA00A8626D /* ContextAwareNavigationLink.swift */; };
 		EEEC3B362B39A2C700A8626D /* VoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B352B39A2C700A8626D /* VoteModel.swift */; };
 		EEEC3B392B39A97900A8626D /* CommonsVotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B382B39A97900A8626D /* CommonsVotesView.swift */; };
@@ -212,7 +212,7 @@
 		EEEC3B262B38BAF500A8626D /* BillPublicationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillPublicationsViewModel.swift; sourceTree = "<group>"; };
 		EEEC3B282B38BCD200A8626D /* BillPublicationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillPublicationRow.swift; sourceTree = "<group>"; };
 		EEEC3B2E2B397BEA00A8626D /* ContextModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextModel.swift; sourceTree = "<group>"; };
-		EEEC3B302B3983C100A8626D /* NavigationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationModels.swift; sourceTree = "<group>"; };
+		EEEC3B302B3983C100A8626D /* NavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationItem.swift; sourceTree = "<group>"; };
 		EEEC3B322B398ADA00A8626D /* ContextAwareNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextAwareNavigationLink.swift; sourceTree = "<group>"; };
 		EEEC3B352B39A2C700A8626D /* VoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteModel.swift; sourceTree = "<group>"; };
 		EEEC3B382B39A97900A8626D /* CommonsVotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonsVotesView.swift; sourceTree = "<group>"; };
@@ -347,7 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				EE86A4732B345131007BEA83 /* PartyModel.swift */,
-				EEEC3B302B3983C100A8626D /* NavigationModels.swift */,
+				EEEC3B302B3983C100A8626D /* NavigationItem.swift */,
 				EE1BE5732C161BDA00ED3F0F /* Banner.swift */,
 			);
 			path = Models;
@@ -664,7 +664,7 @@
 				EE8F2CC42B36D74F00D771F2 /* RegisteredInterestsView.swift in Sources */,
 				EEEC3B0D2B388FE100A8626D /* LordsBadge.swift in Sources */,
 				EE0186252B38255D004F7F77 /* MemberContactView.swift in Sources */,
-				EEEC3B312B3983C100A8626D /* NavigationModels.swift in Sources */,
+				EEEC3B312B3983C100A8626D /* NavigationItem.swift in Sources */,
 				EEEC3B2F2B397BEA00A8626D /* ContextModel.swift in Sources */,
 				EE3195012B6F80AA00A5F754 /* LordsVoteRow.swift in Sources */,
 				EE8F2CC72B36D88200D771F2 /* RegisteredInterestModel.swift in Sources */,
