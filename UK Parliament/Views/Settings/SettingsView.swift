@@ -26,7 +26,11 @@ struct SettingsView: View {
                     NavigationLink {
                         helpView
                     } label: {
-                        Label("Help", image: "help")
+                        HStack {
+                            Image("help")
+                            Text("Help")
+                        }
+                        .foregroundStyle(.primary)
                     }
                 }
                 Section {
