@@ -29,7 +29,7 @@ struct ContentView: View {
                     Button {
                         showHelpSheet = true
                     } label: {
-                        Image(systemName: "gearshape.circle.fill")
+                        Image(systemName: "gearshape.fill")
                             .accessibilityLabel(Text("Settings"))
                     }
                     .foregroundStyle(.primary)

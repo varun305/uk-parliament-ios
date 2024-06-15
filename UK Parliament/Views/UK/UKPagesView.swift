@@ -80,7 +80,7 @@ struct UKPagesView: View {
     }
 
     var body: some View {
-        LazyVStack(spacing: 10) {
+        VStack(spacing: 10) {
             ForEach(filteredGridItems) { gridItem in
                 LargePageItemView(gridItem: gridItem)
             }
