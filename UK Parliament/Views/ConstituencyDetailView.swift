@@ -117,8 +117,8 @@ struct ConstituencyDetailView: View {
             }
             ForEach(0..<formattedCoords.count, id: \.self) { i in
                 MapPolygon(coordinates: formattedCoords[i])
-                    .stroke((config.party?.bgColor ?? Color.primary), lineWidth: 1)
-                    .foregroundStyle((config.party?.bgColor ?? .white).opacity(0.5))
+                    .stroke((config.party?.bgColor ?? Color.primary), lineWidth: 2)
+                    .foregroundStyle((config.party?.bgColor ?? .primary).opacity(0.3))
             }
         }
     }
