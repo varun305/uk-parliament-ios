@@ -8,7 +8,7 @@ struct UKPagesView: View {
         PageItem(
             title: "Bills",
             subtitle: "View bills, stages and publications",
-            systemImage: "doc.on.doc.fill",
+            image: "bill",
             background: .accent,
             foreground: .white,
             navigateTo: .billsView(member: nil)
@@ -16,7 +16,7 @@ struct UKPagesView: View {
         PageItem(
             title: "Constituencies",
             subtitle: "View and search for constituencies",
-            systemImage: "map.fill",
+            image: "map",
             background: .accent,
             foreground: .white,
             navigateTo: .constituenciesView
@@ -24,7 +24,7 @@ struct UKPagesView: View {
         PageItem(
             title: "Commons votes",
             subtitle: "View and filter the results of votes in the House of Commons",
-            systemImage: "building.columns.fill",
+            image: "vote",
             background: .commons,
             foreground: .white,
             navigateTo: .commonsVotesView
@@ -32,7 +32,7 @@ struct UKPagesView: View {
         PageItem(
             title: "MPs",
             subtitle: "View and search for members of the House of Commons",
-            systemImage: "person.3.fill",
+            image: "group",
             background: .commons,
             foreground: .white,
             navigateTo: .mpsView
@@ -40,7 +40,7 @@ struct UKPagesView: View {
         PageItem(
             title: "Lords votes",
             subtitle: "View and filter the results of votes in the House of Lords",
-            systemImage: "building.columns.fill",
+            image: "vote",
             background: .lords,
             foreground: .white,
             navigateTo: .lordsVotesView
@@ -48,7 +48,7 @@ struct UKPagesView: View {
         PageItem(
             title: "Lords",
             subtitle: "View and search for members of the House of Lords",
-            systemImage: "person.3.fill",
+            image: "group",
             background: .lords,
             foreground: .white,
             navigateTo: .lordsView
@@ -56,7 +56,7 @@ struct UKPagesView: View {
         PageItem(
             title: "Posts",
             subtitle: "View government and opposition posts",
-            systemImage: "briefcase.fill",
+            image: "post",
             background: .accent,
             foreground: .white,
             navigateTo: .postsView
@@ -64,7 +64,7 @@ struct UKPagesView: View {
         PageItem(
             title: "Parties",
             subtitle: "View the state of the parties in the Commons and the Lords",
-            systemImage: "chart.pie.fill",
+            image: "pie",
             background: .accent,
             foreground: .white,
             navigateTo: .partiesView
@@ -91,15 +91,15 @@ struct UKPagesView: View {
 struct PageItem: Identifiable {
     var title: String
     var subtitle: String
-    var systemImage: String
+    var image: String
     var background: Color
     var foreground: Color
     var navigateTo: NavigationItem
 
-    init(title: String, subtitle: String, systemImage: String, background: Color, foreground: Color, navigateTo: NavigationItem) {
+    init(title: String, subtitle: String, image: String, background: Color, foreground: Color, navigateTo: NavigationItem) {
         self.title = title
         self.subtitle = subtitle
-        self.systemImage = systemImage
+        self.image = image
         self.background = background
         self.foreground = foreground
         self.navigateTo = navigateTo

@@ -126,10 +126,10 @@ struct LordsVoteDetailView: View {
                 var text = AttributedString(textNode.text())
                 if let parent = node.parent(), parent.nodeName() == "b" || parent.nodeName() == "strong" {
                     text = AttributedString(textNode.text())
-                    text.font = .boldSystemFont(ofSize: UIFont.labelFontSize)
+                    text.font = .body.bold()
                 } else if let parent = node.parent(), parent.nodeName() == "i" || parent.nodeName() == "em" {
                     text = AttributedString(textNode.text())
-                    text.font = .italicSystemFont(ofSize: UIFont.labelFontSize)
+                    text.font = .body.italic()
                 }
                 attributedString += text
             } else if node.nodeName() == "br" {

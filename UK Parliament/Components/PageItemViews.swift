@@ -24,7 +24,7 @@ struct LargePageItemView: View {
         ZStack {
             gridItem.background
             HStack(alignment: .center, spacing: 15) {
-                Image(systemName: gridItem.systemImage)
+                Image(gridItem.image)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: 45, maxHeight: 45)

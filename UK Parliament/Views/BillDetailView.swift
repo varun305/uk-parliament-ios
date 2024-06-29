@@ -128,7 +128,7 @@ struct BillDetailView: View {
 
                 Section {
                     ContextAwareNavigationLink(value: .billPublicationsView(bill: bill, stage: nil)) {
-                        Label("View publications", image: "description")
+                        Text("View publications")
                     }
                 }
 
