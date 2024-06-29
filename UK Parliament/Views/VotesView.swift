@@ -10,11 +10,38 @@ struct VotesView: View {
         .listStyle(.plain)
         .navigationTitle("All votes, \(allVotesModel.title ?? "")")
         .navigationBarTitleDisplayMode(.inline)
+        .searchable(text: $search)
+    }
+    
+    @State private var search = ""
+    
+    private var yesTellers: [any Voter] {
+        allVotesModel.yesVoteTellers?.filter {
+            $0.name?.searchContains(search) ?? false
+        } ?? []
+    }
+    
+    private var noTellers: [any Voter] {
+        allVotesModel.noVoteTellers?.filter {
+            $0.name?.searchContains(search) ?? false
+        } ?? []
+    }
+    
+    private var yesVotes: [any Voter] {
+        allVotesModel.yesVotes?.filter {
+            $0.name?.searchContains(search) ?? false
+        } ?? []
+    }
+    
+    private var noVotes: [any Voter] {
+        allVotesModel.noVotes?.filter {
+            $0.name?.searchContains(search) ?? false
+        } ?? []
     }
 
     @ViewBuilder
     var votesView: some View {
-        if let yesTellers = allVotesModel.yesVoteTellers, yesTellers.count > 0 {
+        if yesTellers.count > 0 {
             Section(allVotesModel.house == .commons ? "Aye tellers" : "Content tellers") {
                 ForEach(yesTellers.sorted { $0.listAs ?? "" < $1.listAs ?? "" }, id: \.memberId) { teller in
                     voterNavigationLink(teller)
@@ -22,7 +49,7 @@ struct VotesView: View {
             }
         }
 
-        if let noTellers = allVotesModel.noVoteTellers, noTellers.count > 0 {
+        if noTellers.count > 0 {
             Section(allVotesModel.house == .commons ? "No tellers" : "Not content tellers") {
                 ForEach(noTellers.sorted { $0.listAs ?? "" < $1.listAs ?? "" }, id: \.memberId) { teller in
                     voterNavigationLink(teller)
@@ -30,7 +57,7 @@ struct VotesView: View {
             }
         }
 
-        if let yesVotes = allVotesModel.yesVotes, yesVotes.count > 0 {
+        if yesVotes.count > 0 {
             Section(allVotesModel.house == .commons ? "Ayes" : "Contents") {
                 ForEach(yesVotes.sorted { $0.listAs ?? "" < $1.listAs ?? "" }, id: \.memberId) { aye in
                     voterNavigationLink(aye)
@@ -38,7 +65,7 @@ struct VotesView: View {
             }
         }
 
-        if let noVotes = allVotesModel.noVotes, noVotes.count > 0 {
+        if noVotes.count > 0 {
             Section(allVotesModel.house == .commons ? "Noes" : "Not contents") {
                 ForEach(noVotes.sorted { $0.listAs ?? "" < $1.listAs ?? "" }, id: \.memberId) { no in
                     voterNavigationLink(no)

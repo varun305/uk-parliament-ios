@@ -111,7 +111,6 @@ struct LordsVoteDetailView: View {
                         }
                     }
             }
-            
             .foregroundStyle(.primary)
             .listRowSeparator(.hidden)
             .listRowBackground(Color.clear)

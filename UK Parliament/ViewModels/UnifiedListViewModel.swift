@@ -17,7 +17,9 @@ class UnifiedListViewModel<T: Identifiable>: ObservableObject {
         $search
             .debounce(for: 0.3, scheduler: DispatchQueue.main)
             .sink { [weak self] searchText in
-                self?.nextData(searchText: searchText, reset: true)
+                if !searchText.isEmpty {
+                    self?.nextData(searchText: searchText, reset: true)
+                }
             }
             .store(in: &cancellables)
     }
