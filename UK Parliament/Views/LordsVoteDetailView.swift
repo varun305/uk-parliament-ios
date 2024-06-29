@@ -94,6 +94,7 @@ struct LordsVoteDetailView: View {
                         NavigationStack {
                             ScrollView {
                                 Text(string)
+                                    .textSelection(.enabled)
                                     .padding()
                             }
                             .navigationTitle("Amendment motion notes")
