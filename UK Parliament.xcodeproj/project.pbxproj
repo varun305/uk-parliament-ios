@@ -40,6 +40,7 @@
 		EE3195092B6F952700A5F754 /* MemberLordsVotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3195082B6F952700A5F754 /* MemberLordsVotesView.swift */; };
 		EE31950B2B6F954900A5F754 /* MemberLordsVotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE31950A2B6F954900A5F754 /* MemberLordsVotesViewModel.swift */; };
 		EE31950D2B6F959900A5F754 /* MemberLordsVoteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE31950C2B6F959900A5F754 /* MemberLordsVoteRow.swift */; };
+		EE3B90F12C3002FD00A4AD06 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = EE3B90F02C3002FD00A4AD06 /* SwiftSoup */; };
 		EE50F9B92B358F8B00163E52 /* MembersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE50F9B82B358F8B00163E52 /* MembersView.swift */; };
 		EE50F9BB2B358FA200163E52 /* MembersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE50F9BA2B358FA200163E52 /* MembersViewModel.swift */; };
 		EE50F9BD2B3592D200163E52 /* MemberRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE50F9BC2B3592D200163E52 /* MemberRow.swift */; };
@@ -247,6 +248,7 @@
 				EEF10F052BD2BCD100FE7D21 /* LicenseList in Frameworks */,
 				EE1BE57A2C17857400ED3F0F /* FirebaseFirestore in Frameworks */,
 				EEE171B52B9DE7DD00C89859 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				EE3B90F12C3002FD00A4AD06 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +509,7 @@
 				EEE171B62B9DE7DD00C89859 /* FirebaseCrashlytics */,
 				EEF10F042BD2BCD100FE7D21 /* LicenseList */,
 				EE1BE5792C17857400ED3F0F /* FirebaseFirestore */,
+				EE3B90F02C3002FD00A4AD06 /* SwiftSoup */,
 			);
 			productName = "UK Parliament";
 			productReference = EE86A45B2B344BA6007BEA83 /* UK Parliament.app */;
@@ -545,6 +548,7 @@
 				EE020BC22B618A94004C893B /* XCRemoteSwiftPackageReference "SkeletonUI" */,
 				EE91A3802B8212A400901743 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				EEF10F032BD2BCD100FE7D21 /* XCRemoteSwiftPackageReference "LicenseList" */,
+				EE3B90EF2C3002FD00A4AD06 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
 			productRefGroup = EE86A45C2B344BA6007BEA83 /* Products */;
 			projectDirPath = "";
@@ -906,7 +910,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2024.24;
+				MARKETING_VERSION = 2024.26;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.vsanth.UK-Parliament";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -941,7 +945,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2024.24;
+				MARKETING_VERSION = 2024.26;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.vsanth.UK-Parliament";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -996,6 +1000,14 @@
 				minimumVersion = 2.0.1;
 			};
 		};
+		EE3B90EF2C3002FD00A4AD06 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.2;
+			};
+		};
 		EE91A3802B8212A400901743 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1024,6 +1036,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EE91A3802B8212A400901743 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		EE3B90F02C3002FD00A4AD06 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EE3B90EF2C3002FD00A4AD06 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
 		};
 		EEE171B42B9DE7DD00C89859 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
 			isa = XCSwiftPackageProductDependency;
