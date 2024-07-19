@@ -152,7 +152,7 @@ class MemberModel {
         }
         queryItems += [
             URLQueryItem(name: "House", value: String(house.rawValue)),
-            URLQueryItem(name: "IsEligible", value: "true")
+            URLQueryItem(name: "IsCurrentMember", value: "true")
         ]
         components.queryItems = queryItems
         return components.url!
