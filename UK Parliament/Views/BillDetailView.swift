@@ -109,12 +109,13 @@ struct BillDetailView: View {
                 if let sponsors = bill.sponsors, !sponsors.isEmpty {
                     Section("Sponsors") {
                         ForEach(sponsors) { sponsor in
-                            if let memberId = sponsor.member?.memberId {
-                                ContextAwareNavigationLink(value: .memberDetailView(memberId: memberId)) {
-                                    SponsorRow(sponsor: sponsor)
-                                }
-                            } else {
+                            if sponsor.member != nil {
                                 SponsorRow(sponsor: sponsor)
+                                    .ifLet(sponsor.member?.memberId) { view, memberId in
+                                        ContextAwareNavigationLink(value: .memberDetailView(memberId: memberId)) {
+                                            view
+                                        }
+                                    }
                             }
                         }
                     }
