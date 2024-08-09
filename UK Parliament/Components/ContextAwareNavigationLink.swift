@@ -4,21 +4,36 @@ struct ContextAwareNavigationLink<Label>: View where Label: View {
     @EnvironmentObject var contextModel: ContextModel
 
     private var value: NavigationItem
+    private var addChevron: Bool = true
     private var label: () -> Label
 
-    init(value: NavigationItem, @ViewBuilder label: @escaping () -> Label) {
+    init(value: NavigationItem, addChevron: Bool = true, @ViewBuilder label: @escaping () -> Label) {
         self.value = value
         self.label = label
+        self.addChevron = addChevron
     }
 
     var body: some View {
-        if forwardLink {
-            NavigationLink(value: value) {
-                label()
+        label()
+            .if(forwardLink) { view in
+                Button {
+                    contextModel.manualNavigate(to: value)
+                    print("NAVIGATED")
+                } label: {
+                    view
+                        .if(addChevron) { view in
+                            HStack {
+                                view
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundStyle(.secondary)
+                                    .opacity(0.5)
+                            }
+                            .padding(.horizontal, 5)
+                        }
+                }
+                .foregroundStyle(.primary)
             }
-        } else {
-            label()
-        }
     }
 
     private var forwardLink: Bool {

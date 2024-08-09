@@ -910,7 +910,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2024.26;
+				MARKETING_VERSION = 2024.29;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.vsanth.UK-Parliament";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -945,7 +945,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2024.26;
+				MARKETING_VERSION = 2024.29;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.vsanth.UK-Parliament";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1013,7 +1013,7 @@
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 10.22.1;
+				minimumVersion = 10.24.0;
 			};
 		};
 		EEF10F032BD2BCD100FE7D21 /* XCRemoteSwiftPackageReference "LicenseList" */ = {
