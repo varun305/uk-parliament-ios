@@ -1,13 +1,13 @@
 import Foundation
 import SwiftUI
 
-class RegisteredInterestsViewModel: ObservableObject {
+class MemberRegisteredInterestsViewModel: ObservableObject {
     @Published var registeredInterests: [RegisteredInterest] = []
     @Published var loading = false
 
     public func fetchData(for id: Int) {
         loading = true
-        RegisteredInterestModel.shared.getRegisteredInterests(for: id) { result in
+        MemberRegisteredInterestModel.shared.getRegisteredInterests(for: id) { result in
             Task { @MainActor in
                 withAnimation {
                     self.registeredInterests = result?.value ?? []

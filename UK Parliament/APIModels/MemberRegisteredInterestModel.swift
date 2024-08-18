@@ -20,8 +20,8 @@ class RegisteredInterestValueModel: Codable {
     var value: [RegisteredInterest]?
 }
 
-class RegisteredInterestModel {
-    public static var shared = RegisteredInterestModel()
+class MemberRegisteredInterestModel {
+    public static var shared = MemberRegisteredInterestModel()
     private init() {}
 
     public func getRegisteredInterests(for id: Int, _ completion: @escaping (RegisteredInterestValueModel?) -> Void) {
