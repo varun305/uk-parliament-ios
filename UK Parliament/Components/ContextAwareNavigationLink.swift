@@ -18,7 +18,6 @@ struct ContextAwareNavigationLink<Label>: View where Label: View {
             .if(forwardLink) { view in
                 Button {
                     contextModel.manualNavigate(to: value)
-                    print("NAVIGATED")
                 } label: {
                     view
                         .if(addChevron) { view in

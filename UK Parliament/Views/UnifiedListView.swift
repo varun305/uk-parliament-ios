@@ -29,11 +29,11 @@ struct UnifiedListView<T, RowContent, LoadingContent>: View where T: Identifiabl
 
     var body: some View {
         Group {
-            if viewModel.loading {
+            if !viewModel.items.isEmpty {
+                scrollView
+            } else if viewModel.loading {
                 loadingView
                     .opacity(0.5)
-            } else if !viewModel.items.isEmpty {
-                scrollView
             } else {
                 NoDataView()
             }
@@ -81,16 +81,35 @@ struct UnifiedListView<T, RowContent, LoadingContent>: View where T: Identifiabl
 
     @ViewBuilder
         var scrollView: some View {
-            List {
-                ForEach(viewModel.items) { item in
-                    rowView(item)
-                        .onAppear(perform: { onScrollEnd(item: item) })
+            ScrollView {
+                LazyVStack {
+                    ForEach(viewModel.items) { item in
+                        Divider()
+                        rowView(item)
+                            .multilineTextAlignment(.leading)
+                            .padding(.horizontal, 5)
+                            .padding(.vertical, 2)
+                            .onAppear(perform: { onScrollEnd(item: item) })
+                    }
                 }
                 .if(showNumResults) { view in
                     Section(resultsText) {
                         view
                     }
                 }
+                
+                HStack {
+                    Spacer()
+                    if viewModel.loading && !viewModel.items.isEmpty {
+                        LoadingText(text: "loading more data")
+                    } else if !viewModel.loading && !viewModel.items.isEmpty {
+                        Text("No more data")
+                    }
+                    Spacer()
+                }
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
+                .padding(10)
             }
             .listStyle(.grouped)
         }

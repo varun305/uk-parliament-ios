@@ -53,7 +53,7 @@ struct ContentView: View {
                 case .memberContactView(let member):
                     MemberContactView(member: member)
                 case .memberInterestsView(let member):
-                    RegisteredInterestsView(member: member)
+                    MemberRegisteredInterestsView(member: member)
                 case .constituenciesView:
                     ConstituenciesView()
                 case .constituencyDetailView(let constituency):

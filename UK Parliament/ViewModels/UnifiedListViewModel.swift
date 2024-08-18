@@ -30,9 +30,9 @@ class UnifiedListViewModel<T: Identifiable>: ObservableObject {
             return
         }
 
+        loading = true
         if reset {
             withAnimation {
-                loading = true
                 items = []
             }
         }
@@ -42,10 +42,10 @@ class UnifiedListViewModel<T: Identifiable>: ObservableObject {
                     self.totalResults = totalResults
                     if reset {
                         self.items = result
-                        self.loading = false
                     } else {
                         self.items += result
                     }
+                    self.loading = false
                 }
             }
         }

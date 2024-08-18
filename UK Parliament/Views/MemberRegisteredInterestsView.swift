@@ -1,7 +1,7 @@
 import SwiftUI
 import SkeletonUI
 
-struct RegisteredInterestsView: View {
+struct MemberRegisteredInterestsView: View {
     @StateObject var viewModel = RegisteredInterestsViewModel()
     var member: Member
 

@@ -58,9 +58,10 @@
 		EE86A4762B3452F4007BEA83 /* PartiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE86A4752B3452F4007BEA83 /* PartiesViewModel.swift */; };
 		EE86A4782B34564C007BEA83 /* PartyRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE86A4772B34564C007BEA83 /* PartyRow.swift */; };
 		EE8B07BA2BA188DF001C878A /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8B07B92BA188DF001C878A /* Mocks.swift */; };
+		EE8CA9472C66B2D0009E3A20 /* LoadingText.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8CA9462C66B2D0009E3A20 /* LoadingText.swift */; };
 		EE8F2CBD2B36341300D771F2 /* ConstituencyElectionDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8F2CBC2B36341300D771F2 /* ConstituencyElectionDetailViewModel.swift */; };
 		EE8F2CBF2B36C53700D771F2 /* MemberDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8F2CBE2B36C53700D771F2 /* MemberDetailViewModel.swift */; };
-		EE8F2CC42B36D74F00D771F2 /* RegisteredInterestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8F2CC32B36D74F00D771F2 /* RegisteredInterestsView.swift */; };
+		EE8F2CC42B36D74F00D771F2 /* MemberRegisteredInterestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8F2CC32B36D74F00D771F2 /* MemberRegisteredInterestsView.swift */; };
 		EE8F2CC72B36D88200D771F2 /* RegisteredInterestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8F2CC62B36D88200D771F2 /* RegisteredInterestModel.swift */; };
 		EE8F2CC92B36DA5600D771F2 /* RegisteredInterestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8F2CC82B36DA5600D771F2 /* RegisteredInterestsViewModel.swift */; };
 		EE8FCD892B7FF2DA00B54609 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8FCD882B7FF2DA00B54609 /* DateExtensions.swift */; };
@@ -176,9 +177,10 @@
 		EE86A4752B3452F4007BEA83 /* PartiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartiesViewModel.swift; sourceTree = "<group>"; };
 		EE86A4772B34564C007BEA83 /* PartyRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyRow.swift; sourceTree = "<group>"; };
 		EE8B07B92BA188DF001C878A /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
+		EE8CA9462C66B2D0009E3A20 /* LoadingText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingText.swift; sourceTree = "<group>"; };
 		EE8F2CBC2B36341300D771F2 /* ConstituencyElectionDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstituencyElectionDetailViewModel.swift; sourceTree = "<group>"; };
 		EE8F2CBE2B36C53700D771F2 /* MemberDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailViewModel.swift; sourceTree = "<group>"; };
-		EE8F2CC32B36D74F00D771F2 /* RegisteredInterestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredInterestsView.swift; sourceTree = "<group>"; };
+		EE8F2CC32B36D74F00D771F2 /* MemberRegisteredInterestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRegisteredInterestsView.swift; sourceTree = "<group>"; };
 		EE8F2CC52B36D81C00D771F2 /* UK-Parliament-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "UK-Parliament-Info.plist"; sourceTree = SOURCE_ROOT; };
 		EE8F2CC62B36D88200D771F2 /* RegisteredInterestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredInterestModel.swift; sourceTree = "<group>"; };
 		EE8F2CC82B36DA5600D771F2 /* RegisteredInterestsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredInterestsViewModel.swift; sourceTree = "<group>"; };
@@ -330,7 +332,7 @@
 				EEEC3B042B388B1900A8626D /* BillsView.swift */,
 				EE01861D2B375B0C004F7F77 /* PostsView.swift */,
 				EE0186242B38255D004F7F77 /* MemberContactView.swift */,
-				EE8F2CC32B36D74F00D771F2 /* RegisteredInterestsView.swift */,
+				EE8F2CC32B36D74F00D771F2 /* MemberRegisteredInterestsView.swift */,
 				EEFC7C9A2B36132200183203 /* MemberDetailView.swift */,
 				EE50F9B82B358F8B00163E52 /* MembersView.swift */,
 				EEFC7CA22B36290B00183203 /* ConstituencyElectionDetailView.swift */,
@@ -371,6 +373,7 @@
 				EEE171C02B9E21E600C89859 /* PageItemViews.swift */,
 				EEB657EC2BD3D5FC00F47995 /* WebView.swift */,
 				EE1BE5752C161D4C00ED3F0F /* BannerView.swift */,
+				EE8CA9462C66B2D0009E3A20 /* LoadingText.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -654,6 +657,7 @@
 				EEEC3B392B39A97900A8626D /* CommonsVotesView.swift in Sources */,
 				EE97BF9C2B3571C800FA950C /* PartyCircleView.swift in Sources */,
 				EE8F2CC92B36DA5600D771F2 /* RegisteredInterestsViewModel.swift in Sources */,
+				EE8CA9472C66B2D0009E3A20 /* LoadingText.swift in Sources */,
 				EE208E842B7949DC005125BA /* UnifiedListViewModel.swift in Sources */,
 				EE3194F82B6E55C200A5F754 /* UtilsModel.swift in Sources */,
 				EE167D8E2B7A108900415100 /* UnifiedListView.swift in Sources */,
@@ -665,7 +669,7 @@
 				EEFC7C992B35B4E000183203 /* MemberPictureView.swift in Sources */,
 				EEEC3B442B39B83A00A8626D /* VoterRow.swift in Sources */,
 				EEEC3B272B38BAF500A8626D /* BillPublicationsViewModel.swift in Sources */,
-				EE8F2CC42B36D74F00D771F2 /* RegisteredInterestsView.swift in Sources */,
+				EE8F2CC42B36D74F00D771F2 /* MemberRegisteredInterestsView.swift in Sources */,
 				EEEC3B0D2B388FE100A8626D /* LordsBadge.swift in Sources */,
 				EE0186252B38255D004F7F77 /* MemberContactView.swift in Sources */,
 				EEEC3B312B3983C100A8626D /* NavigationItem.swift in Sources */,
