@@ -3,7 +3,6 @@ import TipKit
 
 struct ContentView: View {
     @EnvironmentObject var contextModel: ContextModel
-    @StateObject var viewModel = ContentViewModel()
     @State var search = ""
     @State var showHelpSheet = false
 
@@ -11,9 +10,6 @@ struct ContentView: View {
         NavigationStack(path: $contextModel.navigationPath) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    if let banner = viewModel.banner {
-                        BannerView(banner: banner)
-                    }
                     UKPagesView(search: $search)
                 }
                 .padding([.horizontal, .bottom])
@@ -21,9 +17,6 @@ struct ContentView: View {
             .searchable(text: $search)
             .navigationTitle("Home")
             .listStyle(.grouped)
-            .task {
-                await viewModel.fetchBanner()
-            }
             .toolbar {
                 ToolbarItem(placement: .automatic) {
                     Button {

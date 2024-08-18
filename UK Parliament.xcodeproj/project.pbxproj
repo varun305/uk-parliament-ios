@@ -17,9 +17,6 @@
 		EE020BC42B618A94004C893B /* SkeletonUI in Frameworks */ = {isa = PBXBuildFile; productRef = EE020BC32B618A94004C893B /* SkeletonUI */; };
 		EE167D8E2B7A108900415100 /* UnifiedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE167D8D2B7A108900415100 /* UnifiedListView.swift */; };
 		EE1BE5742C161BDA00ED3F0F /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1BE5732C161BDA00ED3F0F /* Banner.swift */; };
-		EE1BE5762C161D4C00ED3F0F /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1BE5752C161D4C00ED3F0F /* BannerView.swift */; };
-		EE1BE5782C17849100ED3F0F /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1BE5772C17849100ED3F0F /* ContentViewModel.swift */; };
-		EE1BE57A2C17857400ED3F0F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EE1BE5792C17857400ED3F0F /* FirebaseFirestore */; };
 		EE208E842B7949DC005125BA /* UnifiedListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE208E832B7949DC005125BA /* UnifiedListViewModel.swift */; };
 		EE29CCC42B6059E10027CBA4 /* ListExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE29CCC32B6059E10027CBA4 /* ListExtensions.swift */; };
 		EE3194D52B6C181200A5F754 /* DummyNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3194D42B6C181200A5F754 /* DummyNavigationLink.swift */; };
@@ -73,8 +70,6 @@
 		EE97BF9C2B3571C800FA950C /* PartyCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BF9B2B3571C800FA950C /* PartyCircleView.swift */; };
 		EEB657ED2BD3D5FC00F47995 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB657EC2BD3D5FC00F47995 /* WebView.swift */; };
 		EEE171B22B9DE78100C89859 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEE171B12B9DE78100C89859 /* GoogleService-Info.plist */; };
-		EEE171B52B9DE7DD00C89859 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = EEE171B42B9DE7DD00C89859 /* FirebaseAnalyticsWithoutAdIdSupport */; };
-		EEE171B72B9DE7DD00C89859 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = EEE171B62B9DE7DD00C89859 /* FirebaseCrashlytics */; };
 		EEE171B92B9DEAAD00C89859 /* UKPagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE171B82B9DEAAD00C89859 /* UKPagesView.swift */; };
 		EEE171BD2B9E19D200C89859 /* Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE171BC2B9E19D200C89859 /* Flags.swift */; };
 		EEE171C12B9E21E600C89859 /* PageItemViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE171C02B9E21E600C89859 /* PageItemViews.swift */; };
@@ -136,8 +131,6 @@
 		EE01A7352BDB7BA800B34EE4 /* VotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotesView.swift; sourceTree = "<group>"; };
 		EE167D8D2B7A108900415100 /* UnifiedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnifiedListView.swift; sourceTree = "<group>"; };
 		EE1BE5732C161BDA00ED3F0F /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
-		EE1BE5752C161D4C00ED3F0F /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
-		EE1BE5772C17849100ED3F0F /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		EE208E832B7949DC005125BA /* UnifiedListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnifiedListViewModel.swift; sourceTree = "<group>"; };
 		EE29CCC32B6059E10027CBA4 /* ListExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListExtensions.swift; sourceTree = "<group>"; };
 		EE3194D42B6C181200A5F754 /* DummyNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyNavigationLink.swift; sourceTree = "<group>"; };
@@ -245,11 +238,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EEE171B72B9DE7DD00C89859 /* FirebaseCrashlytics in Frameworks */,
 				EE020BC42B618A94004C893B /* SkeletonUI in Frameworks */,
 				EEF10F052BD2BCD100FE7D21 /* LicenseList in Frameworks */,
-				EE1BE57A2C17857400ED3F0F /* FirebaseFirestore in Frameworks */,
-				EEE171B52B9DE7DD00C89859 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				EE3B90F12C3002FD00A4AD06 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,7 +362,6 @@
 				EEE171BC2B9E19D200C89859 /* Flags.swift */,
 				EEE171C02B9E21E600C89859 /* PageItemViews.swift */,
 				EEB657EC2BD3D5FC00F47995 /* WebView.swift */,
-				EE1BE5752C161D4C00ED3F0F /* BannerView.swift */,
 				EE8CA9462C66B2D0009E3A20 /* LoadingText.swift */,
 			);
 			path = Components;
@@ -408,7 +397,6 @@
 				EE8F2CBC2B36341300D771F2 /* ConstituencyElectionDetailViewModel.swift */,
 				EE86A4752B3452F4007BEA83 /* PartiesViewModel.swift */,
 				EE208E832B7949DC005125BA /* UnifiedListViewModel.swift */,
-				EE1BE5772C17849100ED3F0F /* ContentViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -508,10 +496,7 @@
 			name = "UK Parliament";
 			packageProductDependencies = (
 				EE020BC32B618A94004C893B /* SkeletonUI */,
-				EEE171B42B9DE7DD00C89859 /* FirebaseAnalyticsWithoutAdIdSupport */,
-				EEE171B62B9DE7DD00C89859 /* FirebaseCrashlytics */,
 				EEF10F042BD2BCD100FE7D21 /* LicenseList */,
-				EE1BE5792C17857400ED3F0F /* FirebaseFirestore */,
 				EE3B90F02C3002FD00A4AD06 /* SwiftSoup */,
 			);
 			productName = "UK Parliament";
@@ -549,7 +534,6 @@
 			mainGroup = EE86A4522B344BA6007BEA83;
 			packageReferences = (
 				EE020BC22B618A94004C893B /* XCRemoteSwiftPackageReference "SkeletonUI" */,
-				EE91A3802B8212A400901743 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				EEF10F032BD2BCD100FE7D21 /* XCRemoteSwiftPackageReference "LicenseList" */,
 				EE3B90EF2C3002FD00A4AD06 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
@@ -604,7 +588,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+			shellScript = "
+";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -662,7 +647,6 @@
 				EE3194F82B6E55C200A5F754 /* UtilsModel.swift in Sources */,
 				EE167D8E2B7A108900415100 /* UnifiedListView.swift in Sources */,
 				EEFC7C9B2B36132200183203 /* MemberDetailView.swift in Sources */,
-				EE1BE5762C161D4C00ED3F0F /* BannerView.swift in Sources */,
 				EEE171C12B9E21E600C89859 /* PageItemViews.swift in Sources */,
 				EEB657ED2BD3D5FC00F47995 /* WebView.swift in Sources */,
 				EEEC3B222B38AED000A8626D /* BillStagesViewModel.swift in Sources */,
@@ -678,7 +662,6 @@
 				EE8F2CC72B36D88200D771F2 /* RegisteredInterestModel.swift in Sources */,
 				EE50F9C22B35A59700163E52 /* ConstituencyDetailView.swift in Sources */,
 				EE50F9BD2B3592D200163E52 /* MemberRow.swift in Sources */,
-				EE1BE5782C17849100ED3F0F /* ContentViewModel.swift in Sources */,
 				EEEC3B0B2B388F4800A8626D /* CommonsBadge.swift in Sources */,
 				EEF10F022BD04B1700FE7D21 /* Tips.swift in Sources */,
 				EE97BF962B34C6DD00FA950C /* ConstituencyRow.swift in Sources */,
@@ -1012,14 +995,6 @@
 				minimumVersion = 2.7.2;
 			};
 		};
-		EE91A3802B8212A400901743 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.24.0;
-			};
-		};
 		EEF10F032BD2BCD100FE7D21 /* XCRemoteSwiftPackageReference "LicenseList" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/cybozu/LicenseList.git";
@@ -1036,25 +1011,10 @@
 			package = EE020BC22B618A94004C893B /* XCRemoteSwiftPackageReference "SkeletonUI" */;
 			productName = SkeletonUI;
 		};
-		EE1BE5792C17857400ED3F0F /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EE91A3802B8212A400901743 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
-		};
 		EE3B90F02C3002FD00A4AD06 /* SwiftSoup */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EE3B90EF2C3002FD00A4AD06 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
-		};
-		EEE171B42B9DE7DD00C89859 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EE91A3802B8212A400901743 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsWithoutAdIdSupport;
-		};
-		EEE171B62B9DE7DD00C89859 /* FirebaseCrashlytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EE91A3802B8212A400901743 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCrashlytics;
 		};
 		EEF10F042BD2BCD100FE7D21 /* LicenseList */ = {
 			isa = XCSwiftPackageProductDependency;
