@@ -3,6 +3,16 @@ import SkeletonUI
 
 struct BillRow: View {
     var bill: Bill
+    
+    var originatingHouse: House? {
+        if bill.originatingHouse == "Commons" {
+            House.commons
+        } else if bill.originatingHouse == "Lords" {
+            House.lords
+        } else {
+            nil
+        }
+    }
 
     var body: some View {
         HStack(alignment: .center) {
@@ -13,16 +23,13 @@ struct BillRow: View {
             VStack(alignment: .leading) {
                 Text(bill.shortTitle ?? "")
                     .bold()
-                Group {
+                HStack(spacing: 5) {
                     Text(bill.formattedDate)
-                    Group {
-                        if bill.originatingHouse == "Commons" {
-                            Text("From House of Commons")
-                        } else if bill.originatingHouse == "Lords" {
-                            Text("From House of Lords")
-                        }
+                    if let house = originatingHouse {
+                        Text("•")
+                            .accessibilityHidden(true)
+                        Text("From \(house)")
                     }
-                    .italic()
                 }
                 .foregroundStyle(.secondary)
                 .font(.footnote)
@@ -70,5 +77,10 @@ struct BillRowLoading: View {
 }
 
 #Preview {
-    BillRow(bill: Mocks.mockBill)
+    NavigationStack {
+        List {
+            BillRow(bill: Mocks.mockBill)
+        }
+        .navigationTitle("Hello world")
+    }
 }

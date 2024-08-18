@@ -81,16 +81,11 @@ struct UnifiedListView<T, RowContent, LoadingContent>: View where T: Identifiabl
 
     @ViewBuilder
         var scrollView: some View {
-            ScrollView {
-                LazyVStack {
-                    ForEach(viewModel.items) { item in
-                        Divider()
-                        rowView(item)
-                            .multilineTextAlignment(.leading)
-                            .padding(.horizontal, 5)
-                            .padding(.vertical, 2)
-                            .onAppear(perform: { onScrollEnd(item: item) })
-                    }
+            List {
+                ForEach(viewModel.items) { item in
+                    rowView(item)
+                        .multilineTextAlignment(.leading)
+                        .onAppear(perform: { onScrollEnd(item: item) })
                 }
                 .if(showNumResults) { view in
                     Section(resultsText) {

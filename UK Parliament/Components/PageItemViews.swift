@@ -12,7 +12,7 @@ struct LargePageItemView: View {
     }
 
     var body: some View {
-        ContextAwareNavigationLink(value: gridItem.navigateTo, addChevron: false) {
+        ContextAwareNavigationLink(value: gridItem.navigateTo) {
             face
                 .accessibilityElement(children: .combine)
         }

@@ -69,9 +69,7 @@
 		EE97BF962B34C6DD00FA950C /* ConstituencyRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BF952B34C6DD00FA950C /* ConstituencyRow.swift */; };
 		EE97BF9C2B3571C800FA950C /* PartyCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE97BF9B2B3571C800FA950C /* PartyCircleView.swift */; };
 		EEB657ED2BD3D5FC00F47995 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB657EC2BD3D5FC00F47995 /* WebView.swift */; };
-		EEE171B22B9DE78100C89859 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEE171B12B9DE78100C89859 /* GoogleService-Info.plist */; };
 		EEE171B92B9DEAAD00C89859 /* UKPagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE171B82B9DEAAD00C89859 /* UKPagesView.swift */; };
-		EEE171BD2B9E19D200C89859 /* Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE171BC2B9E19D200C89859 /* Flags.swift */; };
 		EEE171C12B9E21E600C89859 /* PageItemViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE171C02B9E21E600C89859 /* PageItemViews.swift */; };
 		EEEC3B022B38862400A8626D /* BillModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B012B38862400A8626D /* BillModel.swift */; };
 		EEEC3B052B388B1900A8626D /* BillsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B042B388B1900A8626D /* BillsView.swift */; };
@@ -185,9 +183,7 @@
 		EE97BF952B34C6DD00FA950C /* ConstituencyRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstituencyRow.swift; sourceTree = "<group>"; };
 		EE97BF9B2B3571C800FA950C /* PartyCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyCircleView.swift; sourceTree = "<group>"; };
 		EEB657EC2BD3D5FC00F47995 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
-		EEE171B12B9DE78100C89859 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EEE171B82B9DEAAD00C89859 /* UKPagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UKPagesView.swift; sourceTree = "<group>"; };
-		EEE171BC2B9E19D200C89859 /* Flags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flags.swift; sourceTree = "<group>"; };
 		EEE171C02B9E21E600C89859 /* PageItemViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageItemViews.swift; sourceTree = "<group>"; };
 		EEEC3B012B38862400A8626D /* BillModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillModel.swift; sourceTree = "<group>"; };
 		EEEC3B042B388B1900A8626D /* BillsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillsView.swift; sourceTree = "<group>"; };
@@ -266,28 +262,28 @@
 		EE6A12C32C728B01005C76D1 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
-				EE6A12D92C728F2D005C76D1 /* Party */,
-				EE6A12D82C728F1C005C76D1 /* Post */,
-				EE6A12D72C728EA7005C76D1 /* MemberVoteLords */,
-				EE6A12D62C728E79005C76D1 /* VoteLordsDetail */,
-				EE6A12D52C728E5F005C76D1 /* VoteLords */,
-				EE6A12D42C728E28005C76D1 /* MemberVoteCommons */,
-				EE6A12D32C728DD9005C76D1 /* Vote */,
-				EE6A12D22C728DAD005C76D1 /* VoteCommonsDetail */,
-				EE6A12D12C728D71005C76D1 /* VoteCommons */,
-				EE6A12D02C728D4F005C76D1 /* BillStageSitting */,
-				EE6A12CF2C728D0A005C76D1 /* BillStage */,
-				EE6A12CE2C728CE6005C76D1 /* BillPublication */,
+				EE6A12C52C728B34005C76D1 /* Bill */,
 				EE6A12CD2C728CB9005C76D1 /* BillDetail */,
+				EE6A12CE2C728CE6005C76D1 /* BillPublication */,
+				EE6A12CF2C728D0A005C76D1 /* BillStage */,
+				EE6A12D02C728D4F005C76D1 /* BillStageSitting */,
+				EE6A12C82C728BB1005C76D1 /* Constituency */,
 				EE6A12CC2C728C89005C76D1 /* ConstituencyDetail */,
 				EE6A12CB2C728C5F005C76D1 /* ConstituencyElectionResult */,
-				EE6A12CA2C728C3A005C76D1 /* MemberContact */,
-				EE6A12C92C728BD0005C76D1 /* MemberRegisteredInterest */,
-				EE6A12C82C728BB1005C76D1 /* Constituency */,
-				EE6A12C72C728B75005C76D1 /* MemberDetail */,
-				EE6A12C62C728B51005C76D1 /* Member */,
-				EE6A12C52C728B34005C76D1 /* Bill */,
 				EE6A12C42C728B11005C76D1 /* Home */,
+				EE6A12C62C728B51005C76D1 /* Member */,
+				EE6A12CA2C728C3A005C76D1 /* MemberContact */,
+				EE6A12C72C728B75005C76D1 /* MemberDetail */,
+				EE6A12C92C728BD0005C76D1 /* MemberRegisteredInterest */,
+				EE6A12D42C728E28005C76D1 /* MemberVoteCommons */,
+				EE6A12D72C728EA7005C76D1 /* MemberVoteLords */,
+				EE6A12D92C728F2D005C76D1 /* Party */,
+				EE6A12D82C728F1C005C76D1 /* Post */,
+				EE6A12D32C728DD9005C76D1 /* Vote */,
+				EE6A12D12C728D71005C76D1 /* VoteCommons */,
+				EE6A12D22C728DAD005C76D1 /* VoteCommonsDetail */,
+				EE6A12D52C728E5F005C76D1 /* VoteLords */,
+				EE6A12D62C728E79005C76D1 /* VoteLordsDetail */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -520,7 +516,6 @@
 			isa = PBXGroup;
 			children = (
 				EE6A12C12C728ADA005C76D1 /* Features */,
-				EEE171B12B9DE78100C89859 /* GoogleService-Info.plist */,
 				EEEC3B172B38A3EE00A8626D /* Extensions */,
 				EE8F2CC52B36D81C00D771F2 /* UK-Parliament-Info.plist */,
 				EE97BF9A2B35717A00FA950C /* Components */,
@@ -581,7 +576,6 @@
 				EEEC3B322B398ADA00A8626D /* ContextAwareNavigationLink.swift */,
 				EE3194D42B6C181200A5F754 /* DummyNavigationLink.swift */,
 				EE3194D62B6C229200A5F754 /* NoDataView.swift */,
-				EEE171BC2B9E19D200C89859 /* Flags.swift */,
 				EEE171C02B9E21E600C89859 /* PageItemViews.swift */,
 				EEB657EC2BD3D5FC00F47995 /* WebView.swift */,
 				EE8CA9462C66B2D0009E3A20 /* LoadingText.swift */,
@@ -753,7 +747,6 @@
 			files = (
 				EE86A4662B344BA7007BEA83 /* Preview Assets.xcassets in Resources */,
 				EE86A4632B344BA7007BEA83 /* Assets.xcassets in Resources */,
-				EEE171B22B9DE78100C89859 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -861,7 +854,6 @@
 				EE3194DC2B6CD4FE00A5F754 /* MemberCommonsVotesView.swift in Sources */,
 				EE3194FF2B6F808C00A5F754 /* LordsVotesViewModel.swift in Sources */,
 				EEEC3B252B38BA7900A8626D /* BillPublicationsView.swift in Sources */,
-				EEE171BD2B9E19D200C89859 /* Flags.swift in Sources */,
 				EE01861E2B375B0C004F7F77 /* PostsView.swift in Sources */,
 				EE3194E52B6E3BA400A5F754 /* BillStageSittingsView.swift in Sources */,
 				EE50F9B92B358F8B00163E52 /* MembersView.swift in Sources */,
