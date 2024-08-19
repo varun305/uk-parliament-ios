@@ -10,7 +10,7 @@ struct PartyTaggedText: View {
             .foregroundStyle(party?.fgColor ?? .black)
             .padding(4)
             .background {
-                RoundedRectangle(cornerRadius: 5)
+                RoundedRectangle(cornerRadius: 4)
                     .foregroundStyle(party?.bgColor ?? .white)
             }
     }
