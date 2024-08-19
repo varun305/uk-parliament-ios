@@ -89,7 +89,7 @@ struct BillDetailView: View {
         }
         .environment(\.isScrollEnabled, false)
     }
-    
+
     var houseColor: Color {
         if bill.currentHouse?.lowercased() == "commons" {
             Color.commons

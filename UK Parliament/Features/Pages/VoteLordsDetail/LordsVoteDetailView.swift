@@ -4,7 +4,7 @@ import SwiftSoup
 struct LordsVoteDetailView: View {
     @StateObject var viewModel = LordsVoteDetailViewModel()
     var vote: LordsVote
-    
+
     var body: some View {
         Group {
             if viewModel.vote != nil {
@@ -23,7 +23,7 @@ struct LordsVoteDetailView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     var loadingView: some View {
         List {
@@ -41,19 +41,19 @@ struct LordsVoteDetailView: View {
         .listStyle(.grouped)
         .environment(\.isScrollEnabled, false)
     }
-    
+
     @ViewBuilder
     var scrollView: some View {
         List {
             amendmentNotes
-            
+
             voteCount
-            
+
             Section("Votes") {
                 VoteChart(yesVotes: viewModel.contentsGrouping, noVotes: viewModel.notContentsGrouping)
             }
             .accessibilityHidden(true)
-            
+
             if let vote = viewModel.vote {
                 ContextAwareNavigationLink(value: .allVotesView(allVotes: vote)) {
                     Label("View all votes", image: "vote")
@@ -62,9 +62,9 @@ struct LordsVoteDetailView: View {
             }
         }
     }
-    
+
     @State private var showNotesSheet = false
-    
+
     @ViewBuilder
     private var amendmentNotes: some View {
         if let amendmentMotionNotes = viewModel.vote?.amendmentMotionNotes {
@@ -102,10 +102,10 @@ struct LordsVoteDetailView: View {
             .padding(.bottom, 20)
         }
     }
-    
+
     private func getAttributedString(from html: String) -> AttributedString {
         guard let document = try? SwiftSoup.parse(html) else { return AttributedString("") }
-        
+
         func traverseNodes(_ node: Node, attributedString: inout AttributedString) {
             if let textNode = node as? TextNode {
                 var text = AttributedString(textNode.text())
@@ -128,13 +128,13 @@ struct LordsVoteDetailView: View {
                 }
             }
         }
-        
+
         var attributedString = AttributedString("")
         traverseNodes(document, attributedString: &attributedString)
-        
+
         return attributedString
     }
-    
+
     @ViewBuilder
     private var voteCount: some View {
         if let authoritativeContentCount = vote.authoritativeContentCount, let authoritativeNotContentCount = vote.authoritativeNotContentCount {

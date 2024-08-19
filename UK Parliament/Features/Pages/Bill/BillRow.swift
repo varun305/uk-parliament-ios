@@ -3,7 +3,7 @@ import SkeletonUI
 
 struct BillRow: View {
     var bill: Bill
-    
+
     var originatingHouse: House? {
         if bill.originatingHouse == "Commons" {
             House.commons
@@ -28,7 +28,7 @@ struct BillRow: View {
             .multilineTextAlignment(.leading)
         }
     }
-    
+
     @ViewBuilder
     var caption: some View {
         let date = bill.formattedDate

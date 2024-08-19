@@ -23,7 +23,7 @@ struct ConstituencyRow: View {
             Spacer()
         }
     }
-    
+
     @ViewBuilder
     var caption: some View {
         let memberName = consituency.member?.nameDisplayAs ?? ""

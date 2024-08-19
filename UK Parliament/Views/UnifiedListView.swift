@@ -92,7 +92,7 @@ struct UnifiedListView<T, RowContent, LoadingContent>: View where T: Identifiabl
                         view
                     }
                 }
-                
+
                 HStack {
                     Spacer()
                     if viewModel.loading && !viewModel.items.isEmpty {

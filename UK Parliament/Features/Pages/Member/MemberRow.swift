@@ -18,7 +18,7 @@ struct MemberRow: View {
             Spacer()
         }
     }
-    
+
     @ViewBuilder
     var caption: some View {
         let partyName = member.latestParty?.name ?? ""

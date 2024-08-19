@@ -12,27 +12,27 @@ struct VotesView: View {
         .navigationBarTitleDisplayMode(.inline)
         .searchable(text: $search)
     }
-    
+
     @State private var search = ""
-    
+
     private var yesTellers: [any Voter] {
         allVotesModel.yesVoteTellers?.filter {
             $0.name?.searchContains(search) ?? false
         } ?? []
     }
-    
+
     private var noTellers: [any Voter] {
         allVotesModel.noVoteTellers?.filter {
             $0.name?.searchContains(search) ?? false
         } ?? []
     }
-    
+
     private var yesVotes: [any Voter] {
         allVotesModel.yesVotes?.filter {
             $0.name?.searchContains(search) ?? false
         } ?? []
     }
-    
+
     private var noVotes: [any Voter] {
         allVotesModel.noVotes?.filter {
             $0.name?.searchContains(search) ?? false

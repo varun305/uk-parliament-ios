@@ -3,7 +3,7 @@ import LicenseList
 
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
-    
+
     let faqItems = [
         FAQItem(
             question: "How can I find my constituency?",
@@ -18,7 +18,7 @@ struct SettingsView: View {
             answer: "To view the latest version of a bill, go to the \"Bills\" page, search for the bill you are interested in, select it, and then click on \"All publications\""
         )
     ]
-    
+
     var body: some View {
         NavigationStack {
             List {
@@ -30,7 +30,7 @@ struct SettingsView: View {
                             .labelStyle(SquircleLabelStyle(color: .accentColor))
                     }
                 }
-                
+
                 Section {
                     NavigationLink {
                         LicenseListView()
@@ -41,13 +41,13 @@ struct SettingsView: View {
                         Label("Licences", image: "licence")
                             .labelStyle(SquircleLabelStyle(color: .accentColor))
                     }
-                    
+
                     Link(destination: URL(string: "https://www.parliament.uk/site-information/copyright-parliament/open-parliament-licence/")!) {
                         Label("UK Parliament API", systemImage: "link")
                             .labelStyle(SquircleLabelStyle(color: .accentColor))
                     }
                 }
-                
+
                 Section {
                     Link(destination: URL(string: "https://github.com/varun305/uk-parliament-ios")!) {
                         Label("GitHub repository", image: "github.logo")
@@ -71,7 +71,7 @@ struct SettingsView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     var helpView: some View {
         List {
@@ -93,12 +93,12 @@ struct SettingsView: View {
 struct FAQItem: Identifiable {
     var question: String
     var answer: String
-    
+
     init(question: String, answer: String) {
         self.question = question
         self.answer = answer
     }
-    
+
     var id: String {
         question + answer
     }

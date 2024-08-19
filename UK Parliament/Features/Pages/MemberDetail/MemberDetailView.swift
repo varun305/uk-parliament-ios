@@ -109,7 +109,7 @@ struct MemberDetailView: View {
         }
         .environment(\.isScrollEnabled, false)
     }
-    
+
     var houseColor: Color {
         if let member = viewModel.member, member.isCommonsMember {
             Color.commons
@@ -119,7 +119,7 @@ struct MemberDetailView: View {
             Color.accentColor
         }
     }
-    
+
     var partyColor: Color {
         Color(hexString: viewModel.member?.latestParty?.backgroundColour ?? "ffffff")
     }
