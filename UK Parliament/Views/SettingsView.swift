@@ -3,7 +3,7 @@ import LicenseList
 
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
-
+    
     let faqItems = [
         FAQItem(
             question: "How can I find my constituency?",
@@ -18,7 +18,7 @@ struct SettingsView: View {
             answer: "To view the latest version of a bill, go to the \"Bills\" page, search for the bill you are interested in, select it, and then click on \"All publications\""
         )
     ]
-
+    
     var body: some View {
         NavigationStack {
             List {
@@ -26,29 +26,35 @@ struct SettingsView: View {
                     NavigationLink {
                         helpView
                     } label: {
-                        HStack {
-                            Image("help")
-                            Text("Help")
-                        }
-                        .foregroundStyle(.primary)
+                        Label("Help", systemImage: "questionmark")
+                            .labelStyle(SquircleLabelStyle(color: .accentColor))
                     }
                 }
+                
                 Section {
-                    NavigationLink("Licences") {
+                    NavigationLink {
                         LicenseListView()
                             .licenseListViewStyle(.withRepositoryAnchorLink)
                             .navigationTitle("Licences")
                             .navigationBarTitleDisplayMode(.inline)
+                    } label: {
+                        Label("Licences", image: "licence")
+                            .labelStyle(SquircleLabelStyle(color: .accentColor))
                     }
-                    Link(
-                        "Open parliament licence",
-                        destination: URL(string: "https://www.parliament.uk/site-information/copyright-parliament/open-parliament-licence/")!
-                    )
-                    .foregroundStyle(.primary)
+                    
+                    Link(destination: URL(string: "https://www.parliament.uk/site-information/copyright-parliament/open-parliament-licence/")!) {
+                        Label("UK Parliament API", systemImage: "link")
+                            .labelStyle(SquircleLabelStyle(color: .accentColor))
+                    }
                 }
-
+                
                 Section {
-                    Text("© App developer " + String(Calendar.current.component(.year, from: Date())))
+                    Link(destination: URL(string: "https://github.com/varun305/uk-parliament-ios")!) {
+                        Label("GitHub repository", image: "github.logo")
+                            .labelStyle(SquircleLabelStyle(color: .black))
+                    }
+                } footer: {
+                    Text("This app is open-source ")
                 }
             }
             .navigationTitle("Settings")
@@ -65,7 +71,7 @@ struct SettingsView: View {
             }
         }
     }
-
+    
     @ViewBuilder
     var helpView: some View {
         List {
@@ -87,12 +93,12 @@ struct SettingsView: View {
 struct FAQItem: Identifiable {
     var question: String
     var answer: String
-
+    
     init(question: String, answer: String) {
         self.question = question
         self.answer = answer
     }
-
+    
     var id: String {
         question + answer
     }

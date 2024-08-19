@@ -56,24 +56,8 @@ struct LordsVoteDetailView: View {
             
             if let vote = viewModel.vote {
                 ContextAwareNavigationLink(value: .allVotesView(allVotes: vote)) {
-                    Label(
-                        title: { Text("View all votes") },
-                        icon: {
-                            ZStack {
-                                Rectangle()
-                                    .aspectRatio(1.0, contentMode: .fit)
-                                    .foregroundStyle(Color.lords)
-                                    .mask {
-                                        RoundedRectangle(cornerRadius: 5)
-                                    }
-                                Image(systemName: "person.3.fill")
-                                    .resizable()
-                                    .padding(3)
-                                    .aspectRatio(contentMode: .fit)
-                                    .foregroundStyle(.white)
-                            }
-                        }
-                    )
+                    Label("View all votes", image: "vote")
+                        .labelStyle(SquircleLabelStyle(color: Color.lords))
                 }
             }
         }

@@ -23,18 +23,24 @@ struct BillRow: View {
             VStack(alignment: .leading) {
                 Text(bill.shortTitle ?? "")
                     .bold()
-                HStack(spacing: 5) {
-                    Text(bill.formattedDate)
-                    if let house = originatingHouse {
-                        Text("•")
-                            .accessibilityHidden(true)
-                        Text("From \(house)")
-                    }
-                }
-                .foregroundStyle(.secondary)
-                .font(.footnote)
+                caption
             }
             .multilineTextAlignment(.leading)
+        }
+    }
+    
+    @ViewBuilder
+    var caption: some View {
+        let date = bill.formattedDate
+        if let house = originatingHouse {
+            Text(date + " • From \(house)")
+                .accessibilityLabel(Text(date + ", From \(house)"))
+                .foregroundStyle(.secondary)
+                .font(.footnote)
+        } else {
+            Text(date)
+                .foregroundStyle(.secondary)
+                .font(.footnote)
         }
     }
 }

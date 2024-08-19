@@ -109,6 +109,20 @@ struct MemberDetailView: View {
         }
         .environment(\.isScrollEnabled, false)
     }
+    
+    var houseColor: Color {
+        if let member = viewModel.member, member.isCommonsMember {
+            Color.commons
+        } else if let member = viewModel.member, !member.isCommonsMember {
+            Color.lords
+        } else {
+            Color.accentColor
+        }
+    }
+    
+    var partyColor: Color {
+        Color(hexString: viewModel.member?.latestParty?.backgroundColour ?? "ffffff")
+    }
 
     @ViewBuilder
     var scrollView: some View {
@@ -130,17 +144,14 @@ struct MemberDetailView: View {
                 .listRowSeparator(.hidden)
 
                 Section("Party") {
-                    HStack(alignment: .center) {
-                        Circle()
-                            .frame(width: 20, height: 20)
-                            .foregroundStyle(Color(hexString: member.latestParty?.backgroundColour ?? "ffffff"))
-                        Text(member.latestParty?.name ?? "")
-                    }
+                    Label(member.latestParty?.name ?? "", systemImage: "person.2.fill")
+                        .labelStyle(SquircleLabelStyle(color: partyColor))
                 }
 
                 Section {
                     ContextAwareNavigationLink(value: .billsView(member: member)) {
-                        Text("View bills")
+                        Label("View bills", image: "bill")
+                            .labelStyle(SquircleLabelStyle(color: houseColor))
                     }
                     votesLink
                 }
@@ -151,10 +162,12 @@ struct MemberDetailView: View {
 
                 Section {
                     ContextAwareNavigationLink(value: .memberInterestsView(member: member)) {
-                        Text("Registered interests")
+                        Label("Registered interests", image: "interest")
+                            .labelStyle(SquircleLabelStyle(color: Color.accentColor))
                     }
                     ContextAwareNavigationLink(value: .memberContactView(member: member)) {
-                        Text("Contact details")
+                        Label("Contact details", systemImage: "mail.fill")
+                            .labelStyle(SquircleLabelStyle(color: Color.accentColor))
                     }
                 }
             }
@@ -176,11 +189,13 @@ struct MemberDetailView: View {
     var votesLink: some View {
         if let member = viewModel.member, member.isCommonsMember {
             ContextAwareNavigationLink(value: .memberCommonsVotesView(member: member)) {
-                Text("View commons votes")
+                Label("View commons votes", image: "vote")
+                    .labelStyle(SquircleLabelStyle(color: Color.commons))
             }
         } else if let member = viewModel.member, !member.isCommonsMember {
             ContextAwareNavigationLink(value: .memberLordsVotesView(member: member)) {
-                Text("View lords votes")
+                Label("View lords votes", image: "vote")
+                    .labelStyle(SquircleLabelStyle(color: Color.lords))
             }
         }
     }
@@ -188,7 +203,8 @@ struct MemberDetailView: View {
     @ViewBuilder
     var membershipTile: some View {
         if let member = viewModel.member {
-            Text(member.latestHouseMembership?.membershipFrom ?? "")
+            Label(member.latestHouseMembership?.membershipFrom ?? "", image: "map")
+                .labelStyle(SquircleLabelStyle(color: Color.accentColor))
         } else {
             Text("No member found")
                 .italic()

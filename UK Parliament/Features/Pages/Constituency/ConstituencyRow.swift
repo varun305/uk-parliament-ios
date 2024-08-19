@@ -17,17 +17,20 @@ struct ConstituencyRow: View {
                 Text(consituency.name ?? "")
                     .multilineTextAlignment(.leading)
                     .bold()
-                if let member = consituency.member {
-                    Text(member.nameDisplayAs ?? "")
-                        .font(.footnote)
-                }
-                if let name = party?.name {
-                    Text(name)
-                        .font(.caption)
-                }
+                caption
             }
 
             Spacer()
         }
+    }
+    
+    @ViewBuilder
+    var caption: some View {
+        let memberName = consituency.member?.nameDisplayAs ?? ""
+        let partyName = party?.name ?? ""
+        Text(memberName + " • " + partyName)
+            .accessibilityLabel(Text(memberName + ", " + partyName))
+            .foregroundStyle(.secondary)
+            .font(.footnote)
     }
 }

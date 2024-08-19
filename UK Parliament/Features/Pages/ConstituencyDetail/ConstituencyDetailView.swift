@@ -76,7 +76,8 @@ struct ConstituencyDetailView: View {
                     Button {
                         showMapView = true
                     } label: {
-                        Label("View on a map", systemImage: "map.fill")
+                        Label("View on a map", systemImage: "map")
+                            .labelStyle(SquircleLabelStyle(color: Color.accentColor))
                     }
                     .foregroundStyle(.primary)
                     .sheet(isPresented: $showMapView) {

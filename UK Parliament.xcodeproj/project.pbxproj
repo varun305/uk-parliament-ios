@@ -46,6 +46,7 @@
 		EE5AE8262B4C7AC000550126 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5AE8252B4C7AC000550126 /* ViewExtensions.swift */; };
 		EE62BE782BE55BA600CF90BF /* VoteChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE62BE772BE55BA600CF90BF /* VoteChart.swift */; };
 		EE6A12DB2C72900A005C76D1 /* Color+Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6A12DA2C72900A005C76D1 /* Color+Modifiers.swift */; };
+		EE6A12DD2C72990D005C76D1 /* LabelStyle+Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6A12DC2C72990D005C76D1 /* LabelStyle+Modifiers.swift */; };
 		EE86A45F2B344BA6007BEA83 /* UK_ParliamentApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE86A45E2B344BA6007BEA83 /* UK_ParliamentApp.swift */; };
 		EE86A4612B344BA6007BEA83 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE86A4602B344BA6007BEA83 /* ContentView.swift */; };
 		EE86A4632B344BA7007BEA83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE86A4622B344BA7007BEA83 /* Assets.xcassets */; };
@@ -158,6 +159,7 @@
 		EE5AE8252B4C7AC000550126 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		EE62BE772BE55BA600CF90BF /* VoteChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteChart.swift; sourceTree = "<group>"; };
 		EE6A12DA2C72900A005C76D1 /* Color+Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Modifiers.swift"; sourceTree = "<group>"; };
+		EE6A12DC2C72990D005C76D1 /* LabelStyle+Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LabelStyle+Modifiers.swift"; sourceTree = "<group>"; };
 		EE86A45B2B344BA6007BEA83 /* UK Parliament.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UK Parliament.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE86A45E2B344BA6007BEA83 /* UK_ParliamentApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UK_ParliamentApp.swift; sourceTree = "<group>"; };
 		EE86A4602B344BA6007BEA83 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -550,6 +552,7 @@
 				EE167D8D2B7A108900415100 /* UnifiedListView.swift */,
 				EEE171B82B9DEAAD00C89859 /* UKPagesView.swift */,
 				EE6A12DA2C72900A005C76D1 /* Color+Modifiers.swift */,
+				EE6A12DC2C72990D005C76D1 /* LabelStyle+Modifiers.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -883,6 +886,7 @@
 				EE3194DE2B6CD52400A5F754 /* MemberCommonsVotesViewModel.swift in Sources */,
 				EE8F2CBD2B36341300D771F2 /* ConstituencyElectionDetailViewModel.swift in Sources */,
 				EEFC7C9F2B3615AD00183203 /* ConstituencyDetailViewModel.swift in Sources */,
+				EE6A12DD2C72990D005C76D1 /* LabelStyle+Modifiers.swift in Sources */,
 				EE0186272B38258B004F7F77 /* MemberContactViewModel.swift in Sources */,
 				EE1BE5742C161BDA00ED3F0F /* Banner.swift in Sources */,
 			);

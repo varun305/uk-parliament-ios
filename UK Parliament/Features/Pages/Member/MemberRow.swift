@@ -12,14 +12,21 @@ struct MemberRow: View {
             VStack(alignment: .leading) {
                 Text(member.nameDisplayAs ?? "")
                     .bold()
-                Text(member.latestParty?.name ?? "")
-                    .font(.footnote)
-                Text(member.latestHouseMembership?.membershipFrom ?? "")
-                    .font(.caption)
+                caption
             }
 
             Spacer()
         }
+    }
+    
+    @ViewBuilder
+    var caption: some View {
+        let partyName = member.latestParty?.name ?? ""
+        let constituencyName = member.latestHouseMembership?.membershipFrom ?? ""
+        Text(partyName + " • " + constituencyName)
+            .accessibilityLabel(Text(partyName + ", " + constituencyName))
+            .foregroundStyle(.secondary)
+            .font(.footnote)
     }
 }
 

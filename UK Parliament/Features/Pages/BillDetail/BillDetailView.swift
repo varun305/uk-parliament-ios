@@ -89,6 +89,16 @@ struct BillDetailView: View {
         }
         .environment(\.isScrollEnabled, false)
     }
+    
+    var houseColor: Color {
+        if bill.currentHouse?.lowercased() == "commons" {
+            Color.commons
+        } else if bill.currentHouse?.lowercased() == "lords" {
+            Color.lords
+        } else {
+            Color.accentColor
+        }
+    }
 
     @ViewBuilder
     var scrollView: some View {
@@ -123,13 +133,15 @@ struct BillDetailView: View {
 
                 if let _ = bill.lastUpdate {
                     Section("Last update") {
-                        Text(bill.formattedDate)
+                        Label(bill.formattedDate, systemImage: "calendar")
+                            .labelStyle(SquircleLabelStyle(color: houseColor))
                     }
                 }
 
                 Section {
                     ContextAwareNavigationLink(value: .billPublicationsView(bill: bill, stage: nil)) {
-                        Text("View publications")
+                        Label("View publications", image: "article")
+                            .labelStyle(SquircleLabelStyle(color: houseColor))
                     }
                 }
 
@@ -137,7 +149,8 @@ struct BillDetailView: View {
                     Section("Current stage") {
                         BillStageRow(stage: currentStage)
                         ContextAwareNavigationLink(value: .billStagesView(bill: bill)) {
-                            Text("See all stages")
+                            Label("See all stages", systemImage: "list.bullet")
+                                .labelStyle(SquircleLabelStyle(color: houseColor))
                         }
                     }
                 }
