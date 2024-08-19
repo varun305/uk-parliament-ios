@@ -160,7 +160,7 @@
 		EE62BE772BE55BA600CF90BF /* VoteChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteChart.swift; sourceTree = "<group>"; };
 		EE6A12DA2C72900A005C76D1 /* Color+Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Modifiers.swift"; sourceTree = "<group>"; };
 		EE6A12DC2C72990D005C76D1 /* LabelStyle+Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LabelStyle+Modifiers.swift"; sourceTree = "<group>"; };
-		EE86A45B2B344BA6007BEA83 /* UK Parliament.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UK Parliament.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE86A45B2B344BA6007BEA83 /* UKParliament.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UKParliament.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE86A45E2B344BA6007BEA83 /* UK_ParliamentApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UK_ParliamentApp.swift; sourceTree = "<group>"; };
 		EE86A4602B344BA6007BEA83 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EE86A4622B344BA7007BEA83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -500,7 +500,7 @@
 			children = (
 				EEE171B32B9DE7DD00C89859 /* Frameworks */,
 				EE86A45C2B344BA6007BEA83 /* Products */,
-				EE86A45D2B344BA6007BEA83 /* UK Parliament */,
+				EE86A45D2B344BA6007BEA83 /* UKParliament */,
 				EE3194ED2B6E550900A5F754 /* UKParliamentTests */,
 			);
 			sourceTree = "<group>";
@@ -508,13 +508,13 @@
 		EE86A45C2B344BA6007BEA83 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EE86A45B2B344BA6007BEA83 /* UK Parliament.app */,
+				EE86A45B2B344BA6007BEA83 /* UKParliament.app */,
 				EE3194EC2B6E550900A5F754 /* UKParliamentTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		EE86A45D2B344BA6007BEA83 /* UK Parliament */ = {
+		EE86A45D2B344BA6007BEA83 /* UKParliament */ = {
 			isa = PBXGroup;
 			children = (
 				EEE8F4F42C1D72BB0072887D /* APIModels */,
@@ -533,7 +533,7 @@
 				EE8F2CC52B36D81C00D771F2 /* UK-Parliament-Info.plist */,
 				EE86A45E2B344BA6007BEA83 /* UK_ParliamentApp.swift */,
 			);
-			path = "UK Parliament";
+			path = UKParliament;
 			sourceTree = "<group>";
 		};
 		EE86A4642B344BA7007BEA83 /* Preview Content */ = {
@@ -669,9 +669,9 @@
 			productReference = EE3194EC2B6E550900A5F754 /* UKParliamentTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		EE86A45A2B344BA6007BEA83 /* UK Parliament */ = {
+		EE86A45A2B344BA6007BEA83 /* UKParliament */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EE86A4692B344BA7007BEA83 /* Build configuration list for PBXNativeTarget "UK Parliament" */;
+			buildConfigurationList = EE86A4692B344BA7007BEA83 /* Build configuration list for PBXNativeTarget "UKParliament" */;
 			buildPhases = (
 				EE86A4572B344BA6007BEA83 /* Sources */,
 				EE86A4582B344BA6007BEA83 /* Frameworks */,
@@ -682,14 +682,14 @@
 			);
 			dependencies = (
 			);
-			name = "UK Parliament";
+			name = UKParliament;
 			packageProductDependencies = (
 				EEF10F042BD2BCD100FE7D21 /* LicenseList */,
 				EE020BC32B618A94004C893B /* SkeletonUI */,
 				EE3B90F02C3002FD00A4AD06 /* SwiftSoup */,
 			);
 			productName = "UK Parliament";
-			productReference = EE86A45B2B344BA6007BEA83 /* UK Parliament.app */;
+			productReference = EE86A45B2B344BA6007BEA83 /* UKParliament.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -712,7 +712,7 @@
 					};
 				};
 			};
-			buildConfigurationList = EE86A4562B344BA6007BEA83 /* Build configuration list for PBXProject "UK Parliament" */;
+			buildConfigurationList = EE86A4562B344BA6007BEA83 /* Build configuration list for PBXProject "UKParliament" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -730,7 +730,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EE86A45A2B344BA6007BEA83 /* UK Parliament */,
+				EE86A45A2B344BA6007BEA83 /* UKParliament */,
 				EE3194EB2B6E550900A5F754 /* UKParliamentTests */,
 			);
 		};
@@ -897,7 +897,7 @@
 /* Begin PBXTargetDependency section */
 		EE3194F12B6E550900A5F754 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = EE86A45A2B344BA6007BEA83 /* UK Parliament */;
+			target = EE86A45A2B344BA6007BEA83 /* UKParliament */;
 			targetProxy = EE3194F02B6E550900A5F754 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -920,7 +920,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UK Parliament.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/UK Parliament";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UKParliament.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/UKParliament";
 			};
 			name = Debug;
 		};
@@ -940,7 +940,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UK Parliament.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/UK Parliament";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UKParliament.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/UKParliament";
 			};
 			name = Release;
 		};
@@ -1146,7 +1146,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EE86A4562B344BA6007BEA83 /* Build configuration list for PBXProject "UK Parliament" */ = {
+		EE86A4562B344BA6007BEA83 /* Build configuration list for PBXProject "UKParliament" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EE86A4672B344BA7007BEA83 /* Debug */,
@@ -1155,7 +1155,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EE86A4692B344BA7007BEA83 /* Build configuration list for PBXNativeTarget "UK Parliament" */ = {
+		EE86A4692B344BA7007BEA83 /* Build configuration list for PBXNativeTarget "UKParliament" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EE86A46A2B344BA7007BEA83 /* Debug */,

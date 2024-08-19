@@ -43,9 +43,12 @@ struct SettingsView: View {
                     }
 
                     Link(destination: URL(string: "https://www.parliament.uk/site-information/copyright-parliament/open-parliament-licence/")!) {
-                        Label("UK Parliament API", systemImage: "link")
+                        Label("Open parliament licence", systemImage: "link")
                             .labelStyle(SquircleLabelStyle(color: .accentColor))
                     }
+                    .tint(.primary)
+                } footer: {
+                    Text("This app makes use of the UK Parliament API. Check out their licence for more information.")
                 }
 
                 Section {
@@ -53,8 +56,9 @@ struct SettingsView: View {
                         Label("GitHub repository", image: "github.logo")
                             .labelStyle(SquircleLabelStyle(color: .black))
                     }
+                    .tint(.primary)
                 } footer: {
-                    Text("This app is open-source ")
+                    Text("This app is open-source! Check out the GitHub repository to view and contribute!")
                 }
             }
             .navigationTitle("Settings")
