@@ -301,9 +301,9 @@
 		EE6A12C52C728B34005C76D1 /* Bill */ = {
 			isa = PBXGroup;
 			children = (
-				EEEC3B062B388B2600A8626D /* BillsViewModel.swift */,
 				EEEC3B082B388E5600A8626D /* BillRow.swift */,
 				EEEC3B042B388B1900A8626D /* BillsView.swift */,
+				EEEC3B062B388B2600A8626D /* BillsViewModel.swift */,
 			);
 			path = Bill;
 			sourceTree = "<group>";
@@ -311,9 +311,9 @@
 		EE6A12C62C728B51005C76D1 /* Member */ = {
 			isa = PBXGroup;
 			children = (
-				EE50F9BA2B358FA200163E52 /* MembersViewModel.swift */,
-				EE50F9B82B358F8B00163E52 /* MembersView.swift */,
 				EE50F9BC2B3592D200163E52 /* MemberRow.swift */,
+				EE50F9B82B358F8B00163E52 /* MembersView.swift */,
+				EE50F9BA2B358FA200163E52 /* MembersViewModel.swift */,
 			);
 			path = Member;
 			sourceTree = "<group>";
@@ -321,8 +321,8 @@
 		EE6A12C72C728B75005C76D1 /* MemberDetail */ = {
 			isa = PBXGroup;
 			children = (
-				EE8F2CBE2B36C53700D771F2 /* MemberDetailViewModel.swift */,
 				EEFC7C9A2B36132200183203 /* MemberDetailView.swift */,
+				EE8F2CBE2B36C53700D771F2 /* MemberDetailViewModel.swift */,
 			);
 			path = MemberDetail;
 			sourceTree = "<group>";
@@ -330,9 +330,9 @@
 		EE6A12C82C728BB1005C76D1 /* Constituency */ = {
 			isa = PBXGroup;
 			children = (
+				EE97BF8F2B34C30800FA950C /* ConstituenciesView.swift */,
 				EE97BF912B34C32A00FA950C /* ConstituenciesViewModel.swift */,
 				EE97BF952B34C6DD00FA950C /* ConstituencyRow.swift */,
-				EE97BF8F2B34C30800FA950C /* ConstituenciesView.swift */,
 			);
 			path = Constituency;
 			sourceTree = "<group>";
@@ -340,8 +340,8 @@
 		EE6A12C92C728BD0005C76D1 /* MemberRegisteredInterest */ = {
 			isa = PBXGroup;
 			children = (
-				EE8F2CC82B36DA5600D771F2 /* MemberRegisteredInterestsViewModel.swift */,
 				EE8F2CC32B36D74F00D771F2 /* MemberRegisteredInterestsView.swift */,
+				EE8F2CC82B36DA5600D771F2 /* MemberRegisteredInterestsViewModel.swift */,
 			);
 			path = MemberRegisteredInterest;
 			sourceTree = "<group>";
@@ -349,8 +349,8 @@
 		EE6A12CA2C728C3A005C76D1 /* MemberContact */ = {
 			isa = PBXGroup;
 			children = (
-				EE0186262B38258B004F7F77 /* MemberContactViewModel.swift */,
 				EE0186242B38255D004F7F77 /* MemberContactView.swift */,
+				EE0186262B38258B004F7F77 /* MemberContactViewModel.swift */,
 			);
 			path = MemberContact;
 			sourceTree = "<group>";
@@ -358,8 +358,8 @@
 		EE6A12CB2C728C5F005C76D1 /* ConstituencyElectionResult */ = {
 			isa = PBXGroup;
 			children = (
-				EE8F2CBC2B36341300D771F2 /* ConstituencyElectionDetailViewModel.swift */,
 				EEFC7CA22B36290B00183203 /* ConstituencyElectionDetailView.swift */,
+				EE8F2CBC2B36341300D771F2 /* ConstituencyElectionDetailViewModel.swift */,
 			);
 			path = ConstituencyElectionResult;
 			sourceTree = "<group>";
@@ -367,8 +367,8 @@
 		EE6A12CC2C728C89005C76D1 /* ConstituencyDetail */ = {
 			isa = PBXGroup;
 			children = (
-				EEFC7C9E2B3615AD00183203 /* ConstituencyDetailViewModel.swift */,
 				EE50F9C12B35A59700163E52 /* ConstituencyDetailView.swift */,
+				EEFC7C9E2B3615AD00183203 /* ConstituencyDetailViewModel.swift */,
 			);
 			path = ConstituencyDetail;
 			sourceTree = "<group>";
@@ -376,9 +376,9 @@
 		EE6A12CD2C728CB9005C76D1 /* BillDetail */ = {
 			isa = PBXGroup;
 			children = (
-				EEEC3B132B3899EC00A8626D /* SponsorRow.swift */,
-				EEEC3B112B38971600A8626D /* BillDetailViewModel.swift */,
 				EEEC3B0F2B3896EF00A8626D /* BillDetailView.swift */,
+				EEEC3B112B38971600A8626D /* BillDetailViewModel.swift */,
+				EEEC3B132B3899EC00A8626D /* SponsorRow.swift */,
 			);
 			path = BillDetail;
 			sourceTree = "<group>";
@@ -386,9 +386,9 @@
 		EE6A12CE2C728CE6005C76D1 /* BillPublication */ = {
 			isa = PBXGroup;
 			children = (
-				EEEC3B262B38BAF500A8626D /* BillPublicationsViewModel.swift */,
 				EEEC3B282B38BCD200A8626D /* BillPublicationRow.swift */,
 				EEEC3B242B38BA7900A8626D /* BillPublicationsView.swift */,
+				EEEC3B262B38BAF500A8626D /* BillPublicationsViewModel.swift */,
 			);
 			path = BillPublication;
 			sourceTree = "<group>";
@@ -397,8 +397,8 @@
 			isa = PBXGroup;
 			children = (
 				EEEC3B1F2B38AE7300A8626D /* BillStageRow.swift */,
-				EEEC3B212B38AED000A8626D /* BillStagesViewModel.swift */,
 				EEEC3B1D2B38ADC500A8626D /* BillStagesView.swift */,
+				EEEC3B212B38AED000A8626D /* BillStagesViewModel.swift */,
 			);
 			path = BillStage;
 			sourceTree = "<group>";
@@ -414,9 +414,9 @@
 		EE6A12D12C728D71005C76D1 /* VoteCommons */ = {
 			isa = PBXGroup;
 			children = (
-				EEEC3B3A2B39A98900A8626D /* CommonsVotesViewModel.swift */,
 				EEEC3B3C2B39AC4600A8626D /* CommonsVoteRow.swift */,
 				EEEC3B382B39A97900A8626D /* CommonsVotesView.swift */,
+				EEEC3B3A2B39A98900A8626D /* CommonsVotesViewModel.swift */,
 			);
 			path = VoteCommons;
 			sourceTree = "<group>";
@@ -424,8 +424,8 @@
 		EE6A12D22C728DAD005C76D1 /* VoteCommonsDetail */ = {
 			isa = PBXGroup;
 			children = (
-				EEEC3B412B39B55000A8626D /* CommonsVoteDetailViewModel.swift */,
 				EEEC3B3F2B39B54200A8626D /* CommonsVoteDetailView.swift */,
+				EEEC3B412B39B55000A8626D /* CommonsVoteDetailViewModel.swift */,
 			);
 			path = VoteCommonsDetail;
 			sourceTree = "<group>";
@@ -441,9 +441,9 @@
 		EE6A12D42C728E28005C76D1 /* MemberVoteCommons */ = {
 			isa = PBXGroup;
 			children = (
-				EE3194DD2B6CD52400A5F754 /* MemberCommonsVotesViewModel.swift */,
 				EE3194DF2B6CD7CD00A5F754 /* MemberCommonsVoteRow.swift */,
 				EE3194DB2B6CD4FE00A5F754 /* MemberCommonsVotesView.swift */,
+				EE3194DD2B6CD52400A5F754 /* MemberCommonsVotesViewModel.swift */,
 			);
 			path = MemberVoteCommons;
 			sourceTree = "<group>";
@@ -451,9 +451,9 @@
 		EE6A12D52C728E5F005C76D1 /* VoteLords */ = {
 			isa = PBXGroup;
 			children = (
-				EE3194FE2B6F808C00A5F754 /* LordsVotesViewModel.swift */,
 				EE3195002B6F80AA00A5F754 /* LordsVoteRow.swift */,
 				EE3194FC2B6F807900A5F754 /* LordsVotesView.swift */,
+				EE3194FE2B6F808C00A5F754 /* LordsVotesViewModel.swift */,
 			);
 			path = VoteLords;
 			sourceTree = "<group>";
@@ -461,8 +461,8 @@
 		EE6A12D62C728E79005C76D1 /* VoteLordsDetail */ = {
 			isa = PBXGroup;
 			children = (
-				EE3195032B6F83F800A5F754 /* LordsVoteDetailViewModel.swift */,
 				EE3195052B6F841700A5F754 /* LordsVoteDetailView.swift */,
+				EE3195032B6F83F800A5F754 /* LordsVoteDetailViewModel.swift */,
 			);
 			path = VoteLordsDetail;
 			sourceTree = "<group>";
@@ -470,9 +470,9 @@
 		EE6A12D72C728EA7005C76D1 /* MemberVoteLords */ = {
 			isa = PBXGroup;
 			children = (
-				EE31950A2B6F954900A5F754 /* MemberLordsVotesViewModel.swift */,
 				EE31950C2B6F959900A5F754 /* MemberLordsVoteRow.swift */,
 				EE3195082B6F952700A5F754 /* MemberLordsVotesView.swift */,
+				EE31950A2B6F954900A5F754 /* MemberLordsVotesViewModel.swift */,
 			);
 			path = MemberVoteLords;
 			sourceTree = "<group>";
@@ -480,8 +480,8 @@
 		EE6A12D82C728F1C005C76D1 /* Post */ = {
 			isa = PBXGroup;
 			children = (
-				EE01861F2B375B4D004F7F77 /* PostsViewModel.swift */,
 				EE01861D2B375B0C004F7F77 /* PostsView.swift */,
+				EE01861F2B375B4D004F7F77 /* PostsViewModel.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -489,8 +489,8 @@
 		EE6A12D92C728F2D005C76D1 /* Party */ = {
 			isa = PBXGroup;
 			children = (
-				EE86A4752B3452F4007BEA83 /* PartiesViewModel.swift */,
 				EE86A46F2B344D4C007BEA83 /* PartiesView.swift */,
+				EE86A4752B3452F4007BEA83 /* PartiesViewModel.swift */,
 			);
 			path = Party;
 			sourceTree = "<group>";
@@ -498,10 +498,10 @@
 		EE86A4522B344BA6007BEA83 = {
 			isa = PBXGroup;
 			children = (
+				EEE171B32B9DE7DD00C89859 /* Frameworks */,
+				EE86A45C2B344BA6007BEA83 /* Products */,
 				EE86A45D2B344BA6007BEA83 /* UK Parliament */,
 				EE3194ED2B6E550900A5F754 /* UKParliamentTests */,
-				EE86A45C2B344BA6007BEA83 /* Products */,
-				EEE171B32B9DE7DD00C89859 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -517,21 +517,21 @@
 		EE86A45D2B344BA6007BEA83 /* UK Parliament */ = {
 			isa = PBXGroup;
 			children = (
-				EE6A12C12C728ADA005C76D1 /* Features */,
-				EEEC3B172B38A3EE00A8626D /* Extensions */,
-				EE8F2CC52B36D81C00D771F2 /* UK-Parliament-Info.plist */,
-				EE97BF9A2B35717A00FA950C /* Components */,
-				EEE8F4F22C1D71490072887D /* ViewModels */,
-				EEE8F4F52C1D733F0072887D /* Utils */,
 				EEE8F4F42C1D72BB0072887D /* APIModels */,
-				EE86A46D2B344C1A007BEA83 /* Models */,
 				EEE8F4F32C1D71F20072887D /* ComponentViews */,
-				EE86A46C2B344C14007BEA83 /* Views */,
-				EE86A45E2B344BA6007BEA83 /* UK_ParliamentApp.swift */,
-				EEEC3B2E2B397BEA00A8626D /* ContextModel.swift */,
-				EE86A4622B344BA7007BEA83 /* Assets.xcassets */,
+				EE97BF9A2B35717A00FA950C /* Components */,
+				EEEC3B172B38A3EE00A8626D /* Extensions */,
+				EE6A12C12C728ADA005C76D1 /* Features */,
+				EE86A46D2B344C1A007BEA83 /* Models */,
 				EE86A4642B344BA7007BEA83 /* Preview Content */,
+				EEE8F4F52C1D733F0072887D /* Utils */,
+				EEE8F4F22C1D71490072887D /* ViewModels */,
+				EE86A46C2B344C14007BEA83 /* Views */,
+				EE86A4622B344BA7007BEA83 /* Assets.xcassets */,
+				EEEC3B2E2B397BEA00A8626D /* ContextModel.swift */,
 				EEF10F012BD04B1700FE7D21 /* Tips.swift */,
+				EE8F2CC52B36D81C00D771F2 /* UK-Parliament-Info.plist */,
+				EE86A45E2B344BA6007BEA83 /* UK_ParliamentApp.swift */,
 			);
 			path = "UK Parliament";
 			sourceTree = "<group>";
@@ -547,12 +547,12 @@
 		EE86A46C2B344C14007BEA83 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EEF543C42B9FA12400AD29D0 /* SettingsView.swift */,
 				EE3194E62B6E3E9C00A5F754 /* BillAmendmentsView.swift */,
-				EE167D8D2B7A108900415100 /* UnifiedListView.swift */,
-				EEE171B82B9DEAAD00C89859 /* UKPagesView.swift */,
 				EE6A12DA2C72900A005C76D1 /* Color+Modifiers.swift */,
 				EE6A12DC2C72990D005C76D1 /* LabelStyle+Modifiers.swift */,
+				EEF543C42B9FA12400AD29D0 /* SettingsView.swift */,
+				EEE171B82B9DEAAD00C89859 /* UKPagesView.swift */,
+				EE167D8D2B7A108900415100 /* UnifiedListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -560,9 +560,9 @@
 		EE86A46D2B344C1A007BEA83 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				EE86A4732B345131007BEA83 /* PartyModel.swift */,
-				EEEC3B302B3983C100A8626D /* NavigationItem.swift */,
 				EE1BE5732C161BDA00ED3F0F /* Banner.swift */,
+				EEEC3B302B3983C100A8626D /* NavigationItem.swift */,
+				EE86A4732B345131007BEA83 /* PartyModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -570,18 +570,18 @@
 		EE97BF9A2B35717A00FA950C /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				EE97BF9B2B3571C800FA950C /* PartyCircleView.swift */,
-				EEFC7C982B35B4E000183203 /* MemberPictureView.swift */,
-				EE0186282B385A4E004F7F77 /* PartyTaggedText.swift */,
-				EEEC3B0A2B388F4800A8626D /* CommonsBadge.swift */,
-				EEEC3B0C2B388FE100A8626D /* LordsBadge.swift */,
 				EEEC3B152B389F9D00A8626D /* BillStageBadge.swift */,
+				EEEC3B0A2B388F4800A8626D /* CommonsBadge.swift */,
 				EEEC3B322B398ADA00A8626D /* ContextAwareNavigationLink.swift */,
 				EE3194D42B6C181200A5F754 /* DummyNavigationLink.swift */,
+				EE8CA9462C66B2D0009E3A20 /* LoadingText.swift */,
+				EEEC3B0C2B388FE100A8626D /* LordsBadge.swift */,
+				EEFC7C982B35B4E000183203 /* MemberPictureView.swift */,
 				EE3194D62B6C229200A5F754 /* NoDataView.swift */,
 				EEE171C02B9E21E600C89859 /* PageItemViews.swift */,
+				EE97BF9B2B3571C800FA950C /* PartyCircleView.swift */,
+				EE0186282B385A4E004F7F77 /* PartyTaggedText.swift */,
 				EEB657EC2BD3D5FC00F47995 /* WebView.swift */,
-				EE8CA9462C66B2D0009E3A20 /* LoadingText.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -604,8 +604,8 @@
 		EEE8F4F32C1D71F20072887D /* ComponentViews */ = {
 			isa = PBXGroup;
 			children = (
-				EEEC3B432B39B83A00A8626D /* VoterRow.swift */,
 				EE62BE772BE55BA600CF90BF /* VoteChart.swift */,
+				EEEC3B432B39B83A00A8626D /* VoterRow.swift */,
 			);
 			path = ComponentViews;
 			sourceTree = "<group>";
@@ -614,15 +614,15 @@
 			isa = PBXGroup;
 			children = (
 				EEEC3B012B38862400A8626D /* BillModel.swift */,
-				EEEC3B352B39A2C700A8626D /* VoteModel.swift */,
-				EE3194D82B6CCBB800A5F754 /* MemberVoteModel.swift */,
-				EE86A4712B34506F007BEA83 /* HouseModel.swift */,
 				EE97BF8D2B34BF5E00FA950C /* ConstituencyModel.swift */,
-				EE97BF932B34C60300FA950C /* MemberModel.swift */,
 				EEFC7C9C2B36140400183203 /* ElectionResultModel.swift */,
-				EE8F2CC62B36D88200D771F2 /* MemberRegisteredInterestModel.swift */,
-				EE0186212B375B66004F7F77 /* PostModel.swift */,
 				EE50F9BE2B35A09E00163E52 /* FetchModel.swift */,
+				EE86A4712B34506F007BEA83 /* HouseModel.swift */,
+				EE97BF932B34C60300FA950C /* MemberModel.swift */,
+				EE8F2CC62B36D88200D771F2 /* MemberRegisteredInterestModel.swift */,
+				EE3194D82B6CCBB800A5F754 /* MemberVoteModel.swift */,
+				EE0186212B375B66004F7F77 /* PostModel.swift */,
+				EEEC3B352B39A2C700A8626D /* VoteModel.swift */,
 			);
 			path = APIModels;
 			sourceTree = "<group>";
@@ -640,10 +640,10 @@
 			isa = PBXGroup;
 			children = (
 				EEEC3B182B38A3FD00A8626D /* ColorExtensions.swift */,
+				EE8FCD882B7FF2DA00B54609 /* DateExtensions.swift */,
+				EE29CCC32B6059E10027CBA4 /* ListExtensions.swift */,
 				EEEC3B1A2B38A51D00A8626D /* StringExtensions.swift */,
 				EE5AE8252B4C7AC000550126 /* ViewExtensions.swift */,
-				EE29CCC32B6059E10027CBA4 /* ListExtensions.swift */,
-				EE8FCD882B7FF2DA00B54609 /* DateExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -684,8 +684,8 @@
 			);
 			name = "UK Parliament";
 			packageProductDependencies = (
-				EE020BC32B618A94004C893B /* SkeletonUI */,
 				EEF10F042BD2BCD100FE7D21 /* LicenseList */,
+				EE020BC32B618A94004C893B /* SkeletonUI */,
 				EE3B90F02C3002FD00A4AD06 /* SwiftSoup */,
 			);
 			productName = "UK Parliament";
@@ -722,8 +722,8 @@
 			);
 			mainGroup = EE86A4522B344BA6007BEA83;
 			packageReferences = (
-				EE020BC22B618A94004C893B /* XCRemoteSwiftPackageReference "SkeletonUI" */,
 				EEF10F032BD2BCD100FE7D21 /* XCRemoteSwiftPackageReference "LicenseList" */,
+				EE020BC22B618A94004C893B /* XCRemoteSwiftPackageReference "SkeletonUI" */,
 				EE3B90EF2C3002FD00A4AD06 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
 			productRefGroup = EE86A45C2B344BA6007BEA83 /* Products */;
@@ -748,8 +748,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE86A4662B344BA7007BEA83 /* Preview Assets.xcassets in Resources */,
 				EE86A4632B344BA7007BEA83 /* Assets.xcassets in Resources */,
+				EE86A4662B344BA7007BEA83 /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -794,101 +794,101 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EEEC3B122B38971600A8626D /* BillDetailViewModel.swift in Sources */,
-				EE97BF922B34C32A00FA950C /* ConstituenciesViewModel.swift in Sources */,
-				EE3194D52B6C181200A5F754 /* DummyNavigationLink.swift in Sources */,
-				EE50F9BB2B358FA200163E52 /* MembersViewModel.swift in Sources */,
-				EEEC3B1E2B38ADC500A8626D /* BillStagesView.swift in Sources */,
-				EEEC3B022B38862400A8626D /* BillModel.swift in Sources */,
-				EEEC3B142B3899EC00A8626D /* SponsorRow.swift in Sources */,
-				EE0186222B375B66004F7F77 /* PostModel.swift in Sources */,
-				EEFC7CA32B36290B00183203 /* ConstituencyElectionDetailView.swift in Sources */,
-				EE3194D92B6CCBB800A5F754 /* MemberVoteModel.swift in Sources */,
-				EEEC3B362B39A2C700A8626D /* VoteModel.swift in Sources */,
-				EE6A12DB2C72900A005C76D1 /* Color+Modifiers.swift in Sources */,
+				EE1BE5742C161BDA00ED3F0F /* Banner.swift in Sources */,
 				EE3194E72B6E3E9C00A5F754 /* BillAmendmentsView.swift in Sources */,
-				EE97BF942B34C60300FA950C /* MemberModel.swift in Sources */,
-				EEF543C52B9FA12400AD29D0 /* SettingsView.swift in Sources */,
-				EEEC3B3B2B39A98900A8626D /* CommonsVotesViewModel.swift in Sources */,
-				EE86A4702B344D4C007BEA83 /* PartiesView.swift in Sources */,
-				EE3195092B6F952700A5F754 /* MemberLordsVotesView.swift in Sources */,
-				EE86A4612B344BA6007BEA83 /* ContentView.swift in Sources */,
-				EE8B07BA2BA188DF001C878A /* Mocks.swift in Sources */,
-				EE86A4722B34506F007BEA83 /* HouseModel.swift in Sources */,
+				EEEC3B102B3896EF00A8626D /* BillDetailView.swift in Sources */,
+				EEEC3B122B38971600A8626D /* BillDetailViewModel.swift in Sources */,
+				EEEC3B022B38862400A8626D /* BillModel.swift in Sources */,
 				EEEC3B292B38BCD200A8626D /* BillPublicationRow.swift in Sources */,
+				EEEC3B252B38BA7900A8626D /* BillPublicationsView.swift in Sources */,
+				EEEC3B272B38BAF500A8626D /* BillPublicationsViewModel.swift in Sources */,
+				EEEC3B092B388E5600A8626D /* BillRow.swift in Sources */,
+				EEEC3B162B389F9D00A8626D /* BillStageBadge.swift in Sources */,
 				EEEC3B202B38AE7300A8626D /* BillStageRow.swift in Sources */,
-				EE97BF8E2B34BF5E00FA950C /* ConstituencyModel.swift in Sources */,
-				EE31950D2B6F959900A5F754 /* MemberLordsVoteRow.swift in Sources */,
-				EE3195062B6F841700A5F754 /* LordsVoteDetailView.swift in Sources */,
-				EEEC3B1B2B38A51D00A8626D /* StringExtensions.swift in Sources */,
-				EE50F9BF2B35A09E00163E52 /* FetchModel.swift in Sources */,
-				EE86A4742B345131007BEA83 /* PartyModel.swift in Sources */,
+				EE3194E52B6E3BA400A5F754 /* BillStageSittingsView.swift in Sources */,
+				EEEC3B1E2B38ADC500A8626D /* BillStagesView.swift in Sources */,
+				EEEC3B222B38AED000A8626D /* BillStagesViewModel.swift in Sources */,
+				EEEC3B052B388B1900A8626D /* BillsView.swift in Sources */,
+				EEEC3B072B388B2600A8626D /* BillsViewModel.swift in Sources */,
+				EE6A12DB2C72900A005C76D1 /* Color+Modifiers.swift in Sources */,
+				EEEC3B192B38A3FD00A8626D /* ColorExtensions.swift in Sources */,
+				EEEC3B0B2B388F4800A8626D /* CommonsBadge.swift in Sources */,
 				EEEC3B402B39B54200A8626D /* CommonsVoteDetailView.swift in Sources */,
-				EE31950B2B6F954900A5F754 /* MemberLordsVotesViewModel.swift in Sources */,
-				EE8FCD892B7FF2DA00B54609 /* DateExtensions.swift in Sources */,
-				EEE171B92B9DEAAD00C89859 /* UKPagesView.swift in Sources */,
+				EEEC3B422B39B55000A8626D /* CommonsVoteDetailViewModel.swift in Sources */,
+				EEEC3B3D2B39AC4600A8626D /* CommonsVoteRow.swift in Sources */,
 				EEEC3B392B39A97900A8626D /* CommonsVotesView.swift in Sources */,
-				EE97BF9C2B3571C800FA950C /* PartyCircleView.swift in Sources */,
-				EE8F2CC92B36DA5600D771F2 /* MemberRegisteredInterestsViewModel.swift in Sources */,
+				EEEC3B3B2B39A98900A8626D /* CommonsVotesViewModel.swift in Sources */,
+				EE97BF902B34C30800FA950C /* ConstituenciesView.swift in Sources */,
+				EE97BF922B34C32A00FA950C /* ConstituenciesViewModel.swift in Sources */,
+				EE50F9C22B35A59700163E52 /* ConstituencyDetailView.swift in Sources */,
+				EEFC7C9F2B3615AD00183203 /* ConstituencyDetailViewModel.swift in Sources */,
+				EEFC7CA32B36290B00183203 /* ConstituencyElectionDetailView.swift in Sources */,
+				EE8F2CBD2B36341300D771F2 /* ConstituencyElectionDetailViewModel.swift in Sources */,
+				EE97BF8E2B34BF5E00FA950C /* ConstituencyModel.swift in Sources */,
+				EE97BF962B34C6DD00FA950C /* ConstituencyRow.swift in Sources */,
+				EE86A4612B344BA6007BEA83 /* ContentView.swift in Sources */,
+				EEEC3B332B398ADA00A8626D /* ContextAwareNavigationLink.swift in Sources */,
+				EEEC3B2F2B397BEA00A8626D /* ContextModel.swift in Sources */,
+				EE8FCD892B7FF2DA00B54609 /* DateExtensions.swift in Sources */,
+				EE3194D52B6C181200A5F754 /* DummyNavigationLink.swift in Sources */,
+				EEFC7C9D2B36140400183203 /* ElectionResultModel.swift in Sources */,
+				EE50F9BF2B35A09E00163E52 /* FetchModel.swift in Sources */,
+				EE86A4722B34506F007BEA83 /* HouseModel.swift in Sources */,
+				EE6A12DD2C72990D005C76D1 /* LabelStyle+Modifiers.swift in Sources */,
+				EE29CCC42B6059E10027CBA4 /* ListExtensions.swift in Sources */,
 				EE8CA9472C66B2D0009E3A20 /* LoadingText.swift in Sources */,
+				EEEC3B0D2B388FE100A8626D /* LordsBadge.swift in Sources */,
+				EE3195062B6F841700A5F754 /* LordsVoteDetailView.swift in Sources */,
+				EE3195042B6F83F800A5F754 /* LordsVoteDetailViewModel.swift in Sources */,
+				EE3195012B6F80AA00A5F754 /* LordsVoteRow.swift in Sources */,
+				EE3194FD2B6F807900A5F754 /* LordsVotesView.swift in Sources */,
+				EE3194FF2B6F808C00A5F754 /* LordsVotesViewModel.swift in Sources */,
+				EE3194E02B6CD7CD00A5F754 /* MemberCommonsVoteRow.swift in Sources */,
+				EE3194DC2B6CD4FE00A5F754 /* MemberCommonsVotesView.swift in Sources */,
+				EE3194DE2B6CD52400A5F754 /* MemberCommonsVotesViewModel.swift in Sources */,
+				EE0186252B38255D004F7F77 /* MemberContactView.swift in Sources */,
+				EE0186272B38258B004F7F77 /* MemberContactViewModel.swift in Sources */,
+				EEFC7C9B2B36132200183203 /* MemberDetailView.swift in Sources */,
+				EE8F2CBF2B36C53700D771F2 /* MemberDetailViewModel.swift in Sources */,
+				EE31950D2B6F959900A5F754 /* MemberLordsVoteRow.swift in Sources */,
+				EE3195092B6F952700A5F754 /* MemberLordsVotesView.swift in Sources */,
+				EE31950B2B6F954900A5F754 /* MemberLordsVotesViewModel.swift in Sources */,
+				EE97BF942B34C60300FA950C /* MemberModel.swift in Sources */,
+				EEFC7C992B35B4E000183203 /* MemberPictureView.swift in Sources */,
+				EE8F2CC72B36D88200D771F2 /* MemberRegisteredInterestModel.swift in Sources */,
+				EE8F2CC42B36D74F00D771F2 /* MemberRegisteredInterestsView.swift in Sources */,
+				EE8F2CC92B36DA5600D771F2 /* MemberRegisteredInterestsViewModel.swift in Sources */,
+				EE50F9BD2B3592D200163E52 /* MemberRow.swift in Sources */,
+				EE3194D92B6CCBB800A5F754 /* MemberVoteModel.swift in Sources */,
+				EE50F9B92B358F8B00163E52 /* MembersView.swift in Sources */,
+				EE50F9BB2B358FA200163E52 /* MembersViewModel.swift in Sources */,
+				EE8B07BA2BA188DF001C878A /* Mocks.swift in Sources */,
+				EEEC3B312B3983C100A8626D /* NavigationItem.swift in Sources */,
+				EE3194D72B6C229200A5F754 /* NoDataView.swift in Sources */,
+				EEE171C12B9E21E600C89859 /* PageItemViews.swift in Sources */,
+				EE86A4702B344D4C007BEA83 /* PartiesView.swift in Sources */,
+				EE86A4762B3452F4007BEA83 /* PartiesViewModel.swift in Sources */,
+				EE97BF9C2B3571C800FA950C /* PartyCircleView.swift in Sources */,
+				EE86A4742B345131007BEA83 /* PartyModel.swift in Sources */,
+				EE0186292B385A4E004F7F77 /* PartyTaggedText.swift in Sources */,
+				EE0186222B375B66004F7F77 /* PostModel.swift in Sources */,
+				EE01861E2B375B0C004F7F77 /* PostsView.swift in Sources */,
+				EE0186202B375B4D004F7F77 /* PostsViewModel.swift in Sources */,
+				EEF543C52B9FA12400AD29D0 /* SettingsView.swift in Sources */,
+				EEEC3B142B3899EC00A8626D /* SponsorRow.swift in Sources */,
+				EEEC3B1B2B38A51D00A8626D /* StringExtensions.swift in Sources */,
+				EEF10F022BD04B1700FE7D21 /* Tips.swift in Sources */,
+				EEE171B92B9DEAAD00C89859 /* UKPagesView.swift in Sources */,
+				EE86A45F2B344BA6007BEA83 /* UK_ParliamentApp.swift in Sources */,
+				EE167D8E2B7A108900415100 /* UnifiedListView.swift in Sources */,
 				EE208E842B7949DC005125BA /* UnifiedListViewModel.swift in Sources */,
 				EE3194F82B6E55C200A5F754 /* UtilsModel.swift in Sources */,
-				EE167D8E2B7A108900415100 /* UnifiedListView.swift in Sources */,
-				EEFC7C9B2B36132200183203 /* MemberDetailView.swift in Sources */,
-				EEE171C12B9E21E600C89859 /* PageItemViews.swift in Sources */,
-				EEB657ED2BD3D5FC00F47995 /* WebView.swift in Sources */,
-				EEEC3B222B38AED000A8626D /* BillStagesViewModel.swift in Sources */,
-				EEFC7C992B35B4E000183203 /* MemberPictureView.swift in Sources */,
-				EEEC3B442B39B83A00A8626D /* VoterRow.swift in Sources */,
-				EEEC3B272B38BAF500A8626D /* BillPublicationsViewModel.swift in Sources */,
-				EE8F2CC42B36D74F00D771F2 /* MemberRegisteredInterestsView.swift in Sources */,
-				EEEC3B0D2B388FE100A8626D /* LordsBadge.swift in Sources */,
-				EE0186252B38255D004F7F77 /* MemberContactView.swift in Sources */,
-				EEEC3B312B3983C100A8626D /* NavigationItem.swift in Sources */,
-				EEEC3B2F2B397BEA00A8626D /* ContextModel.swift in Sources */,
-				EE3195012B6F80AA00A5F754 /* LordsVoteRow.swift in Sources */,
-				EE8F2CC72B36D88200D771F2 /* MemberRegisteredInterestModel.swift in Sources */,
-				EE50F9C22B35A59700163E52 /* ConstituencyDetailView.swift in Sources */,
-				EE50F9BD2B3592D200163E52 /* MemberRow.swift in Sources */,
-				EEEC3B0B2B388F4800A8626D /* CommonsBadge.swift in Sources */,
-				EEF10F022BD04B1700FE7D21 /* Tips.swift in Sources */,
-				EE97BF962B34C6DD00FA950C /* ConstituencyRow.swift in Sources */,
-				EEEC3B052B388B1900A8626D /* BillsView.swift in Sources */,
-				EE3194DC2B6CD4FE00A5F754 /* MemberCommonsVotesView.swift in Sources */,
-				EE3194FF2B6F808C00A5F754 /* LordsVotesViewModel.swift in Sources */,
-				EEEC3B252B38BA7900A8626D /* BillPublicationsView.swift in Sources */,
-				EE01861E2B375B0C004F7F77 /* PostsView.swift in Sources */,
-				EE3194E52B6E3BA400A5F754 /* BillStageSittingsView.swift in Sources */,
-				EE50F9B92B358F8B00163E52 /* MembersView.swift in Sources */,
-				EE86A45F2B344BA6007BEA83 /* UK_ParliamentApp.swift in Sources */,
-				EEEC3B072B388B2600A8626D /* BillsViewModel.swift in Sources */,
-				EE3194D72B6C229200A5F754 /* NoDataView.swift in Sources */,
-				EE0186292B385A4E004F7F77 /* PartyTaggedText.swift in Sources */,
-				EE86A4762B3452F4007BEA83 /* PartiesViewModel.swift in Sources */,
-				EEEC3B332B398ADA00A8626D /* ContextAwareNavigationLink.swift in Sources */,
-				EE3194E02B6CD7CD00A5F754 /* MemberCommonsVoteRow.swift in Sources */,
-				EE3194FD2B6F807900A5F754 /* LordsVotesView.swift in Sources */,
-				EE3195042B6F83F800A5F754 /* LordsVoteDetailViewModel.swift in Sources */,
-				EEFC7C9D2B36140400183203 /* ElectionResultModel.swift in Sources */,
-				EEEC3B102B3896EF00A8626D /* BillDetailView.swift in Sources */,
-				EE97BF902B34C30800FA950C /* ConstituenciesView.swift in Sources */,
-				EEEC3B162B389F9D00A8626D /* BillStageBadge.swift in Sources */,
-				EE29CCC42B6059E10027CBA4 /* ListExtensions.swift in Sources */,
-				EE0186202B375B4D004F7F77 /* PostsViewModel.swift in Sources */,
-				EEEC3B422B39B55000A8626D /* CommonsVoteDetailViewModel.swift in Sources */,
-				EE01A7362BDB7BA800B34EE4 /* VotesView.swift in Sources */,
-				EEEC3B3D2B39AC4600A8626D /* CommonsVoteRow.swift in Sources */,
-				EEEC3B092B388E5600A8626D /* BillRow.swift in Sources */,
 				EE5AE8262B4C7AC000550126 /* ViewExtensions.swift in Sources */,
-				EE8F2CBF2B36C53700D771F2 /* MemberDetailViewModel.swift in Sources */,
-				EEEC3B192B38A3FD00A8626D /* ColorExtensions.swift in Sources */,
 				EE62BE782BE55BA600CF90BF /* VoteChart.swift in Sources */,
-				EE3194DE2B6CD52400A5F754 /* MemberCommonsVotesViewModel.swift in Sources */,
-				EE8F2CBD2B36341300D771F2 /* ConstituencyElectionDetailViewModel.swift in Sources */,
-				EEFC7C9F2B3615AD00183203 /* ConstituencyDetailViewModel.swift in Sources */,
-				EE6A12DD2C72990D005C76D1 /* LabelStyle+Modifiers.swift in Sources */,
-				EE0186272B38258B004F7F77 /* MemberContactViewModel.swift in Sources */,
-				EE1BE5742C161BDA00ED3F0F /* Banner.swift in Sources */,
+				EEEC3B362B39A2C700A8626D /* VoteModel.swift in Sources */,
+				EEEC3B442B39B83A00A8626D /* VoterRow.swift in Sources */,
+				EE01A7362BDB7BA800B34EE4 /* VotesView.swift in Sources */,
+				EEB657ED2BD3D5FC00F47995 /* WebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
