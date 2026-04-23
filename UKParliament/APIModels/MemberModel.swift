@@ -121,7 +121,7 @@ class MemberModel {
         var components = URLComponents(string: "https://members-api.parliament.uk/api/Members/\(id)/Portrait")!
         components.queryItems = [
             URLQueryItem(name: "cropType", value: "2"),
-            URLQueryItem(name: "webVersion", value: "true")
+            URLQueryItem(name: "webVersion", value: "false")
         ]
         return components.url!
     }
