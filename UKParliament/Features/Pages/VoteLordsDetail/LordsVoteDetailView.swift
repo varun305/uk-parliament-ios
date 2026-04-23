@@ -34,8 +34,6 @@ struct LordsVoteDetailView: View {
         List {
             Section {
                 Text("").skeleton(with: true).frame(height: 10)
-                Text("").skeleton(with: true).frame(height: 10)
-                Text("").skeleton(with: true).frame(height: 10)
             }
             Section {
                 Text("").skeleton(with: true).frame(height: 200)
@@ -80,55 +78,43 @@ struct LordsVoteDetailView: View {
         }
     }
 
-    @State private var showNotesSheet = false
+    @State private var notesExpanded = false
 
     @ViewBuilder
     func amendmentNotesCard(html: String) -> some View {
         let string = getAttributedString(from: html)
-        Button {
-            showNotesSheet = true
-        } label: {
-            VStack(alignment: .leading, spacing: 8) {
-                Text("Amendment motion notes")
-                    .font(.caption)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(.secondary)
+        VStack(alignment: .leading, spacing: 0) {
+            Button {
+                withAnimation(.easeInOut(duration: 0.25)) {
+                    notesExpanded.toggle()
+                }
+            } label: {
+                HStack {
+                    Text("Amendment motion notes")
+                        .font(.subheadline)
+                    Spacer()
+                    Image(systemName: "chevron.down")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .rotationEffect(.degrees(notesExpanded ? 180 : 0))
+                }
+                .padding()
+            }
+
+            if notesExpanded {
+                Divider()
+                    .padding(.horizontal)
                 Text(string)
-                    .lineLimit(4)
                     .font(.subheadline)
-                    .multilineTextAlignment(.leading)
-                    .foregroundStyle(.primary)
-                Text("Tap to read more")
-                    .font(.caption)
-                    .foregroundStyle(Color.lords)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding()
-            .background(Color(UIColor.secondarySystemGroupedBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-            .padding(.horizontal)
-        }
-        .sheet(isPresented: $showNotesSheet) {
-            NavigationStack {
-                ScrollView {
-                    Text(string)
-                        .textSelection(.enabled)
-                        .padding()
-                }
-                .navigationTitle("Amendment motion notes")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button {
-                            showNotesSheet = false
-                        } label: {
-                            Image(systemName: "xmark.circle.fill")
-                        }
-                        .foregroundStyle(.primary)
-                    }
-                }
+                    .textSelection(.enabled)
+                    .padding()
             }
         }
+        .foregroundStyle(.primary)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color(UIColor.secondarySystemGroupedBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .padding(.horizontal)
     }
 
     @ViewBuilder
@@ -285,11 +271,11 @@ struct LordsVoteDetailView: View {
     }
 
     @ViewBuilder
-    func viewAllVotesCard(detailedVote: CommonsVote) -> some View {
+    func viewAllVotesCard(detailedVote: LordsVote) -> some View {
         ContextAwareNavigationLink(value: .allVotesView(allVotes: vote)) {
             HStack {
                 Label("View all votes", image: "vote")
-                    .labelStyle(SquircleLabelStyle(color: Color.commons))
+                    .labelStyle(SquircleLabelStyle(color: Color.lords))
                 Spacer()
                 Image(systemName: "chevron.right")
                     .font(.footnote)
