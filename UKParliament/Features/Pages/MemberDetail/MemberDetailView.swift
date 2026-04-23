@@ -5,14 +5,6 @@ struct MemberDetailView: View {
     @StateObject var viewModel = MemberDetailViewModel()
     var memberId: Int
 
-    private var positionTypeString: String {
-        if let house = viewModel.member?.latestHouseMembership?.house {
-            return house == 2 ? "Peerage type" : "Constituency"
-        } else {
-            return ""
-        }
-    }
-
     var body: some View {
         Group {
             if viewModel.member != nil {
@@ -47,62 +39,37 @@ struct MemberDetailView: View {
                         Text("2")
                             .skeleton(with: true)
                     }
-                    .frame(width: 180, height: 180)
-
+                    .frame(width: 120, height: 120)
                     Text("")
                         .skeleton(with: true)
                     Text("")
                         .skeleton(with: true)
-                    Spacer()
                 }
+                Spacer()
             }
-            .multilineTextAlignment(.center)
             .listRowBackground(Color.clear)
             .listRowSeparator(.hidden)
 
             Section {
-                Text("")
-                    .skeleton(with: true)
-                    .frame(height: 10)
+                Text("").skeleton(with: true).frame(height: 10)
             }
-
             Section {
-                NavigationLink {
-                    Text("")
-                } label: {
-                    Text("")
-                        .skeleton(with: true)
-                        .frame(height: 10)
+                NavigationLink { Text("") } label: {
+                    Text("").skeleton(with: true).frame(height: 10)
+                }
+                .disabled(true)
+                NavigationLink { Text("") } label: {
+                    Text("").skeleton(with: true).frame(height: 10)
                 }
                 .disabled(true)
             }
-
             Section {
-                NavigationLink {
-                    Text("")
-                } label: {
-                    Text("")
-                        .skeleton(with: true)
-                        .frame(height: 10)
+                NavigationLink { Text("") } label: {
+                    Text("").skeleton(with: true).frame(height: 10)
                 }
                 .disabled(true)
-            }
-
-            Section {
-                NavigationLink {
-                    Text("")
-                } label: {
-                    Text("")
-                        .skeleton(with: true)
-                        .frame(height: 10)
-                }
-                .disabled(true)
-                NavigationLink {
-                    Text("")
-                } label: {
-                    Text("")
-                        .skeleton(with: true)
-                        .frame(height: 10)
+                NavigationLink { Text("") } label: {
+                    Text("").skeleton(with: true).frame(height: 10)
                 }
                 .disabled(true)
             }
@@ -127,87 +94,211 @@ struct MemberDetailView: View {
     @ViewBuilder
     var scrollView: some View {
         if let member = viewModel.member {
-            List {
-                HStack {
-                    Spacer()
-                    VStack(alignment: .center, spacing: 20) {
-                        MemberPictureView(member: member)
-                            .frame(width: 180, height: 180)
-                        Text(viewModel.synopsis)
-                            .font(.caption)
-                            .multilineTextAlignment(.leading)
+            ScrollView {
+                VStack(spacing: 16) {
+                    heroCard(member: member)
+                    if !viewModel.synopsis.isEmpty {
+                        synopsisCard()
                     }
-                    Spacer()
+                    detailsCard(member: member)
+                    linksCard(member: member)
                 }
-                .multilineTextAlignment(.center)
-                .listRowBackground(Color.clear)
-                .listRowSeparator(.hidden)
-
-                Section("Party") {
-                    Label(member.latestParty?.name ?? "", systemImage: "person.2.fill")
-                        .labelStyle(SquircleLabelStyle(color: partyColor))
-                }
-
-                Section {
-                    ContextAwareNavigationLink(value: .billsView(member: member)) {
-                        Label("View bills", image: "bill")
-                            .labelStyle(SquircleLabelStyle(color: houseColor))
-                    }
-                    votesLink
-                }
-
-                Section(positionTypeString) {
-                    membershipLink
-                }
-
-                Section {
-                    ContextAwareNavigationLink(value: .memberInterestsView(member: member)) {
-                        Label("Registered interests", image: "interest")
-                            .labelStyle(SquircleLabelStyle(color: Color.accentColor))
-                    }
-                    ContextAwareNavigationLink(value: .memberContactView(member: member)) {
-                        Label("Contact details", systemImage: "mail.fill")
-                            .labelStyle(SquircleLabelStyle(color: Color.accentColor))
-                    }
-                }
+                .padding(.top, 12)
+                .padding(.bottom, 24)
             }
+            .background(Color(UIColor.systemGroupedBackground))
         }
     }
 
     @ViewBuilder
-    var membershipLink: some View {
-        if let member = viewModel.member, member.isCommonsMember, let constituency = viewModel.constituency {
-            ContextAwareNavigationLink(value: .constituencyDetailView(constituency: constituency)) {
-                membershipTile
+    func heroCard(member: Member) -> some View {
+        VStack(spacing: 0) {
+            // Portrait image fills the top of the card
+            Color(UIColor.secondarySystemGroupedBackground)
+                .frame(maxWidth: .infinity)
+                .frame(height: 220)
+                .overlay {
+                    if let portrait = viewModel.portraitImage {
+                        Image(uiImage: portrait)
+                            .resizable()
+                            .scaledToFill()
+                            .transition(.opacity)
+                    } else {
+                        ProgressView()
+                    }
+                }
+                .clipped()
+                .animation(.easeInOut(duration: 0.3), value: viewModel.portraitImage != nil)
+            
+            // Colored accent bar separating image from details
+            Rectangle()
+                .fill(partyColor)
+                .frame(height: 4)
+            
+            // Member details below the portrait
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(member.nameFullTitle ?? "")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .multilineTextAlignment(.center)
+                    Text(member.latestParty?.name ?? "")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                    Text(member.isCommonsMember ? "House of Commons" : "House of Lords")
+                        .font(.caption)
+                        .foregroundStyle(houseColor)
+                }
+                Spacer()
             }
-        } else if let member = viewModel.member, !member.isCommonsMember {
-            Text(member.latestHouseMembership?.membershipFrom ?? "")
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(Color(UIColor.secondarySystemGroupedBackground))
         }
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .padding(.horizontal)
+    }
+
+    @ViewBuilder
+    func synopsisCard() -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text("About")
+                .font(.headline)
+                .padding(.horizontal)
+                .padding(.top, 14)
+                .padding(.bottom, 8)
+
+            Divider()
+
+            Text(viewModel.synopsis)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .padding(.horizontal)
+                .padding(.vertical, 12)
+        }
+        .background(Color(UIColor.secondarySystemGroupedBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .padding(.horizontal)
+    }
+
+    @ViewBuilder
+    func detailsCard(member: Member) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text("Details")
+                .font(.headline)
+                .padding(.horizontal)
+                .padding(.top, 14)
+                .padding(.bottom, 8)
+
+            Divider()
+
+            HStack {
+                Text("Party")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                Spacer()
+                HStack(spacing: 6) {
+                    Circle()
+                        .fill(partyColor)
+                        .frame(width: 10, height: 10)
+                    Text(member.latestParty?.name ?? "")
+                        .font(.subheadline)
+                }
+            }
+            .padding(.horizontal)
+            .padding(.vertical, 12)
+
+            if member.isCommonsMember, let constituency = viewModel.constituency {
+                Divider().padding(.leading)
+                ContextAwareNavigationLink(value: .constituencyDetailView(constituency: constituency)) {
+                    HStack {
+                        Text("Constituency")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                        Spacer()
+                        HStack(spacing: 4) {
+                            Text(member.latestHouseMembership?.membershipFrom ?? "")
+                                .font(.subheadline)
+                            Image(systemName: "chevron.right")
+                                .font(.caption)
+                                .foregroundStyle(.tertiary)
+                        }
+                    }
+                    .padding(.horizontal)
+                    .padding(.vertical, 12)
+                }
+                .foregroundStyle(.primary)
+            } else if !member.isCommonsMember {
+                Divider().padding(.leading)
+                HStack {
+                    Text("Peerage type")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                    Spacer()
+                    Text(member.latestHouseMembership?.membershipFrom ?? "")
+                        .font(.subheadline)
+                }
+                .padding(.horizontal)
+                .padding(.vertical, 12)
+            }
+        }
+        .background(Color(UIColor.secondarySystemGroupedBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .padding(.horizontal)
+    }
+
+    @ViewBuilder
+    func linksCard(member: Member) -> some View {
+        VStack(spacing: 0) {
+            ContextAwareNavigationLink(value: .billsView(member: member)) {
+                linkRow(title: "View bills", image: "bill", isSystemImage: false, color: houseColor)
+            }
+            Divider().padding(.leading, 52)
+            votesLink
+            Divider().padding(.leading, 52)
+            ContextAwareNavigationLink(value: .memberInterestsView(member: member)) {
+                linkRow(title: "Registered interests", image: "interest", isSystemImage: false, color: .accentColor)
+            }
+            Divider().padding(.leading, 52)
+            ContextAwareNavigationLink(value: .memberContactView(member: member)) {
+                linkRow(title: "Contact details", image: "mail.fill", isSystemImage: true, color: .accentColor)
+            }
+        }
+        .foregroundStyle(.primary)
+        .background(Color(UIColor.secondarySystemGroupedBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .padding(.horizontal)
+    }
+
+    func linkRow(title: String, image: String, isSystemImage: Bool, color: Color) -> some View {
+        HStack {
+            Group {
+                if isSystemImage {
+                    Label(title, systemImage: image)
+                } else {
+                    Label(title, image: image)
+                }
+            }
+            .labelStyle(SquircleLabelStyle(color: color))
+            Spacer()
+            Image(systemName: "chevron.right")
+                .font(.caption)
+                .foregroundStyle(.tertiary)
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 12)
     }
 
     @ViewBuilder
     var votesLink: some View {
         if let member = viewModel.member, member.isCommonsMember {
             ContextAwareNavigationLink(value: .memberCommonsVotesView(member: member)) {
-                Label("View commons votes", image: "vote")
-                    .labelStyle(SquircleLabelStyle(color: Color.commons))
+                linkRow(title: "View commons votes", image: "vote", isSystemImage: false, color: .commons)
             }
         } else if let member = viewModel.member, !member.isCommonsMember {
             ContextAwareNavigationLink(value: .memberLordsVotesView(member: member)) {
-                Label("View lords votes", image: "vote")
-                    .labelStyle(SquircleLabelStyle(color: Color.lords))
+                linkRow(title: "View lords votes", image: "vote", isSystemImage: false, color: .lords)
             }
-        }
-    }
-
-    @ViewBuilder
-    var membershipTile: some View {
-        if let member = viewModel.member {
-            Label(member.latestHouseMembership?.membershipFrom ?? "", image: "map")
-                .labelStyle(SquircleLabelStyle(color: Color.accentColor))
-        } else {
-            Text("No member found")
-                .italic()
         }
     }
 }

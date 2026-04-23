@@ -114,7 +114,7 @@ struct ConstituencyElectionDetailView: View {
                                 .fontWeight(.semibold)
                             Text(winner.party.flatMap(\.name) ?? "Independent")
                                 .font(.subheadline)
-                                .foregroundStyle(winner.party?.bgColor ?? .secondary)
+                                .foregroundStyle(.secondary)
                         }
                         Spacer()
                         if let votes = winner.votes {
@@ -125,7 +125,7 @@ struct ConstituencyElectionDetailView: View {
                                 Text(votes.formatted())
                                     .font(.title2)
                                     .fontWeight(.bold)
-                                    .foregroundStyle(winner.party?.bgColor ?? .primary)
+                                    .foregroundStyle(.primary)
                                 if totalVotes > 0 {
                                     Text(String(format: "%.1f%%", Double(votes) / Double(totalVotes) * 100))
                                         .font(.caption)

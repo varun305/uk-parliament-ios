@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import UIKit
 
 class MemberDetailViewModel: ObservableObject {
     @Published var member: Member? {
@@ -15,14 +16,27 @@ class MemberDetailViewModel: ObservableObject {
     @Published var constituency: Constituency?
     @Published var synopsis = ""
     @Published var loading = false
+    @Published var portraitImage: UIImage?
 
     public func fetchMember(for id: Int) {
         loading = true
+        fetchPortrait(for: id)
         MemberModel.shared.fetchMember(for: id) { result in
             Task { @MainActor in
                 withAnimation {
                     self.member = result?.value
                     self.loading = false
+                }
+            }
+        }
+    }
+
+    private func fetchPortrait(for id: Int) {
+        MemberModel.shared.fetchMemberPortrait(for: id) { data in
+            guard let data, let image = UIImage(data: data) else { return }
+            Task { @MainActor in
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    self.portraitImage = image
                 }
             }
         }

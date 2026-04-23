@@ -112,6 +112,20 @@ class MemberModel {
         URL(string: "https://members-api.parliament.uk/api/Members/\(id)/Synopsis")!
     }
 
+    public func fetchMemberPortrait(for id: Int, _ completion: @escaping (Data?) -> Void) {
+        let url = constructMemberPortraitUrl(for: id)
+        FetchModel.base.fetchData(from: url, completion)
+    }
+
+    private func constructMemberPortraitUrl(for id: Int) -> URL {
+        var components = URLComponents(string: "https://members-api.parliament.uk/api/Members/\(id)/Portrait")!
+        components.queryItems = [
+            URLQueryItem(name: "cropType", value: "2"),
+            URLQueryItem(name: "webVersion", value: "true")
+        ]
+        return components.url!
+    }
+
     public func fetchMemberContacts(for id: Int, _ completion: @escaping (MemberContactValueModel?) -> Void) {
         let url = constructMemberContactUrl(for: id)
         FetchModel.base.fetchData(MemberContactValueModel.self, from: url) { result in
