@@ -202,6 +202,7 @@ struct MemberDetailView: View {
                         .fill(partyColor)
                         .frame(width: 10, height: 10)
                     Text(member.latestParty?.name ?? "")
+                        .multilineTextAlignment(.trailing)
                         .font(.subheadline)
                 }
             }
@@ -218,6 +219,7 @@ struct MemberDetailView: View {
                         Spacer()
                         HStack(spacing: 4) {
                             Text(member.latestHouseMembership?.membershipFrom ?? "")
+                                .multilineTextAlignment(.trailing)
                                 .font(.subheadline)
                             Image(systemName: "chevron.right")
                                 .font(.caption)
