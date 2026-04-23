@@ -1,9 +1,14 @@
 import SwiftUI
 import SwiftSoup
+import SkeletonUI
 
 struct LordsVoteDetailView: View {
     @StateObject var viewModel = LordsVoteDetailViewModel()
     var vote: LordsVote
+
+    var formattedDate: String {
+        vote.date?.convertToDate() ?? ""
+    }
 
     var body: some View {
         Group {
@@ -27,80 +32,275 @@ struct LordsVoteDetailView: View {
     @ViewBuilder
     var loadingView: some View {
         List {
-            Section("") {
-                ForEach(0..<20) { _ in
-                    NavigationLink {
-                        Text("")
-                    } label: {
-                        VoterRowLoading()
-                    }
-                    .disabled(true)
-                }
+            Section {
+                Text("").skeleton(with: true).frame(height: 10)
+                Text("").skeleton(with: true).frame(height: 10)
+                Text("").skeleton(with: true).frame(height: 10)
+            }
+            Section {
+                Text("").skeleton(with: true).frame(height: 200)
+            }
+            Section {
+                Text("").skeleton(with: true).frame(height: 10)
+                Text("").skeleton(with: true).frame(height: 10)
+                Text("").skeleton(with: true).frame(height: 10)
+                Text("").skeleton(with: true).frame(height: 10)
             }
         }
-        .listStyle(.grouped)
         .environment(\.isScrollEnabled, false)
     }
 
     @ViewBuilder
     var scrollView: some View {
-        List {
-            amendmentNotes
+        if let detailedVote = viewModel.vote {
+            let contentsCount = detailedVote.authoritativeContentCount ?? vote.authoritativeContentCount ?? 0
+            let notContentsCount = detailedVote.authoritativeNotContentCount ?? vote.authoritativeNotContentCount ?? 0
+            let majority = abs(contentsCount - notContentsCount)
+            let contentsWon = contentsCount >= notContentsCount
 
-            voteCount
-
-            Section("Votes") {
-                VoteChart(yesVotes: viewModel.contentsGrouping, noVotes: viewModel.notContentsGrouping)
-            }
-            .accessibilityHidden(true)
-
-            if let vote = viewModel.vote {
-                ContextAwareNavigationLink(value: .allVotesView(allVotes: vote)) {
-                    Label("View all votes", image: "vote")
-                        .labelStyle(SquircleLabelStyle(color: Color.lords))
+            ScrollView {
+                VStack(spacing: 16) {
+                    if let amendmentNotes = detailedVote.amendmentMotionNotes {
+                        amendmentNotesCard(html: amendmentNotes)
+                    }
+                    heroCard(vote: detailedVote, contentsCount: contentsCount, notContentsCount: notContentsCount, contentsWon: contentsWon)
+                    statsRow(contentsCount: contentsCount, notContentsCount: notContentsCount, majority: majority)
+                    if !viewModel.contentsGrouping.isEmpty {
+                        partySection(title: "Contents votes by party", grouping: viewModel.contentsGrouping, total: contentsCount)
+                    }
+                    if !viewModel.notContentsGrouping.isEmpty {
+                        partySection(title: "Not contents votes by party", grouping: viewModel.notContentsGrouping, total: notContentsCount)
+                    }
+                    viewAllVotesCard(detailedVote: detailedVote)
                 }
+                .padding(.top, 12)
+                .padding(.bottom, 24)
             }
+            .background(Color(UIColor.systemGroupedBackground))
         }
     }
 
     @State private var showNotesSheet = false
 
     @ViewBuilder
-    private var amendmentNotes: some View {
-        if let amendmentMotionNotes = viewModel.vote?.amendmentMotionNotes {
-            let string = getAttributedString(from: amendmentMotionNotes)
-            Button {
-                showNotesSheet = true
-            } label: {
+    func amendmentNotesCard(html: String) -> some View {
+        let string = getAttributedString(from: html)
+        Button {
+            showNotesSheet = true
+        } label: {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Amendment motion notes")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.secondary)
                 Text(string)
-                    .lineLimit(5)
-                    .sheet(isPresented: $showNotesSheet) {
-                        NavigationStack {
-                            ScrollView {
-                                Text(string)
-                                    .textSelection(.enabled)
-                                    .padding()
-                            }
-                            .navigationTitle("Amendment motion notes")
-                            .navigationBarTitleDisplayMode(.inline)
-                            .toolbar {
-                                ToolbarItem(placement: .cancellationAction) {
-                                    Button {
-                                        showNotesSheet = false
-                                    } label: {
-                                        Image(systemName: "xmark.circle.fill")
-                                    }
-                                    .foregroundStyle(.primary)
-                                }
-                            }
+                    .lineLimit(4)
+                    .font(.subheadline)
+                    .multilineTextAlignment(.leading)
+                    .foregroundStyle(.primary)
+                Text("Tap to read more")
+                    .font(.caption)
+                    .foregroundStyle(Color.lords)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding()
+            .background(Color(UIColor.secondarySystemGroupedBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .padding(.horizontal)
+        }
+        .sheet(isPresented: $showNotesSheet) {
+            NavigationStack {
+                ScrollView {
+                    Text(string)
+                        .textSelection(.enabled)
+                        .padding()
+                }
+                .navigationTitle("Amendment motion notes")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button {
+                            showNotesSheet = false
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                        }
+                        .foregroundStyle(.primary)
+                    }
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    func heroCard(vote: LordsVote, contentsCount: Int, notContentsCount: Int, contentsWon: Bool) -> some View {
+        VStack(spacing: 0) {
+            Rectangle()
+                .fill(contentsWon ? Color.lords : Color(UIColor.systemGray))
+                .frame(height: 5)
+
+            VStack(alignment: .leading, spacing: 12) {
+                HStack {
+                    VStack(alignment: .leading, spacing: 3) {
+                        if !formattedDate.isEmpty {
+                            Text(formattedDate)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                        if let number = vote.number {
+                            Text("Division No. \(number)")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
                         }
                     }
+                    Spacer()
+                    Text(contentsWon ? "CONTENTS WON" : "NOT CONTENTS WON")
+                        .font(.caption)
+                        .fontWeight(.bold)
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
+                        .background(contentsWon ? Color.lords : Color(UIColor.systemGray))
+                        .clipShape(RoundedRectangle(cornerRadius: 6))
+                }
+
+                Divider()
+
+                HStack(alignment: .top) {
+                    VStack(alignment: .leading, spacing: 3) {
+                        Text("Contents")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        Text(contentsCount.formatted())
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .foregroundStyle(contentsWon ? Color.lords : .primary)
+                    }
+                    Spacer()
+                    VStack(alignment: .trailing, spacing: 3) {
+                        Text("Not Contents")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        Text(notContentsCount.formatted())
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .foregroundStyle(!contentsWon ? Color(UIColor.systemGray) : .primary)
+                    }
+                }
             }
-            .foregroundStyle(.primary)
-            .listRowSeparator(.hidden)
-            .listRowBackground(Color.clear)
-            .padding(.bottom, 20)
+            .padding()
+            .background(Color(UIColor.secondarySystemGroupedBackground))
         }
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .padding(.horizontal)
+    }
+
+    @ViewBuilder
+    func statsRow(contentsCount: Int, notContentsCount: Int, majority: Int) -> some View {
+        HStack(spacing: 10) {
+            statCard(title: "Contents", value: contentsCount.formatted(), color: Color.lords)
+            statCard(title: "Not Contents", value: notContentsCount.formatted(), color: Color(UIColor.systemGray))
+            statCard(title: "Majority", value: majority.formatted(), color: .primary)
+        }
+        .padding(.horizontal)
+    }
+
+    @ViewBuilder
+    func statCard(title: String, value: String, color: Color) -> some View {
+        VStack(spacing: 6) {
+            Text(value)
+                .font(.callout)
+                .fontWeight(.bold)
+                .minimumScaleFactor(0.6)
+                .lineLimit(1)
+                .foregroundStyle(color)
+            Text(title)
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 14)
+        .background(Color(UIColor.secondarySystemGroupedBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+    }
+
+    @ViewBuilder
+    func partySection(title: String, grouping: [(PartyHashable, Int)], total: Int) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text(title)
+                .font(.headline)
+                .padding(.horizontal)
+                .padding(.top, 14)
+                .padding(.bottom, 4)
+
+            ForEach(grouping.indices, id: \.self) { index in
+                let (party, count) = grouping[index]
+                if index > 0 {
+                    Divider().padding(.leading, 16)
+                }
+                partyRow(party: party, count: count, total: total)
+            }
+
+            Spacer().frame(height: 6)
+        }
+        .background(Color(UIColor.secondarySystemGroupedBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .padding(.horizontal)
+    }
+
+    @ViewBuilder
+    func partyRow(party: PartyHashable, count: Int, total: Int) -> some View {
+        let share: Double = total > 0 ? Double(count) / Double(total) : 0
+        let partyColor = Color(hexString: party.partyColour ?? "888888")
+
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(alignment: .top) {
+                HStack(spacing: 6) {
+                    Circle()
+                        .fill(partyColor)
+                        .frame(width: 10, height: 10)
+                        .padding(.top, 3)
+                    Text(party.party)
+                        .font(.subheadline)
+                }
+                Spacer()
+                Text(count.formatted())
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+            }
+
+            GeometryReader { geo in
+                ZStack(alignment: .leading) {
+                    RoundedRectangle(cornerRadius: 3)
+                        .fill(Color(UIColor.systemFill))
+                        .frame(height: 5)
+                    RoundedRectangle(cornerRadius: 3)
+                        .fill(partyColor)
+                        .frame(width: max(geo.size.width * share, share > 0 ? 4 : 0), height: 5)
+                }
+            }
+            .frame(height: 5)
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 10)
+    }
+
+    @ViewBuilder
+    func viewAllVotesCard(detailedVote: CommonsVote) -> some View {
+        ContextAwareNavigationLink(value: .allVotesView(allVotes: vote)) {
+            HStack {
+                Label("View all votes", image: "vote")
+                    .labelStyle(SquircleLabelStyle(color: Color.commons))
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.footnote)
+                    .foregroundStyle(.tertiary)
+            }
+            .padding()
+            .background(Color(UIColor.secondarySystemGroupedBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .padding(.horizontal)
+        }
+        .foregroundStyle(.primary)
     }
 
     private func getAttributedString(from html: String) -> AttributedString {
@@ -133,40 +333,5 @@ struct LordsVoteDetailView: View {
         traverseNodes(document, attributedString: &attributedString)
 
         return attributedString
-    }
-
-    @ViewBuilder
-    private var voteCount: some View {
-        if let authoritativeContentCount = vote.authoritativeContentCount, let authoritativeNotContentCount = vote.authoritativeNotContentCount {
-            HStack(alignment: .center) {
-                HStack {
-                    Image(systemName: "hand.thumbsup.fill")
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                        .foregroundStyle(.secondary)
-                    Text("\(authoritativeContentCount)")
-                        .font(.title)
-                        .if(authoritativeContentCount > authoritativeNotContentCount) { $0.bold() }
-                }
-                .accessibilityElement(children: .combine)
-                .accessibilityLabel(Text("Contents \(authoritativeContentCount)"))
-                Spacer()
-                HStack {
-                    Text("\(authoritativeNotContentCount)")
-                        .font(.title)
-                        .if(authoritativeContentCount < authoritativeNotContentCount) { $0.bold() }
-                    Image(systemName: "hand.thumbsdown.fill")
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                        .foregroundStyle(.secondary)
-                }
-                .accessibilityElement(children: .combine)
-                .accessibilityLabel(Text("Not contents \(authoritativeNotContentCount)"))
-            }
-            .listRowSeparator(.hidden)
-            .listRowBackground(Color.clear)
-            .padding(.bottom, 20)
-            .padding(.horizontal, 20)
-        }
     }
 }
