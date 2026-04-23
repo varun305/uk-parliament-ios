@@ -5,52 +5,48 @@ struct LargePageItemView: View {
 
     var gridItem: PageItem
 
-    init(
-        gridItem: PageItem
-    ) {
+    init(gridItem: PageItem) {
         self.gridItem = gridItem
     }
 
     var body: some View {
         ContextAwareNavigationLink(value: gridItem.navigateTo) {
-            face
-                .accessibilityElement(children: .combine)
-        }
-        .foregroundStyle(.primary)
-    }
-
-    @ViewBuilder
-    var face: some View {
-        ZStack {
-            gridItem.background
-            HStack(alignment: .center, spacing: 15) {
+            HStack(spacing: 14) {
+                // Icon badge
                 Image(gridItem.image)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: 45, maxHeight: 45)
-                    .foregroundStyle(gridItem.foreground)
+                    .frame(width: 26, height: 26)
+                    .foregroundStyle(gridItem.background)
+                    .padding(10)
+                    .background(.white.opacity(0.25))
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
                     .accessibilityHidden(true)
-                VStack(alignment: .leading) {
+
+                // Text
+                VStack(alignment: .leading, spacing: 2) {
                     Text(gridItem.title)
                         .font(.headline)
-                        .bold()
                     Text(gridItem.subtitle)
                         .font(.caption)
+                        .opacity(0.85)
                 }
                 .foregroundStyle(gridItem.foreground)
                 .multilineTextAlignment(.leading)
-                Spacer()
+
+                Spacer(minLength: 0)
+
                 Image(systemName: "chevron.right")
-                    .bold()
-                    .foregroundStyle(gridItem.foreground)
+                    .font(.caption.weight(.bold))
+                    .foregroundStyle(gridItem.foreground.opacity(0.7))
                     .accessibilityHidden(true)
             }
-            .padding(.horizontal, 20)
+            .padding(16)
+            .background(gridItem.background)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .shadow(color: gridItem.background.opacity(0.3), radius: 4, y: 2)
+            .accessibilityElement(children: .combine)
         }
-        .frame(minHeight: 80)
-        .mask {
-            RoundedRectangle(cornerRadius: 20)
-        }
-        .shadow(radius: 2)
+        .foregroundStyle(.primary)
     }
 }

@@ -14,7 +14,7 @@ struct ContentView: View {
                 }
                 .padding([.horizontal, .bottom])
             }
-            .searchable(text: $search)
+            .searchable(text: $search, placement: .navigationBarDrawer)
             .navigationTitle("Home")
             .listStyle(.grouped)
             .toolbar {

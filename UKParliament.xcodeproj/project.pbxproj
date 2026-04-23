@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B4DDDFE2F9A5BAE001108A4 /* LicenseList in Frameworks */ = {isa = PBXBuildFile; productRef = 8B4DDDFD2F9A5BAE001108A4 /* LicenseList */; };
 		EE01861E2B375B0C004F7F77 /* PostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE01861D2B375B0C004F7F77 /* PostsView.swift */; };
 		EE0186202B375B4D004F7F77 /* PostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE01861F2B375B4D004F7F77 /* PostsViewModel.swift */; };
 		EE0186222B375B66004F7F77 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0186212B375B66004F7F77 /* PostModel.swift */; };
@@ -101,7 +102,6 @@
 		EEEC3B422B39B55000A8626D /* CommonsVoteDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B412B39B55000A8626D /* CommonsVoteDetailViewModel.swift */; };
 		EEEC3B442B39B83A00A8626D /* VoterRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEC3B432B39B83A00A8626D /* VoterRow.swift */; };
 		EEF10F022BD04B1700FE7D21 /* Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF10F012BD04B1700FE7D21 /* Tips.swift */; };
-		EEF10F052BD2BCD100FE7D21 /* LicenseList in Frameworks */ = {isa = PBXBuildFile; productRef = EEF10F042BD2BCD100FE7D21 /* LicenseList */; };
 		EEF543C52B9FA12400AD29D0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF543C42B9FA12400AD29D0 /* SettingsView.swift */; };
 		EEFC7C992B35B4E000183203 /* MemberPictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFC7C982B35B4E000183203 /* MemberPictureView.swift */; };
 		EEFC7C9B2B36132200183203 /* MemberDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFC7C9A2B36132200183203 /* MemberDetailView.swift */; };
@@ -237,8 +237,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE020BC42B618A94004C893B /* SkeletonUI in Frameworks */,
-				EEF10F052BD2BCD100FE7D21 /* LicenseList in Frameworks */,
 				EE3B90F12C3002FD00A4AD06 /* SwiftSoup in Frameworks */,
+				8B4DDDFE2F9A5BAE001108A4 /* LicenseList in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -684,9 +684,9 @@
 			);
 			name = UKParliament;
 			packageProductDependencies = (
-				EEF10F042BD2BCD100FE7D21 /* LicenseList */,
 				EE020BC32B618A94004C893B /* SkeletonUI */,
 				EE3B90F02C3002FD00A4AD06 /* SwiftSoup */,
+				8B4DDDFD2F9A5BAE001108A4 /* LicenseList */,
 			);
 			productName = "UK Parliament";
 			productReference = EE86A45B2B344BA6007BEA83 /* UKParliament.app */;
@@ -722,9 +722,9 @@
 			);
 			mainGroup = EE86A4522B344BA6007BEA83;
 			packageReferences = (
-				EEF10F032BD2BCD100FE7D21 /* XCRemoteSwiftPackageReference "LicenseList" */,
 				EE020BC22B618A94004C893B /* XCRemoteSwiftPackageReference "SkeletonUI" */,
 				EE3B90EF2C3002FD00A4AD06 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+				8B4DDDFC2F9A5BAE001108A4 /* XCRemoteSwiftPackageReference "LicenseList" */,
 			);
 			productRefGroup = EE86A45C2B344BA6007BEA83 /* Products */;
 			projectDirPath = "";
@@ -1071,7 +1071,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_ASSET_PATHS = "\"UK Parliament/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"UKParliament/Preview Content\"";
 				DEVELOPMENT_TEAM = 53MK4G2GN4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1106,7 +1106,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"UK Parliament/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"UKParliament/Preview Content\"";
 				DEVELOPMENT_TEAM = 53MK4G2GN4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1167,6 +1167,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		8B4DDDFC2F9A5BAE001108A4 /* XCRemoteSwiftPackageReference "LicenseList" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/cybozu/LicenseList";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.4.0;
+			};
+		};
 		EE020BC22B618A94004C893B /* XCRemoteSwiftPackageReference "SkeletonUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/CSolanaM/SkeletonUI";
@@ -1183,17 +1191,14 @@
 				minimumVersion = 2.7.2;
 			};
 		};
-		EEF10F032BD2BCD100FE7D21 /* XCRemoteSwiftPackageReference "LicenseList" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/cybozu/LicenseList.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.7.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8B4DDDFD2F9A5BAE001108A4 /* LicenseList */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B4DDDFC2F9A5BAE001108A4 /* XCRemoteSwiftPackageReference "LicenseList" */;
+			productName = LicenseList;
+		};
 		EE020BC32B618A94004C893B /* SkeletonUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EE020BC22B618A94004C893B /* XCRemoteSwiftPackageReference "SkeletonUI" */;
@@ -1203,11 +1208,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EE3B90EF2C3002FD00A4AD06 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
-		};
-		EEF10F042BD2BCD100FE7D21 /* LicenseList */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EEF10F032BD2BCD100FE7D21 /* XCRemoteSwiftPackageReference "LicenseList" */;
-			productName = LicenseList;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
