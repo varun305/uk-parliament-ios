@@ -60,7 +60,6 @@ struct CommonsVoteDetailView: View {
             ScrollView {
                 VStack(spacing: 16) {
                     heroCard(vote: detailedVote, ayeCount: ayeCount, noCount: noCount, ayesWon: ayesWon)
-                    statsRow(ayeCount: ayeCount, noCount: noCount, majority: majority)
                     if !viewModel.ayesGrouping.isEmpty {
                         partySection(title: "Aye votes by party", grouping: viewModel.ayesGrouping, total: ayeCount)
                     }
@@ -136,16 +135,6 @@ struct CommonsVoteDetailView: View {
             .background(Color(UIColor.secondarySystemGroupedBackground))
         }
         .clipShape(RoundedRectangle(cornerRadius: 12))
-        .padding(.horizontal)
-    }
-
-    @ViewBuilder
-    func statsRow(ayeCount: Int, noCount: Int, majority: Int) -> some View {
-        HStack(spacing: 10) {
-            statCard(title: "Ayes", value: ayeCount.formatted(), color: Color.commons)
-            statCard(title: "Noes", value: noCount.formatted(), color: Color(UIColor.systemRed))
-            statCard(title: "Majority", value: majority.formatted(), color: .primary)
-        }
         .padding(.horizontal)
     }
 

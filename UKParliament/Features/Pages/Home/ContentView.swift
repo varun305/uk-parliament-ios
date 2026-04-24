@@ -14,9 +14,9 @@ struct ContentView: View {
                 }
                 .padding([.horizontal, .bottom])
             }
+            .background(Color(.systemGroupedBackground))
             .searchable(text: $search, placement: .navigationBarDrawer)
-            .navigationTitle("Home")
-            .listStyle(.grouped)
+            .navigationTitle("UK Parliament")
             .toolbar {
                 ToolbarItem(placement: .automatic) {
                     Button {

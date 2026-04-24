@@ -62,7 +62,6 @@ struct LordsVoteDetailView: View {
                         amendmentNotesCard(html: amendmentNotes)
                     }
                     heroCard(vote: detailedVote, contentsCount: contentsCount, notContentsCount: notContentsCount, contentsWon: contentsWon)
-                    statsRow(contentsCount: contentsCount, notContentsCount: notContentsCount, majority: majority)
                     if !viewModel.contentsGrouping.isEmpty {
                         partySection(title: "Contents votes by party", grouping: viewModel.contentsGrouping, total: contentsCount)
                     }
@@ -177,16 +176,6 @@ struct LordsVoteDetailView: View {
             .background(Color(UIColor.secondarySystemGroupedBackground))
         }
         .clipShape(RoundedRectangle(cornerRadius: 12))
-        .padding(.horizontal)
-    }
-
-    @ViewBuilder
-    func statsRow(contentsCount: Int, notContentsCount: Int, majority: Int) -> some View {
-        HStack(spacing: 10) {
-            statCard(title: "Contents", value: contentsCount.formatted(), color: Color.lords)
-            statCard(title: "Not Contents", value: notContentsCount.formatted(), color: Color(UIColor.systemGray))
-            statCard(title: "Majority", value: majority.formatted(), color: .primary)
-        }
         .padding(.horizontal)
     }
 

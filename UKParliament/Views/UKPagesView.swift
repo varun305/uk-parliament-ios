@@ -123,9 +123,12 @@ struct UKPagesView: View {
         if filteredItems.isEmpty {
             ContentUnavailableView.search(text: search)
         } else {
-            VStack(spacing: 10) {
-                ForEach(filteredItems) { item in
-                    LargePageItemView(gridItem: item)
+            SectionRow(title: "Results") {
+                ForEach(Array(filteredItems.enumerated()), id: \.element.id) { index, item in
+                    MinimalRowItem(item: item)
+                    if index < filteredItems.count - 1 {
+                        Divider().padding(.leading, 56)
+                    }
                 }
             }
         }
@@ -135,37 +138,39 @@ struct UKPagesView: View {
 
     @ViewBuilder
     private var sectionsView: some View {
-        VStack(alignment: .leading, spacing: 28) {
-            // House of Commons
-            HomeSection(title: "House of Commons", systemImage: "building.columns.fill", tint: .commons) {
-                HStack(spacing: 12) {
-                    ForEach(commonsItems) { item in
-                        CompactPageItemView(item: item)
+        VStack(alignment: .leading, spacing: 32) {
+            SectionRow(title: "House of Commons") {
+                ForEach(Array(commonsItems.enumerated()), id: \.element.id) { index, item in
+                    MinimalRowItem(item: item)
+                    if index < commonsItems.count - 1 {
+                        Divider().padding(.leading, 56)
                     }
                 }
             }
 
-            // House of Lords
-            HomeSection(title: "House of Lords", systemImage: "building.columns.fill", tint: .lords) {
-                HStack(spacing: 12) {
-                    ForEach(lordsItems) { item in
-                        CompactPageItemView(item: item)
+            SectionRow(title: "House of Lords") {
+                ForEach(Array(lordsItems.enumerated()), id: \.element.id) { index, item in
+                    MinimalRowItem(item: item)
+                    if index < lordsItems.count - 1 {
+                        Divider().padding(.leading, 56)
                     }
                 }
             }
 
-            // Legislation
-            HomeSection(title: "Legislation", systemImage: "doc.text.fill", tint: .accentColor) {
-                ForEach(legislationItems) { item in
-                    LargePageItemView(gridItem: item)
+            SectionRow(title: "Legislation") {
+                ForEach(Array(legislationItems.enumerated()), id: \.element.id) { index, item in
+                    MinimalRowItem(item: item)
+                    if index < legislationItems.count - 1 {
+                        Divider().padding(.leading, 56)
+                    }
                 }
             }
 
-            // Explore
-            HomeSection(title: "Explore", systemImage: "safari.fill", tint: .accentColor) {
-                LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 12) {
-                    ForEach(exploreItems) { item in
-                        CompactPageItemView(item: item)
+            SectionRow(title: "Explore") {
+                ForEach(Array(exploreItems.enumerated()), id: \.element.id) { index, item in
+                    MinimalRowItem(item: item)
+                    if index < exploreItems.count - 1 {
+                        Divider().padding(.leading, 56)
                     }
                 }
             }
@@ -173,67 +178,67 @@ struct UKPagesView: View {
     }
 }
 
-// MARK: - Section Header
+// MARK: - Minimal Section
 
-private struct HomeSection<Content: View>: View {
+private struct SectionRow<Content: View>: View {
     let title: String
-    let systemImage: String
-    let tint: Color
     @ViewBuilder let content: Content
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Label(title, systemImage: systemImage)
-                .font(.title3.weight(.semibold))
-                .foregroundStyle(tint)
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(.footnote.weight(.semibold))
+                .foregroundStyle(.secondary)
+                .textCase(.uppercase)
+                .padding(.horizontal, 4)
 
-            content
+            VStack(spacing: 0) {
+                content
+            }
+            .background(Color(.secondarySystemGroupedBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 12))
         }
     }
 }
 
-// MARK: - Compact Card for Grid
+// MARK: - Minimal Row Item
 
-struct CompactPageItemView: View {
-    @EnvironmentObject var contextModel: ContextModel
+private struct MinimalRowItem: View {
     let item: PageItem
 
     var body: some View {
         ContextAwareNavigationLink(value: item.navigateTo) {
-            VStack(alignment: .leading, spacing: 12) {
-                // Icon badge
-                Image(item.image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 22, height: 22)
+            HStack(spacing: 14) {
+                Image(systemName: item.systemImage)
+                    .font(.system(size: 14, weight: .medium))
                     .foregroundStyle(item.background)
-                    .padding(8)
-                    .background(.white.opacity(0.25))
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .frame(width: 32, height: 32)
+                    .background(item.background.opacity(0.12))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
                     .accessibilityHidden(true)
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(item.title)
+                        .font(.body)
+                        .foregroundStyle(.primary)
+                    Text(item.subtitle)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
 
                 Spacer(minLength: 0)
 
-                // Text
-                VStack(alignment: .leading, spacing: 3) {
-                    Text(item.title)
-                        .font(.subheadline.weight(.bold))
-                    Text(item.subtitle)
-                        .font(.caption)
-                        .opacity(0.85)
-                        .lineLimit(2)
-                }
-                .foregroundStyle(item.foreground)
-                .multilineTextAlignment(.leading)
+                Image(systemName: "chevron.right")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.tertiary)
+                    .accessibilityHidden(true)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-            .padding(14)
-            .background(item.background)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
-            .shadow(color: item.background.opacity(0.3), radius: 4, y: 2)
-            .accessibilityElement(children: .combine)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 12)
+            .contentShape(Rectangle())
         }
         .foregroundStyle(.primary)
+        .accessibilityElement(children: .combine)
     }
 }
 
@@ -262,4 +267,3 @@ struct PageItem: Identifiable {
         title + subtitle
     }
 }
-
