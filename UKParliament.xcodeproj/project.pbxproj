@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B0A1EFC2F9B718100EF231F /* DesignComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A1EFB2F9B718000EF231F /* DesignComponents.swift */; };
 		8B4DDDFE2F9A5BAE001108A4 /* LicenseList in Frameworks */ = {isa = PBXBuildFile; productRef = 8B4DDDFD2F9A5BAE001108A4 /* LicenseList */; };
 		8B4DDE002F9A69AF001108A4 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4DDDFF2F9A69AE001108A4 /* HelpView.swift */; };
 		EE01861E2B375B0C004F7F77 /* PostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE01861D2B375B0C004F7F77 /* PostsView.swift */; };
@@ -122,6 +123,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8B0A1EFB2F9B718000EF231F /* DesignComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignComponents.swift; sourceTree = "<group>"; };
 		8B4DDDFF2F9A69AE001108A4 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		EE01861D2B375B0C004F7F77 /* PostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsView.swift; sourceTree = "<group>"; };
 		EE01861F2B375B4D004F7F77 /* PostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewModel.swift; sourceTree = "<group>"; };
@@ -585,6 +587,7 @@
 				EE97BF9B2B3571C800FA950C /* PartyCircleView.swift */,
 				EE0186282B385A4E004F7F77 /* PartyTaggedText.swift */,
 				EEB657EC2BD3D5FC00F47995 /* WebView.swift */,
+				8B0A1EFB2F9B718000EF231F /* DesignComponents.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -804,6 +807,7 @@
 				EEEC3B022B38862400A8626D /* BillModel.swift in Sources */,
 				EEEC3B292B38BCD200A8626D /* BillPublicationRow.swift in Sources */,
 				EEEC3B252B38BA7900A8626D /* BillPublicationsView.swift in Sources */,
+				8B0A1EFC2F9B718100EF231F /* DesignComponents.swift in Sources */,
 				EEEC3B272B38BAF500A8626D /* BillPublicationsViewModel.swift in Sources */,
 				EEEC3B092B388E5600A8626D /* BillRow.swift in Sources */,
 				EEEC3B162B389F9D00A8626D /* BillStageBadge.swift in Sources */,

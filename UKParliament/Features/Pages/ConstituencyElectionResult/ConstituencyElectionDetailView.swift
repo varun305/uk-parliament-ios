@@ -67,7 +67,7 @@ struct ConstituencyElectionDetailView: View {
             let totalVotes = sorted.compactMap(\.votes).reduce(0, +)
 
             ScrollView {
-                VStack(spacing: 16) {
+                VStack(spacing: 24) {
                     heroCard(result: result, winner: sorted.first, totalVotes: totalVotes)
                     statsRow(result: result)
                     chartSection(result: result, sorted: sorted)
@@ -82,65 +82,64 @@ struct ConstituencyElectionDetailView: View {
 
     @ViewBuilder
     func heroCard(result: ElectionResult, winner: CandidateResultModel?, totalVotes: Int) -> some View {
-        VStack(spacing: 0) {
-            Rectangle()
-                .fill(result.winningParty?.bgColor ?? .gray)
-                .frame(height: 5)
+        MinimalSection(title: "Result") {
+            VStack(spacing: 0) {
+                Rectangle()
+                    .fill(result.winningParty?.bgColor ?? .gray)
+                    .frame(height: 5)
 
-            VStack(alignment: .leading, spacing: 12) {
-                HStack {
-                    VStack(alignment: .leading, spacing: 3) {
-                        Text(result.formattedDate)
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                        if let name = result.constituencyName {
-                            Text(name)
-                                .font(.headline)
-                        }
-                    }
-                    Spacer()
-                    PartyTaggedText(text: result.result?.uppercased() ?? "", party: result.winningParty)
-                }
-
-                if let winner {
-                    Divider()
-                    HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack {
                         VStack(alignment: .leading, spacing: 3) {
-                            Text("Winner")
+                            Text(result.formattedDate)
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
-                            Text(winner.name)
-                                .font(.title3)
-                                .fontWeight(.semibold)
-                            Text(winner.party.flatMap(\.name) ?? "Independent")
-                                .font(.subheadline)
-                                .foregroundStyle(.secondary)
+                            if let name = result.constituencyName {
+                                Text(name)
+                                    .font(.headline)
+                            }
                         }
                         Spacer()
-                        if let votes = winner.votes {
-                            VStack(alignment: .trailing, spacing: 3) {
-                                Text("Votes")
+                        PartyTaggedText(text: result.result?.uppercased() ?? "", party: result.winningParty)
+                    }
+
+                    if let winner {
+                        Divider()
+                        HStack(alignment: .top) {
+                            VStack(alignment: .leading, spacing: 3) {
+                                Text("Winner")
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
-                                Text(votes.formatted())
-                                    .font(.title2)
-                                    .fontWeight(.bold)
-                                    .foregroundStyle(.primary)
-                                if totalVotes > 0 {
-                                    Text(String(format: "%.1f%%", Double(votes) / Double(totalVotes) * 100))
+                                Text(winner.name)
+                                    .font(.title3)
+                                    .fontWeight(.semibold)
+                                Text(winner.party.flatMap(\.name) ?? "Independent")
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                            }
+                            Spacer()
+                            if let votes = winner.votes {
+                                VStack(alignment: .trailing, spacing: 3) {
+                                    Text("Votes")
                                         .font(.caption)
                                         .foregroundStyle(.secondary)
+                                    Text(votes.formatted())
+                                        .font(.title2)
+                                        .fontWeight(.bold)
+                                        .foregroundStyle(.primary)
+                                    if totalVotes > 0 {
+                                        Text(String(format: "%.1f%%", Double(votes) / Double(totalVotes) * 100))
+                                            .font(.caption)
+                                            .foregroundStyle(.secondary)
+                                    }
                                 }
                             }
                         }
                     }
                 }
+                .padding()
             }
-            .padding()
-            .background(Color(UIColor.secondarySystemGroupedBackground))
         }
-        .clipShape(RoundedRectangle(cornerRadius: 12))
-        .padding(.horizontal)
     }
 
     @ViewBuilder
@@ -191,13 +190,7 @@ struct ConstituencyElectionDetailView: View {
 
     @ViewBuilder
     func chartSection(result: ElectionResult, sorted: [CandidateResultModel]) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text("Vote share")
-                .font(.headline)
-                .padding(.horizontal)
-                .padding(.top, 14)
-                .padding(.bottom, 8)
-
+        MinimalSection(title: "Vote Share") {
             Chart(sorted, id: \.name) { candidate in
                 SectorMark(
                     angle: .value("Votes", candidate.votes ?? 0),
@@ -222,23 +215,15 @@ struct ConstituencyElectionDetailView: View {
             }
             .frame(height: 280)
             .padding(.horizontal)
+            .padding(.top, 8)
             .padding(.bottom, 14)
             .accessibilityHidden(true)
         }
-        .background(Color(UIColor.secondarySystemGroupedBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
-        .padding(.horizontal)
     }
 
     @ViewBuilder
     func candidatesSection(sorted: [CandidateResultModel], totalVotes: Int) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text("All candidates")
-                .font(.headline)
-                .padding(.horizontal)
-                .padding(.top, 14)
-                .padding(.bottom, 4)
-
+        MinimalSection(title: "All Candidates") {
             ForEach(sorted.indices, id: \.self) { index in
                 let candidate = sorted[index]
                 if index > 0 {
@@ -246,12 +231,8 @@ struct ConstituencyElectionDetailView: View {
                 }
                 candidateRow(candidate: candidate, totalVotes: totalVotes, rank: index + 1)
             }
-
             Spacer().frame(height: 6)
         }
-        .background(Color(UIColor.secondarySystemGroupedBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
-        .padding(.horizontal)
     }
 
     @ViewBuilder

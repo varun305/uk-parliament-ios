@@ -12,7 +12,7 @@ struct ContentView: View {
                 VStack(alignment: .leading, spacing: 20) {
                     UKPagesView(search: $search)
                 }
-                .padding([.horizontal, .bottom])
+                .padding(.bottom)
             }
             .background(Color(.systemGroupedBackground))
             .searchable(text: $search, placement: .navigationBarDrawer)

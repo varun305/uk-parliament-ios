@@ -123,7 +123,7 @@ struct UKPagesView: View {
         if filteredItems.isEmpty {
             ContentUnavailableView.search(text: search)
         } else {
-            SectionRow(title: "Results") {
+            MinimalSection(title: "Results") {
                 ForEach(Array(filteredItems.enumerated()), id: \.element.id) { index, item in
                     MinimalRowItem(item: item)
                     if index < filteredItems.count - 1 {
@@ -139,7 +139,7 @@ struct UKPagesView: View {
     @ViewBuilder
     private var sectionsView: some View {
         VStack(alignment: .leading, spacing: 32) {
-            SectionRow(title: "House of Commons") {
+            MinimalSection(title: "House of Commons") {
                 ForEach(Array(commonsItems.enumerated()), id: \.element.id) { index, item in
                     MinimalRowItem(item: item)
                     if index < commonsItems.count - 1 {
@@ -148,7 +148,7 @@ struct UKPagesView: View {
                 }
             }
 
-            SectionRow(title: "House of Lords") {
+            MinimalSection(title: "House of Lords") {
                 ForEach(Array(lordsItems.enumerated()), id: \.element.id) { index, item in
                     MinimalRowItem(item: item)
                     if index < lordsItems.count - 1 {
@@ -157,7 +157,7 @@ struct UKPagesView: View {
                 }
             }
 
-            SectionRow(title: "Legislation") {
+            MinimalSection(title: "Legislation") {
                 ForEach(Array(legislationItems.enumerated()), id: \.element.id) { index, item in
                     MinimalRowItem(item: item)
                     if index < legislationItems.count - 1 {
@@ -166,7 +166,7 @@ struct UKPagesView: View {
                 }
             }
 
-            SectionRow(title: "Explore") {
+            MinimalSection(title: "Explore") {
                 ForEach(Array(exploreItems.enumerated()), id: \.element.id) { index, item in
                     MinimalRowItem(item: item)
                     if index < exploreItems.count - 1 {
@@ -175,70 +175,6 @@ struct UKPagesView: View {
                 }
             }
         }
-    }
-}
-
-// MARK: - Minimal Section
-
-private struct SectionRow<Content: View>: View {
-    let title: String
-    @ViewBuilder let content: Content
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(title)
-                .font(.footnote.weight(.semibold))
-                .foregroundStyle(.secondary)
-                .textCase(.uppercase)
-                .padding(.horizontal, 4)
-
-            VStack(spacing: 0) {
-                content
-            }
-            .background(Color(.secondarySystemGroupedBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-        }
-    }
-}
-
-// MARK: - Minimal Row Item
-
-private struct MinimalRowItem: View {
-    let item: PageItem
-
-    var body: some View {
-        ContextAwareNavigationLink(value: item.navigateTo) {
-            HStack(spacing: 14) {
-                Image(systemName: item.systemImage)
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundStyle(item.background)
-                    .frame(width: 32, height: 32)
-                    .background(item.background.opacity(0.12))
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                    .accessibilityHidden(true)
-
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(item.title)
-                        .font(.body)
-                        .foregroundStyle(.primary)
-                    Text(item.subtitle)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-
-                Spacer(minLength: 0)
-
-                Image(systemName: "chevron.right")
-                    .font(.caption.weight(.semibold))
-                    .foregroundStyle(.tertiary)
-                    .accessibilityHidden(true)
-            }
-            .padding(.horizontal, 14)
-            .padding(.vertical, 12)
-            .contentShape(Rectangle())
-        }
-        .foregroundStyle(.primary)
-        .accessibilityElement(children: .combine)
     }
 }
 

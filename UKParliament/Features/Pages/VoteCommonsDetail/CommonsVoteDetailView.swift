@@ -54,7 +54,6 @@ struct CommonsVoteDetailView: View {
         if let detailedVote = viewModel.vote {
             let ayeCount = detailedVote.ayeCount ?? vote.ayeCount ?? 0
             let noCount = detailedVote.noCount ?? vote.noCount ?? 0
-            let majority = abs(ayeCount - noCount)
             let ayesWon = ayeCount >= noCount
 
             ScrollView {
@@ -77,108 +76,102 @@ struct CommonsVoteDetailView: View {
 
     @ViewBuilder
     func heroCard(vote: CommonsVote, ayeCount: Int, noCount: Int, ayesWon: Bool) -> some View {
-        VStack(spacing: 0) {
-            Rectangle()
-                .fill(ayesWon ? Color.commons : Color(UIColor.systemRed))
-                .frame(height: 5)
+        GroupedCard {
+            VStack(spacing: 0) {
+                Rectangle()
+                    .fill(ayesWon ? Color.commons : Color(UIColor.systemRed))
+                    .frame(height: 5)
 
-            VStack(alignment: .leading, spacing: 12) {
-                HStack {
-                    VStack(alignment: .leading, spacing: 3) {
-                        if !formattedDate.isEmpty {
-                            Text(formattedDate)
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack {
+                        VStack(alignment: .leading, spacing: 3) {
+                            if !formattedDate.isEmpty {
+                                Text(formattedDate)
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                            if let number = vote.number {
+                                Text("Division No. \(number)")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                        Spacer()
+                        Text(ayesWon ? "AYES WON" : "NOES WON")
+                            .font(.caption)
+                            .fontWeight(.bold)
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 5)
+                            .background(ayesWon ? Color.commons : Color(UIColor.systemRed))
+                            .clipShape(RoundedRectangle(cornerRadius: 6))
+                    }
+
+                    Divider()
+
+                    HStack(alignment: .top) {
+                        VStack(alignment: .leading, spacing: 3) {
+                            Text("Ayes")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
+                            Text(ayeCount.formatted())
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundStyle(ayesWon ? Color.commons : .primary)
                         }
-                        if let number = vote.number {
-                            Text("Division No. \(number)")
+                        Spacer()
+                        VStack(alignment: .trailing, spacing: 3) {
+                            Text("Noes")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
+                            Text(noCount.formatted())
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundStyle(!ayesWon ? Color(UIColor.systemRed) : .primary)
                         }
                     }
-                    Spacer()
-                    Text(ayesWon ? "AYES WON" : "NOES WON")
-                        .font(.caption)
-                        .fontWeight(.bold)
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 5)
-                        .background(ayesWon ? Color.commons : Color(UIColor.systemRed))
-                        .clipShape(RoundedRectangle(cornerRadius: 6))
                 }
-
-                Divider()
-
-                HStack(alignment: .top) {
-                    VStack(alignment: .leading, spacing: 3) {
-                        Text("Ayes")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                        Text(ayeCount.formatted())
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundStyle(ayesWon ? Color.commons : .primary)
-                    }
-                    Spacer()
-                    VStack(alignment: .trailing, spacing: 3) {
-                        Text("Noes")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                        Text(noCount.formatted())
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundStyle(!ayesWon ? Color(UIColor.systemRed) : .primary)
-                    }
-                }
+                .padding()
             }
-            .padding()
-            .background(Color(UIColor.secondarySystemGroupedBackground))
         }
-        .clipShape(RoundedRectangle(cornerRadius: 12))
-        .padding(.horizontal)
     }
 
     @ViewBuilder
     func statCard(title: String, value: String, color: Color) -> some View {
-        VStack(spacing: 6) {
-            Text(value)
-                .font(.callout)
-                .fontWeight(.bold)
-                .minimumScaleFactor(0.6)
-                .lineLimit(1)
-                .foregroundStyle(color)
-            Text(title)
-                .font(.caption2)
-                .foregroundStyle(.secondary)
+        GroupedCard {
+            VStack(spacing: 6) {
+                Text(value)
+                    .font(.callout)
+                    .fontWeight(.bold)
+                    .minimumScaleFactor(0.6)
+                    .lineLimit(1)
+                    .foregroundStyle(color)
+                Text(title)
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 14)
         }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 14)
-        .background(Color(UIColor.secondarySystemGroupedBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 
     @ViewBuilder
     func partySection(title: String, grouping: [(PartyHashable, Int)], total: Int) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text(title)
-                .font(.headline)
-                .padding(.horizontal)
-                .padding(.top, 14)
-                .padding(.bottom, 4)
+        GroupedCard {
+            VStack(alignment: .leading, spacing: 0) {
+                CardSectionHeader(title: title, showDivider: false)
 
-            ForEach(grouping.indices, id: \.self) { index in
-                let (party, count) = grouping[index]
-                if index > 0 {
-                    Divider().padding(.leading, 16)
+                ForEach(grouping.indices, id: \.self) { index in
+                    let (party, count) = grouping[index]
+                    if index > 0 {
+                        Divider().padding(.leading, 16)
+                    }
+                    partyRow(party: party, count: count, total: total)
                 }
-                partyRow(party: party, count: count, total: total)
-            }
 
-            Spacer().frame(height: 6)
+                Spacer().frame(height: 6)
+            }
         }
-        .background(Color(UIColor.secondarySystemGroupedBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
-        .padding(.horizontal)
     }
 
     @ViewBuilder
@@ -222,20 +215,11 @@ struct CommonsVoteDetailView: View {
 
     @ViewBuilder
     func viewAllVotesCard(detailedVote: CommonsVote) -> some View {
-        ContextAwareNavigationLink(value: .allVotesView(allVotes: detailedVote)) {
-            HStack {
-                Label("View all votes", image: "vote")
-                    .labelStyle(SquircleLabelStyle(color: Color.commons))
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .font(.footnote)
-                    .foregroundStyle(.tertiary)
+        GroupedCard {
+            ContextAwareNavigationLink(value: .allVotesView(allVotes: detailedVote)) {
+                DetailLinkRow(title: "View all votes", image: "vote", color: .commons)
             }
-            .padding()
-            .background(Color(UIColor.secondarySystemGroupedBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-            .padding(.horizontal)
+            .foregroundStyle(.primary)
         }
-        .foregroundStyle(.primary)
     }
 }

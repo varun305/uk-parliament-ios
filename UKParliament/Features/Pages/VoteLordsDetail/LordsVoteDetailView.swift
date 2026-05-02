@@ -53,7 +53,6 @@ struct LordsVoteDetailView: View {
         if let detailedVote = viewModel.vote {
             let contentsCount = detailedVote.authoritativeContentCount ?? vote.authoritativeContentCount ?? 0
             let notContentsCount = detailedVote.authoritativeNotContentCount ?? vote.authoritativeNotContentCount ?? 0
-            let majority = abs(contentsCount - notContentsCount)
             let contentsWon = contentsCount >= notContentsCount
 
             ScrollView {
@@ -82,144 +81,137 @@ struct LordsVoteDetailView: View {
     @ViewBuilder
     func amendmentNotesCard(html: String) -> some View {
         let string = getAttributedString(from: html)
-        VStack(alignment: .leading, spacing: 0) {
-            Button {
-                withAnimation(.easeInOut(duration: 0.25)) {
-                    notesExpanded.toggle()
-                }
-            } label: {
-                HStack {
-                    Text("Amendment motion notes")
-                        .font(.subheadline)
-                    Spacer()
-                    Image(systemName: "chevron.down")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                        .rotationEffect(.degrees(notesExpanded ? 180 : 0))
-                }
-                .padding()
-            }
-
-            if notesExpanded {
-                Divider()
-                    .padding(.horizontal)
-                Text(string)
-                    .font(.subheadline)
-                    .textSelection(.enabled)
+        GroupedCard {
+            VStack(alignment: .leading, spacing: 0) {
+                Button {
+                    withAnimation(.easeInOut(duration: 0.25)) {
+                        notesExpanded.toggle()
+                    }
+                } label: {
+                    HStack {
+                        Text("Amendment motion notes")
+                            .font(.subheadline)
+                        Spacer()
+                        Image(systemName: "chevron.down")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .rotationEffect(.degrees(notesExpanded ? 180 : 0))
+                    }
                     .padding()
+                }
+
+                if notesExpanded {
+                    Divider()
+                        .padding(.horizontal)
+                    Text(string)
+                        .font(.subheadline)
+                        .textSelection(.enabled)
+                        .padding()
+                }
             }
+            .foregroundStyle(.primary)
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .foregroundStyle(.primary)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(UIColor.secondarySystemGroupedBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
-        .padding(.horizontal)
     }
 
     @ViewBuilder
     func heroCard(vote: LordsVote, contentsCount: Int, notContentsCount: Int, contentsWon: Bool) -> some View {
-        VStack(spacing: 0) {
-            Rectangle()
-                .fill(contentsWon ? Color.lords : Color(UIColor.systemGray))
-                .frame(height: 5)
+        GroupedCard {
+            VStack(spacing: 0) {
+                Rectangle()
+                    .fill(contentsWon ? Color.lords : Color(UIColor.systemGray))
+                    .frame(height: 5)
 
-            VStack(alignment: .leading, spacing: 12) {
-                HStack {
-                    VStack(alignment: .leading, spacing: 3) {
-                        if !formattedDate.isEmpty {
-                            Text(formattedDate)
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack {
+                        VStack(alignment: .leading, spacing: 3) {
+                            if !formattedDate.isEmpty {
+                                Text(formattedDate)
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                            if let number = vote.number {
+                                Text("Division No. \(number)")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                        Spacer()
+                        Text(contentsWon ? "CONTENTS WON" : "NOT CONTENTS WON")
+                            .font(.caption)
+                            .fontWeight(.bold)
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 5)
+                            .background(contentsWon ? Color.lords : Color(UIColor.systemGray))
+                            .clipShape(RoundedRectangle(cornerRadius: 6))
+                    }
+
+                    Divider()
+
+                    HStack(alignment: .top) {
+                        VStack(alignment: .leading, spacing: 3) {
+                            Text("Contents")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
+                            Text(contentsCount.formatted())
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundStyle(contentsWon ? Color.lords : .primary)
                         }
-                        if let number = vote.number {
-                            Text("Division No. \(number)")
+                        Spacer()
+                        VStack(alignment: .trailing, spacing: 3) {
+                            Text("Not Contents")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
+                            Text(notContentsCount.formatted())
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundStyle(!contentsWon ? Color(UIColor.systemGray) : .primary)
                         }
                     }
-                    Spacer()
-                    Text(contentsWon ? "CONTENTS WON" : "NOT CONTENTS WON")
-                        .font(.caption)
-                        .fontWeight(.bold)
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 5)
-                        .background(contentsWon ? Color.lords : Color(UIColor.systemGray))
-                        .clipShape(RoundedRectangle(cornerRadius: 6))
                 }
-
-                Divider()
-
-                HStack(alignment: .top) {
-                    VStack(alignment: .leading, spacing: 3) {
-                        Text("Contents")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                        Text(contentsCount.formatted())
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundStyle(contentsWon ? Color.lords : .primary)
-                    }
-                    Spacer()
-                    VStack(alignment: .trailing, spacing: 3) {
-                        Text("Not Contents")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                        Text(notContentsCount.formatted())
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundStyle(!contentsWon ? Color(UIColor.systemGray) : .primary)
-                    }
-                }
+                .padding()
             }
-            .padding()
-            .background(Color(UIColor.secondarySystemGroupedBackground))
         }
-        .clipShape(RoundedRectangle(cornerRadius: 12))
-        .padding(.horizontal)
     }
 
     @ViewBuilder
     func statCard(title: String, value: String, color: Color) -> some View {
-        VStack(spacing: 6) {
-            Text(value)
-                .font(.callout)
-                .fontWeight(.bold)
-                .minimumScaleFactor(0.6)
-                .lineLimit(1)
-                .foregroundStyle(color)
-            Text(title)
-                .font(.caption2)
-                .foregroundStyle(.secondary)
+        GroupedCard {
+            VStack(spacing: 6) {
+                Text(value)
+                    .font(.callout)
+                    .fontWeight(.bold)
+                    .minimumScaleFactor(0.6)
+                    .lineLimit(1)
+                    .foregroundStyle(color)
+                Text(title)
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 14)
         }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 14)
-        .background(Color(UIColor.secondarySystemGroupedBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 
     @ViewBuilder
     func partySection(title: String, grouping: [(PartyHashable, Int)], total: Int) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text(title)
-                .font(.headline)
-                .padding(.horizontal)
-                .padding(.top, 14)
-                .padding(.bottom, 4)
+        GroupedCard {
+            VStack(alignment: .leading, spacing: 0) {
+                CardSectionHeader(title: title, showDivider: false)
 
-            ForEach(grouping.indices, id: \.self) { index in
-                let (party, count) = grouping[index]
-                if index > 0 {
-                    Divider().padding(.leading, 16)
+                ForEach(grouping.indices, id: \.self) { index in
+                    let (party, count) = grouping[index]
+                    if index > 0 {
+                        Divider().padding(.leading, 16)
+                    }
+                    partyRow(party: party, count: count, total: total)
                 }
-                partyRow(party: party, count: count, total: total)
-            }
 
-            Spacer().frame(height: 6)
+                Spacer().frame(height: 6)
+            }
         }
-        .background(Color(UIColor.secondarySystemGroupedBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
-        .padding(.horizontal)
     }
 
     @ViewBuilder
@@ -261,21 +253,12 @@ struct LordsVoteDetailView: View {
 
     @ViewBuilder
     func viewAllVotesCard(detailedVote: LordsVote) -> some View {
-        ContextAwareNavigationLink(value: .allVotesView(allVotes: vote)) {
-            HStack {
-                Label("View all votes", image: "vote")
-                    .labelStyle(SquircleLabelStyle(color: Color.lords))
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .font(.footnote)
-                    .foregroundStyle(.tertiary)
+        GroupedCard {
+            ContextAwareNavigationLink(value: .allVotesView(allVotes: vote)) {
+                DetailLinkRow(title: "View all votes", image: "vote", color: .commons)
             }
-            .padding()
-            .background(Color(UIColor.secondarySystemGroupedBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-            .padding(.horizontal)
+            .foregroundStyle(.primary)
         }
-        .foregroundStyle(.primary)
     }
 
     private func getAttributedString(from html: String) -> AttributedString {
