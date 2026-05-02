@@ -76,7 +76,7 @@ struct CommonsVoteDetailView: View {
 
     @ViewBuilder
     func heroCard(vote: CommonsVote, ayeCount: Int, noCount: Int, ayesWon: Bool) -> some View {
-        GroupedCard {
+        MinimalSection(title: "Result") {
             VStack(spacing: 0) {
                 Rectangle()
                     .fill(ayesWon ? Color.commons : Color(UIColor.systemRed))
@@ -157,20 +157,16 @@ struct CommonsVoteDetailView: View {
 
     @ViewBuilder
     func partySection(title: String, grouping: [(PartyHashable, Int)], total: Int) -> some View {
-        GroupedCard {
-            VStack(alignment: .leading, spacing: 0) {
-                CardSectionHeader(title: title, showDivider: false)
-
-                ForEach(grouping.indices, id: \.self) { index in
-                    let (party, count) = grouping[index]
-                    if index > 0 {
-                        Divider().padding(.leading, 16)
-                    }
-                    partyRow(party: party, count: count, total: total)
+        MinimalSection(title: title) {
+            ForEach(grouping.indices, id: \.self) { index in
+                let (party, count) = grouping[index]
+                if index > 0 {
+                    Divider().padding(.leading, 16)
                 }
-
-                Spacer().frame(height: 6)
+                partyRow(party: party, count: count, total: total)
             }
+
+            Spacer().frame(height: 6)
         }
     }
 

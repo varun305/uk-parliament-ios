@@ -2,7 +2,6 @@ import SwiftUI
 
 struct UKPagesView: View {
     @EnvironmentObject var contextModel: ContextModel
-    @Binding var search: String
 
     // MARK: - Page Items
 
@@ -94,45 +93,12 @@ struct UKPagesView: View {
         commonsItems + lordsItems + legislationItems + exploreItems
     }
 
-    private var filteredItems: [PageItem] {
-        guard !search.isEmpty else { return [] }
-        return allItems.filter {
-            $0.title.localizedCaseInsensitiveContains(search) ||
-            $0.subtitle.localizedCaseInsensitiveContains(search)
-        }
-    }
-
-    private var isSearching: Bool {
-        !search.isEmpty
-    }
-
     // MARK: - Body
 
     var body: some View {
-        if isSearching {
-            searchResults
-        } else {
-            sectionsView
-        }
+        sectionsView
     }
 
-    // MARK: - Search Results
-
-    @ViewBuilder
-    private var searchResults: some View {
-        if filteredItems.isEmpty {
-            ContentUnavailableView.search(text: search)
-        } else {
-            MinimalSection(title: "Results") {
-                ForEach(Array(filteredItems.enumerated()), id: \.element.id) { index, item in
-                    MinimalRowItem(item: item)
-                    if index < filteredItems.count - 1 {
-                        Divider().padding(.leading, 56)
-                    }
-                }
-            }
-        }
-    }
 
     // MARK: - Sections
 

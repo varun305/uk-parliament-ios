@@ -3,19 +3,17 @@ import TipKit
 
 struct ContentView: View {
     @EnvironmentObject var contextModel: ContextModel
-    @State var search = ""
     @State var showHelpSheet = false
 
     var body: some View {
         NavigationStack(path: $contextModel.navigationPath) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    UKPagesView(search: $search)
+                    UKPagesView()
                 }
                 .padding(.bottom)
             }
             .background(Color(.systemGroupedBackground))
-            .searchable(text: $search, placement: .navigationBarDrawer)
             .navigationTitle("UK Parliament")
             .toolbar {
                 ToolbarItem(placement: .automatic) {

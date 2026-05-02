@@ -103,58 +103,86 @@ struct BillDetailView: View {
     @ViewBuilder
     var scrollView: some View {
         if let bill = viewModel.bill {
-            List {
-                HStack(alignment: .center) {
+            ScrollView {
+                VStack(spacing: 16) {
                     if let longTitle = bill.longTitle {
-                        Spacer()
                         Text(longTitle)
                             .font(.subheadline)
-                        Spacer()
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal)
                     }
-                }
-                .multilineTextAlignment(.center)
-                .listRowBackground(Color.clear)
-                .listSectionSeparator(.hidden)
 
-                if let sponsors = bill.sponsors, !sponsors.isEmpty {
-                    Section("Sponsors") {
-                        ForEach(sponsors) { sponsor in
-                            if sponsor.member != nil {
-                                SponsorRow(sponsor: sponsor)
-                                    .ifLet(sponsor.member?.memberId) { view, memberId in
-                                        ContextAwareNavigationLink(value: .memberDetailView(memberId: memberId)) {
-                                            view
-                                        }
+                    if let sponsors = bill.sponsors {
+                        let validSponsors = sponsors.filter { $0.member != nil }
+                        if !validSponsors.isEmpty {
+                            MinimalSection(title: "Sponsors") {
+                                ForEach(validSponsors.indices, id: \.self) { index in
+                                    let sponsor = validSponsors[index]
+                                    if index > 0 {
+                                        Divider().padding(.leading, 16)
                                     }
+                                    if let memberId = sponsor.member?.memberId {
+                                        ContextAwareNavigationLink(value: .memberDetailView(memberId: memberId)) {
+                                            HStack {
+                                                SponsorRow(sponsor: sponsor)
+                                                Spacer()
+                                                Image(systemName: "chevron.right")
+                                                    .font(.caption)
+                                                    .foregroundStyle(.tertiary)
+                                            }
+                                            .padding(.horizontal)
+                                            .padding(.vertical, 12)
+                                        }
+                                        .foregroundStyle(.primary)
+                                    } else {
+                                        SponsorRow(sponsor: sponsor)
+                                            .padding(.horizontal)
+                                            .padding(.vertical, 12)
+                                    }
+                                }
                             }
                         }
                     }
-                }
 
-                if let _ = bill.lastUpdate {
-                    Section("Last update") {
-                        Label(bill.formattedDate, systemImage: "calendar")
-                            .labelStyle(SquircleLabelStyle(color: houseColor))
+                    if let _ = bill.lastUpdate {
+                        MinimalSection(title: "Last Update") {
+                            HStack {
+                                Label(bill.formattedDate, systemImage: "calendar")
+                                    .labelStyle(SquircleLabelStyle(color: houseColor))
+                                Spacer()
+                            }
+                            .padding(.horizontal)
+                            .padding(.vertical, 12)
+                        }
                     }
-                }
 
-                Section {
-                    ContextAwareNavigationLink(value: .billPublicationsView(bill: bill, stage: nil)) {
-                        Label("View publications", image: "article")
-                            .labelStyle(SquircleLabelStyle(color: houseColor))
+                    MinimalSection(title: "Publications") {
+                        ContextAwareNavigationLink(value: .billPublicationsView(bill: bill, stage: nil)) {
+                            DetailLinkRow(title: "View publications", image: "article", color: houseColor)
+                        }
+                        .foregroundStyle(.primary)
                     }
-                }
 
-                if let currentStage = bill.currentStage {
-                    Section("Current stage") {
-                        BillStageRow(stage: currentStage)
-                        ContextAwareNavigationLink(value: .billStagesView(bill: bill)) {
-                            Label("See all stages", systemImage: "list.bullet")
-                                .labelStyle(SquircleLabelStyle(color: houseColor))
+                    if let currentStage = bill.currentStage {
+                        MinimalSection(title: "Current Stage") {
+                            HStack {
+                                BillStageRow(stage: currentStage)
+                                Spacer()
+                            }
+                            .padding(.horizontal)
+                            .padding(.vertical, 12)
+                            Divider().padding(.leading, 16)
+                            ContextAwareNavigationLink(value: .billStagesView(bill: bill)) {
+                                DetailLinkRow(title: "See all stages", image: "list.bullet", isSystemImage: true, color: houseColor)
+                            }
+                            .foregroundStyle(.primary)
                         }
                     }
                 }
+                .padding(.top, 12)
+                .padding(.bottom, 24)
             }
+            .background(Color(UIColor.systemGroupedBackground))
         }
     }
 }

@@ -62,10 +62,10 @@ struct LordsVoteDetailView: View {
                     }
                     heroCard(vote: detailedVote, contentsCount: contentsCount, notContentsCount: notContentsCount, contentsWon: contentsWon)
                     if !viewModel.contentsGrouping.isEmpty {
-                        partySection(title: "Contents votes by party", grouping: viewModel.contentsGrouping, total: contentsCount)
+                        partySection(title: "Content votes by party", grouping: viewModel.contentsGrouping, total: contentsCount)
                     }
                     if !viewModel.notContentsGrouping.isEmpty {
-                        partySection(title: "Not contents votes by party", grouping: viewModel.notContentsGrouping, total: notContentsCount)
+                        partySection(title: "Not content votes by party", grouping: viewModel.notContentsGrouping, total: notContentsCount)
                     }
                     viewAllVotesCard(detailedVote: detailedVote)
                 }
@@ -81,42 +81,39 @@ struct LordsVoteDetailView: View {
     @ViewBuilder
     func amendmentNotesCard(html: String) -> some View {
         let string = getAttributedString(from: html)
-        GroupedCard {
-            VStack(alignment: .leading, spacing: 0) {
-                Button {
-                    withAnimation(.easeInOut(duration: 0.25)) {
-                        notesExpanded.toggle()
-                    }
-                } label: {
-                    HStack {
-                        Text("Amendment motion notes")
-                            .font(.subheadline)
-                        Spacer()
-                        Image(systemName: "chevron.down")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                            .rotationEffect(.degrees(notesExpanded ? 180 : 0))
-                    }
-                    .padding()
+        MinimalSection(title: "Amendment Motion Notes") {
+            Button {
+                withAnimation(.easeInOut(duration: 0.25)) {
+                    notesExpanded.toggle()
                 }
-
-                if notesExpanded {
-                    Divider()
-                        .padding(.horizontal)
-                    Text(string)
+            } label: {
+                HStack {
+                    Text("Show notes")
                         .font(.subheadline)
-                        .textSelection(.enabled)
-                        .padding()
+                    Spacer()
+                    Image(systemName: "chevron.down")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .rotationEffect(.degrees(notesExpanded ? 180 : 0))
                 }
+                .padding()
             }
-            .foregroundStyle(.primary)
-            .frame(maxWidth: .infinity, alignment: .leading)
+
+            if notesExpanded {
+                Divider()
+                    .padding(.horizontal)
+                Text(string)
+                    .font(.subheadline)
+                    .textSelection(.enabled)
+                    .padding()
+            }
         }
+        .foregroundStyle(.primary)
     }
 
     @ViewBuilder
     func heroCard(vote: LordsVote, contentsCount: Int, notContentsCount: Int, contentsWon: Bool) -> some View {
-        GroupedCard {
+        MinimalSection(title: "Result") {
             VStack(spacing: 0) {
                 Rectangle()
                     .fill(contentsWon ? Color.lords : Color(UIColor.systemGray))
@@ -197,20 +194,16 @@ struct LordsVoteDetailView: View {
 
     @ViewBuilder
     func partySection(title: String, grouping: [(PartyHashable, Int)], total: Int) -> some View {
-        GroupedCard {
-            VStack(alignment: .leading, spacing: 0) {
-                CardSectionHeader(title: title, showDivider: false)
-
-                ForEach(grouping.indices, id: \.self) { index in
-                    let (party, count) = grouping[index]
-                    if index > 0 {
-                        Divider().padding(.leading, 16)
-                    }
-                    partyRow(party: party, count: count, total: total)
+        MinimalSection(title: title) {
+            ForEach(grouping.indices, id: \.self) { index in
+                let (party, count) = grouping[index]
+                if index > 0 {
+                    Divider().padding(.leading, 16)
                 }
-
-                Spacer().frame(height: 6)
+                partyRow(party: party, count: count, total: total)
             }
+
+            Spacer().frame(height: 6)
         }
     }
 

@@ -47,7 +47,7 @@ struct BillPublicationRow: View {
                 Button {
                     linkItem = texts[0].1
                 } label: {
-                    Text("Open")
+                    Text("Open \(filetypeToString[texts[0].0, default: ""])")
                         .bold()
                 }
                 .buttonStyle(.bordered)

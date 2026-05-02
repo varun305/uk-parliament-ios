@@ -161,6 +161,8 @@ struct MemberDetailView: View {
             Text(viewModel.synopsis)
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .fixedSize(horizontal: false, vertical: true)
                 .padding(.horizontal)
                 .padding(.vertical, 12)
         }

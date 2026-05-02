@@ -30,14 +30,23 @@ struct BillPublicationsView: View {
         .navigationTitle(navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            Button {
-                withAnimation(.interactiveSpring) {
-                    viewModel.sortOrderAscending.toggle()
+            Menu {
+                Button {
+                    withAnimation(.interactiveSpring) {
+                        viewModel.sortOrderAscending = true
+                    }
+                } label: {
+                    Label("Oldest first", systemImage: viewModel.sortOrderAscending ? "checkmark" : "")
+                }
+                Button {
+                    withAnimation(.interactiveSpring) {
+                        viewModel.sortOrderAscending = false
+                    }
+                } label: {
+                    Label("Newest first", systemImage: viewModel.sortOrderAscending ? "" : "checkmark")
                 }
             } label: {
-                Image(systemName: "chevron.up.circle")
-                    .rotationEffect(.degrees(viewModel.sortOrderAscending ? 0 : 180))
-                    .accessibilityLabel(Text(viewModel.sortOrderAscending ? "Sort by descending date" : "Sort by ascending date"))
+                Label("Sort", systemImage: "arrow.up.arrow.down")
             }
             .foregroundStyle(.primary)
         }
@@ -50,7 +59,7 @@ struct BillPublicationsView: View {
     var loadingView: some View {
         List {
             Section("") {
-                ForEach(0..<30) { _ in
+                ForEach(0..<8) { _ in
                     DummyNavigationLink {
                         BillPublicationRowLoading()
                     }
@@ -67,13 +76,27 @@ struct BillPublicationsView: View {
             VStack(alignment: .leading, spacing: 5) {
                 if viewModel.publications.count > 1 {
                     VStack(alignment: .leading, spacing: 10) {
+                        Text("Filter by type")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                            .padding(.horizontal)
                         ScrollView(.horizontal) {
                             HStack(alignment: .center) {
                                 ForEach(viewModel.allPublicationTypes.sorted { $0 < $1 }) { type in
-                                    FilterCapsule(text: type)
-                                        .environmentObject(viewModel)
-                                        .accessibilityElement(children: .combine)
-                                        .accessibilityLabel(Text("Filter by \(type)"))
+                                    FilterCapsule(
+                                        text: type,
+                                        isSelected: viewModel.typeFilters.contains(type)
+                                    ) {
+                                        withAnimation {
+                                            if viewModel.typeFilters.contains(type) {
+                                                viewModel.typeFilters.remove(type)
+                                            } else {
+                                                viewModel.typeFilters.insert(type)
+                                            }
+                                        }
+                                    }
+                                    .accessibilityElement(children: .combine)
+                                    .accessibilityLabel(Text("Filter by \(type)"))
                                 }
                             }
                             .padding(.horizontal)
@@ -98,12 +121,30 @@ struct BillPublicationsView: View {
                 }
                 .padding(.horizontal)
 
-                LazyVStack(alignment: .leading) {
-                    Divider()
-                    ForEach(viewModel.filteredPublications) { publication in
-                        billPulicationRow(publication)
-                            .foregroundStyle(.primary)
+                if viewModel.filteredPublications.isEmpty {
+                    ContentUnavailableView {
+                        Label("No results", systemImage: "doc.text.magnifyingglass")
+                    } description: {
+                        Text("No publications match your current search or filters.")
+                    } actions: {
+                        if !viewModel.typeFilters.isEmpty || !viewModel.search.isEmpty {
+                            Button("Clear all") {
+                                withAnimation {
+                                    viewModel.typeFilters.removeAll()
+                                    viewModel.search = ""
+                                }
+                            }
+                        }
+                    }
+                    .padding(.top, 40)
+                } else {
+                    LazyVStack(alignment: .leading) {
                         Divider()
+                        ForEach(viewModel.filteredPublications) { publication in
+                            billPulicationRow(publication)
+                                .foregroundStyle(.primary)
+                            Divider()
+                        }
                     }
                 }
             }
@@ -126,24 +167,16 @@ struct BillPublicationsView: View {
 
 private struct FilterCapsule: View {
     var text: String
-
-    @EnvironmentObject var viewModel: BillPublicationsViewModel
+    var isSelected: Bool
+    var onTap: () -> Void
 
     var body: some View {
-        Button {
-            withAnimation {
-                if viewModel.typeFilters.contains(text) {
-                    viewModel.typeFilters.remove(text)
-                } else {
-                    viewModel.typeFilters.insert(text)
-                }
-            }
-        } label: {
+        Button(action: onTap) {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
-                    .ifElse(viewModel.typeFilters.contains(text), trueTransform: { $0.fill(Color.accentColor) }, falseTransform: { $0.stroke(.primary, lineWidth: 3) })
+                    .ifElse(isSelected, trueTransform: { $0.fill(Color.accentColor) }, falseTransform: { $0.stroke(.primary, lineWidth: 3) })
                 Text(text)
-                    .ifElse(viewModel.typeFilters.contains(text), trueTransform: { $0.foregroundStyle(Color.white) }, falseTransform: { $0 })
+                    .ifElse(isSelected, trueTransform: { $0.foregroundStyle(Color.white) }, falseTransform: { $0 })
                     .padding(.vertical, 7)
                     .padding(.horizontal, 10)
             }

@@ -153,6 +153,17 @@ class BillPublication: Codable, Identifiable, Equatable, Hashable {
     var links: [BillPublicationLink]?
     var files: [BillPublicationFile]?
 
+    private static let dateParser: DateFormatter = {
+        let f = DateFormatter()
+        f.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        return f
+    }()
+
+    lazy var parsedDisplayDate: Date? = {
+        guard let raw = displayDate?.components(separatedBy: ".").first else { return nil }
+        return Self.dateParser.date(from: raw)
+    }()
+
     var formattedDate: String {
         displayDate?.convertToDate() ?? ""
     }

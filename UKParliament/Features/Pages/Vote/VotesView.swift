@@ -10,7 +10,7 @@ struct VotesView: View {
         .listStyle(.plain)
         .navigationTitle("All votes, \(allVotesModel.title ?? "")")
         .navigationBarTitleDisplayMode(.inline)
-        .searchable(text: $search)
+        .searchable(text: $search, placement: .navigationBarDrawer)
     }
 
     @State private var search = ""
