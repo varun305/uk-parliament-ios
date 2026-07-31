@@ -25,7 +25,7 @@ struct MemberRegisteredInterestsView: View {
             if !viewModel.registeredInterests.isEmpty {
                 scrollView
             } else if viewModel.loading {
-                loadingView
+                LoadingView()
             } else {
                 NoDataView()
             }
@@ -37,39 +37,6 @@ struct MemberRegisteredInterestsView: View {
                 viewModel.fetchData(for: memberId)
             }
         }
-    }
-
-    @ViewBuilder
-    var loadingView: some View {
-        ScrollView {
-            VStack(spacing: 16) {
-                ForEach(0..<4) { _ in
-                    VStack(alignment: .leading, spacing: 0) {
-                        Text("").skeleton(with: true).frame(width: 160, height: 14)
-                            .padding(.horizontal)
-                            .padding(.top, 14)
-                            .padding(.bottom, 8)
-                        Divider()
-                        ForEach(0..<3) { i in
-                            if i > 0 { Divider().padding(.leading) }
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text("").skeleton(with: true).frame(maxWidth: .infinity).frame(height: 11)
-                                Text("").skeleton(with: true).frame(width: 200, height: 11)
-                            }
-                            .padding(.horizontal)
-                            .padding(.vertical, 10)
-                        }
-                    }
-                    .background(Color(UIColor.secondarySystemGroupedBackground))
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-                    .padding(.horizontal)
-                }
-            }
-            .padding(.top, 12)
-            .padding(.bottom, 24)
-        }
-        .background(Color(UIColor.systemGroupedBackground))
-        .environment(\.isScrollEnabled, false)
     }
 
     @ViewBuilder

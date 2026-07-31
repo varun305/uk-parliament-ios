@@ -10,6 +10,8 @@
 		8B0A1EFC2F9B718100EF231F /* DesignComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A1EFB2F9B718000EF231F /* DesignComponents.swift */; };
 		8B4DDDFE2F9A5BAE001108A4 /* LicenseList in Frameworks */ = {isa = PBXBuildFile; productRef = 8B4DDDFD2F9A5BAE001108A4 /* LicenseList */; };
 		8B4DDE002F9A69AF001108A4 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4DDDFF2F9A69AE001108A4 /* HelpView.swift */; };
+		8BBA0B4A301D3A5500D8C2A5 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBA0B49301D3A4E00D8C2A5 /* LoadingView.swift */; };
+		8BBA0B4D301D3D5300D8C2A5 /* SkeletonUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8BBA0B4C301D3D5300D8C2A5 /* SkeletonUI */; };
 		EE01861E2B375B0C004F7F77 /* PostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE01861D2B375B0C004F7F77 /* PostsView.swift */; };
 		EE0186202B375B4D004F7F77 /* PostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE01861F2B375B4D004F7F77 /* PostsViewModel.swift */; };
 		EE0186222B375B66004F7F77 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0186212B375B66004F7F77 /* PostModel.swift */; };
@@ -17,7 +19,6 @@
 		EE0186272B38258B004F7F77 /* MemberContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0186262B38258B004F7F77 /* MemberContactViewModel.swift */; };
 		EE0186292B385A4E004F7F77 /* PartyTaggedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0186282B385A4E004F7F77 /* PartyTaggedText.swift */; };
 		EE01A7362BDB7BA800B34EE4 /* VotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE01A7352BDB7BA800B34EE4 /* VotesView.swift */; };
-		EE020BC42B618A94004C893B /* SkeletonUI in Frameworks */ = {isa = PBXBuildFile; productRef = EE020BC32B618A94004C893B /* SkeletonUI */; };
 		EE167D8E2B7A108900415100 /* UnifiedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE167D8D2B7A108900415100 /* UnifiedListView.swift */; };
 		EE1BE5742C161BDA00ED3F0F /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1BE5732C161BDA00ED3F0F /* Banner.swift */; };
 		EE208E842B7949DC005125BA /* UnifiedListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE208E832B7949DC005125BA /* UnifiedListViewModel.swift */; };
@@ -125,6 +126,7 @@
 /* Begin PBXFileReference section */
 		8B0A1EFB2F9B718000EF231F /* DesignComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignComponents.swift; sourceTree = "<group>"; };
 		8B4DDDFF2F9A69AE001108A4 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
+		8BBA0B49301D3A4E00D8C2A5 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		EE01861D2B375B0C004F7F77 /* PostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsView.swift; sourceTree = "<group>"; };
 		EE01861F2B375B4D004F7F77 /* PostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewModel.swift; sourceTree = "<group>"; };
 		EE0186212B375B66004F7F77 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
@@ -240,8 +242,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE020BC42B618A94004C893B /* SkeletonUI in Frameworks */,
 				EE3B90F12C3002FD00A4AD06 /* SwiftSoup in Frameworks */,
+				8BBA0B4D301D3D5300D8C2A5 /* SkeletonUI in Frameworks */,
 				8B4DDDFE2F9A5BAE001108A4 /* LicenseList in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -575,6 +577,7 @@
 		EE97BF9A2B35717A00FA950C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				8BBA0B49301D3A4E00D8C2A5 /* LoadingView.swift */,
 				EEEC3B152B389F9D00A8626D /* BillStageBadge.swift */,
 				EEEC3B0A2B388F4800A8626D /* CommonsBadge.swift */,
 				EEEC3B322B398ADA00A8626D /* ContextAwareNavigationLink.swift */,
@@ -690,9 +693,9 @@
 			);
 			name = UKParliament;
 			packageProductDependencies = (
-				EE020BC32B618A94004C893B /* SkeletonUI */,
 				EE3B90F02C3002FD00A4AD06 /* SwiftSoup */,
 				8B4DDDFD2F9A5BAE001108A4 /* LicenseList */,
+				8BBA0B4C301D3D5300D8C2A5 /* SkeletonUI */,
 			);
 			productName = "UK Parliament";
 			productReference = EE86A45B2B344BA6007BEA83 /* UKParliament.app */;
@@ -728,9 +731,9 @@
 			);
 			mainGroup = EE86A4522B344BA6007BEA83;
 			packageReferences = (
-				EE020BC22B618A94004C893B /* XCRemoteSwiftPackageReference "SkeletonUI" */,
 				EE3B90EF2C3002FD00A4AD06 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				8B4DDDFC2F9A5BAE001108A4 /* XCRemoteSwiftPackageReference "LicenseList" */,
+				8BBA0B4B301D3D3000D8C2A5 /* XCRemoteSwiftPackageReference "SkeletonUI" */,
 			);
 			productRefGroup = EE86A45C2B344BA6007BEA83 /* Products */;
 			projectDirPath = "";
@@ -861,6 +864,7 @@
 				EE31950D2B6F959900A5F754 /* MemberLordsVoteRow.swift in Sources */,
 				EE3195092B6F952700A5F754 /* MemberLordsVotesView.swift in Sources */,
 				EE31950B2B6F954900A5F754 /* MemberLordsVotesViewModel.swift in Sources */,
+				8BBA0B4A301D3A5500D8C2A5 /* LoadingView.swift in Sources */,
 				EE97BF942B34C60300FA950C /* MemberModel.swift in Sources */,
 				EEFC7C992B35B4E000183203 /* MemberPictureView.swift in Sources */,
 				EE8F2CC72B36D88200D771F2 /* MemberRegisteredInterestModel.swift in Sources */,
@@ -1185,12 +1189,12 @@
 				minimumVersion = 2.4.0;
 			};
 		};
-		EE020BC22B618A94004C893B /* XCRemoteSwiftPackageReference "SkeletonUI" */ = {
+		8BBA0B4B301D3D3000D8C2A5 /* XCRemoteSwiftPackageReference "SkeletonUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/CSolanaM/SkeletonUI";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.1;
+				minimumVersion = 2.0.2;
 			};
 		};
 		EE3B90EF2C3002FD00A4AD06 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
@@ -1209,9 +1213,9 @@
 			package = 8B4DDDFC2F9A5BAE001108A4 /* XCRemoteSwiftPackageReference "LicenseList" */;
 			productName = LicenseList;
 		};
-		EE020BC32B618A94004C893B /* SkeletonUI */ = {
+		8BBA0B4C301D3D5300D8C2A5 /* SkeletonUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = EE020BC22B618A94004C893B /* XCRemoteSwiftPackageReference "SkeletonUI" */;
+			package = 8BBA0B4B301D3D3000D8C2A5 /* XCRemoteSwiftPackageReference "SkeletonUI" */;
 			productName = SkeletonUI;
 		};
 		EE3B90F02C3002FD00A4AD06 /* SwiftSoup */ = {

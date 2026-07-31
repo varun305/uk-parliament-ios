@@ -11,7 +11,7 @@ struct PartiesView: View {
     var body: some View {
         Group {
             if viewModel.loading {
-                loadingView
+                LoadingView()
             } else {
                 scrollView
             }
@@ -21,73 +21,6 @@ struct PartiesView: View {
         .task {
             viewModel.fetchData()
         }
-    }
-
-    @ViewBuilder
-    var loadingView: some View {
-        ScrollView {
-            VStack(spacing: 16) {
-                Picker("House", selection: .constant(House.commons)) {
-                    Text("Commons").tag(House.commons)
-                    Text("Lords").tag(House.lords)
-                }
-                .pickerStyle(.segmented)
-                .padding(.horizontal)
-                .disabled(true)
-
-                VStack(alignment: .leading, spacing: 0) {
-                    HStack {
-                        Text("").skeleton(with: true).frame(width: 140, height: 14)
-                        Spacer()
-                        Text("").skeleton(with: true).frame(width: 70, height: 12)
-                    }
-                    .padding(.horizontal)
-                    .padding(.top, 14)
-                    .padding(.bottom, 8)
-                    Divider()
-                    RoundedRectangle(cornerRadius: 8)
-                        .skeleton(with: true)
-                        .frame(height: 32)
-                        .padding(.horizontal)
-                        .padding(.vertical, 14)
-                }
-                .background(Color(UIColor.secondarySystemGroupedBackground))
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .padding(.horizontal)
-
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("").skeleton(with: true).frame(width: 60, height: 14)
-                        .padding(.horizontal)
-                        .padding(.top, 14)
-                        .padding(.bottom, 8)
-                    Divider()
-                    ForEach(0..<8) { i in
-                        if i > 0 { Divider().padding(.leading, 52) }
-                        HStack(spacing: 12) {
-                            Circle().skeleton(with: true).frame(width: 36, height: 36)
-                            VStack(alignment: .leading, spacing: 6) {
-                                Text("").skeleton(with: true).frame(width: 130, height: 12)
-                                Text("").skeleton(with: true).frame(height: 4)
-                            }
-                            Spacer()
-                            VStack(alignment: .trailing, spacing: 4) {
-                                Text("").skeleton(with: true).frame(width: 36, height: 12)
-                                Text("").skeleton(with: true).frame(width: 36, height: 10)
-                            }
-                        }
-                        .padding(.horizontal)
-                        .padding(.vertical, 10)
-                    }
-                }
-                .background(Color(UIColor.secondarySystemGroupedBackground))
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .padding(.horizontal)
-            }
-            .padding(.top, 12)
-            .padding(.bottom, 24)
-        }
-        .background(Color(UIColor.systemGroupedBackground))
-        .environment(\.isScrollEnabled, false)
     }
 
     @ViewBuilder

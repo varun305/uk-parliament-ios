@@ -10,7 +10,7 @@ struct BillDetailView: View {
             if viewModel.bill != nil {
                 scrollView
             } else if viewModel.loading {
-                loadingView
+                LoadingView()
             } else {
                 NoDataView()
             }
@@ -22,72 +22,6 @@ struct BillDetailView: View {
                 viewModel.fetchData(for: billId)
             }
         }
-    }
-
-    @ViewBuilder
-    var loadingView: some View {
-        List {
-            HStack(alignment: .center) {
-                Spacer()
-                VStack {
-                    ForEach(0..<5) { _ in
-                        Text("")
-                            .skeleton(with: true)
-                            .frame(height: 10)
-                    }
-                }
-                Spacer()
-            }
-            .multilineTextAlignment(.center)
-            .listRowBackground(Color.clear)
-            .listSectionSeparator(.hidden)
-
-            Section {
-                NavigationLink {
-                    Text("")
-                } label: {
-                    MemberRowLoading()
-                }
-                .disabled(true)
-
-                NavigationLink {
-                    Text("")
-                } label: {
-                    MemberRowLoading()
-                }
-                .disabled(true)
-            }
-
-            Section {
-                Text("")
-                    .skeleton(with: true)
-                    .frame(height: 10)
-            }
-
-            Section {
-                NavigationLink {
-                    Text("")
-                } label: {
-                    Text("")
-                        .skeleton(with: true)
-                        .frame(height: 10)
-                }
-                .disabled(true)
-            }
-
-            Section {
-                BillStageRowLoading()
-                NavigationLink {
-                    Text("")
-                } label: {
-                    Text("")
-                        .skeleton(with: true)
-                        .frame(height: 10)
-                }
-                .disabled(true)
-            }
-        }
-        .environment(\.isScrollEnabled, false)
     }
 
     var houseColor: Color {

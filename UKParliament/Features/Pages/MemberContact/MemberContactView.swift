@@ -10,7 +10,7 @@ struct MemberContactView: View {
             if viewModel.contacts.count > 0 {
                 scrollView
             } else if viewModel.loading {
-                loadingView
+                LoadingView()
             } else {
                 NoDataView()
             }
@@ -21,24 +21,6 @@ struct MemberContactView: View {
             }
         }
         .navigationTitle("Contact details, \(member.nameDisplayAs ?? "")")
-    }
-
-    @ViewBuilder
-    var loadingView: some View {
-        List {
-            ForEach(0..<5) { _ in
-                Section("") {
-                    Text("")
-                        .skeleton(with: true)
-                        .frame(height: 10)
-                    Text("")
-                        .skeleton(with: true)
-                        .frame(height: 10)
-                }
-            }
-        }
-        .listStyle(.plain)
-        .environment(\.isScrollEnabled, false)
     }
 
     @ViewBuilder

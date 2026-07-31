@@ -13,9 +13,6 @@ struct MembersView: View {
                         }
                     }
             },
-            rowLoadingView: {
-                MemberRowLoading()
-            },
             navigationTitle: viewModel.house == .commons ? "MPs" : "Lords"
         )
     }

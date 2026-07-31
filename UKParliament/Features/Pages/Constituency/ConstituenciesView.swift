@@ -9,9 +9,6 @@ struct ConstituenciesView: View {
                     ConstituencyRow(consituency: constituency)
                 }
             },
-            rowLoadingView: {
-                MemberRowLoading()
-            },
             navigationTitle: "Constituencies"
         )
     }

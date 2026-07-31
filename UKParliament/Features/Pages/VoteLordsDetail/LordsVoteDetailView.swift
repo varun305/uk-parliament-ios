@@ -15,7 +15,7 @@ struct LordsVoteDetailView: View {
             if viewModel.vote != nil {
                 scrollView
             } else if viewModel.loading {
-                loadingView
+                LoadingView()
             } else {
                 NoDataView()
             }
@@ -27,25 +27,6 @@ struct LordsVoteDetailView: View {
                 viewModel.fetchData(for: divisionId)
             }
         }
-    }
-
-    @ViewBuilder
-    var loadingView: some View {
-        List {
-            Section {
-                Text("").skeleton(with: true).frame(height: 10)
-            }
-            Section {
-                Text("").skeleton(with: true).frame(height: 200)
-            }
-            Section {
-                Text("").skeleton(with: true).frame(height: 10)
-                Text("").skeleton(with: true).frame(height: 10)
-                Text("").skeleton(with: true).frame(height: 10)
-                Text("").skeleton(with: true).frame(height: 10)
-            }
-        }
-        .environment(\.isScrollEnabled, false)
     }
 
     @ViewBuilder

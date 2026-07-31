@@ -32,6 +32,7 @@ struct SponsorRow: View {
                 if let organisation = sponsor.organisation {
                     Text("On behalf of \(organisation.name ?? "")")
                         .font(.footnote)
+                        .multilineTextAlignment(.leading)
                 }
             }
         }

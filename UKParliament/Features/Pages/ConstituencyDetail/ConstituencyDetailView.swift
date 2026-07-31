@@ -11,7 +11,7 @@ struct ConstituencyDetailView: View {
             if viewModel.constituency != nil {
                 scrollView
             } else if viewModel.loading {
-                loadingView
+                LoadingView()
             } else {
                 NoDataView()
             }
@@ -25,67 +25,6 @@ struct ConstituencyDetailView: View {
                 viewModel.fetchElectionResults(for: constituencyId)
             }
         }
-    }
-
-    @ViewBuilder
-    var loadingView: some View {
-        ScrollView {
-            VStack(spacing: 24) {
-                GroupedCard {
-                    VStack(spacing: 0) {
-                        Color(UIColor.secondarySystemGroupedBackground)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 260)
-                            .skeleton(with: true)
-                        Rectangle()
-                            .fill(Color.clear)
-                            .frame(height: 4)
-                            .skeleton(with: true)
-                        HStack {
-                            VStack(alignment: .leading, spacing: 6) {
-                                Text("").skeleton(with: true).frame(width: 200, height: 16)
-                                Text("").skeleton(with: true).frame(width: 120, height: 12)
-                            }
-                            Spacer()
-                        }
-                        .padding()
-                    }
-                }
-
-                GroupedCard {
-                    VStack(alignment: .leading, spacing: 0) {
-                        Text("").skeleton(with: true)
-                            .frame(width: 100, height: 14)
-                            .padding(.horizontal)
-                            .padding(.top, 14)
-                            .padding(.bottom, 8)
-                        Divider()
-                        MemberRowLoading().padding(.horizontal)
-                    }
-                }
-
-                GroupedCard {
-                    VStack(alignment: .leading, spacing: 0) {
-                        Text("").skeleton(with: true)
-                            .frame(width: 160, height: 14)
-                            .padding(.horizontal)
-                            .padding(.top, 14)
-                            .padding(.bottom, 8)
-                        Divider()
-                        ForEach(0..<4) { i in
-                            if i > 0 { Divider().padding(.leading) }
-                            Text("").skeleton(with: true).frame(height: 10)
-                                .padding(.horizontal)
-                                .padding(.vertical, 14)
-                        }
-                    }
-                }
-            }
-            .padding(.top, 12)
-            .padding(.bottom, 24)
-        }
-        .background(Color(UIColor.systemGroupedBackground))
-        .environment(\.isScrollEnabled, false)
     }
 
     private var mapConfig: MapConfiguration? {

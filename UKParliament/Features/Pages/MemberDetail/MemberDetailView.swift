@@ -10,7 +10,7 @@ struct MemberDetailView: View {
             if viewModel.member != nil {
                 scrollView
             } else if viewModel.loading {
-                loadingView
+                LoadingView()
             } else {
                 NoDataView()
             }
@@ -20,61 +20,6 @@ struct MemberDetailView: View {
         .task {
             viewModel.fetchMember(for: memberId)
         }
-    }
-
-    @ViewBuilder
-    var loadingView: some View {
-        List {
-            HStack {
-                Spacer()
-                VStack(alignment: .center) {
-                    ZStack {
-                        Circle()
-                            .stroke(.white, lineWidth: 3)
-                            .skeleton(with: true)
-                        Circle()
-                            .fill(.white)
-                            .padding(5)
-                            .skeleton(with: true)
-                        Text("2")
-                            .skeleton(with: true)
-                    }
-                    .frame(width: 120, height: 120)
-                    Text("")
-                        .skeleton(with: true)
-                    Text("")
-                        .skeleton(with: true)
-                }
-                Spacer()
-            }
-            .listRowBackground(Color.clear)
-            .listRowSeparator(.hidden)
-
-            Section {
-                Text("").skeleton(with: true).frame(height: 10)
-            }
-            Section {
-                NavigationLink { Text("") } label: {
-                    Text("").skeleton(with: true).frame(height: 10)
-                }
-                .disabled(true)
-                NavigationLink { Text("") } label: {
-                    Text("").skeleton(with: true).frame(height: 10)
-                }
-                .disabled(true)
-            }
-            Section {
-                NavigationLink { Text("") } label: {
-                    Text("").skeleton(with: true).frame(height: 10)
-                }
-                .disabled(true)
-                NavigationLink { Text("") } label: {
-                    Text("").skeleton(with: true).frame(height: 10)
-                }
-                .disabled(true)
-            }
-        }
-        .environment(\.isScrollEnabled, false)
     }
 
     var houseColor: Color {
@@ -139,7 +84,7 @@ struct MemberDetailView: View {
                         Text(member.nameFullTitle ?? "")
                             .font(.title3)
                             .fontWeight(.semibold)
-                            .multilineTextAlignment(.center)
+                            .multilineTextAlignment(.leading)
                         Text(member.latestParty?.name ?? "")
                             .font(.subheadline)
                             .foregroundStyle(.secondary)

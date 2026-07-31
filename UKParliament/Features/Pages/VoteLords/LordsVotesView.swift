@@ -10,9 +10,6 @@ struct LordsVotesView: View {
                     LordsVoteRow(vote: lordsVote)
                 }
             },
-            rowLoadingView: {
-                CommonsVoteRowLoading()
-            },
             navigationTitle: "Lords votes",
             showNumResults: false
         )

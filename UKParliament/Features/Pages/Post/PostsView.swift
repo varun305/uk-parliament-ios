@@ -36,7 +36,7 @@ struct PostsView: View {
     var body: some View {
         Group {
             if viewModel.loading {
-                loadingView
+                LoadingView()
             } else {
                 scrollView
             }
@@ -47,45 +47,6 @@ struct PostsView: View {
             viewModel.getPosts(side: .government)
             viewModel.getPosts(side: .opposition)
         }
-    }
-
-    @ViewBuilder
-    var loadingView: some View {
-        ScrollView {
-            VStack(spacing: 16) {
-                Picker("Side", selection: .constant(Side.government)) {
-                    Text("Government").tag(Side.government)
-                    Text("Opposition").tag(Side.opposition)
-                }
-                .pickerStyle(.segmented)
-                .padding(.horizontal)
-                .disabled(true)
-
-                VStack(alignment: .leading, spacing: 0) {
-                    ForEach(0..<10) { i in
-                        if i > 0 { Divider().padding(.leading, 56) }
-                        HStack(spacing: 12) {
-                            Circle().skeleton(with: true).frame(width: 44, height: 44)
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text("").skeleton(with: true).frame(width: 150, height: 12)
-                                Text("").skeleton(with: true).frame(width: 200, height: 10)
-                                Text("").skeleton(with: true).frame(width: 90, height: 10)
-                            }
-                            Spacer()
-                        }
-                        .padding(.horizontal)
-                        .padding(.vertical, 10)
-                    }
-                }
-                .background(Color(UIColor.secondarySystemGroupedBackground))
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .padding(.horizontal)
-            }
-            .padding(.top, 12)
-            .padding(.bottom, 24)
-        }
-        .background(Color(UIColor.systemGroupedBackground))
-        .environment(\.isScrollEnabled, false)
     }
 
     @ViewBuilder

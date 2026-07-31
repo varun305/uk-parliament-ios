@@ -20,7 +20,7 @@ struct ConstituencyElectionDetailView: View {
             if viewModel.result != nil {
                 scrollView
             } else if viewModel.loading {
-                loadingView
+                LoadingView()
             } else {
                 NoDataView()
             }
@@ -32,32 +32,6 @@ struct ConstituencyElectionDetailView: View {
                 viewModel.fetchData(in: constituencyId, at: electionId)
             }
         }
-    }
-
-    @ViewBuilder
-    var loadingView: some View {
-        List {
-            Section {
-                Text("").skeleton(with: true).frame(height: 10)
-                Text("").skeleton(with: true).frame(height: 10)
-                Text("").skeleton(with: true).frame(height: 10)
-            }
-            Section {
-                ZStack {
-                    Circle().stroke(.white, lineWidth: 3).skeleton(with: true)
-                    Circle().fill(.white).padding(5).skeleton(with: true)
-                    Text("2").skeleton(with: true)
-                }
-                .frame(width: 340, height: 340)
-            }
-            Section {
-                Text("").skeleton(with: true).frame(height: 10)
-                Text("").skeleton(with: true).frame(height: 10)
-                Text("").skeleton(with: true).frame(height: 10)
-                Text("").skeleton(with: true).frame(height: 10)
-            }
-        }
-        .environment(\.isScrollEnabled, false)
     }
 
     @ViewBuilder

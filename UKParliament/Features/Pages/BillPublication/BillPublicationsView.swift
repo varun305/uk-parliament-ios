@@ -21,7 +21,7 @@ struct BillPublicationsView: View {
             if viewModel.publications.count > 0 {
                 scrollView
             } else if viewModel.loading {
-                loadingView
+                LoadingView()
             } else {
                 NoDataView()
             }
@@ -53,21 +53,6 @@ struct BillPublicationsView: View {
         .task {
             viewModel.fetchPublications()
         }
-    }
-
-    @ViewBuilder
-    var loadingView: some View {
-        List {
-            Section("") {
-                ForEach(0..<8) { _ in
-                    DummyNavigationLink {
-                        BillPublicationRowLoading()
-                    }
-                }
-            }
-        }
-        .listStyle(.grouped)
-        .environment(\.isScrollEnabled, false)
     }
 
     @ViewBuilder

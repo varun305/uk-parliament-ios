@@ -19,9 +19,6 @@ struct BillsView: View {
                     BillRow(bill: bill)
                 }
             },
-            rowLoadingView: {
-                BillRowLoading()
-            },
             navigationTitle: navTitle
         )
     }
