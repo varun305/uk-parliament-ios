@@ -8,10 +8,10 @@ struct ConstituencyRow: View {
 
     var body: some View {
         HStack(alignment: .center) {
-            if let member = consituency.member {
-                MemberPictureView(member: member)
-                    .frame(width: 60, height: 60)
-            }
+//            if let member = consituency.member {
+//                MemberPictureView(member: member)
+//                    .frame(width: 60, height: 60)
+//            }
 
             VStack(alignment: .leading) {
                 Text(consituency.name ?? "")

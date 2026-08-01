@@ -27,6 +27,7 @@ struct MemberRow: View {
             .accessibilityLabel(Text(partyName + ", " + constituencyName))
             .foregroundStyle(.secondary)
             .font(.footnote)
+            .multilineTextAlignment(.leading)
     }
 }
 

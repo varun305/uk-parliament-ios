@@ -105,8 +105,6 @@ struct LordsVoteDetailView: View {
                     HStack {
                         if !formattedDate.isEmpty {
                             Text(formattedDate)
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
                         }
                         
                         Spacer()
