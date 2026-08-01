@@ -39,11 +39,10 @@ struct CommonsVoteDetailView: View {
         if let detailedVote = viewModel.vote {
             let ayeCount = detailedVote.ayeCount ?? vote.ayeCount ?? 0
             let noCount = detailedVote.noCount ?? vote.noCount ?? 0
-            let ayesWon = ayeCount >= noCount
 
             ScrollView {
                 VStack(spacing: 16) {
-                    heroCard(vote: detailedVote, ayeCount: ayeCount, noCount: noCount, ayesWon: ayesWon)
+                    heroCard(vote: detailedVote, ayeCount: ayeCount, noCount: noCount)
                     if !viewModel.ayesGrouping.isEmpty {
                         partySection(title: "Aye votes by party", grouping: viewModel.ayesGrouping, total: ayeCount)
                     }
@@ -60,59 +59,39 @@ struct CommonsVoteDetailView: View {
     }
 
     @ViewBuilder
-    func heroCard(vote: CommonsVote, ayeCount: Int, noCount: Int, ayesWon: Bool) -> some View {
+    func heroCard(vote: CommonsVote, ayeCount: Int, noCount: Int) -> some View {
         MinimalSection(title: "Result") {
             VStack(spacing: 0) {
-                Rectangle()
-                    .fill(ayesWon ? Color.commons : Color(UIColor.systemRed))
-                    .frame(height: 5)
-
                 VStack(alignment: .leading, spacing: 12) {
                     HStack {
-                        VStack(alignment: .leading, spacing: 3) {
-                            if !formattedDate.isEmpty {
-                                Text(formattedDate)
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                            }
-                            if let number = vote.number {
-                                Text("Division No. \(number)")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                            }
+                        if !formattedDate.isEmpty {
+                            Text(formattedDate)
                         }
+                        
                         Spacer()
-                        Text(ayesWon ? "AYES WON" : "NOES WON")
-                            .font(.caption)
-                            .fontWeight(.bold)
-                            .foregroundStyle(.white)
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 5)
-                            .background(ayesWon ? Color.commons : Color(UIColor.systemRed))
-                            .clipShape(RoundedRectangle(cornerRadius: 6))
+                        if let number = vote.number {
+                            Text("Division No. \(number)")
+                                .foregroundStyle(.secondary)
+                        }
                     }
 
                     Divider()
 
                     HStack(alignment: .top) {
-                        VStack(alignment: .leading, spacing: 3) {
-                            Text("Ayes")
-                                .font(.caption)
+                        HStack(spacing: 3) {
+                            Image(systemName: "hand.thumbsup.fill")
                                 .foregroundStyle(.secondary)
                             Text(ayeCount.formatted())
                                 .font(.title2)
-                                .fontWeight(.bold)
-                                .foregroundStyle(ayesWon ? Color.commons : .primary)
+                                .if(ayeCount > noCount) { view in view.fontWeight(.bold) }
                         }
                         Spacer()
-                        VStack(alignment: .trailing, spacing: 3) {
-                            Text("Noes")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
+                        HStack(spacing: 3) {
                             Text(noCount.formatted())
                                 .font(.title2)
-                                .fontWeight(.bold)
-                                .foregroundStyle(!ayesWon ? Color(UIColor.systemRed) : .primary)
+                                .if(ayeCount < noCount) { view in view.fontWeight(.bold) }
+                            Image(systemName: "hand.thumbsdown.fill")
+                                .foregroundStyle(.secondary)
                         }
                     }
                 }

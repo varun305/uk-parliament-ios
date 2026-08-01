@@ -40,14 +40,13 @@ struct LordsVoteDetailView: View {
         if let detailedVote = viewModel.vote {
             let contentsCount = detailedVote.authoritativeContentCount ?? vote.authoritativeContentCount ?? 0
             let notContentsCount = detailedVote.authoritativeNotContentCount ?? vote.authoritativeNotContentCount ?? 0
-            let contentsWon = contentsCount >= notContentsCount
 
             ScrollView {
                 VStack(spacing: 16) {
                     if let amendmentNotes = detailedVote.amendmentMotionNotes {
                         amendmentNotesCard(html: amendmentNotes)
                     }
-                    heroCard(vote: detailedVote, contentsCount: contentsCount, notContentsCount: notContentsCount, contentsWon: contentsWon)
+                    heroCard(vote: detailedVote, contentsCount: contentsCount, notContentsCount: notContentsCount)
                     if !viewModel.contentsGrouping.isEmpty {
                         partySection(title: "Content votes by party", grouping: viewModel.contentsGrouping, total: contentsCount)
                     }
@@ -99,59 +98,41 @@ struct LordsVoteDetailView: View {
     }
 
     @ViewBuilder
-    func heroCard(vote: LordsVote, contentsCount: Int, notContentsCount: Int, contentsWon: Bool) -> some View {
+    func heroCard(vote: LordsVote, contentsCount: Int, notContentsCount: Int) -> some View {
         MinimalSection(title: "Result") {
             VStack(spacing: 0) {
-                Rectangle()
-                    .fill(contentsWon ? Color.lords : Color(UIColor.systemGray))
-                    .frame(height: 5)
-
                 VStack(alignment: .leading, spacing: 12) {
                     HStack {
-                        VStack(alignment: .leading, spacing: 3) {
-                            if !formattedDate.isEmpty {
-                                Text(formattedDate)
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                            }
-                            if let number = vote.number {
-                                Text("Division No. \(number)")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                            }
+                        if !formattedDate.isEmpty {
+                            Text(formattedDate)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
                         }
+                        
                         Spacer()
-                        Text(contentsWon ? "CONTENTS WON" : "NOT CONTENTS WON")
-                            .font(.caption)
-                            .fontWeight(.bold)
-                            .foregroundStyle(.white)
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 5)
-                            .background(contentsWon ? Color.lords : Color(UIColor.systemGray))
-                            .clipShape(RoundedRectangle(cornerRadius: 6))
+                        if let number = vote.number {
+                            Text("Division No. \(number)")
+                                .foregroundStyle(.secondary)
+                        }
                     }
 
                     Divider()
 
                     HStack(alignment: .top) {
-                        VStack(alignment: .leading, spacing: 3) {
-                            Text("Contents")
-                                .font(.caption)
+                        HStack(spacing: 3) {
+                            Image(systemName: "hand.thumbsup.fill")
                                 .foregroundStyle(.secondary)
                             Text(contentsCount.formatted())
                                 .font(.title2)
-                                .fontWeight(.bold)
-                                .foregroundStyle(contentsWon ? Color.lords : .primary)
+                                .if(contentsCount > notContentsCount) { view in view.fontWeight(.bold) }
                         }
                         Spacer()
-                        VStack(alignment: .trailing, spacing: 3) {
-                            Text("Not Contents")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
+                        HStack(spacing: 3) {
                             Text(notContentsCount.formatted())
                                 .font(.title2)
-                                .fontWeight(.bold)
-                                .foregroundStyle(!contentsWon ? Color(UIColor.systemGray) : .primary)
+                                .if(contentsCount < notContentsCount) { view in view.fontWeight(.bold) }
+                            Image(systemName: "hand.thumbsdown.fill")
+                                .foregroundStyle(.secondary)
                         }
                     }
                 }
