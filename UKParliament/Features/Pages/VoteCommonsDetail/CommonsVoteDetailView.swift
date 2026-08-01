@@ -3,6 +3,7 @@ import SkeletonUI
 
 struct CommonsVoteDetailView: View {
     @StateObject var viewModel = CommonsVoteDetailViewModel()
+    @Environment(\.requestReview) private var requestReview
     var vote: CommonsVote
 
     var formattedDate: String {
@@ -25,6 +26,11 @@ struct CommonsVoteDetailView: View {
             if let divisionId = vote.divisionId {
                 viewModel.fetchData(for: divisionId)
             }
+        }
+        .onChange(of: viewModel.vote != nil) { _, loaded in
+            guard loaded else { return }
+            ReviewManager.shared.recordSuccessMoment()
+            ReviewManager.shared.requestReviewIfAppropriate(using: requestReview)
         }
     }
 

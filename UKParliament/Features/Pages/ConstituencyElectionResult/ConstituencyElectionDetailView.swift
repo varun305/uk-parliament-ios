@@ -4,6 +4,7 @@ import SkeletonUI
 
 struct ConstituencyElectionDetailView: View {
     @StateObject var viewModel = ConstituencyElectionDetailViewModel()
+    @Environment(\.requestReview) private var requestReview
     var constituency: Constituency
     var electionResult: ElectionResult
 
@@ -31,6 +32,11 @@ struct ConstituencyElectionDetailView: View {
             if let constituencyId = constituency.id, let electionId = electionResult.id {
                 viewModel.fetchData(in: constituencyId, at: electionId)
             }
+        }
+        .onChange(of: viewModel.result != nil) { _, loaded in
+            guard loaded else { return }
+            ReviewManager.shared.recordSuccessMoment()
+            ReviewManager.shared.requestReviewIfAppropriate(using: requestReview)
         }
     }
 

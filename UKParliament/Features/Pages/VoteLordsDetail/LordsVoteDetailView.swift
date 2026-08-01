@@ -4,6 +4,7 @@ import SkeletonUI
 
 struct LordsVoteDetailView: View {
     @StateObject var viewModel = LordsVoteDetailViewModel()
+    @Environment(\.requestReview) private var requestReview
     var vote: LordsVote
 
     var formattedDate: String {
@@ -26,6 +27,11 @@ struct LordsVoteDetailView: View {
             if let divisionId = vote.divisionId {
                 viewModel.fetchData(for: divisionId)
             }
+        }
+        .onChange(of: viewModel.vote != nil) { _, loaded in
+            guard loaded else { return }
+            ReviewManager.shared.recordSuccessMoment()
+            ReviewManager.shared.requestReviewIfAppropriate(using: requestReview)
         }
     }
 

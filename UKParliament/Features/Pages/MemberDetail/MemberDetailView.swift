@@ -3,6 +3,7 @@ import SkeletonUI
 
 struct MemberDetailView: View {
     @StateObject var viewModel = MemberDetailViewModel()
+    @Environment(\.requestReview) private var requestReview
     var memberId: Int
 
     var body: some View {
@@ -19,6 +20,12 @@ struct MemberDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .task {
             viewModel.fetchMember(for: memberId)
+        }
+        .onChange(of: viewModel.member != nil) { _, loaded in
+            // Looking up a member is the app's flagship success moment.
+            guard loaded else { return }
+            ReviewManager.shared.recordSuccessMoment()
+            ReviewManager.shared.requestReviewIfAppropriate(using: requestReview)
         }
     }
 

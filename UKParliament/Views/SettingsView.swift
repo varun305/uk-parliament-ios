@@ -3,6 +3,8 @@ import LicenseList
 
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.requestReview) private var requestReview
+    @Environment(\.openURL) private var openURL
 
     var body: some View {
         NavigationStack {
@@ -14,6 +16,16 @@ struct SettingsView: View {
                         Label("Help", systemImage: "questionmark")
                             .labelStyle(SquircleLabelStyle(color: .accentColor))
                     }
+
+                    Button {
+                        if let url = ReviewManager.writeReviewURL {
+                            openURL(url)
+                        }
+                    } label: {
+                        Label("Rate this app", systemImage: "star.fill")
+                            .labelStyle(SquircleLabelStyle(color: .accentColor))
+                    }
+                    .tint(.primary)
                 }
 
                 Section {

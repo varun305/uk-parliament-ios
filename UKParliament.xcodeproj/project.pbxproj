@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8B0A1EFC2F9B718100EF231F /* DesignComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A1EFB2F9B718000EF231F /* DesignComponents.swift */; };
+		8B445F5F301DD7490024FACB /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B445F5E301DD7490024FACB /* ReviewManager.swift */; };
 		8B4DDDFE2F9A5BAE001108A4 /* LicenseList in Frameworks */ = {isa = PBXBuildFile; productRef = 8B4DDDFD2F9A5BAE001108A4 /* LicenseList */; };
 		8B4DDE002F9A69AF001108A4 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4DDDFF2F9A69AE001108A4 /* HelpView.swift */; };
 		8BBA0B4A301D3A5500D8C2A5 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBA0B49301D3A4E00D8C2A5 /* LoadingView.swift */; };
@@ -125,6 +126,7 @@
 
 /* Begin PBXFileReference section */
 		8B0A1EFB2F9B718000EF231F /* DesignComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignComponents.swift; sourceTree = "<group>"; };
+		8B445F5E301DD7490024FACB /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
 		8B4DDDFF2F9A69AE001108A4 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		8BBA0B49301D3A4E00D8C2A5 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		EE01861D2B375B0C004F7F77 /* PostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsView.swift; sourceTree = "<group>"; };
@@ -641,6 +643,7 @@
 			children = (
 				EE8B07B92BA188DF001C878A /* Mocks.swift */,
 				EE3194F72B6E55C200A5F754 /* UtilsModel.swift */,
+				8B445F5E301DD7490024FACB /* ReviewManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -818,6 +821,7 @@
 				EE3194E52B6E3BA400A5F754 /* BillStageSittingsView.swift in Sources */,
 				EEEC3B1E2B38ADC500A8626D /* BillStagesView.swift in Sources */,
 				8B4DDE002F9A69AF001108A4 /* HelpView.swift in Sources */,
+				8B445F5F301DD7490024FACB /* ReviewManager.swift in Sources */,
 				EEEC3B222B38AED000A8626D /* BillStagesViewModel.swift in Sources */,
 				EEEC3B052B388B1900A8626D /* BillsView.swift in Sources */,
 				EEEC3B072B388B2600A8626D /* BillsViewModel.swift in Sources */,
@@ -1098,7 +1102,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2026.17;
+				MARKETING_VERSION = 2026.31;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.vsanth.UK-Parliament";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1134,7 +1138,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2026.17;
+				MARKETING_VERSION = 2026.31;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.vsanth.UK-Parliament";
 				PRODUCT_NAME = "$(TARGET_NAME)";

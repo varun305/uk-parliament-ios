@@ -3,6 +3,7 @@ import SafariServices
 
 struct BillPublicationsView: View {
     @StateObject var viewModel: BillPublicationsViewModel
+    @Environment(\.requestReview) private var requestReview
     var bill: Bill
     var stage: Stage?
 
@@ -52,6 +53,11 @@ struct BillPublicationsView: View {
         }
         .task {
             viewModel.fetchPublications()
+        }
+        .onChange(of: viewModel.publications.count > 0) { _, loaded in
+            guard loaded else { return }
+            ReviewManager.shared.recordSuccessMoment()
+            ReviewManager.shared.requestReviewIfAppropriate(using: requestReview)
         }
     }
 
