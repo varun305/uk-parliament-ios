@@ -45,11 +45,10 @@ struct LoadingView: View {
         VStack(spacing: 10) {
             BreathingDotsLoader()
 
-            Text("Loading")
+            Text("loading")
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(.systemBackground))
     }
 }
 

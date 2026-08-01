@@ -54,6 +54,5 @@ struct MemberContactView: View {
                 }
             }
         }
-        .listStyle(.grouped)
     }
 }

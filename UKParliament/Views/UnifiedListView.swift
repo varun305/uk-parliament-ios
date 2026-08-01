@@ -77,7 +77,7 @@ struct UnifiedListView<T, RowContent>: View where T: Identifiable, T: Equatable,
                 HStack {
                     Spacer()
                     if viewModel.loading && !viewModel.items.isEmpty {
-                        LoadingText(text: "loading more data")
+                        LoadingView()
                     } else if !viewModel.loading && !viewModel.items.isEmpty {
                         Text("No more data")
                     }
@@ -87,7 +87,6 @@ struct UnifiedListView<T, RowContent>: View where T: Identifiable, T: Equatable,
                 .listRowBackground(Color.clear)
                 .padding(10)
             }
-            .listStyle(.grouped)
         }
 
     private func onScrollEnd(item: T) {
